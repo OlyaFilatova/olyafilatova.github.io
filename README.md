@@ -6,9 +6,7 @@ Right now I have one active project on GitHub:
 
 ### My Vine
 
-[Garden PhotoAlbum](https://olyafilatova.github.io/My-Vine/)
-
-![My Vine](https://raw.githubusercontent.com/OlyaFilatova/My-Vine/master/docs/entrance.png)
+[![My Vine](https://raw.githubusercontent.com/OlyaFilatova/My-Vine/master/docs/entrance.png)](https://olyafilatova.github.io/My-Vine/)
 
 All of my other projects are just demonstration of my new knowledge and cheatsheets for future work.
 
