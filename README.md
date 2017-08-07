@@ -4,7 +4,7 @@ I'm a newbee in Android programming and GitHub.
 
 Right now I have one active project on GitHub:
 
-[### My Vine](https://olyafilatova.github.io/My-Vine/)
+### [My Vine](https://olyafilatova.github.io/My-Vine/)
 
 [![My Vine](https://raw.githubusercontent.com/OlyaFilatova/My-Vine/master/docs/entrance.png)](https://olyafilatova.github.io/My-Vine/)
 
