@@ -1,9 +1,13 @@
 import type { Localization } from "./config";
 
 export const texts_navigation = {
+  "main": {
+    "ua": "Головна",
+    "en": "Home"
+  },
   "books": {
-    "ua": "Думки о книгах",
-    "en": "Thoughts on books"
+    "ua": "Думки о джерелах знань",
+    "en": "Thoughts on knowledge sources"
   },
   "history": {
     "ua": "Хронологія досвіду",

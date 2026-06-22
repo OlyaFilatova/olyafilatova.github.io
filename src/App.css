@@ -3,3 +3,6 @@
   flex-direction: row;
   gap: 10px;
 }
+.app-content {
+  flex-grow: 1;
+}

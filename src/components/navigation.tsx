@@ -8,8 +8,9 @@ function Navigation() {
 
   return (
     <div className='navigation'>
-      <a>{texts_navigation.books[currentLanguage]}</a>
-      <a>{texts_navigation.history[currentLanguage]}</a>
+      <a href="/">{texts_navigation.main[currentLanguage]}</a>
+      <a href="/knowledge-sources">{texts_navigation.books[currentLanguage]}</a>
+      <a href="/history">{texts_navigation.history[currentLanguage]}</a>
     </div>
   )
 }
