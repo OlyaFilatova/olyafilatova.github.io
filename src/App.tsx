@@ -22,7 +22,7 @@ function App() {
       <div>
         <img className='profile-img' src={photo} />
       </div>
-      <div className='welcome'>{texts["welcome"][currentLang]}</div>
+      <div className='welcome'>{texts.welcome[currentLang]}</div>
       <a className='profile-link' href='https://github.com/OlyaFilatova' target='_blank'>GitHub</a>
       <div className='languages'>
         {languages.map(lang => <button key={lang} className={lang == currentLang ? 'selected-lang' : 'lang'} onClick={() => changeLanguage(lang)}>{lang}</button>)}
