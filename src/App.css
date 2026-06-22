@@ -1,20 +1,5 @@
-.profile {
+.app {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
-}
-.profile-img {
-  width: 300px;
-  max-width: 100%;
-}
-.languages button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-.languages button.selected-lang {
-  font-weight: bold;
 }

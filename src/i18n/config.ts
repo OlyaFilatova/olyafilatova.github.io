@@ -1,3 +1,5 @@
+import { createContext } from "react";
+
 export const languages = ['ua', 'en'] as const;
 
 export type Language = typeof languages[number];
@@ -13,6 +15,8 @@ function parseLangCache(): Language {
   }
   return 'ua';
 }
+
+export const LanguageContext = createContext<Language>('ua');
 
 const languageControls = (function(){
   let currentLanguage: Language = parseLangCache();

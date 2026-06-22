@@ -1,33 +1,24 @@
-import { useState, useEffect } from 'react'
-import photo from './assets/photo.jpg'
+import { useState } from 'react'
 import './App.css'
+import Sidebar from './components/sidebar'
 import { texts } from './i18n/app'
-import type { Language } from './i18n/config'
-import { getCurrentLanguage, changeCurrentLanguage, languages } from './i18n/config'
+import { changeCurrentLanguage, getCurrentLanguage, LanguageContext, type Language } from './i18n/config'
 
 function App() {
-  const [currentLang, setCurrentLang] = useState(getCurrentLanguage());
-
-  function changeLanguage(lang: Language) {
-    changeCurrentLanguage(lang);
-    setCurrentLang(lang);
-  }
-
-  useEffect(() => {
-    document.documentElement.lang = currentLang;
-  }, [currentLang]);
+  const [currentLanguage, setLang] = useState<Language>(getCurrentLanguage());
 
   return (
-    <div className='profile'>
-      <div>
-        <img className='profile-img' src={photo} />
+    <LanguageContext.Provider value={currentLanguage}>
+      <div className='app'>
+        <div className='app-sidebar'>
+          <Sidebar onLangChange={lang => {
+            changeCurrentLanguage(lang);
+            setLang(lang);
+          }} />
+        </div>
+        <div className='app-content'>{texts.welcome[currentLanguage]}</div>
       </div>
-      <div className='welcome'>{texts.welcome[currentLang]}</div>
-      <a className='profile-link' href='https://github.com/OlyaFilatova' target='_blank'>GitHub</a>
-      <div className='languages'>
-        {languages.map(lang => <button key={lang} className={lang == currentLang ? 'selected-lang' : 'lang'} onClick={() => changeLanguage(lang)}>{lang}</button>)}
-      </div>
-    </div>
+    </LanguageContext.Provider>
   )
 }
 
