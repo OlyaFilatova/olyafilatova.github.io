@@ -3,6 +3,7 @@ import { createContext } from "react";
 export const languages = ['ua', 'en'] as const;
 
 export type Language = typeof languages[number];
+export type Localization = Record<string, Record<Language, string>>;
 
 function isLanguage(lang: string | null): lang is Language {
   return !!lang && languages.includes(lang as any);

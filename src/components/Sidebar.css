@@ -6,6 +6,10 @@
 .sidebar-img {
   max-width: 100%;
 }
+.languages {
+  text-align: center;
+  padding: 15px;
+}
 .languages button {
   background: none;
   border: none;

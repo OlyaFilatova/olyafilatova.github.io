@@ -3,6 +3,7 @@ import photo from '../assets/photo.jpg'
 import './Sidebar.css'
 import type { Language } from '../i18n/config'
 import { languages, LanguageContext } from '../i18n/config'
+import Navigation from './navigation'
 
 function Sidebar({ onLangChange }: {
   onLangChange: (lang: Language) => void
@@ -22,10 +23,11 @@ function Sidebar({ onLangChange }: {
       <div>
         <img className='sidebar-img' src={photo} />
       </div>
-      <a className='outside-link' href='https://github.com/OlyaFilatova' target='_blank'>GitHub</a>
+      <Navigation />
       <div className='languages'>
         {languages.map(lang => <button key={lang} className={lang == currentLanguage ? 'selected-lang' : 'lang'} onClick={() => changeLanguage(lang)}>{lang}</button>)}
       </div>
+      <a className='outside-link' href='https://github.com/OlyaFilatova' target='_blank'>GitHub</a>
     </div>
   )
 }
