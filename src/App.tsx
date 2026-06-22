@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import photo from './assets/photo.jpg'
 import './App.css'
 import { texts } from './i18n/app'
@@ -12,6 +12,10 @@ function App() {
     changeCurrentLanguage(lang);
     setCurrentLang(lang);
   }
+
+  useEffect(() => {
+    document.documentElement.lang = currentLang;
+  }, [currentLang]);
 
   return (
     <div className='profile'>
