@@ -5,8 +5,8 @@ import './App.css'
 import Sidebar from './components/Sidebar'
 import { changeCurrentLanguage, getCurrentLanguage, LanguageContext, type Language } from './i18n/config'
 import KnowledgeSources from './pages/KnowledgeSources';
-import History from './pages/history';
-import Home from './pages/home';
+import History from './pages/History';
+import Home from './pages/Home';
 
 function App() {
   const [currentLanguage, setLang] = useState<Language>(getCurrentLanguage());

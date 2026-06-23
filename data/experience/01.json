@@ -1,0 +1,59 @@
+{
+  "kind": "work",
+  "position": {
+    "en": "Full Stack Engineer",
+    "ua": "Full Stack Розробник"
+  },
+  "tech_stack": {
+    "en": "JavaScript/PHP",
+    "ua": "JavaScript/PHP"
+  },
+  "from": {
+    "en": "2012",
+    "ua": "2012"
+  },
+  "to": {
+    "en": "2018",
+    "ua": "2018"
+  },
+  "projects": [
+    {
+      "en": "Worked on an early-stage on-demand service marketplace, focusing on core platform design and user flows for connecting clients with technicians.",
+      "ua": "Працювала над ранньою версією маркетплейсу послуг за запитом (on-demand), зосереджуючись на дизайні ядра платформи та користувацьких сценаріях для взаємодії клієнтів і виконавців."
+    },
+    {
+      "en": "Developed high-conversion landing pages supporting paid campaigns on Google Ads.",
+      "ua": "Розробляла Landing сторінки з високою конверсією для підтримки платних рекламних кампаній у Google Ads."
+    },
+    {
+      "en": "Developed a field service management platform for handling job assignments, inventory, and customer communication.",
+      "ua": "Розробила платформу для управління виїзними сервісами (field service management), включаючи призначення задач, облік матеріалів та комунікацію з клієнтами."
+    }
+  ],
+  "skills": [
+    {
+      "en": "JavaScript",
+      "ua": "JavaScript"
+    },
+    {
+      "en": "PHP",
+      "ua": "PHP"
+    },
+    {
+      "en": "MySQL",
+      "ua": "MySQL"
+    },
+    {
+      "en": "HTML",
+      "ua": "HTML"
+    },
+    {
+      "en": "CSS",
+      "ua": "CSS"
+    },
+    {
+      "en": "VPS (Linux)",
+      "ua": "VPS (Linux)"
+    }
+  ]
+}

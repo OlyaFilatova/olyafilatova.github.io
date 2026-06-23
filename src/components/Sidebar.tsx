@@ -3,7 +3,7 @@ import photo from '../assets/photo.jpg'
 import './Sidebar.css'
 import type { Language } from '../i18n/config'
 import { languages, LanguageContext } from '../i18n/config'
-import Navigation from './navigation'
+import Navigation from './Navigation'
 
 function Sidebar({ onLangChange }: {
   onLangChange: (lang: Language) => void
