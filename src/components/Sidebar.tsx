@@ -4,6 +4,7 @@ import './Sidebar.css'
 import type { Language } from '../i18n/config'
 import { languages, LanguageContext } from '../i18n/config'
 import Navigation from './Navigation'
+import { texts } from '../i18n/sidebar'
 
 function Sidebar({ onLangChange }: {
   onLangChange: (lang: Language) => void
@@ -32,7 +33,7 @@ function Sidebar({ onLangChange }: {
         <div className='languages'>
           {languages.map(lang => <button key={lang} className={lang == currentLanguage ? 'selected-lang' : 'lang'} onClick={() => changeLanguage(lang)}>{lang}</button>)}
         </div>
-        <a className='outside-link' href='https://github.com/OlyaFilatova' target='_blank'>GitHub</a>
+        <a className='cv-link' href={texts.cv_link[currentLanguage]} download>{texts.download_cv[currentLanguage]}</a>
       </div>
     </>
   )

@@ -1,7 +1,9 @@
 .sidebar {
   width: 250px;
   max-width: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .sidebar-img {
   max-width: 100%;
@@ -21,6 +23,12 @@
 .sidebar-opener {
   display: none;
 }
+.cv-link {
+  color: var(--text);
+  display: flex;
+  margin-top: auto;
+  margin-bottom: 32px;
+}
 
 @media screen and (max-width: 700px) {
   .sidebar {
@@ -31,6 +39,7 @@
     padding: 5px;
     transform: translate(-280px, -15px);
     transition-duration: .5s;
+    box-sizing: border-box;
   }
   .sidebar.opened {
     transform: translate(0, 0);
