@@ -21,9 +21,9 @@ function Home() {
       <ul className='contacts-list'>
         <li><Icon iconClass='icss-envelope'><a href="mailto:olyafilatov@gmail.com">olyafilatov@gmail.com</a></Icon></li>
         <li><Icon iconClass='icss-phone'><a href="tel:+380687904383">+38 (068) 790-43-83</a></Icon></li>
-        <li><Icon iconClass='icss-whatsapp'><a href="https://wa.me/+380687904383">Whatsapp</a></Icon></li>
-        <li><Icon iconClass='icss-linkedin'><a href="https://www.linkedin.com/in/olha-filatova-dev/">LinkedIn</a></Icon></li>
-        <li><Icon iconClass='icss-github-o'><a href="https://github.com/OlyaFilatova">GitHub</a></Icon></li>
+        <li><Icon iconClass='icss-whatsapp'><a target="_blank" href="https://wa.me/+380687904383">Whatsapp</a></Icon></li>
+        <li><Icon iconClass='icss-linkedin'><a target="_blank" href="https://www.linkedin.com/in/olha-filatova-dev/">LinkedIn</a></Icon></li>
+        <li><Icon iconClass='icss-github-o'><a target="_blank" href="https://github.com/OlyaFilatova">GitHub</a></Icon></li>
       </ul>
     </div>
   )
