@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router";
 
 import './App.css'
-import Sidebar from './components/sidebar'
+import Sidebar from './components/Sidebar'
 import { changeCurrentLanguage, getCurrentLanguage, LanguageContext, type Language } from './i18n/config'
-import KnowledgeSources from './pages/knowledge_sources';
+import KnowledgeSources from './pages/KnowledgeSources';
 import History from './pages/history';
 import Home from './pages/home';
 
