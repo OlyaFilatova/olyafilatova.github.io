@@ -37,6 +37,14 @@
   background: var(--accent);
 }
 
+.diamond-clip {
+  width: 24px;
+  height: 24px;
+  background-color: #3498db;
+  /* Coordinates: Top (50% 0), Right (100% 50%), Bottom (50% 100%), Left (0 50%) */
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
 .content {
   padding-bottom: 24px;
 }

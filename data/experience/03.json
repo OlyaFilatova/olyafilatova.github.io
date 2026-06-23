@@ -1,0 +1,132 @@
+{
+  "kind": "work",
+  "position": {
+    "en": "Backend Engineer - AstrumU (Startup)",
+    "ua": "Backend Розробник - AstrumU (Startup)"
+  },
+  "tech_stack": {
+    "en": "TypeScript/Python",
+    "ua": "TypeScript/Python"
+  },
+  "from": {
+    "en": "Apr 2018",
+    "ua": "Квітень 2022"
+  },
+  "to": {
+    "en": "Jun 2025",
+    "ua": "Червень 2025"
+  },
+  "projects": [
+    {
+      "en": "PDF cleaning and parsing",
+      "ua": "Обробка та парсинг PDF"
+    },
+    {
+      "en": "RESTful and GraphQL APIs",
+      "ua": "RESTful та GraphQL API"
+    },
+    {
+      "en": "Data pipeline",
+      "ua": "Пайплайн даних"
+    },
+    {
+      "en": "White-label system of landing pages with integrated ML solution",
+      "ua": "White-label система лендинг сторінок з вбудованим ML рішенням"
+    },
+    {
+      "en": "Skills analysis system with integrated ML solution",
+      "ua": "Система аналізу навичок з вбудованим ML рішенням"
+    }
+  ],
+  "skills": [
+    {
+      "en": "TypeScript",
+      "ua": "TypeScript"
+    },
+    {
+      "en": "Python3",
+      "ua": "Python3"
+    },
+    {
+      "en": "Node.js",
+      "ua": "Node.js"
+    },
+    {
+      "en": "FastAPI",
+      "ua": "FastAPI"
+    },
+    {
+      "en": "Ray Serve",
+      "ua": "Ray Serve"
+    },
+    {
+      "en": "React.js",
+      "ua": "React.js"
+    },
+    {
+      "en": "Nest.js",
+      "ua": "Nest.js"
+    },
+    {
+      "en": "Pulumi",
+      "ua": "Pulumi"
+    },
+    {
+      "en": "MongoDB",
+      "ua": "MongoDB"
+    },
+    {
+      "en": "PostgreSQL",
+      "ua": "PostgreSQL"
+    },
+    {
+      "en": "TypeORM",
+      "ua": "TypeORM"
+    },
+    {
+      "en": "SQLAlchemy",
+      "ua": "SQLAlchemy"
+    },
+    {
+      "en": "Auth0",
+      "ua": "Auth0"
+    },
+    {
+      "en": "vllm",
+      "ua": "vllm"
+    },
+    {
+      "en": "Kafka",
+      "ua": "Kafka"
+    },
+    {
+      "en": "Dagster",
+      "ua": "Dagster"
+    },
+    {
+      "en": "Tilt",
+      "ua": "Tilt"
+    },
+    {
+      "en": "Dagger",
+      "ua": "Dagger"
+    },
+    {
+      "en": "Redis",
+      "ua": "Redis"
+    },
+    {
+      "en": "Docker",
+      "ua": "Docker"
+    },
+    {
+      "en": "Kubernetes",
+      "ua": "Kubernetes"
+    },
+    {
+      "en": "Azure Cloud",
+      "ua": "Azure Cloud"
+    }
+  ]
+}
+

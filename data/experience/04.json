@@ -1,0 +1,103 @@
+{
+  "kind": "work",
+  "position": {
+    "en": "Full Stack Engineer",
+    "ua": "Full Stack Розробник"
+  },
+  "tech_stack": {
+    "en": "TypeScript/Python",
+    "ua": "TypeScript/Python"
+  },
+  "from": {
+    "en": "Jun 2025",
+    "ua": "Червень 2025"
+  },
+  "to": {
+    "en": "Present",
+    "ua": "Теперішній час"
+  },
+  "projects": [
+    {
+      "en": "Chrome extension for highlighting terms and subsequent analysis of the pages.",
+      "ua": "Chrome розширення для виділення виразів на сторінках та  аналізу сторінок."
+    },
+    {
+      "en": "Mobile app with real time collaboration for a small user group",
+      "ua": "Мобільний застосунок із real time співпрацею для малої групи користувачів"
+    }
+  ],
+  "skills": [
+    {
+      "en": "monorepo",
+      "ua": "monorepo"
+    },
+    {
+      "en": "TypeScript",
+      "ua": "TypeScript"
+    },
+    {
+      "en": "JavaScript",
+      "ua": "JavaScript"
+    },
+    {
+      "en": "Python",
+      "ua": "Python"
+    },
+    {
+      "en": "Node.js",
+      "ua": "Node.js"
+    },
+    {
+      "en": "Nest.js",
+      "ua": "Nest.js"
+    },
+    {
+      "en": "React Native",
+      "ua": "React Native"
+    },
+    {
+      "en": "React.js",
+      "ua": "React.js"
+    },
+    {
+      "en": "Next.js",
+      "ua": "Next.js"
+    },
+    {
+      "en": "Socket.io",
+      "ua": "Socket.io"
+    },
+    {
+      "en": "PostgreSQL",
+      "ua": "PostgreSQL"
+    },
+    {
+      "en": "Prisma",
+      "ua": "Prisma"
+    },
+    {
+      "en": "Docker",
+      "ua": "Docker"
+    },
+    {
+      "en": "Prometheus+Loki+Grafana",
+      "ua": "Prometheus+Loki+Grafana"
+    },
+    {
+      "en": "Manifest V3",
+      "ua": "Manifest V3"
+    },
+    {
+      "en": "Vite",
+      "ua": "Vite"
+    },
+    {
+      "en": "Playwright",
+      "ua": "Playwright"
+    },
+    {
+      "en": "VPS (Linux)",
+      "ua": "VPS (Linux)"
+    }
+  ]
+}

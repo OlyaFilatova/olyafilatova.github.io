@@ -1,38 +1,56 @@
 import { useContext } from 'react'
 import './TimelineItem.css'
 import { LanguageContext } from '../i18n/config'
+import type { Experience } from '../schemas/experience';
 
-function Navigation() {
+function TimelineItem({ experience }: {experience: Experience}) {
   const currentLanguage = useContext(LanguageContext);
 
-  return (
-    <div className="item">
-      <div className="year">2026</div>
+  return experience.kind == 'education' ? (
+    <div className="item education">
+      <div className="year">{experience.year[currentLanguage]}</div>
+
+      <div className="spine">
+        <div className="dot diamond-clip"></div>
+      </div>
+
+      <div className="content">
+        <div className="title">{experience.specialization[currentLanguage]}</div>
+
+        <div className="meta">
+          {experience.year[currentLanguage]} · {experience.location[currentLanguage]}
+        </div>
+
+        {experience.skills && <ul className="list">
+          {experience.skills.map(skill => <li>{skill[currentLanguage]}</li>)}
+        </ul>}
+      </div>
+    </div>
+  ) : (
+    <div className="item job">
+      <div className="year">{experience.from[currentLanguage]}<br/> {experience.to[currentLanguage]}</div>
 
       <div className="spine">
         <div className="dot"></div>
       </div>
 
       <div className="content">
-        <div className="title">Job Chronology page</div>
+        <div className="title">{experience.position[currentLanguage]}</div>
 
         <div className="meta">
-          June 2026 · Placeholder
+          {experience.tech_stack[currentLanguage]}
         </div>
 
-        <div className="text">
-          The chronology page is under development. TODO:
-        </div>
+        {experience.projects && <ul className="list">
+          {experience.projects.map(project => <li>{project[currentLanguage]}</li>)}
+        </ul>}
 
-        <ul className="list">
-          <li>Add Job history</li>
-          <li>Use i18n</li>
-          <li>Improve styles as needed</li>
-        </ul>
-
+        {experience.skills && <ul className="list">
+          {experience.skills.map(skill => <li>{skill[currentLanguage]}</li>)}
+        </ul>}
       </div>
     </div>
   )
 }
 
-export default Navigation
+export default TimelineItem

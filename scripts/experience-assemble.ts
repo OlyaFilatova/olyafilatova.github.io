@@ -12,7 +12,6 @@ async function loadAndParseExperience() {
     return Experience.parse(fileData);
   }));
 
-  console.log(experiences);
   await fs.writeFile(join(process.cwd(), 'src/data/experience.ts'), `import { Experience } from '../schemas/experience.ts';
 
 export const experience: Experience[] = ${JSON.stringify(experiences, undefined, 2)};
