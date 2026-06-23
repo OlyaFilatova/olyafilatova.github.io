@@ -1,4 +1,4 @@
-import './history.css';
+import './History.css';
 import TimelineItem from '../components/TimelineItem';
 import { experience } from '../data/experience';
 

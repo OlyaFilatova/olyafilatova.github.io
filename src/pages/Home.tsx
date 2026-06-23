@@ -6,7 +6,9 @@ function Home() {
   const currentLanguage = useContext(LanguageContext);
 
   return (
-    <div>{texts.welcome[currentLanguage]}</div>
+    <>
+      <div>{texts.welcome[currentLanguage]}</div>
+    </>
   )
 }
 
