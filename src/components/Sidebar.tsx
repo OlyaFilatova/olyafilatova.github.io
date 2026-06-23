@@ -28,7 +28,7 @@ function Sidebar({ onLangChange }: {
         <div>
           <img className='sidebar-img' src={photo} />
         </div>
-        <Navigation />
+        <Navigation onLinkClicked={() => setSidebarOpened(false)} />
         <div className='languages'>
           {languages.map(lang => <button key={lang} className={lang == currentLanguage ? 'selected-lang' : 'lang'} onClick={() => changeLanguage(lang)}>{lang}</button>)}
         </div>

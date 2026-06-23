@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from "react-router";
+import { HashRouter, Routes, Route } from "react-router";
 
 import './App.css'
 import Sidebar from './components/Sidebar'
@@ -21,13 +21,13 @@ function App() {
           }} />
         </div>
         <div className='app-content'>
-          <BrowserRouter>
+          <HashRouter>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/knowledge-sources" element={<KnowledgeSources />} />
               <Route path="/history" element={<History />} />
             </Routes>
-          </BrowserRouter>
+          </HashRouter>
         </div>
       </div>
     </LanguageContext.Provider>
