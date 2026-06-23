@@ -1,0 +1,27 @@
+.home {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.personal-details {
+  padding-top: 2em;
+  padding-bottom: 3em;
+  .icon-line {
+    padding: 1em 0;
+  }
+  .icon-line:nth-child(2) {
+    padding-top: 3em;
+  }
+}
+
+.contacts-list {
+  padding: 0 1em;
+  li {
+    list-style: none;
+    a {
+      padding: 1em 0;
+      color: var(--text);
+      text-decoration: none;
+    }
+  }
+}
