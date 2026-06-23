@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import './TimelineItem.css'
+import './KnowledgeSourceItem.css'
 import { LanguageContext } from '../i18n/config'
 import type { KnowledgeSource } from '../schemas/knowledge-source';
 
