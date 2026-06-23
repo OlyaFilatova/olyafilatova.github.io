@@ -6,7 +6,7 @@
 .navigation a {
   padding: 5px;
   text-decoration: none;
-  color: black;
+  color: var(--text);
 }
 .navigation a:hover {
   background: rgba(128, 128, 128, .3);

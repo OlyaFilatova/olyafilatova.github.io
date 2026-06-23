@@ -1,2 +1,13 @@
-body {font-family: sans-serif}
+:root {
+  --text: #111827;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --accent: #2563eb;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: #fff;
+}
 img {max-width: 100%;}
