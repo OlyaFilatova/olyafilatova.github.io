@@ -2,8 +2,8 @@ import type { Localization } from "./config";
 
 export const texts = {
   "name": {
-    "ua": "Ольга Філатова.",
-    "en": "Olha Filatova."
+    "ua": "Ольга Філатова",
+    "en": "Olha Filatova"
   },
   "specialization": {
     "ua": "Backend-інженер із сильними навичками Node.js та Python. Спеціалізуюсь на API, серверних системах і автоматизації процесів.",
