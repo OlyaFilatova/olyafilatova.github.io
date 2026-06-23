@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "experience-assemble": "npx tsx scripts/experience-assemble.ts"
+    "experience-assemble": "npx tsx scripts/experience-assemble.ts",
+    "thoughts-assemble": "npx tsx scripts/thoughts-assemble.ts",
+    "data-assemble": "npm run experience-assemble && npm run thoughts-assemble"
   },
   "dependencies": {
     "react": "^19.2.6",

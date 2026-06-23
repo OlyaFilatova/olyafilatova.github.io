@@ -1,12 +1,12 @@
-import { useContext } from 'react'
-import { texts } from '../i18n/knowledge_sources'
-import { LanguageContext } from '../i18n/config'
+import './KnowledgeSources.css';
+import KnowledgeSource from '../components/KnowledgeSourceItem';
+import { knowledgeSources } from '../data/knowledge-sources';
 
 function KnowledgeSources() {
-  const currentLanguage = useContext(LanguageContext);
-
   return (
-    <div>{texts.welcome[currentLanguage]}</div>
+    <div className='knw-source'>
+      {knowledgeSources.map(source => <KnowledgeSource source={source} />)}
+    </div>
   )
 }
 
