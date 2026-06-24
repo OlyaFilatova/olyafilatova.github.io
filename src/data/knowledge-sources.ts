@@ -13,7 +13,7 @@ export const knowledgeSources: KnowledgeSource[] = [
     "thoughts": [
       {
         "en": "Before starting the book, I expected to read about usual code structure changes. But the first chapter introduced me to the idea that functional programs are not \"function\"-al from the coding point of view but from the point of view of mathematics. It was fascinating to watch how the decision to abandon functions' names and replace them with the usual '+' and '*' operations allowed us to simplify the call chain using the rules of algebra. But now I wonder how the style of the code comments must change with this paradigma.",
-        "ua": "До того як почати читати книгу я очікувала звичайних змін у структурі коду. Але перший розділ познайомив мене з ідеєю про те, що функціональні програми не є \"функціо\" з точки зору термінів коду, а з точки зору термінів математики. Спостерігати за тим, як рішення відмовитися від назв функцій та замінити їх на звичайні операції '+' та '*', дозволило спростити ланцюжок викликів за допомогою правил алгебри, було вкрай захопливо. Але тепер мені цікаво, наскільки стиль коментарів до коду повинен змінитися з цією парадигмою."
+        "ua": "До того як почати читати книгу я очікувала звичайних змін у структурі коду. Але перший розділ познайомив мене з ідеєю про те, що функціональні програми не є \"функціо\" з точки зору термінів коду, а з точки зору термінів математики. Спостерігати за тим, як рішення відмовитися від назв функцій та замінити їх на звичайні операції '+' та '*' дозволило спростити ланцюжок викликів за допомогою правил алгебри, було вкрай захопливо. Але тепер мені цікаво, наскільки стиль коментарів до коду повинен змінитися з цією парадигмою."
       },
       {
         "en": "First class functions == Beware of the redundant wrapper funtions.",
@@ -38,6 +38,10 @@ export const knowledgeSources: KnowledgeSource[] = [
       {
         "en": "Into 5th chapter now and feel like the connection to math is not so apparent anymore. ...till the Category Theory section. I would like to see a more examples of category theory in code though.",
         "ua": "Поки читала 5ий розділ виникло відчуття, що звʼязку з математикою знову не видно. ...поки не почала читати секцію \"Category Theory\". Хотілось би побачити більше прикладів category theory в коді."
+      },
+      {
+        "en": "What is most noticeable now is that functions are becoming very short and there are quite a lot of them.",
+        "ua": "Більш за все зараз кидається в очі те, що функції стають дуже короткими і їх стає доволі багато."
       }
     ]
   },
