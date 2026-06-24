@@ -42,6 +42,10 @@ export const knowledgeSources: KnowledgeSource[] = [
       {
         "en": "What is most noticeable now is that functions are becoming very short and there are quite a lot of them.",
         "ua": "Більш за все зараз кидається в очі те, що функції стають дуже короткими і їх стає доволі багато."
+      },
+      {
+        "en": "Hindley-Milner type signature. Using it allows to search for existing functions (ex. https://hoogle.haskell.org/). Also it helps to analyze function from the math PoV.",
+        "ua": "Сигнатура типу Хіндлі-Мілнера. Її використання дозволяє знаходити існуючі функції (наприклад https://hoogle.haskell.org/). Також вона допомагає аналізувати функцію з точки зору математики."
       }
     ]
   },
@@ -56,8 +60,8 @@ export const knowledgeSources: KnowledgeSource[] = [
     "link": "https://github.com/getify/You-Dont-Know-JS",
     "thoughts": [
       {
-        "en": "Sometimes come as too opinionated but is a great read to improve grasp on JS. I've put the read on a pause but I definitely recommend these and plan to read all of them myself.",
-        "ua": "Іноді здаються надто упередженими, але це чудові книги для покращення розуміння JS. Поки поставила читання цих книжок на паузу, але точно раджу до читання і сама планую прочитати всі ці книги."
+        "en": "Sometimes come as too opinionated but is a great read to improve grasp on JS. I've put the read on a pause but I definitely recommend these and plan to read all of them myself. What I like about these, that they are not the usual quick intro books but a thorough study of the topics.",
+        "ua": "Іноді здаються надто упередженими, але це чудові книги для покращення розуміння JS. Поки поставила читання цих книжок на паузу, але точно раджу до читання і сама планую прочитати всі ці книги. Це не звичний швидкий вступ у мову, а ретельне опрацювання тем."
       }
     ]
   }
