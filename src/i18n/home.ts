@@ -26,7 +26,7 @@ export const texts = {
     "en": "Work hours: 12:00 - 21:00 (Kyiv time)"
   },
   "contact_me": {
-    "ua": "За наступними контактами є можливість зв’язатися зі мною, для обговорення проєкту, пропозиції співпраці чи кар’єрної можливості.",
-    "en": "Feel free to reach out if you have a project, collaboration, or job opportunity."
+    "ua": "За наступними контактами є можливість зв’язатися зі мною, для обговорення проєкту, пропозиції співпраці, кар’єрної можливості чи щоб потеревенити про розробку програмного забезпечення.",
+    "en": "Feel free to reach out if you have a project, collaboration, job opportunity or wish to chat about software engineering."
   }
 } as const satisfies Localization;
