@@ -36,8 +36,24 @@ export const knowledgeSources: KnowledgeSource[] = [
         "ua": "compose == спрощення вкладених викликів функцій у список функцій, що будуть викликані. (читай список функцій справа на ліво)"
       },
       {
-        "en": "Into 5th chapter now and feel like the connection to math is not so apparent anymore. ...till the Category Theiry section. I would like to see a more examples of category theory in code though.",
-        "ua": "Поки читала 5ий розділ виникло відчуття, що звʼязку з математикою знову не видно. ...поки не почала читати секцію \"Category Theiry\". Хотілось би побачити більше прикладів category theory в коді."
+        "en": "Into 5th chapter now and feel like the connection to math is not so apparent anymore. ...till the Category Theory section. I would like to see a more examples of category theory in code though.",
+        "ua": "Поки читала 5ий розділ виникло відчуття, що звʼязку з математикою знову не видно. ...поки не почала читати секцію \"Category Theory\". Хотілось би побачити більше прикладів category theory в коді."
+      }
+    ]
+  },
+  {
+    "kind": "book",
+    "status": "in-progress-first-read",
+    "title": {
+      "en": "You Don't Know JS (1st and 2nd editions)",
+      "ua": "You Don't Know JS (1st and 2nd editions)"
+    },
+    "access": "free",
+    "link": "https://github.com/getify/You-Dont-Know-JS",
+    "thoughts": [
+      {
+        "en": "Sometimes come as too opinionated but is a great read to improve grasp on JS. I've put the read on a pause but I definitely recommend these and plan to read all of them myself.",
+        "ua": "Іноді здаються надто упередженими, але це чудові книги для покращення розуміння JS. Поки поставила читання цих книжок на паузу, але точно раджу до читання і сама планую прочитати всі ці книги."
       }
     ]
   }

@@ -1,0 +1,16 @@
+{
+  "kind": "book",
+  "status": "in-progress-first-read",
+  "title": {
+    "ua": "You Don't Know JS (1st and 2nd editions)",
+    "en": "You Don't Know JS (1st and 2nd editions)"
+  },
+  "access": "free",
+  "link": "https://github.com/getify/You-Dont-Know-JS",
+  "thoughts": [
+    {
+      "ua": "Іноді здаються надто упередженими, але це чудові книги для покращення розуміння JS. Поки поставила читання цих книжок на паузу, але точно раджу до читання і сама планую прочитати всі ці книги.",
+      "en": "Sometimes come as too opinionated but is a great read to improve grasp on JS. I've put the read on a pause but I definitely recommend these and plan to read all of them myself."
+    }
+  ]
+}
