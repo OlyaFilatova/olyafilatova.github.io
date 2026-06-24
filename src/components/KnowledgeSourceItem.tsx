@@ -16,7 +16,7 @@ function KnowledgeSourceItem({ source }: {source: KnowledgeSource}) {
       </div>
       <a href={source.link} target='_blank'>{source.link}</a>
       <ul>
-        {source.thoughts.map(thought => <li>{thought[currentLanguage]}</li>)}
+        {source.thoughts.map(thought => <li><p>{thought[currentLanguage]}</p></li>)}
       </ul>
     </div>
   )
