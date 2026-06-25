@@ -46,6 +46,10 @@ export const knowledgeSources: KnowledgeSource[] = [
       {
         "en": "Hindley-Milner type signature. Using it allows to search for existing functions (ex. https://hoogle.haskell.org/). Also it helps to analyze function from the math PoV.",
         "ua": "Сигнатура типу Хіндлі-Мілнера. Її використання дозволяє знаходити існуючі функції (наприклад https://hoogle.haskell.org/). Також вона допомагає аналізувати функцію з точки зору математики."
+      },
+      {
+        "en": "Got to chapter about Container and Functors and they have class structure at its core. Not something that I was expecting from functional programming.",
+        "ua": "Дійшла до розділу про контейнери та функтори, а вони створюються на основі класів. Не те, чого я очікувала від функціонального програмування."
       }
     ]
   },
