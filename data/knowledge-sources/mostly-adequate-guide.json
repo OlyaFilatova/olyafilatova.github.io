@@ -47,6 +47,14 @@
     {
       "ua": "Дійшла до розділу про контейнери та функтори, а вони створюються на основі класів. Не те, чого я очікувала від функціонального програмування.",
       "en": "Got to chapter about Container and Functors and they have class structure at its core. Not something that I was expecting from functional programming."
+    },
+    {
+      "ua": "До чого мені важко звикнути, так це до читання коду програми знизу вгору та справа наліво.",
+      "en": "What takes me some time to get used to is definitely the reading of application code bottom to top and right to left."
+    },
+    {
+      "ua": "Для людини, яка вже досить довго пише в імперативному стилі, при першому прочитанні імперативний стиль все ще набагато читабельніший. Але я розумію, що з усіма функторами/монадами та операторними функціями, попередньо визначеними в бібліотеці, код стає набагато меншим, а для досвідченого у функціональному програмуванні розробника більш читабельним.",
+      "en": "For a person that have been writing in imperative style for quite a long time at the first read the imperative style is still much more readable. But I understand that with all the functors/monads and operator functions predefined in a library the code becomes much smaller and for a person experienced in functional programming it becomes more readable."
     }
   ]
 }
