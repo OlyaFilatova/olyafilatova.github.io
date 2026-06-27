@@ -5,6 +5,7 @@
 }
 .app-content {
   flex-grow: 1;
+  padding-left: 260px;
 }
 
 @media screen and (max-width: 700px) {

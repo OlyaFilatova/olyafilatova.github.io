@@ -1,6 +1,10 @@
 import type { Localization } from "./config";
 
 export const texts = {
+  "page_title": {
+    "ua": "Домашня сторінка - Ольга Філатова",
+    "en": "Home page - Olha Filatova"
+  },
   "name": {
     "ua": "Ольга Філатова",
     "en": "Olha Filatova"

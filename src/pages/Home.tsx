@@ -1,11 +1,17 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
+
+import './Home.css'
+
 import { texts } from '../i18n/home'
 import { LanguageContext } from '../i18n/config'
-import './Home.css'
 import Icon from '../components/Icon';
 
 function Home() {
   const currentLanguage = useContext(LanguageContext);
+
+  useEffect(() => {
+    document.title = texts.page_title[currentLanguage];
+  }, [currentLanguage]);
 
   return (
     <div className='home'>

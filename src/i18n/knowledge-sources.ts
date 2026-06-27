@@ -2,6 +2,10 @@ import type { Status } from "../schemas/knowledge-source";
 import type { Localization } from "./config";
 
 export const texts = {
+  "page_title": {
+    "ua": "Думки о джерелах знань - Ольга Філатова",
+    "en": "Thoughts on knowledge sources - Olha Filatova"
+  },
   "welcome": {
     "ua": "Вітаю! Сторінка про джерела знань знаходиться у стадії розробки.",
     "en": "Welcome! The page about knowledge sources is under development."

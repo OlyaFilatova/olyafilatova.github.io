@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState } from 'react'
-import photo from '../assets/photo.jpg'
+import photo from '../assets/photo-250.jpg'
 import './Sidebar.css'
 import type { Language } from '../i18n/config'
 import { languages, LanguageContext } from '../i18n/config'
