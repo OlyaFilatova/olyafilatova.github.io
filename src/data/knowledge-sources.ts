@@ -112,5 +112,37 @@ export const knowledgeSources: KnowledgeSource[] = [
         "ua": "продовжую читати..."
       }
     ]
+  },
+  {
+    "kind": "book",
+    "status": "in-progress-first-read",
+    "title": {
+      "en": "Python for Data Analysis (3rd edition)",
+      "ua": "Python for Data Analysis (3rd edition)"
+    },
+    "access": "free",
+    "link": "https://wesmckinney.com/book/",
+    "thoughts": [
+      {
+        "en": "Wonderful introduction book into Python libraries used in Data Analysis.",
+        "ua": "Чудова вступна книга про бібліотеки Python, що використовуються в аналізі даних."
+      },
+      {
+        "en": "Namely, the book gets reader acquainted with following popular libraries: Numpy, Pandas, matplotlib, seaborn.",
+        "ua": "Зокрема, книга знайомить читача з такими популярними бібліотеками як: Numpy, Pandas, matplotlib, seaborn."
+      },
+      {
+        "en": "Book is split by data analysis concerns. First chapters cover Python basics that are used further in the book. Libraries are gradually introduced and new functionality is backed by code examples.",
+        "ua": "Книга розділена за аспектами аналізу даних. У перших розділах розглядаються основи Python, які використовуються далі в книзі. Бібліотеки вводяться поступово, а нові функції підкріплюються прикладами коду."
+      },
+      {
+        "en": "As a supporting knowledge to this book I'd like to read some materials about Data Analysis itself sans coding, about real world problems and existing patterns, about underlying causes for decisions made.",
+        "ua": "Як доповнення до цієї книги я хотіла б прочитати якісь матеріали про сам аналіз даних без акценту на створення коду, про реальні проблеми та існуючі шаблони, про основні причини прийнятих рішень."
+      },
+      {
+        "en": "read in progress...",
+        "ua": "продовжую читати..."
+      }
+    ]
   }
 ];
