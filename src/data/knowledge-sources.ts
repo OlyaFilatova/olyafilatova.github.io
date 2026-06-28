@@ -84,16 +84,12 @@ export const knowledgeSources: KnowledgeSource[] = [
     "link": "https://github.com/getify/Functional-Light-JS/blob/master/manuscript/README.md",
     "thoughts": [
       {
-        "en": "Next I plan to dive into another book describing functional approach in JS.",
-        "ua": "Далі я планую заглибитись в ще одну книгу, яка описує функціональний підхід в JS."
-      },
-      {
         "en": "Revisits JS function basics. (arguments, parameters, default parameters, counting parameters, counting arguments, spread/gather, destructuring, named arguments, early returns, modified outer scope, modified argument by reference, closure, anonymous functions, arrow functions, this)",
-        "ua": "Повторення основ JS-функцій. (arguments, parameters, default parameters, counting parameters, counting arguments, spread/gather, destructuring, named arguments, early returns, modified outer scope, modified argument by reference, closure, anonymous functions, arrow functions, this)"
+        "ua": "Повторює основи JS-функцій. (arguments, parameters, default parameters, counting parameters, counting arguments, spread/gather, destructuring, named arguments, early returns, modified outer scope, modified argument by reference, closure, anonymous functions, arrow functions, this)"
       },
       {
-        "en": "Dives into following FP Terms: Arity, Unary functions, Binary functions, N-ary functions, higher-order function, partial application, currying, point-free style, Composition, ...",
-        "ua": "Заглиблюється в наступні терміни FP:  Arity, Unary functions, Binary functions, N-ary functions, higher-order function, partial application, currying, point-free style, Composition, ..."
+        "en": "Dives into following FP Terms: Arity, Unary functions, Binary functions, N-ary functions, higher-order function, partial application, currying, point-free style, Composition, side effect, side cause, idempotence, pure function, ...",
+        "ua": "Заглиблюється в наступні терміни FP:  Arity, Unary functions, Binary functions, N-ary functions, higher-order function, partial application, currying, point-free style, Composition, side effect, side cause, idempotence, pure function, ..."
       },
       {
         "en": "Explains FP utilities: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, ...",
@@ -104,8 +100,12 @@ export const knowledgeSources: KnowledgeSource[] = [
         "ua": "Автор завжди приділяє додатковий час, щоб описати за допомогою коду те, що відбувається всередині нових структур."
       },
       {
-        "en": "Except for defining function in FP the author, as planned, does not explore the role of math in the FP.",
-        "ua": "Окрім визначення функції в FP, автор, як і планував, не досліджує роль математики в FP."
+        "en": "The author dives into math while defining the role of function in FP, the idempotence.",
+        "ua": "Автор заглиблюється в математику під час визначення ролі функції в FP, the idempotence."
+      },
+      {
+        "en": "The explanation of side effects seems different from the professor Frisby's guide. Especially, I dislike with the idea that accessing outside constants and calling other functions are not side effects.",
+        "ua": "Пояснення побічних ефектів відрізняється від professor Frisby's guide. Особливо мені не подобається ідея, що доступ до зовнішніх констант та виклик інших функцій не є побічними ефектами."
       },
       {
         "en": "read in progress...",

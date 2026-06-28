@@ -16,7 +16,7 @@ function KnowledgeSources() {
 
   return (
     <div className='knw-source'>
-      {knowledgeSources.map(source => <KnowledgeSource source={source} />)}
+      {knowledgeSources.map((source, idx) => <KnowledgeSource key={idx} source={source} />)}
     </div>
   )
 }
