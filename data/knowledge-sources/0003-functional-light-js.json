@@ -1,48 +1,62 @@
 {
   "kind": "book",
-  "status": "in-progress-first-read",
+  "status": "first-read",
   "title": {
-    "ua": "Functional-Light JavaScript",
+    "uk": "Functional-Light JavaScript",
     "en": "Functional-Light JavaScript"
   },
   "access": "free",
   "link": "https://github.com/getify/Functional-Light-JS/blob/master/manuscript/README.md",
+  "categories": [
+    {
+      "uk": "JS",
+      "en": "JS"
+    },
+    {
+      "uk": "Functional programming",
+      "en": "Functional programming"
+    }
+  ],
   "thoughts": [
     {
-      "ua": "Повторює основи JS-функцій. (arguments, parameters, default parameters, counting parameters, counting arguments, spread/gather, destructuring, named arguments, early returns, modified outer scope, modified argument by reference, closure, anonymous functions, arrow functions, this) and other JS structures (const, Object.freeze)",
+      "uk": "Можливо, це побічний ефект того, що ця книга стала моїм другим джерелом знань про FP, але занадто часто в голові я чую: \"Ні, це не може бути правдою. Це суперечить тому, що я читала у попередній книзі\".",
+      "en": "Maybe it's a side effect of this book being my second knowledge source about FP but too much too often I hear in my head \"No, that can't be right. This contradicts with what I've read previously\"."
+    },
+    {
+      "uk": "Повторює основи JS-функцій. (arguments, parameters, default parameters, counting parameters, counting arguments, spread/gather, destructuring, named arguments, early returns, modified outer scope, modified argument by reference, closure, anonymous functions, arrow functions, this) and other JS structures (const, Object.freeze)",
       "en": "Revisits JS function basics. (arguments, parameters, default parameters, counting parameters, counting arguments, spread/gather, destructuring, named arguments, early returns, modified outer scope, modified argument by reference, closure, anonymous functions, arrow functions, this) and other JS structures (const, Object.freeze)"
     },
     {
-      "ua": "Заглиблюється в наступні терміни FP: Arity, Unary functions, Binary functions, N-ary functions, higher-order function, partial application, currying, point-free style, Composition, side effect, side cause, idempotence, pure function, memoization, value immutability, constant, recursion, mutual recursion, call stack, memory pressure, tail call, continuation passing style, trampolines, ...",
-      "en": "Dives into following FP Terms: Arity, Unary functions, Binary functions, N-ary functions, higher-order function, partial application, currying, point-free style, Composition, side effect, side cause, idempotence, pure function, memoization, value immutability, constant, recursion, mutual recursion, call stack, memory pressure, tail call, continuation passing style, trampolines, ..."
+      "uk": "Заглиблюється в наступні терміни: Arity, Unary functions, Binary functions, N-ary functions, higher-order function, partial application, currying, point-free style, Composition, side effect, side cause, idempotence, pure function, memoization, value immutability, constant, recursion, mutual recursion, call stack, memory pressure, tail call, continuation passing style, trampolines, mapping, functor, filtering, predicate function, folding, fusion, eager vs. lazy operation, reactive FP, observable, transducing, monad",
+      "en": "Dives into following terms: Arity, Unary functions, Binary functions, N-ary functions, higher-order function, partial application, currying, point-free style, Composition, side effect, side cause, idempotence, pure function, memoization, value immutability, constant, recursion, mutual recursion, call stack, memory pressure, tail call, continuation passing style, trampolines, mapping, functor, filtering, predicate function, folding, fusion, eager vs. lazy operation, reactive FP, observable, transducing, monad"
     },
     {
-      "ua": "Пояснює утиліти FP: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, Immutable.js, ...",
-      "en": "Explains FP utilities: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, Immutable.js, ..."
+      "uk": "Пояснює утиліти: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, Immutable.js, flatten, zip, merge, invoker, Transducers.js, ...",
+      "en": "Explains utilities: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, Immutable.js, flatten, zip, merge, invoker, Transducers.js, ..."
     },
     {
-      "ua": "Автор завжди приділяє додатковий час, щоб описати за допомогою коду те, що відбувається всередині нових структур.",
+      "uk": "Автор завжди приділяє додатковий час, щоб описати за допомогою коду те, що відбувається всередині нових структур.",
       "en": "The author always spends extra time to describe with code what is going on inside the new structures."
     },
     {
-      "ua": "Автор пояснює за допомоги математики визначення ролі функції в FP, idempotence.",
+      "uk": "Автор пояснює за допомоги математики визначення ролі функції в FP, idempotence.",
       "en": "The author explains using math the role of function in FP, the idempotence."
     },
     {
-      "ua": "Пояснення побічних ефектів відрізняється від professor Frisby's guide. Особливо мені не подобається ідея, що доступ до зовнішніх констант та виклик інших функцій не є побічними ефектами.",
+      "uk": "Пояснення побічних ефектів відрізняється від professor Frisby's guide. Особливо мені не подобається ідея, що доступ до зовнішніх констант та виклик інших функцій не є побічними ефектами.",
       "en": "The explanation of side effects seems different from the professor Frisby's guide. Especially, I dislike with the idea that accessing outside constants and calling other functions are not side effects."
     },
     {
-      "ua": "Обмірковує ідею подібності між замиканням та об'єктом.",
+      "uk": "Обмірковує ідею подібності між замиканням та об'єктом.",
       "en": "Muses idea of similarities between closure and object."
     },
     {
-      "ua": "До цього моменту книга вірна обіцянці своєї передмови, що це не найкраща книга для заглиблення в тему FP. Вона більше заплутує мене щодо FP, ніж допомагає. Замало ідей FP, водночас забагато упереджень автора. Наразі я бачу цю книгу корисною не для огляду FP, а для занурення в обговорення окремих особливостей JS та програмування.",
-      "en": "Up to this point the book is loyal to the promise of its preface that it is not a good book for diving into the topic of FP. It confuses me about FP more than helps. To little of FP ideas to much of author's opinions. At the moment, I see this book as useful not for an overview of FP, but for diving into discussion of individual features of JS and programming."
+      "uk": "Ця книга лише трохи описує Functor.",
+      "en": "The topic of Functor is barely touched in this book."
     },
     {
-      "ua": "продовжую читати...",
-      "en": "read in progress..."
+      "uk": "Книга вірна обіцянці своєї передмови, що це не найкраща книга для заглиблення в тему FP. Вона більше заплутує мене щодо FP, ніж допомагає. Замало ідей FP, водночас забагато упереджень автора. Наразі я бачу цю книгу корисною не для огляду FP, а для занурення в обговорення окремих особливостей JS, FP та програмування.",
+      "en": "The book is loyal to the promise of its preface that it is not a good book for diving into the topic of FP. It confuses me about FP more than helps. To little of FP ideas to much of author's opinions. At the moment, I see this book as useful not for an overview of FP, but for diving into discussion of individual features of JS, FP and programming."
     }
   ]
 }

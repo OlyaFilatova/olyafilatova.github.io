@@ -2,15 +2,15 @@
   "kind": "education",
   "location": {
     "en": "STEP Computer Academy, Dnipro",
-    "ua": "Компʼютерна академія ШАГ"
+    "uk": "Компʼютерна академія ШАГ"
   },
   "specialization": {
     "en": "Software Development",
-    "ua": "Розробка ПЗ"
+    "uk": "Розробка ПЗ"
   },
   "year": {
     "en": "2012",
-    "ua": "2012"
+    "uk": "2012"
   },
   "skills": []
 }

@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-export const languages = ['ua', 'en'] as const;
+export const languages = ['uk', 'en'] as const;
 
 export type Language = typeof languages[number];
 export type Localization = Record<string, Record<Language, string>>;
@@ -14,10 +14,10 @@ function parseLangCache(): Language {
   if (isLanguage(storedLanguage)) {
     return storedLanguage;
   }
-  return 'ua';
+  return 'uk';
 }
 
-export const LanguageContext = createContext<Language>('ua');
+export const LanguageContext = createContext<Language>('uk');
 
 const languageControls = (function(){
   let currentLanguage: Language = parseLangCache();

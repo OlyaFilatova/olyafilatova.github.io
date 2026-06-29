@@ -2,7 +2,7 @@ import * as zod from "zod";
 
 const localizedString = zod.object({
   "en": zod.string().min(1),
-  "ua": zod.string().min(1)
+  "uk": zod.string().min(1)
 });
 
 export const EducationExperience = zod.object({

@@ -2,10 +2,10 @@ import * as zod from "zod";
 
 const localizedString = zod.object({
   "en": zod.string().min(1),
-  "ua": zod.string().min(1)
+  "uk": zod.string().min(1)
 });
 
-const Status = zod.enum(['not-started', 'in-progress-first-read', 'first-read', 'in-progress-thorough-read', 'read']);
+const Status = zod.enum(['planned', 'in-progress-first-read', 'first-read', 'in-progress-thorough-read', 'read', 'paused']);
 const Access = zod.enum(['free', 'paid']);
 
 export const BookSource = zod.object({
@@ -14,7 +14,8 @@ export const BookSource = zod.object({
   "title": localizedString,
   "access": Access,
   "link": zod.string().min(1),
-  "thoughts": zod.array(localizedString)
+  "thoughts": zod.optional(zod.array(localizedString)),
+  "categories": zod.optional(zod.array(localizedString))
 });
 
 export const DocumentationSource = zod.object({
@@ -23,7 +24,8 @@ export const DocumentationSource = zod.object({
   "title": localizedString,
   "access": zod.literal('free'),
   "link": zod.string().min(1),
-  "thoughts": zod.array(localizedString)
+  "thoughts": zod.optional(zod.array(localizedString)),
+  "categories": zod.optional(zod.array(localizedString))
 });
 
 export const KnowledgeSource = zod.union([BookSource, DocumentationSource]);

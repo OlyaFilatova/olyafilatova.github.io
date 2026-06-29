@@ -2,130 +2,130 @@
   "kind": "work",
   "position": {
     "en": "Backend Engineer - AstrumU (Startup)",
-    "ua": "Backend Розробник - AstrumU (Startup)"
+    "uk": "Backend Розробник - AstrumU (Startup)"
   },
   "tech_stack": {
     "en": "TypeScript/Python",
-    "ua": "TypeScript/Python"
+    "uk": "TypeScript/Python"
   },
   "from": {
     "en": "Apr 2018",
-    "ua": "Квітень 2022"
+    "uk": "Квітень 2022"
   },
   "to": {
     "en": "Jun 2025",
-    "ua": "Червень 2025"
+    "uk": "Червень 2025"
   },
   "projects": [
     {
       "en": "PDF cleaning and parsing",
-      "ua": "Обробка та парсинг PDF"
+      "uk": "Обробка та парсинг PDF"
     },
     {
       "en": "RESTful and GraphQL APIs",
-      "ua": "RESTful та GraphQL API"
+      "uk": "RESTful та GraphQL API"
     },
     {
       "en": "Data pipeline",
-      "ua": "Пайплайн даних"
+      "uk": "Пайплайн даних"
     },
     {
       "en": "White-label system of landing pages with integrated ML solution",
-      "ua": "White-label система лендинг сторінок з вбудованим ML рішенням"
+      "uk": "White-label система лендинг сторінок з вбудованим ML рішенням"
     },
     {
       "en": "Skills analysis system with integrated ML solution",
-      "ua": "Система аналізу навичок з вбудованим ML рішенням"
+      "uk": "Система аналізу навичок з вбудованим ML рішенням"
     }
   ],
   "skills": [
     {
       "en": "TypeScript",
-      "ua": "TypeScript"
+      "uk": "TypeScript"
     },
     {
       "en": "Python3",
-      "ua": "Python3"
+      "uk": "Python3"
     },
     {
       "en": "Node.js",
-      "ua": "Node.js"
+      "uk": "Node.js"
     },
     {
       "en": "FastAPI",
-      "ua": "FastAPI"
+      "uk": "FastAPI"
     },
     {
       "en": "Ray Serve",
-      "ua": "Ray Serve"
+      "uk": "Ray Serve"
     },
     {
       "en": "React.js",
-      "ua": "React.js"
+      "uk": "React.js"
     },
     {
       "en": "Nest.js",
-      "ua": "Nest.js"
+      "uk": "Nest.js"
     },
     {
       "en": "Pulumi",
-      "ua": "Pulumi"
+      "uk": "Pulumi"
     },
     {
       "en": "MongoDB",
-      "ua": "MongoDB"
+      "uk": "MongoDB"
     },
     {
       "en": "PostgreSQL",
-      "ua": "PostgreSQL"
+      "uk": "PostgreSQL"
     },
     {
       "en": "TypeORM",
-      "ua": "TypeORM"
+      "uk": "TypeORM"
     },
     {
       "en": "SQLAlchemy",
-      "ua": "SQLAlchemy"
+      "uk": "SQLAlchemy"
     },
     {
       "en": "Auth0",
-      "ua": "Auth0"
+      "uk": "Auth0"
     },
     {
       "en": "vllm",
-      "ua": "vllm"
+      "uk": "vllm"
     },
     {
       "en": "Kafka",
-      "ua": "Kafka"
+      "uk": "Kafka"
     },
     {
       "en": "Dagster",
-      "ua": "Dagster"
+      "uk": "Dagster"
     },
     {
       "en": "Tilt",
-      "ua": "Tilt"
+      "uk": "Tilt"
     },
     {
       "en": "Dagger",
-      "ua": "Dagger"
+      "uk": "Dagger"
     },
     {
       "en": "Redis",
-      "ua": "Redis"
+      "uk": "Redis"
     },
     {
       "en": "Docker",
-      "ua": "Docker"
+      "uk": "Docker"
     },
     {
       "en": "Kubernetes",
-      "ua": "Kubernetes"
+      "uk": "Kubernetes"
     },
     {
       "en": "Azure Cloud",
-      "ua": "Azure Cloud"
+      "uk": "Azure Cloud"
     }
   ]
 }

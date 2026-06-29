@@ -2,35 +2,35 @@ import type { Localization } from "./config";
 
 export const texts = {
   "page_title": {
-    "ua": "Домашня сторінка - Ольга Філатова",
+    "uk": "Домашня сторінка - Ольга Філатова",
     "en": "Home page - Olha Filatova"
   },
   "name": {
-    "ua": "Ольга Філатова",
+    "uk": "Ольга Філатова",
     "en": "Olha Filatova"
   },
   "specialization": {
-    "ua": "Backend-інженер із сильними навичками Node.js та Python. Спеціалізуюсь на API, серверних системах і автоматизації процесів.",
+    "uk": "Backend-інженер із сильними навичками Node.js та Python. Спеціалізуюсь на API, серверних системах і автоматизації процесів.",
     "en": "Backend engineer with strong Node.js and Python experience, focused on APIs, systems, and automation."
   },
   "job_status": {
-    "ua": "Доступна для нових можливостей і відкрита до пропозицій.",
+    "uk": "Доступна для нових можливостей і відкрита до пропозицій.",
     "en": "Available for new opportunities and open to offers."
   },
   "location": {
-    "ua": "Україна, Віддалена співпраця.",
+    "uk": "Україна, Віддалена співпраця.",
     "en": "Ukraine-based, Remote-only."
   },
   "contacts": {
-    "ua": "Контакти:",
+    "uk": "Контакти:",
     "en": "Get in touch:"
   },
   "work_hours": {
-    "ua": "Години роботи: 12:00 - 21:00 (за Київським часом)",
+    "uk": "Години роботи: 12:00 - 21:00 (за Київським часом)",
     "en": "Work hours: 12:00 - 21:00 (Kyiv time)"
   },
   "contact_me": {
-    "ua": "За наступними контактами є можливість зв’язатися зі мною, для обговорення проєкту, пропозиції співпраці, кар’єрної можливості чи щоб потеревенити про розробку програмного забезпечення.",
+    "uk": "За наступними контактами є можливість зв’язатися зі мною, для обговорення проєкту, пропозиції співпраці, кар’єрної можливості чи щоб потеревенити про розробку програмного забезпечення.",
     "en": "Feel free to reach out if you have a project, collaboration, job opportunity or wish to chat about software engineering."
   }
 } as const satisfies Localization;

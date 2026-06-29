@@ -7,11 +7,11 @@ function Navigation({ onLinkClicked } : { onLinkClicked: () => void}) {
   const currentLanguage = useContext(LanguageContext);
 
   return (
-    <div className='navigation'>
+    <nav className='navigation'>
       <a onClick={onLinkClicked} href="/">{texts_navigation.main[currentLanguage]}</a>
       <a onClick={onLinkClicked} href="/#/knowledge-sources">{texts_navigation.books[currentLanguage]}</a>
       <a onClick={onLinkClicked} href="/#/history">{texts_navigation.history[currentLanguage]}</a>
-    </div>
+    </nav>
   )
 }
 

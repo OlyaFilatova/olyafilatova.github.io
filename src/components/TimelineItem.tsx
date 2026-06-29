@@ -7,7 +7,7 @@ function TimelineItem({ experience }: {experience: Experience}) {
   const currentLanguage = useContext(LanguageContext);
 
   return experience.kind == 'education' ? (
-    <div className="item education">
+    <section className="item education">
       <div className="year">{experience.year[currentLanguage]}</div>
 
       <div className="spine">
@@ -15,7 +15,7 @@ function TimelineItem({ experience }: {experience: Experience}) {
       </div>
 
       <div className="content">
-        <div className="title">{experience.specialization[currentLanguage]}</div>
+        <h2 className="title">{experience.specialization[currentLanguage]}</h2>
 
         <div className="meta">
           {experience.year[currentLanguage]} · {experience.location[currentLanguage]}
@@ -25,9 +25,9 @@ function TimelineItem({ experience }: {experience: Experience}) {
           {experience.skills.map(skill => <li>{skill[currentLanguage]}</li>)}
         </ul>}
       </div>
-    </div>
+    </section>
   ) : (
-    <div className="item job">
+    <section className="item job">
       <div className="year">{experience.from[currentLanguage]}<br/> {experience.to[currentLanguage]}</div>
 
       <div className="spine">
@@ -35,7 +35,7 @@ function TimelineItem({ experience }: {experience: Experience}) {
       </div>
 
       <div className="content">
-        <div className="title">{experience.position[currentLanguage]}</div>
+        <h2 className="title">{experience.position[currentLanguage]}</h2>
 
         <div className="meta">
           {experience.tech_stack[currentLanguage]}
@@ -49,7 +49,7 @@ function TimelineItem({ experience }: {experience: Experience}) {
           {experience.skills.map(skill => <li>{skill[currentLanguage]}</li>)}
         </ul>}
       </div>
-    </div>
+    </section>
   )
 }
 

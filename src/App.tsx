@@ -20,7 +20,7 @@ function App() {
             setLang(lang);
           }} />
         </div>
-        <div className='app-content'>
+        <main className='app-content'>
           <HashRouter>
             <Routes>
               <Route path="/" element={<Home />} />
@@ -28,7 +28,7 @@ function App() {
               <Route path="/history" element={<History />} />
             </Routes>
           </HashRouter>
-        </div>
+        </main>
       </div>
     </LanguageContext.Provider>
   )

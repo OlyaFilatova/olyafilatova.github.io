@@ -30,9 +30,9 @@ function Sidebar({ onLangChange }: {
           <img className='sidebar-img' src={photo} />
         </div>
         <Navigation onLinkClicked={() => setSidebarOpened(false)} />
-        <div className='languages'>
+        <nav className='languages' aria-label={texts.language_selector[currentLanguage]}>
           {languages.map(lang => <button key={lang} className={lang == currentLanguage ? 'selected-lang' : 'lang'} onClick={() => changeLanguage(lang)}>{lang}</button>)}
-        </div>
+        </nav>
         <a className='cv-link' href={texts.cv_link[currentLanguage]} download>{texts.download_cv[currentLanguage]}</a>
       </div>
     </>

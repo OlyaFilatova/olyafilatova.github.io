@@ -4,11 +4,15 @@ import cv_ua from '../assets/CV - Software Engineer - Ольга Філатов�
 
 export const texts = {
   "download_cv": {
-    "ua": "Скачати CV",
+    "uk": "Скачати CV",
     "en": "Download CV"
   },
   "cv_link": {
-    "ua": cv_ua,
+    "uk": cv_ua,
     "en": cv_en
+  },
+  "language_selector": {
+    "uk": "Перемикач мови",
+    "en": "Language selector"
   },
 } as const satisfies Localization;

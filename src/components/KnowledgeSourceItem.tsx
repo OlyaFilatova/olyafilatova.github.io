@@ -3,22 +3,40 @@ import './KnowledgeSourceItem.css'
 import { LanguageContext } from '../i18n/config'
 import type { KnowledgeSource } from '../schemas/knowledge-source';
 import { statusTextMapping } from '../i18n/knowledge-sources';
+import React from 'react';
 
 function KnowledgeSourceItem({ source }: {source: KnowledgeSource}) {
   const currentLanguage = useContext(LanguageContext);
+  const separator = ' · ';
+
+  function renderThoughts(thoughts: NonNullable<KnowledgeSource["thoughts"]>) {
+    return <ul>
+        {thoughts.map((thought, idx) => <li key={idx}><p>{thought[currentLanguage]}</p></li>)}
+      </ul>;
+  }
 
   return (
-    <div className="item knowledge-source">
-      <div className="title">{source.title[currentLanguage]}</div>
+    <article className="item knowledge-source">
+      <header>
+        <h2 className="title">{source.title[currentLanguage]}</h2>
 
-      <div className="meta">
-        {source.access} · {source.kind} · {statusTextMapping[source.status][currentLanguage]}
-      </div>
-      <a href={source.link} target='_blank'>{source.link}</a>
-      <ul>
-        {source.thoughts.map((thought, idx) => <li key={idx}><p>{thought[currentLanguage]}</p></li>)}
-      </ul>
-    </div>
+        <hgroup className="meta">
+          {source.access}{separator}{source.kind}{separator}{statusTextMapping[source.status][currentLanguage]}
+        </hgroup>
+        {source.categories ? <div className="meta">
+          {source.categories.map((category, idx) => <React.Fragment key={idx}>
+            {idx != 0 ? separator : undefined}
+            <span>{category[currentLanguage]}</span>
+          </React.Fragment>)}
+        </div> : undefined}
+        <a href={source.link} target='_blank'>{source.link}</a>
+      </header>
+      {!source.thoughts ? undefined :
+        source.thoughts.length == 1 ? renderThoughts(source.thoughts) : <details>
+          <summary>{source.thoughts[0][currentLanguage]}</summary>
+          {renderThoughts(source.thoughts.slice(1))}
+        </details> }
+    </article>
   )
 }
 

@@ -2,94 +2,94 @@
   "kind": "work",
   "position": {
     "en": "Full Stack Engineer (Freelance)",
-    "ua": "Full Stack Розробник (Фриланс)"
+    "uk": "Full Stack Розробник (Фриланс)"
   },
   "tech_stack": {
     "en": "JavaScript/PHP",
-    "ua": "JavaScript/PHP"
+    "uk": "JavaScript/PHP"
   },
   "from": {
     "en": "2018",
-    "ua": "2018"
+    "uk": "2018"
   },
   "to": {
     "en": "Feb 2022",
-    "ua": "Лютий 2022"
+    "uk": "Лютий 2022"
   },
   "projects": [
     {
       "en": "Independently worked on existing codebases, implementing features, debugging issues, and learning new frameworks on the fly to meet client needs.",
-      "ua": "Працювала із наявними кодовими базами: реалізовувала нові функції, виправляла помилки та швидко опановувала нові технології відповідно до потреб клієнтів."
+      "uk": "Працювала із наявними кодовими базами: реалізовувала нові функції, виправляла помилки та швидко опановувала нові технології відповідно до потреб клієнтів."
     },
     {
       "en": "Contributed to the architecture and initial implementation of a white-label learning platform.",
-      "ua": "Брала участь в архітектурі та початковій розробці white-label платформи для онлайн-навчання."
+      "uk": "Брала участь в архітектурі та початковій розробці white-label платформи для онлайн-навчання."
     },
     {
       "en": "Implemented and managed an e-commerce platform for seasonal product sales, contributing to both engineering and direct sales operations.",
-      "ua": "Розгорнула та керувала e-commerce платформою для продажу сезонних товарів, поєднуючи технічну розробку з операційною та продажною діяльністю."
+      "uk": "Розгорнула та керувала e-commerce платформою для продажу сезонних товарів, поєднуючи технічну розробку з операційною та продажною діяльністю."
     },
     {
       "en": "Developed multiple Android applications, including a language learning app (memorizing irregular verbs), a plant care tracking tool, and a logging app for paramedics used to record actions and used materials.",
-      "ua": "Розробила кілька Android-застосунків, включаючи додаток для вивчення мов (неправильні дієслова), інструмент для відстеження догляду за рослинами та застосунок для фіксації дій парамедиків і використаних матеріалів."
+      "uk": "Розробила кілька Android-застосунків, включаючи додаток для вивчення мов (неправильні дієслова), інструмент для відстеження догляду за рослинами та застосунок для фіксації дій парамедиків і використаних матеріалів."
     }
   ],
   "skills": [
     {
       "en": "JavaScript",
-      "ua": "JavaScript"
+      "uk": "JavaScript"
     },
     {
       "en": "TypeScript",
-      "ua": "TypeScript"
+      "uk": "TypeScript"
     },
     {
       "en": "PHP",
-      "ua": "PHP"
+      "uk": "PHP"
     },
     {
       "en": "Node.js",
-      "ua": "Node.js"
+      "uk": "Node.js"
     },
     {
       "en": "MySQL/MariaDB",
-      "ua": "MySQL/MariaDB"
+      "uk": "MySQL/MariaDB"
     },
     {
       "en": "Firebase",
-      "ua": "Firebase"
+      "uk": "Firebase"
     },
     {
       "en": "Laravel",
-      "ua": "Laravel"
+      "uk": "Laravel"
     },
     {
       "en": "Ionic Framework",
-      "ua": "Ionic Framework"
+      "uk": "Ionic Framework"
     },
     {
       "en": "Angular",
-      "ua": "Angular"
+      "uk": "Angular"
     },
     {
       "en": "Java for Android",
-      "ua": "Java for Android"
+      "uk": "Java for Android"
     },
     {
       "en": "Wordpress",
-      "ua": "Wordpress"
+      "uk": "Wordpress"
     },
     {
       "en": "HTML5",
-      "ua": "HTML5"
+      "uk": "HTML5"
     },
     {
       "en": "CSS3",
-      "ua": "CSS3"
+      "uk": "CSS3"
     },
     {
       "en": "VPS (Linux)",
-      "ua": "VPS (Linux)"
+      "uk": "VPS (Linux)"
     }
   ]
 }

@@ -2,102 +2,102 @@
   "kind": "work",
   "position": {
     "en": "Full Stack Engineer",
-    "ua": "Full Stack Розробник"
+    "uk": "Full Stack Розробник"
   },
   "tech_stack": {
     "en": "TypeScript/Python",
-    "ua": "TypeScript/Python"
+    "uk": "TypeScript/Python"
   },
   "from": {
     "en": "Jun 2025",
-    "ua": "Червень 2025"
+    "uk": "Червень 2025"
   },
   "to": {
     "en": "Present",
-    "ua": "Теперішній час"
+    "uk": "Теперішній час"
   },
   "projects": [
     {
       "en": "Chrome extension for highlighting terms and subsequent analysis of the pages.",
-      "ua": "Chrome розширення для виділення виразів на сторінках та  аналізу сторінок."
+      "uk": "Chrome розширення для виділення виразів на сторінках та  аналізу сторінок."
     },
     {
       "en": "Mobile app with real time collaboration for a small user group",
-      "ua": "Мобільний застосунок із real time співпрацею для малої групи користувачів"
+      "uk": "Мобільний застосунок із real time співпрацею для малої групи користувачів"
     }
   ],
   "skills": [
     {
       "en": "monorepo",
-      "ua": "monorepo"
+      "uk": "monorepo"
     },
     {
       "en": "TypeScript",
-      "ua": "TypeScript"
+      "uk": "TypeScript"
     },
     {
       "en": "JavaScript",
-      "ua": "JavaScript"
+      "uk": "JavaScript"
     },
     {
       "en": "Python",
-      "ua": "Python"
+      "uk": "Python"
     },
     {
       "en": "Node.js",
-      "ua": "Node.js"
+      "uk": "Node.js"
     },
     {
       "en": "Nest.js",
-      "ua": "Nest.js"
+      "uk": "Nest.js"
     },
     {
       "en": "React Native",
-      "ua": "React Native"
+      "uk": "React Native"
     },
     {
       "en": "React.js",
-      "ua": "React.js"
+      "uk": "React.js"
     },
     {
       "en": "Next.js",
-      "ua": "Next.js"
+      "uk": "Next.js"
     },
     {
       "en": "Socket.io",
-      "ua": "Socket.io"
+      "uk": "Socket.io"
     },
     {
       "en": "PostgreSQL",
-      "ua": "PostgreSQL"
+      "uk": "PostgreSQL"
     },
     {
       "en": "Prisma",
-      "ua": "Prisma"
+      "uk": "Prisma"
     },
     {
       "en": "Docker",
-      "ua": "Docker"
+      "uk": "Docker"
     },
     {
       "en": "Prometheus+Loki+Grafana",
-      "ua": "Prometheus+Loki+Grafana"
+      "uk": "Prometheus+Loki+Grafana"
     },
     {
       "en": "Manifest V3",
-      "ua": "Manifest V3"
+      "uk": "Manifest V3"
     },
     {
       "en": "Vite",
-      "ua": "Vite"
+      "uk": "Vite"
     },
     {
       "en": "Playwright",
-      "ua": "Playwright"
+      "uk": "Playwright"
     },
     {
       "en": "VPS (Linux)",
-      "ua": "VPS (Linux)"
+      "uk": "VPS (Linux)"
     }
   ]
 }
