@@ -88,12 +88,12 @@ export const knowledgeSources: KnowledgeSource[] = [
         "ua": "Повторює основи JS-функцій. (arguments, parameters, default parameters, counting parameters, counting arguments, spread/gather, destructuring, named arguments, early returns, modified outer scope, modified argument by reference, closure, anonymous functions, arrow functions, this) and other JS structures (const, Object.freeze)"
       },
       {
-        "en": "Dives into following FP Terms: Arity, Unary functions, Binary functions, N-ary functions, higher-order function, partial application, currying, point-free style, Composition, side effect, side cause, idempotence, pure function, memoization, value immutability, constant, ...",
-        "ua": "Заглиблюється в наступні терміни FP: Arity, Unary functions, Binary functions, N-ary functions, higher-order function, partial application, currying, point-free style, Composition, side effect, side cause, idempotence, pure function, memoization, value immutability, constant, ..."
+        "en": "Dives into following FP Terms: Arity, Unary functions, Binary functions, N-ary functions, higher-order function, partial application, currying, point-free style, Composition, side effect, side cause, idempotence, pure function, memoization, value immutability, constant, recursion, mutual recursion, call stack, memory pressure, tail call, continuation passing style, trampolines, ...",
+        "ua": "Заглиблюється в наступні терміни FP: Arity, Unary functions, Binary functions, N-ary functions, higher-order function, partial application, currying, point-free style, Composition, side effect, side cause, idempotence, pure function, memoization, value immutability, constant, recursion, mutual recursion, call stack, memory pressure, tail call, continuation passing style, trampolines, ..."
       },
       {
-        "en": "Explains FP utilities: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, ...",
-        "ua": "Пояснює утиліти FP: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, ..."
+        "en": "Explains FP utilities: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, Immutable.js, ...",
+        "ua": "Пояснює утиліти FP: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, Immutable.js, ..."
       },
       {
         "en": "The author always spends extra time to describe with code what is going on inside the new structures.",
@@ -108,8 +108,12 @@ export const knowledgeSources: KnowledgeSource[] = [
         "ua": "Пояснення побічних ефектів відрізняється від professor Frisby's guide. Особливо мені не подобається ідея, що доступ до зовнішніх констант та виклик інших функцій не є побічними ефектами."
       },
       {
-        "en": "Introduces Immutable.js library from facebook.",
-        "ua": "Знайомить з бібліотекою Immutable.js від facebook."
+        "en": "Muses idea of similarities between closure and object.",
+        "ua": "Обмірковує ідею подібності між замиканням та об'єктом."
+      },
+      {
+        "en": "Up to this point the book is loyal to the promise of its preface that it is not a good book for diving into the topic of FP. It confuses me about FP more than helps. To little of FP ideas to much of author's opinions. At the moment, I see this book as useful not for an overview of FP, but for diving into discussion of individual features of JS and programming.",
+        "ua": "До цього моменту книга вірна обіцянці своєї передмови, що це не найкраща книга для заглиблення в тему FP. Вона більше заплутує мене щодо FP, ніж допомагає. Замало ідей FP, водночас забагато упереджень автора. Наразі я бачу цю книгу корисною не для огляду FP, а для занурення в обговорення окремих особливостей JS та програмування."
       },
       {
         "en": "read in progress...",
