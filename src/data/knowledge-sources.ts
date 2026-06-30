@@ -152,6 +152,242 @@ export const knowledgeSources: KnowledgeSource[] = [
     ]
   },
   {
+    "kind": "documentation",
+    "status": "first-read",
+    "title": {
+      "en": "Django overview /intro/",
+      "uk": "Django overview /intro/"
+    },
+    "access": "free",
+    "link": "https://docs.djangoproject.com/en/6.0/intro/",
+    "thoughts": [
+      {
+        "en": "Main building blocks of django are apps. These customize behavior of the project. They can add pages, change templates, add data structures and other functionality. Popular apps are available to extend a django project.",
+        "uk": "Main building blocks of django are apps. These customize behavior of the project. They can add pages, change templates, add data structures and other functionality. Popular apps are available to extend a django project."
+      },
+      {
+        "en": "A django project has main directory containing configuration files that control folder structure, activate apps and make their urls available to the web, override their settings and add priority to their behavior (first come first serve).",
+        "uk": "A django project has main directory containing configuration files that control folder structure, activate apps and make their urls available to the web, override their settings and add priority to their behavior (first come first serve)."
+      },
+      {
+        "en": "Many of the django apps build their functionality around models. For example admin panel automatically creates forms that can be used to fill in the DB. The admin panel behavior can be configured from the model itself (ex. @admin.display) and from the admin.py file.",
+        "uk": "Many of the django apps build their functionality around models. For example admin panel automatically creates forms that can be used to fill in the DB. The admin panel behavior can be configured from the model itself (ex. @admin.display) and from the admin.py file."
+      },
+      {
+        "en": "Based on the models django can automatically generate migrations and run them.",
+        "uk": "Based on the models django can automatically generate migrations and run them."
+      },
+      {
+        "en": "Django provides both ASGI and WSGI entry points.",
+        "uk": "Django provides both ASGI and WSGI entry points."
+      },
+      {
+        "en": "Django uses views to process user calls to urls and provide responses.",
+        "uk": "Django uses views to process user calls to urls and provide responses."
+      },
+      {
+        "en": "Django uses templates to configure a view response.",
+        "uk": "Django uses templates to configure a view response."
+      },
+      {
+        "en": "Django puts all static files (css, images, etc.) into static folder of an app.",
+        "uk": "Django puts all static files (css, images, etc.) into static folder of an app."
+      },
+      {
+        "en": "Django has shortcuts for popular idioms.",
+        "uk": "Django has shortcuts for popular idioms."
+      },
+      {
+        "en": "Django has a built in solution for writing tests. Each app can have their own suit of tests.",
+        "uk": "Django has a built in solution for writing tests. Each app can have their own suit of tests."
+      },
+      {
+        "en": "Basically apps are self contained and are used as extending/overriding building blocks.",
+        "uk": "Basically apps are self contained and are used as extending/overriding building blocks."
+      }
+    ],
+    "categories": [
+      {
+        "en": "Python",
+        "uk": "Python"
+      },
+      {
+        "en": "Django",
+        "uk": "Django"
+      }
+    ]
+  },
+  {
+    "kind": "documentation",
+    "status": "first-read",
+    "title": {
+      "en": "Django topics /http/",
+      "uk": "Django topics /http/"
+    },
+    "access": "free",
+    "link": "https://docs.djangoproject.com/en/6.0/topics/http/",
+    "thoughts": [
+      {
+        "en": "This section covers following topics: URL mapping to the execution function (view), Error handling, Views and view decorators, File upload handling, 5 shortcut functions, Middleware creation and use, Sessions, URL parsing is configured using URLconf module.",
+        "uk": "This section covers following topics: URL mapping to the execution function (view), Error handling, Views and view decorators, File upload handling, 5 shortcut functions, Middleware creation and use, Sessions, URL parsing is configured using URLconf module."
+      },
+      {
+        "en": "It maps URLs to views(at this step request method and GET/POST parameters are ignored) and provides tools for URL reversing. It allows URL namespacing (at application and application instance levels) for avoiding URL name clashes.",
+        "uk": "It maps URLs to views(at this step request method and GET/POST parameters are ignored) and provides tools for URL reversing. It allows URL namespacing (at application and application instance levels) for avoiding URL name clashes."
+      },
+      {
+        "en": "Has robust solutions for capturing values from the path: has 5 predefined converter types, allows registering custom converter types and supports value capturing using regular expressions with nested arguments. URLconf can be combined with other mappings, constructed dynamically and support i18n. Default error handling views can be configured at the top level URLconf.",
+        "uk": "Has robust solutions for capturing values from the path: has 5 predefined converter types, allows registering custom converter types and supports value capturing using regular expressions with nested arguments. URLconf can be combined with other mappings, constructed dynamically and support i18n. Default error handling views can be configured at the top level URLconf."
+      },
+      {
+        "en": "Views are functions that take a web request and return a web response.",
+        "uk": "Views are functions that take a web request and return a web response."
+      },
+      {
+        "en": "Django provides several decorators that can be applied to views to support various HTTP features. These can be used to control method types that a view accepts, caching behavior, compression and to do per-view customization of CommonMiddleware behavior.",
+        "uk": "Django provides several decorators that can be applied to views to support various HTTP features. These can be used to control method types that a view accepts, caching behavior, compression and to do per-view customization of CommonMiddleware behavior."
+      },
+      {
+        "en": "Django supports file upload. Saving file using model's FileField is quite simple. Django supports multi-file upload but only one file can be saved per one model instance. You can write custom upload handlers and override handlers globally or on a per-request basis.",
+        "uk": "Django supports file upload. Saving file using model's FileField is quite simple. Django supports multi-file upload but only one file can be saved per one model instance. You can write custom upload handlers and override handlers globally or on a per-request basis."
+      },
+      {
+        "en": "Django provides 5 shortcust for popular idioms: rendering template, redirecting to other URL, resolving URL, throwing 404 on instance not found and throwing 404 on model filter returning empty list.",
+        "uk": "Django provides 5 shortcust for popular idioms: rendering template, redirecting to other URL, resolving URL, throwing 404 on instance not found and throwing 404 on model filter returning empty list."
+      },
+      {
+        "en": "Middleware can be used for globally altering Django’s input or output. Django ships with some built-in middleware you can use right out of the box. A middleware can depend on other middleware. For instance, AuthenticationMiddleware stores the authenticated user in the session; therefore, it must run after SessionMiddleware. With current design a middleware can decide to short-circuit and return a response without ever calling its get_response. Django automatically converts exceptions raised by the view or by middleware into an appropriate HTTP response.",
+        "uk": "Middleware can be used for globally altering Django’s input or output. Django ships with some built-in middleware you can use right out of the box. A middleware can depend on other middleware. For instance, AuthenticationMiddleware stores the authenticated user in the session; therefore, it must run after SessionMiddleware. With current design a middleware can decide to short-circuit and return a response without ever calling its get_response. Django automatically converts exceptions raised by the view or by middleware into an appropriate HTTP response."
+      },
+      {
+        "en": "Django provides full support for anonymous sessions. These can be configured to be stored using DB, cache, cookies or files.",
+        "uk": "Django provides full support for anonymous sessions. These can be configured to be stored using DB, cache, cookies or files."
+      }
+    ],
+    "categories": [
+      {
+        "en": "Python",
+        "uk": "Python"
+      },
+      {
+        "en": "Django",
+        "uk": "Django"
+      }
+    ]
+  },
+  {
+    "kind": "documentation",
+    "status": "first-read",
+    "title": {
+      "en": "Django topics /db/",
+      "uk": "Django topics /db/"
+    },
+    "access": "free",
+    "link": "https://docs.djangoproject.com/en/6.0/topics/db/",
+    "thoughts": [
+      {
+        "en": "Django provides powerful ORM to query and modify database. Some built-in apps are written using the ORM. (probably in many third-party apps too). For example, it allows quick setup of the admin panel, authentication and migrations.",
+        "uk": "Django provides powerful ORM to query and modify database. Some built-in apps are written using the ORM. (probably in many third-party apps too). For example, it allows quick setup of the admin panel, authentication and migrations."
+      },
+      {
+        "en": "ORM covers: simple CRUD commands, setting up default query behavior (filtering, ordering), 1-1, many-1, many-many relations, aggregations/annotations, support for raw SQL queries, transactions and savepoints, use of tablespaces (not creation), fixtures, multi-DB design.",
+        "uk": "ORM covers: simple CRUD commands, setting up default query behavior (filtering, ordering), 1-1, many-1, many-many relations, aggregations/annotations, support for raw SQL queries, transactions and savepoints, use of tablespaces (not creation), fixtures, multi-DB design."
+      },
+      {
+        "en": "Important terms of the ORM: Model, Model instance methods, Meta options (abstract, app_label, base_manager_name, db_table, db_table_comment, db_tablespace, default_manager_name, default_related_name, get_latest_by, managed, order_with_respect_to, ordering, permissions, default_permissions, proxy, required_db_features, required_db_vendor, select_on_save, indexes, unique_together, constraints, verbose_name, verbose_name_plural, label, label_lower), Field, Relationship Field (ForeignKey, ManyToManyField, OneToOneField), Manager, Manager methods, QuerySet, Field lookups (prebuilt: exact, iexact, contains, icontains, in, gt, gte, lt, lte, startswith, istartswith, endswith, iendswith, range, date, year, iso_year, month, day, week, week_day, iso_week_day, quarter, time, hour, minute, second, isnull, regex, iregex), Query-related tools (Q, Prefetch, prefetch_related_objects, FilteredRelation), Aggregation functions (expressions, output_field, filter, default, **extra, AnyValue, Avg, Count, Max, Min, StdDev, Sum, Variance, StringAgg), Query Expressions, Conditional Expressions, Database Functions, Index, Constraint.",
+        "uk": "Important terms of the ORM: Model, Model instance methods, Meta options (abstract, app_label, base_manager_name, db_table, db_table_comment, db_tablespace, default_manager_name, default_related_name, get_latest_by, managed, order_with_respect_to, ordering, permissions, default_permissions, proxy, required_db_features, required_db_vendor, select_on_save, indexes, unique_together, constraints, verbose_name, verbose_name_plural, label, label_lower), Field, Relationship Field (ForeignKey, ManyToManyField, OneToOneField), Manager, Manager methods, QuerySet, Field lookups (prebuilt: exact, iexact, contains, icontains, in, gt, gte, lt, lte, startswith, istartswith, endswith, iendswith, range, date, year, iso_year, month, day, week, week_day, iso_week_day, quarter, time, hour, minute, second, isnull, regex, iregex), Query-related tools (Q, Prefetch, prefetch_related_objects, FilteredRelation), Aggregation functions (expressions, output_field, filter, default, **extra, AnyValue, Avg, Count, Max, Min, StdDev, Sum, Variance, StringAgg), Query Expressions, Conditional Expressions, Database Functions, Index, Constraint."
+      },
+      {
+        "en": "It is important to profile queries since it is not always obvious how many times DB is called or how large is the cache. Take a look at QuerySet.explain(), connection.execute_wrapper(), django-debug-toolbar.",
+        "uk": "It is important to profile queries since it is not always obvious how many times DB is called or how large is the cache. Take a look at QuerySet.explain(), connection.execute_wrapper(), django-debug-toolbar."
+      },
+      {
+        "en": "Note that some methods bypass model methods and hooks by running SQL statement instead.",
+        "uk": "Note that some methods bypass model methods and hooks by running SQL statement instead."
+      },
+      {
+        "en": "It’s difficult to intuit how the ORM will translate complex querysets into SQL queries so when in doubt, inspect the SQL with str(queryset.query) and write plenty of tests.",
+        "uk": "It’s difficult to intuit how the ORM will translate complex querysets into SQL queries so when in doubt, inspect the SQL with str(queryset.query) and write plenty of tests."
+      },
+      {
+        "en": "Django does many things automatically, for example it provides names for aggregations, setups primary keys, chooses DB connection, etc. This behavior can be overridden.",
+        "uk": "Django does many things automatically, for example it provides names for aggregations, setups primary keys, chooses DB connection, etc. This behavior can be overridden."
+      },
+      {
+        "en": "Some provided functionality is available not on all DBs. Check support for your DB. For example there is the support of complex querying options for postgres only.",
+        "uk": "Some provided functionality is available not on all DBs. Check support for your DB. For example there is the support of complex querying options for postgres only."
+      },
+      {
+        "en": "Django allows setting up table level functionality (using Managers) and instance level functionality (using Models).",
+        "uk": "Django allows setting up table level functionality (using Managers) and instance level functionality (using Models)."
+      },
+      {
+        "en": "Django has functionality for generating fixtures to pre-populate the database with data for tests or to provide some initial data using the loaddata command.",
+        "uk": "Django has functionality for generating fixtures to pre-populate the database with data for tests or to provide some initial data using the loaddata command."
+      }
+    ],
+    "categories": [
+      {
+        "en": "Python",
+        "uk": "Python"
+      },
+      {
+        "en": "Django",
+        "uk": "Django"
+      }
+    ]
+  },
+  {
+    "kind": "documentation",
+    "status": "first-read",
+    "title": {
+      "en": "Django topics /migrations/",
+      "uk": "Django topics /migrations/"
+    },
+    "access": "free",
+    "link": "https://docs.djangoproject.com/en/6.0/topics/migrations/",
+    "thoughts": [
+      {
+        "en": "Django migrations share many core concepts with other migration systems but differ in how migrations are generated and how model history is handled.",
+        "uk": "Django migrations share many core concepts with other migration systems but differ in how migrations are generated and how model history is handled."
+      },
+      {
+        "en": "Like most migration engines, Django uses incremental migration files that describe how to transform the database schema from one version to another. These migrations are applied sequentially and represent discrete schema changes such as creating tables, adding fields, or altering columns. The migration files are part of the codebase and are intended to be version-controlled and shared across environments, similar to migrations in tools like Flyway, Liquibase, Alembic, or Rails migrations.",
+        "uk": "Like most migration engines, Django uses incremental migration files that describe how to transform the database schema from one version to another. These migrations are applied sequentially and represent discrete schema changes such as creating tables, adding fields, or altering columns. The migration files are part of the codebase and are intended to be version-controlled and shared across environments, similar to migrations in tools like Flyway, Liquibase, Alembic, or Rails migrations."
+      },
+      {
+        "en": "Where Django differs is that migrations are generated automatically from model definitions rather than written manually. Developers modify Django models and run makemigrations, which detects differences in model structure and produces migration files describing the required schema operations.",
+        "uk": "Where Django differs is that migrations are generated automatically from model definitions rather than written manually. Developers modify Django models and run makemigrations, which detects differences in model structure and produces migration files describing the required schema operations."
+      },
+      {
+        "en": "Another important distinction is that Django migrations record the full historical model state, not just the database operations. This includes changes to model and field options even when they do not affect the database schema. These changes are preserved so Django can accurately reconstruct past model states when running older migrations or performing data migrations.",
+        "uk": "Another important distinction is that Django migrations record the full historical model state, not just the database operations. This includes changes to model and field options even when they do not affect the database schema. These changes are preserved so Django can accurately reconstruct past model states when running older migrations or performing data migrations."
+      },
+      {
+        "en": "To support this, Django migrations do not import current model classes when executed. Instead, they operate on the historical model state stored in migration files. This ensures migrations remain valid even if the model code has changed significantly since the migration was created.",
+        "uk": "To support this, Django migrations do not import current model classes when executed. Instead, they operate on the historical model state stored in migration files. This ensures migrations remain valid even if the model code has changed significantly since the migration was created."
+      },
+      {
+        "en": "Django also organizes migrations per application, reflecting its modular app architecture. Each app maintains its own migrations package containing its migration files. If necessary, the location of this package can be customized using the MIGRATION_MODULES setting.",
+        "uk": "Django also organizes migrations per application, reflecting its modular app architecture. Each app maintains its own migrations package containing its migration files. If necessary, the location of this package can be customized using the MIGRATION_MODULES setting."
+      },
+      {
+        "en": "As with other migration systems, database backend capabilities affect migration behavior. PostgreSQL provides the most complete schema alteration support among Django’s supported databases. MySQL does not support transactional schema changes, so failed migrations cannot be automatically rolled back and may require manual correction. SQLite has very limited support for ALTER TABLE, so Django emulates schema changes by creating a new table with the updated schema, copying the data into it, dropping the old table, and renaming the new one. Because of this approach, SQLite is generally more suitable for development environments than production when migrations are involved.",
+        "uk": "As with other migration systems, database backend capabilities affect migration behavior. PostgreSQL provides the most complete schema alteration support among Django’s supported databases. MySQL does not support transactional schema changes, so failed migrations cannot be automatically rolled back and may require manual correction. SQLite has very limited support for ALTER TABLE, so Django emulates schema changes by creating a new table with the updated schema, copying the data into it, dropping the old table, and renaming the new one. Because of this approach, SQLite is generally more suitable for development environments than production when migrations are involved."
+      }
+    ],
+    "categories": [
+      {
+        "en": "Python",
+        "uk": "Python"
+      },
+      {
+        "en": "Django",
+        "uk": "Django"
+      }
+    ]
+  },
+  {
     "kind": "book",
     "status": "in-progress-first-read",
     "title": {
