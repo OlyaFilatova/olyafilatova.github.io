@@ -3,6 +3,80 @@ import { KnowledgeSource } from '../schemas/knowledge-source.ts';
 export const knowledgeSources: KnowledgeSource[] = [
   {
     "kind": "book",
+    "status": "in-progress-first-read",
+    "title": {
+      "en": "AI Engineering",
+      "uk": "AI Engineering"
+    },
+    "access": "paid",
+    "link": "https://www.audible.com/pd/AI-Engineering-Audiobook/B0DWJ1SP94",
+    "thoughts": [
+      {
+        "en": "So far this is an easy read with high level intro into AI topics.",
+        "uk": "Поки що це легка книга з поверховим вступом до тем штучного інтелекту."
+      },
+      {
+        "en": "Defines following terms: language model, token, tokenization, model’s vocabulary, masked language model, autoregressive language model, generative model, supervision, Self-supervised learning, model parameter, multimodal model, large multimodal model (LMM), embeddings, foundation model, prompt engineering, retrieval-augmented generation (RAG), AI engineering...",
+        "uk": "Визначає наступні терміни: language model, token, tokenization, model’s vocabulary, masked language model, autoregressive language model, generative model, supervision, Self-supervised learning, model parameter, multimodal model, large multimodal model (LMM), embeddings, foundation model, prompt engineering, retrieval-augmented generation (RAG), AI engineering..."
+      }
+    ]
+  },
+  {
+    "kind": "book",
+    "status": "in-progress-first-read",
+    "title": {
+      "en": "Python for Data Analysis (3rd edition)",
+      "uk": "Python for Data Analysis (3rd edition)"
+    },
+    "access": "free",
+    "link": "https://wesmckinney.com/book/",
+    "thoughts": [
+      {
+        "en": "Wonderful introduction book into Python libraries used in Data Analysis.",
+        "uk": "Чудова вступна книга про бібліотеки Python, що використовуються в аналізі даних."
+      },
+      {
+        "en": "Namely, the book gets reader acquainted with following popular libraries: Numpy, Pandas, matplotlib, seaborn.",
+        "uk": "Зокрема, книга знайомить читача з такими популярними бібліотеками як: Numpy, Pandas, matplotlib, seaborn."
+      },
+      {
+        "en": "Book is split by data analysis concerns. First chapters cover Python basics that are used further in the book. Libraries are gradually introduced and new functionality is backed by code examples.",
+        "uk": "Книга розділена за аспектами аналізу даних. У перших розділах розглядаються основи Python, які використовуються далі в книзі. Бібліотеки вводяться поступово, а нові функції підкріплюються прикладами коду."
+      },
+      {
+        "en": "As a supporting knowledge to this book I'd like to read some materials about Data Analysis itself sans coding, about real world problems and existing patterns, about underlying causes for decisions made.",
+        "uk": "Як доповнення до цієї книги я хотіла б прочитати якісь матеріали про сам аналіз даних без акценту на створення коду, про реальні проблеми та існуючі шаблони, про основні причини прийнятих рішень."
+      },
+      {
+        "en": "read in progress...",
+        "uk": "продовжую читати..."
+      }
+    ],
+    "categories": [
+      {
+        "en": "Python",
+        "uk": "Python"
+      },
+      {
+        "en": "Data analysis",
+        "uk": "Data analysis"
+      },
+      {
+        "en": "NumPy",
+        "uk": "NumPy"
+      },
+      {
+        "en": "Pandas",
+        "uk": "Pandas"
+      },
+      {
+        "en": "matplotlib",
+        "uk": "matplotlib"
+      }
+    ]
+  },
+  {
+    "kind": "book",
     "status": "first-read",
     "title": {
       "en": "Professor Frisby's Mostly Adequate Guide to Functional Programming",
@@ -69,28 +143,6 @@ export const knowledgeSources: KnowledgeSource[] = [
   },
   {
     "kind": "book",
-    "status": "paused",
-    "title": {
-      "en": "You Don't Know JS (1st and 2nd editions)",
-      "uk": "You Don't Know JS (1st and 2nd editions)"
-    },
-    "access": "free",
-    "link": "https://github.com/getify/You-Dont-Know-JS",
-    "thoughts": [
-      {
-        "en": "Sometimes come as too opinionated but is a great read to improve grasp on JS. I've put the read on a pause but I definitely recommend these and plan to read all of them myself. What I like about these, that they are not the usual quick intro books but a thorough study of the topics.",
-        "uk": "Іноді здаються надто упередженими, але це чудові книги для покращення розуміння JS. Поки поставила читання цих книжок на паузу, але точно раджу до читання і сама планую прочитати всі ці книги. Це не звичний швидкий вступ у мову, а ретельне опрацювання тем."
-      }
-    ],
-    "categories": [
-      {
-        "en": "JS",
-        "uk": "JS"
-      }
-    ]
-  },
-  {
-    "kind": "book",
     "status": "first-read",
     "title": {
       "en": "Functional-Light JavaScript",
@@ -148,6 +200,28 @@ export const knowledgeSources: KnowledgeSource[] = [
       {
         "en": "Functional programming",
         "uk": "Functional programming"
+      }
+    ]
+  },
+  {
+    "kind": "book",
+    "status": "paused",
+    "title": {
+      "en": "You Don't Know JS (1st and 2nd editions)",
+      "uk": "You Don't Know JS (1st and 2nd editions)"
+    },
+    "access": "free",
+    "link": "https://github.com/getify/You-Dont-Know-JS",
+    "thoughts": [
+      {
+        "en": "Sometimes come as too opinionated but is a great read to improve grasp on JS. I've put the read on a pause but I definitely recommend these and plan to read all of them myself. What I like about these, that they are not the usual quick intro books but a thorough study of the topics.",
+        "uk": "Іноді здаються надто упередженими, але це чудові книги для покращення розуміння JS. Поки поставила читання цих книжок на паузу, але точно раджу до читання і сама планую прочитати всі ці книги. Це не звичний швидкий вступ у мову, а ретельне опрацювання тем."
+      }
+    ],
+    "categories": [
+      {
+        "en": "JS",
+        "uk": "JS"
       }
     ]
   },
@@ -389,90 +463,6 @@ export const knowledgeSources: KnowledgeSource[] = [
   },
   {
     "kind": "book",
-    "status": "in-progress-first-read",
-    "title": {
-      "en": "Python for Data Analysis (3rd edition)",
-      "uk": "Python for Data Analysis (3rd edition)"
-    },
-    "access": "free",
-    "link": "https://wesmckinney.com/book/",
-    "thoughts": [
-      {
-        "en": "Wonderful introduction book into Python libraries used in Data Analysis.",
-        "uk": "Чудова вступна книга про бібліотеки Python, що використовуються в аналізі даних."
-      },
-      {
-        "en": "Namely, the book gets reader acquainted with following popular libraries: Numpy, Pandas, matplotlib, seaborn.",
-        "uk": "Зокрема, книга знайомить читача з такими популярними бібліотеками як: Numpy, Pandas, matplotlib, seaborn."
-      },
-      {
-        "en": "Book is split by data analysis concerns. First chapters cover Python basics that are used further in the book. Libraries are gradually introduced and new functionality is backed by code examples.",
-        "uk": "Книга розділена за аспектами аналізу даних. У перших розділах розглядаються основи Python, які використовуються далі в книзі. Бібліотеки вводяться поступово, а нові функції підкріплюються прикладами коду."
-      },
-      {
-        "en": "As a supporting knowledge to this book I'd like to read some materials about Data Analysis itself sans coding, about real world problems and existing patterns, about underlying causes for decisions made.",
-        "uk": "Як доповнення до цієї книги я хотіла б прочитати якісь матеріали про сам аналіз даних без акценту на створення коду, про реальні проблеми та існуючі шаблони, про основні причини прийнятих рішень."
-      },
-      {
-        "en": "read in progress...",
-        "uk": "продовжую читати..."
-      }
-    ],
-    "categories": [
-      {
-        "en": "Python",
-        "uk": "Python"
-      },
-      {
-        "en": "Data analysis",
-        "uk": "Data analysis"
-      },
-      {
-        "en": "NumPy",
-        "uk": "NumPy"
-      },
-      {
-        "en": "Pandas",
-        "uk": "Pandas"
-      },
-      {
-        "en": "matplotlib",
-        "uk": "matplotlib"
-      }
-    ]
-  },
-  {
-    "kind": "book",
-    "status": "in-progress-first-read",
-    "title": {
-      "en": "AI Engineering",
-      "uk": "AI Engineering"
-    },
-    "access": "paid",
-    "link": "https://www.audible.com/pd/AI-Engineering-Audiobook/B0DWJ1SP94",
-    "thoughts": [
-      {
-        "en": "So far this is an easy read with high level intro into AI topics.",
-        "uk": "Поки що це легке чтиво з поверховим вступом до тем штучного інтелекту."
-      },
-      {
-        "en": "Defines following terms: language model, token, tokenization, model’s vocabulary, masked language model, autoregressive language model, generative model, supervision, Self-supervised learning, model parameter, multimodal model, large multimodal model (LMM), embeddings, foundation model, prompt engineering, retrieval-augmented generation (RAG), AI engineering...",
-        "uk": "Визначає наступні терміни: language model, token, tokenization, model’s vocabulary, masked language model, autoregressive language model, generative model, supervision, Self-supervised learning, model parameter, multimodal model, large multimodal model (LMM), embeddings, foundation model, prompt engineering, retrieval-augmented generation (RAG), AI engineering..."
-      }
-    ]
-  },
-  {
-    "kind": "book",
-    "status": "planned",
-    "title": {
-      "en": "Designing Machine Learning Systems",
-      "uk": "Designing Machine Learning Systems"
-    },
-    "access": "paid",
-    "link": "https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/"
-  },
-  {
-    "kind": "book",
     "status": "planned",
     "title": {
       "en": "Designing Data-Intensive Applications (1st edition)",
@@ -480,26 +470,6 @@ export const knowledgeSources: KnowledgeSource[] = [
     },
     "access": "paid",
     "link": "https://www.audible.com/pd/Designing-Data-Intensive-Applications-Audiobook/B08VLGDK32"
-  },
-  {
-    "kind": "book",
-    "status": "planned",
-    "title": {
-      "en": "Fundamentals of Software Architecture (1st edition)",
-      "uk": "Fundamentals of Software Architecture (1st edition)"
-    },
-    "access": "paid",
-    "link": "https://www.audible.com/pd/Fundamentals-of-Software-Architecture-Audiobook/B08X917VLR"
-  },
-  {
-    "kind": "book",
-    "status": "planned",
-    "title": {
-      "en": "Security Engineering (3rd Edition)",
-      "uk": "Security Engineering (3rd Edition)"
-    },
-    "access": "free",
-    "link": "https://www.cl.cam.ac.uk/archive/rja14/book.html"
   },
   {
     "kind": "book",
@@ -515,6 +485,16 @@ export const knowledgeSources: KnowledgeSource[] = [
     "kind": "book",
     "status": "planned",
     "title": {
+      "en": "Security Engineering (3rd Edition)",
+      "uk": "Security Engineering (3rd Edition)"
+    },
+    "access": "free",
+    "link": "https://www.cl.cam.ac.uk/archive/rja14/book.html"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
       "en": "Site Reliability Engineering",
       "uk": "Site Reliability Engineering"
     },
@@ -525,11 +505,31 @@ export const knowledgeSources: KnowledgeSource[] = [
     "kind": "book",
     "status": "planned",
     "title": {
+      "en": "The Art of Unix Programming",
+      "uk": "The Art of Unix Programming"
+    },
+    "access": "free",
+    "link": "http://www.catb.org/~esr/writings/taoup/html/"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
       "en": "Structure and Interpretation of Computer Programs",
       "uk": "Structure and Interpretation of Computer Programs"
     },
     "access": "free",
     "link": "https://web.mit.edu/6.001/6.037/sicp.pdf"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "Game Programming Patterns",
+      "uk": "Game Programming Patterns"
+    },
+    "access": "free",
+    "link": "https://gameprogrammingpatterns.com/contents.html"
   },
   {
     "kind": "book",
@@ -555,26 +555,6 @@ export const knowledgeSources: KnowledgeSource[] = [
     "kind": "book",
     "status": "planned",
     "title": {
-      "en": "Deep Learning with Python",
-      "uk": "Deep Learning with Python"
-    },
-    "access": "free",
-    "link": "https://deeplearningwithpython.io/chapters/"
-  },
-  {
-    "kind": "book",
-    "status": "planned",
-    "title": {
-      "en": "Distributed systems for fun and profit",
-      "uk": "Distributed systems for fun and profit"
-    },
-    "access": "free",
-    "link": "https://book.mixu.net/distsys/ebook.html"
-  },
-  {
-    "kind": "book",
-    "status": "planned",
-    "title": {
       "en": "Eloquent JavaScript",
       "uk": "Eloquent JavaScript"
     },
@@ -585,20 +565,40 @@ export const knowledgeSources: KnowledgeSource[] = [
     "kind": "book",
     "status": "planned",
     "title": {
-      "en": "The Art of Unix Programming",
-      "uk": "The Art of Unix Programming"
+      "en": "Fundamentals of Software Architecture (1st edition)",
+      "uk": "Fundamentals of Software Architecture (1st edition)"
     },
-    "access": "free",
-    "link": "http://www.catb.org/~esr/writings/taoup/html/"
+    "access": "paid",
+    "link": "https://www.audible.com/pd/Fundamentals-of-Software-Architecture-Audiobook/B08X917VLR"
   },
   {
     "kind": "book",
     "status": "planned",
     "title": {
-      "en": "Game Programming Patterns",
-      "uk": "Game Programming Patterns"
+      "en": "Deep Learning with Python",
+      "uk": "Deep Learning with Python"
     },
     "access": "free",
-    "link": "https://gameprogrammingpatterns.com/contents.html"
+    "link": "https://deeplearningwithpython.io/chapters/"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "Designing Machine Learning Systems",
+      "uk": "Designing Machine Learning Systems"
+    },
+    "access": "paid",
+    "link": "https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "Distributed systems for fun and profit",
+      "uk": "Distributed systems for fun and profit"
+    },
+    "access": "free",
+    "link": "https://book.mixu.net/distsys/ebook.html"
   }
 ];

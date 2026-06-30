@@ -4,9 +4,10 @@ import { KnowledgeSource } from '../src/schemas/knowledge-source.ts';
 
 async function loadAndParseExperience() {
   const dir =  join(process.cwd(), 'data/knowledge-sources');
-  const files = await fs.readdir(dir);
 
-  const sources = await Promise.all<KnowledgeSource>(files.map(async file => {
+  const sourceNames = (await fs.readFile(join(dir, 'list.txt'))).toString().split('\n').filter(Boolean); // ls *.json > list.txt
+
+  const sources = await Promise.all<KnowledgeSource>(sourceNames.map(async file => {
     const fileContent = await fs.readFile(join(dir, file), { encoding: 'utf8' });
     const fileData = JSON.parse(fileContent);
     return KnowledgeSource.parse(fileData);

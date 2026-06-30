@@ -1,7 +1,6 @@
 .app {
   display: flex;
   flex-direction: row;
-  gap: 10px;
 }
 .app-content {
   flex-grow: 1;
@@ -9,7 +8,10 @@
 }
 
 @media screen and (max-width: 700px) {
+  .app {
+    flex-direction: column;
+  }
   .app-content {
-    padding-left: 46px;
+    padding-left: 56px;
   }
 }
