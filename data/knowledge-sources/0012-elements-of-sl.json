@@ -1,0 +1,10 @@
+{
+  "kind": "book",
+  "status": "planned",
+  "title": {
+    "uk": "The Elements of Statistical Learning",
+    "en": "The Elements of Statistical Learning"
+  },
+  "access": "free",
+  "link": "https://hastie.su.domains/ElemStatLearn/"
+}

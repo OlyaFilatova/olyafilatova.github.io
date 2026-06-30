@@ -31,8 +31,8 @@
       "en": "Dives into following terms: Arity, Unary functions, Binary functions, N-ary functions, higher-order function, partial application, currying, point-free style, Composition, side effect, side cause, idempotence, pure function, memoization, value immutability, constant, recursion, mutual recursion, call stack, memory pressure, tail call, continuation passing style, trampolines, mapping, functor, filtering, predicate function, folding, fusion, eager vs. lazy operation, reactive FP, observable, transducing, monad"
     },
     {
-      "uk": "Пояснює утиліти: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, Immutable.js, flatten, zip, merge, invoker, Transducers.js, ...",
-      "en": "Explains utilities: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, Immutable.js, flatten, zip, merge, invoker, Transducers.js, ..."
+      "uk": "Пояснює утиліти: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, Immutable.js, flatten, zip, merge, invoker, Transducers.js",
+      "en": "Explains utilities: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, Immutable.js, flatten, zip, merge, invoker, Transducers.js"
     },
     {
       "uk": "Автор завжди приділяє додатковий час, щоб описати за допомогою коду те, що відбувається всередині нових структур.",

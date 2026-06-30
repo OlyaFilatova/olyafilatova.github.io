@@ -1,0 +1,10 @@
+{
+  "kind": "book",
+  "status": "planned",
+  "title": {
+    "uk": "Operating Systems: Three Easy Pieces",
+    "en": "Operating Systems: Three Easy Pieces"
+  },
+  "access": "free",
+  "link": "https://pages.cs.wisc.edu/~remzi/OSTEP/"
+}

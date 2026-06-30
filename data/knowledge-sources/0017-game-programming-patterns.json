@@ -1,0 +1,10 @@
+{
+  "kind": "book",
+  "status": "planned",
+  "title": {
+    "uk": "Game Programming Patterns",
+    "en": "Game Programming Patterns"
+  },
+  "access": "free",
+  "link": "https://gameprogrammingpatterns.com/contents.html"
+}

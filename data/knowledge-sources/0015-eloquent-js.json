@@ -1,0 +1,10 @@
+{
+  "kind": "book",
+  "status": "planned",
+  "title": {
+    "uk": "Eloquent JavaScript",
+    "en": "Eloquent JavaScript"
+  },
+  "access": "free",
+  "link": "https://eloquentjavascript.net/"
+}

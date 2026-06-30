@@ -1,0 +1,10 @@
+{
+  "kind": "book",
+  "status": "planned",
+  "title": {
+    "uk": "Distributed systems for fun and profit",
+    "en": "Distributed systems for fun and profit"
+  },
+  "access": "free",
+  "link": "https://book.mixu.net/distsys/ebook.html"
+}

@@ -112,8 +112,8 @@ export const knowledgeSources: KnowledgeSource[] = [
         "uk": "Заглиблюється в наступні терміни: Arity, Unary functions, Binary functions, N-ary functions, higher-order function, partial application, currying, point-free style, Composition, side effect, side cause, idempotence, pure function, memoization, value immutability, constant, recursion, mutual recursion, call stack, memory pressure, tail call, continuation passing style, trampolines, mapping, functor, filtering, predicate function, folding, fusion, eager vs. lazy operation, reactive FP, observable, transducing, monad"
       },
       {
-        "en": "Explains utilities: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, Immutable.js, flatten, zip, merge, invoker, Transducers.js, ...",
-        "uk": "Пояснює утиліти: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, Immutable.js, flatten, zip, merge, invoker, Transducers.js, ..."
+        "en": "Explains utilities: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, Immutable.js, flatten, zip, merge, invoker, Transducers.js",
+        "uk": "Пояснює утиліти: identity, constant, apply/unapply, partial, partialRight, curry, uncurry, curryProps, partialProps, compose, pipe, prop, setProp, objOf, Immutable.js, flatten, zip, merge, invoker, Transducers.js"
       },
       {
         "en": "The author always spends extra time to describe with code what is going on inside the new structures.",
@@ -207,6 +207,86 @@ export const knowledgeSources: KnowledgeSource[] = [
   },
   {
     "kind": "book",
+    "status": "in-progress-first-read",
+    "title": {
+      "en": "AI Engineering",
+      "uk": "AI Engineering"
+    },
+    "access": "paid",
+    "link": "https://www.audible.com/pd/AI-Engineering-Audiobook/B0DWJ1SP94",
+    "thoughts": [
+      {
+        "en": "So far this is an easy read with high level intro into AI topics.",
+        "uk": "Поки що це легке чтиво з поверховим вступом до тем штучного інтелекту."
+      },
+      {
+        "en": "Defines following terms: language model, token, tokenization, model’s vocabulary, masked language model, autoregressive language model, generative model, supervision, Self-supervised learning, model parameter, multimodal model, large multimodal model (LMM), embeddings, foundation model, prompt engineering, retrieval-augmented generation (RAG), AI engineering...",
+        "uk": "Визначає наступні терміни: language model, token, tokenization, model’s vocabulary, masked language model, autoregressive language model, generative model, supervision, Self-supervised learning, model parameter, multimodal model, large multimodal model (LMM), embeddings, foundation model, prompt engineering, retrieval-augmented generation (RAG), AI engineering..."
+      }
+    ]
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "Designing Machine Learning Systems",
+      "uk": "Designing Machine Learning Systems"
+    },
+    "access": "paid",
+    "link": "https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "Designing Data-Intensive Applications (1st edition)",
+      "uk": "Designing Data-Intensive Applications (1st edition)"
+    },
+    "access": "paid",
+    "link": "https://www.audible.com/pd/Designing-Data-Intensive-Applications-Audiobook/B08VLGDK32"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "Fundamentals of Software Architecture (1st edition)",
+      "uk": "Fundamentals of Software Architecture (1st edition)"
+    },
+    "access": "paid",
+    "link": "https://www.audible.com/pd/Fundamentals-of-Software-Architecture-Audiobook/B08X917VLR"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "Security Engineering (3rd Edition)",
+      "uk": "Security Engineering (3rd Edition)"
+    },
+    "access": "free",
+    "link": "https://www.cl.cam.ac.uk/archive/rja14/book.html"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "Operating Systems: Three Easy Pieces",
+      "uk": "Operating Systems: Three Easy Pieces"
+    },
+    "access": "free",
+    "link": "https://pages.cs.wisc.edu/~remzi/OSTEP/"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "Site Reliability Engineering",
+      "uk": "Site Reliability Engineering"
+    },
+    "access": "free",
+    "link": "https://sre.google/sre-book/table-of-contents/"
+  },
+  {
+    "kind": "book",
     "status": "planned",
     "title": {
       "en": "Structure and Interpretation of Computer Programs",
@@ -214,5 +294,75 @@ export const knowledgeSources: KnowledgeSource[] = [
     },
     "access": "free",
     "link": "https://web.mit.edu/6.001/6.037/sicp.pdf"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "An Introduction to Statistical Learning",
+      "uk": "An Introduction to Statistical Learning"
+    },
+    "access": "free",
+    "link": "https://hastie.su.domains/ISLP/ISLP_website.pdf.download.html"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "The Elements of Statistical Learning",
+      "uk": "The Elements of Statistical Learning"
+    },
+    "access": "free",
+    "link": "https://hastie.su.domains/ElemStatLearn/"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "Deep Learning with Python",
+      "uk": "Deep Learning with Python"
+    },
+    "access": "free",
+    "link": "https://deeplearningwithpython.io/chapters/"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "Distributed systems for fun and profit",
+      "uk": "Distributed systems for fun and profit"
+    },
+    "access": "free",
+    "link": "https://book.mixu.net/distsys/ebook.html"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "Eloquent JavaScript",
+      "uk": "Eloquent JavaScript"
+    },
+    "access": "free",
+    "link": "https://eloquentjavascript.net/"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "The Art of Unix Programming",
+      "uk": "The Art of Unix Programming"
+    },
+    "access": "free",
+    "link": "http://www.catb.org/~esr/writings/taoup/html/"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "Game Programming Patterns",
+      "uk": "Game Programming Patterns"
+    },
+    "access": "free",
+    "link": "https://gameprogrammingpatterns.com/contents.html"
   }
 ];

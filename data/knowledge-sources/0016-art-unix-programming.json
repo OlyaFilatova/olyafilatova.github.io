@@ -1,0 +1,10 @@
+{
+  "kind": "book",
+  "status": "planned",
+  "title": {
+    "uk": "The Art of Unix Programming",
+    "en": "The Art of Unix Programming"
+  },
+  "access": "free",
+  "link": "http://www.catb.org/~esr/writings/taoup/html/"
+}

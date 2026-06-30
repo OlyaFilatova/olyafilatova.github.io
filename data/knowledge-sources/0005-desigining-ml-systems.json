@@ -1,0 +1,10 @@
+{
+  "kind": "book",
+  "status": "planned",
+  "title": {
+    "uk": "Designing Machine Learning Systems",
+    "en": "Designing Machine Learning Systems"
+  },
+  "access": "paid",
+  "link": "https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/"
+}

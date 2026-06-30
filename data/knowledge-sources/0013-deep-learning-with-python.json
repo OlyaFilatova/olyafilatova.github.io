@@ -1,0 +1,10 @@
+{
+  "kind": "book",
+  "status": "planned",
+  "title": {
+    "uk": "Deep Learning with Python",
+    "en": "Deep Learning with Python"
+  },
+  "access": "free",
+  "link": "https://deeplearningwithpython.io/chapters/"
+}

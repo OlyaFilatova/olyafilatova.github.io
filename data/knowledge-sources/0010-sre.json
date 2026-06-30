@@ -1,0 +1,10 @@
+{
+  "kind": "book",
+  "status": "planned",
+  "title": {
+    "uk": "Site Reliability Engineering",
+    "en": "Site Reliability Engineering"
+  },
+  "access": "free",
+  "link": "https://sre.google/sre-book/table-of-contents/"
+}
