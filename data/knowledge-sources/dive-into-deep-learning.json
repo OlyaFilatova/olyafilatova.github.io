@@ -1,0 +1,10 @@
+{
+  "kind": "book",
+  "status": "planned",
+  "title": {
+    "uk": "Dive into Deep Learning",
+    "en": "Dive into Deep Learning"
+  },
+  "access": "free",
+  "link": "https://d2l.ai/"
+}

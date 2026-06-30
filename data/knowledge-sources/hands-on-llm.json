@@ -1,0 +1,10 @@
+{
+  "kind": "book",
+  "status": "planned",
+  "title": {
+    "uk": "Hands-On Large Language Models",
+    "en": "Hands-On Large Language Models"
+  },
+  "access": "paid",
+  "link": "https://www.oreilly.com/library/view/hands-on-large-language/9781098150952/"
+}

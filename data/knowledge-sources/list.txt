@@ -12,6 +12,13 @@ django-http.json
 django-db.json
 django-migrations.json
 
+hands-on-llm.json
+desigining-ml-systems.json
+intro-to-sl.json
+dive-into-deep-learning.json
+deep-learning-with-python.json
+elements-of-sl.json
+
 ddia.json
 os-three-easy-pieces.json
 security-engineering.json
@@ -19,10 +26,6 @@ sre.json
 art-unix-programming.json
 sicp.json
 game-programming-patterns.json
-intro-to-sl.json
-elements-of-sl.json
 eloquent-js.json
 fundamentals-of-sa.json
-deep-learning-with-python.json
-desigining-ml-systems.json
 distributed-for-fun-and-profit.json

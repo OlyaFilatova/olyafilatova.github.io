@@ -465,6 +465,66 @@ export const knowledgeSources: KnowledgeSource[] = [
     "kind": "book",
     "status": "planned",
     "title": {
+      "en": "Hands-On Large Language Models",
+      "uk": "Hands-On Large Language Models"
+    },
+    "access": "paid",
+    "link": "https://www.oreilly.com/library/view/hands-on-large-language/9781098150952/"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "Designing Machine Learning Systems",
+      "uk": "Designing Machine Learning Systems"
+    },
+    "access": "paid",
+    "link": "https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "An Introduction to Statistical Learning",
+      "uk": "An Introduction to Statistical Learning"
+    },
+    "access": "free",
+    "link": "https://hastie.su.domains/ISLP/ISLP_website.pdf.download.html"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "Dive into Deep Learning",
+      "uk": "Dive into Deep Learning"
+    },
+    "access": "free",
+    "link": "https://d2l.ai/"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "Deep Learning with Python",
+      "uk": "Deep Learning with Python"
+    },
+    "access": "free",
+    "link": "https://deeplearningwithpython.io/chapters/"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
+      "en": "The Elements of Statistical Learning",
+      "uk": "The Elements of Statistical Learning"
+    },
+    "access": "free",
+    "link": "https://hastie.su.domains/ElemStatLearn/"
+  },
+  {
+    "kind": "book",
+    "status": "planned",
+    "title": {
       "en": "Designing Data-Intensive Applications (1st edition)",
       "uk": "Designing Data-Intensive Applications (1st edition)"
     },
@@ -535,26 +595,6 @@ export const knowledgeSources: KnowledgeSource[] = [
     "kind": "book",
     "status": "planned",
     "title": {
-      "en": "An Introduction to Statistical Learning",
-      "uk": "An Introduction to Statistical Learning"
-    },
-    "access": "free",
-    "link": "https://hastie.su.domains/ISLP/ISLP_website.pdf.download.html"
-  },
-  {
-    "kind": "book",
-    "status": "planned",
-    "title": {
-      "en": "The Elements of Statistical Learning",
-      "uk": "The Elements of Statistical Learning"
-    },
-    "access": "free",
-    "link": "https://hastie.su.domains/ElemStatLearn/"
-  },
-  {
-    "kind": "book",
-    "status": "planned",
-    "title": {
       "en": "Eloquent JavaScript",
       "uk": "Eloquent JavaScript"
     },
@@ -570,26 +610,6 @@ export const knowledgeSources: KnowledgeSource[] = [
     },
     "access": "paid",
     "link": "https://www.audible.com/pd/Fundamentals-of-Software-Architecture-Audiobook/B08X917VLR"
-  },
-  {
-    "kind": "book",
-    "status": "planned",
-    "title": {
-      "en": "Deep Learning with Python",
-      "uk": "Deep Learning with Python"
-    },
-    "access": "free",
-    "link": "https://deeplearningwithpython.io/chapters/"
-  },
-  {
-    "kind": "book",
-    "status": "planned",
-    "title": {
-      "en": "Designing Machine Learning Systems",
-      "uk": "Designing Machine Learning Systems"
-    },
-    "access": "paid",
-    "link": "https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/"
   },
   {
     "kind": "book",
