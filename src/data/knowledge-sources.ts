@@ -13,11 +13,11 @@ export const knowledgeSources: KnowledgeSource[] = [
     "thoughts": [
       {
         "en": "So far this is an easy read with high level intro into AI topics.",
-        "uk": "Поки що це легка книга з поверховим вступом до тем штучного інтелекту."
+        "uk": "Читається легко. Вступ до тем штучного інтелекту."
       },
       {
-        "en": "Defines following terms: language model, token, tokenization, model’s vocabulary, masked language model, autoregressive language model, generative model, supervision, Self-supervised learning, model parameter, multimodal model, large multimodal model (LMM), embeddings, foundation model, prompt engineering, retrieval-augmented generation (RAG), AI engineering...",
-        "uk": "Визначає наступні терміни: language model, token, tokenization, model’s vocabulary, masked language model, autoregressive language model, generative model, supervision, Self-supervised learning, model parameter, multimodal model, large multimodal model (LMM), embeddings, foundation model, prompt engineering, retrieval-augmented generation (RAG), AI engineering..."
+        "en": "Defines following terms: language model, token, tokenization, model’s vocabulary, masked language model, autoregressive language model, generative model, supervision, Self-supervised learning, model parameter, multimodal model, large multimodal model (LMM), embeddings, foundation model, prompt engineering, retrieval-augmented generation (RAG), AI engineering, human-in-the-loop, Crawl-Walk-Run, Modeling and training, quantization, Pre-training, Finetuning, prompt engineering, Dataset engineering, Inference optimization, Evaluation, ",
+        "uk": "Визначає наступні терміни: language model, token, tokenization, model’s vocabulary, masked language model, autoregressive language model, generative model, supervision, Self-supervised learning, model parameter, multimodal model, large multimodal model (LMM), embeddings, foundation model, prompt engineering, retrieval-augmented generation (RAG), AI engineering, human-in-the-loop, Crawl-Walk-Run, Modeling and training, quantization, Pre-training, Finetuning, prompt engineering, Dataset engineering, Inference optimization, Evaluation, "
       }
     ]
   },
