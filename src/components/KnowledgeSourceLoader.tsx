@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './KnowledgeSourceItem.css'
 import { KnowledgeSource } from '../schemas/knowledge-source';
 import KnowledgeSourceItem from './KnowledgeSourceItem';
+import { bustCache } from '../data/knowledge-sources-index';
 
 function KnowledgeSourceLoader({ filePath }: {filePath: string}) {
   const [source, setSource] = useState<KnowledgeSource | undefined>()
@@ -17,7 +18,7 @@ function KnowledgeSourceLoader({ filePath }: {filePath: string}) {
   }
 
   useEffect(() => {
-    loadData(filePath);
+    loadData(filePath + '?cb=' + bustCache);
   }, []);
 
   return (
