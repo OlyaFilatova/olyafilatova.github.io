@@ -16,7 +16,7 @@ function History() {
 
   return (
     <div className='timeline'>
-      {experience.toReversed().map(event => <TimelineItem experience={event} />)}
+      {experience.toReversed().map((event, idx) => <TimelineItem key={idx} experience={event} />)}
     </div>
   )
 }

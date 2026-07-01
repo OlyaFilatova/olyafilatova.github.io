@@ -34,3 +34,11 @@ export type Status = zod.infer<typeof Status>;
 export type BookSource = zod.infer<typeof BookSource>;
 export type DocumentationSource = zod.infer<typeof DocumentationSource>;
 export type KnowledgeSource = zod.infer<typeof KnowledgeSource>;
+
+export type ThoughtsIndex = {
+  count: number;
+  categories: Record<string, number[]>;
+  status: Partial<Record<KnowledgeSource["status"], number[]>>;
+  kind: Partial<Record<KnowledgeSource["kind"], number[]>>;
+  access: Partial<Record<KnowledgeSource["access"], number[]>>;
+};

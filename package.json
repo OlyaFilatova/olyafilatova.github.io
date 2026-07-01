@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "experience-assemble": "npx tsx scripts/experience-assemble.ts",
     "thoughts-assemble": "npx tsx scripts/thoughts-assemble.ts",
-    "data-assemble": "npm run experience-assemble && npm run thoughts-assemble"
+    "data-assemble": "npm run experience-assemble && npm run thoughts-assemble",
+    "copy-json-assets": "cp -r src/assets/knowledge-sources dist/assets/knowledge-sources"
   },
   "dependencies": {
     "react": "^19.2.6",

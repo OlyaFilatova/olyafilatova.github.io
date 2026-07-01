@@ -22,7 +22,7 @@ function TimelineItem({ experience }: {experience: Experience}) {
         </div>
 
         {experience.skills && <ul className="list">
-          {experience.skills.map(skill => <li>{skill[currentLanguage]}</li>)}
+          {experience.skills.map((skill, idx) => <li key={idx}>{skill[currentLanguage]}</li>)}
         </ul>}
       </div>
     </section>
@@ -42,11 +42,11 @@ function TimelineItem({ experience }: {experience: Experience}) {
         </div>
 
         {experience.projects && <ul className="list">
-          {experience.projects.map(project => <li>{project[currentLanguage]}</li>)}
+          {experience.projects.map((project, idx) => <li key={idx}>{project[currentLanguage]}</li>)}
         </ul>}
 
         {experience.skills && <ul className="list">
-          {experience.skills.map(skill => <li>{skill[currentLanguage]}</li>)}
+          {experience.skills.map((skill, idx) => <li key={idx}>{skill[currentLanguage]}</li>)}
         </ul>}
       </div>
     </section>
