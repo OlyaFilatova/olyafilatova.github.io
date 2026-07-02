@@ -1,7 +1,7 @@
 
 import type { ThoughtsIndex } from '../schemas/knowledge-source.ts';
 
-export const bustCache = 3;
+export const bustCache = 4;
 
 export const index: ThoughtsIndex = {
   "count": 25,
@@ -27,10 +27,10 @@ export const index: ThoughtsIndex = {
     ],
     "Python": [
       1,
+      4,
       5,
       6,
-      7,
-      8
+      7
     ],
     "Data analysis": [
       1
@@ -47,17 +47,17 @@ export const index: ThoughtsIndex = {
     "JS": [
       2,
       3,
-      4
+      8
     ],
     "Functional programming": [
       2,
       3
     ],
     "Django": [
+      4,
       5,
       6,
-      7,
-      8
+      7
     ]
   },
   "kind": {
@@ -66,7 +66,7 @@ export const index: ThoughtsIndex = {
       1,
       2,
       3,
-      4,
+      8,
       9,
       10,
       11,
@@ -85,10 +85,10 @@ export const index: ThoughtsIndex = {
       24
     ],
     "documentation": [
+      4,
       5,
       6,
-      7,
-      8
+      7
     ]
   },
   "access": {
@@ -130,13 +130,13 @@ export const index: ThoughtsIndex = {
     "first-read": [
       2,
       3,
+      4,
       5,
       6,
-      7,
-      8
+      7
     ],
     "paused": [
-      4
+      8
     ],
     "planned": [
       9,
