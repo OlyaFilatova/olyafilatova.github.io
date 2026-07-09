@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import './KnowledgeSourceItem.css'
 import { LanguageContext } from '../i18n/config'
 import type { KnowledgeSource } from '../schemas/knowledge-source';
-import { statusTextMapping } from '../i18n/knowledge-sources';
+import { statusTextMapping, texts } from '../i18n/knowledge-sources';
 import React from 'react';
 
 function KnowledgeSourceItem({ source }: {source: KnowledgeSource}) {
@@ -22,6 +22,7 @@ function KnowledgeSourceItem({ source }: {source: KnowledgeSource}) {
 
         <hgroup className="meta">
           {source.access}{separator}{source.kind}{separator}{statusTextMapping[source.status][currentLanguage]}
+          {!source.date ? undefined : <>{separator}{texts.last_reviewed[currentLanguage]}: {source.date.toDateString()}</>}
         </hgroup>
         {source.categories ? <div className="meta">
           {source.categories.map((category, idx) => <React.Fragment key={idx}>

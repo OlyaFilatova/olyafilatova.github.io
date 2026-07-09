@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import { join } from 'node:path';
 import type { ThoughtsIndex } from '../src/schemas/knowledge-source.ts';
 import { KnowledgeSource } from '../src/schemas/knowledge-source.ts';
+import { getGitFileDate } from './helpers/git-file-date.ts';
 
 function defaultdict<T>(defaultFactory: () => T) {
   return new Proxy({}, {
@@ -21,9 +22,13 @@ async function loadThoughts() {
   const sourceNames = (await fs.readFile(join(dir, 'list.txt'), {encoding: 'utf8'})).split('\n').filter(Boolean);
 
   return await Promise.all<KnowledgeSource>(sourceNames.map(async file => {
-    const fileContent = await fs.readFile(join(dir, file), { encoding: 'utf8' });
+    const filePath = join(dir, file);
+    const fileContent = await fs.readFile(filePath, { encoding: 'utf8' });
+    const date = await getGitFileDate(filePath);
     const fileData = JSON.parse(fileContent);
-    return KnowledgeSource.parse(fileData);
+    const source = KnowledgeSource.parse(fileData);
+    source.date = date;
+    return source;
   }));
 }
 

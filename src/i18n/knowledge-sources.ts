@@ -9,6 +9,10 @@ export const texts = {
   "welcome": {
     "uk": "Вітаю! Сторінка про джерела знань знаходиться у стадії розробки.",
     "en": "Welcome! The page about knowledge sources is under development."
+  },
+  "last_reviewed": {
+    "uk": "Оновлено",
+    "en": "Last reviewed at"
   }
 } as const satisfies Localization;
 

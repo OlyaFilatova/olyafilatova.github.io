@@ -15,7 +15,8 @@ export const BookSource = zod.object({
   "access": Access,
   "link": zod.string().min(1),
   "thoughts": zod.optional(zod.array(localizedString)),
-  "categories": zod.optional(zod.array(localizedString))
+  "categories": zod.optional(zod.array(localizedString)),
+  "date": zod.optional(zod.string().pipe(zod.coerce.date()))
 });
 
 export const DocumentationSource = zod.object({
@@ -25,7 +26,8 @@ export const DocumentationSource = zod.object({
   "access": zod.literal('free'),
   "link": zod.string().min(1),
   "thoughts": zod.optional(zod.array(localizedString)),
-  "categories": zod.optional(zod.array(localizedString))
+  "categories": zod.optional(zod.array(localizedString)),
+  "date": zod.optional(zod.string().pipe(zod.coerce.date()))
 });
 
 export const KnowledgeSource = zod.union([BookSource, DocumentationSource]);
