@@ -1,9 +1,15 @@
 ai-engineer.json
 
+rabbitmq-tutorials.json
+rabbitmq-docs.json
+
+hands-on-ml.json
+deep-learning-with-python.json
+dive-into-deep-learning.json
+
 python-for-data-analysis.json
 
 mostly-adequate-guide.json
-
 functional-light-js.json
 
 django-intro.json
@@ -16,8 +22,6 @@ ydkjs.json
 hands-on-llm.json
 desigining-ml-systems.json
 intro-to-sl.json
-dive-into-deep-learning.json
-deep-learning-with-python.json
 elements-of-sl.json
 
 ddia.json

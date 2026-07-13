@@ -3,8 +3,8 @@ import type { Localization } from "./config";
 
 export const texts = {
   "page_title": {
-    "uk": "Думки о джерелах знань - Ольга Філатова",
-    "en": "Thoughts on knowledge sources - Olha Filatova"
+    "uk": "Нотатки о джерелах знань - Ольга Філатова",
+    "en": "Notes on knowledge sources - Olha Filatova"
   },
   "welcome": {
     "uk": "Вітаю! Сторінка про джерела знань знаходиться у стадії розробки.",

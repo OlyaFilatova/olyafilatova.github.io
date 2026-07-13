@@ -1,0 +1,10 @@
+{
+  "kind": "book",
+  "status": "planned",
+  "title": {
+    "uk": "Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow",
+    "en": "Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow"
+  },
+  "access": "paid",
+  "link": "https://www.oreilly.com/library/view/hands-on-machine-learning/9798341607972/"
+}

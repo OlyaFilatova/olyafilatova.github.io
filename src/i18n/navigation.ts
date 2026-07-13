@@ -6,8 +6,8 @@ export const texts_navigation = {
     "en": "Home"
   },
   "books": {
-    "uk": "Думки о джерелах знань",
-    "en": "Thoughts on knowledge sources"
+    "uk": "Нотатки о джерелах знань",
+    "en": "Notes on knowledge sources"
   },
   "history": {
     "uk": "Хронологія досвіду",
