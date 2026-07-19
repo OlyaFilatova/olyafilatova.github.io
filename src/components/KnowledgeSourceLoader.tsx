@@ -22,7 +22,7 @@ function KnowledgeSourceLoader({ filePath }: {filePath: string}) {
   }, []);
 
   return (
-    source && <KnowledgeSourceItem source={source} />
+    source && source.status != 'planned' && <KnowledgeSourceItem source={source} />
   )
 }
 
