@@ -8,7 +8,7 @@ import { index } from '../data/knowledge-sources-index';
 import KnowledgeSourceLoader from '../components/KnowledgeSourceLoader';
 
 function KnowledgeSources() {
-  const [knowledgeSources, setKnowledgeSources] = useState<string[]>([]);
+  const [knowledgeSources, setKnowledgeSources] = useState<[string, number][]>([]);
 
   const currentLanguage = useContext(LanguageContext);
 
@@ -20,7 +20,7 @@ function KnowledgeSources() {
     const prefix = import.meta.env.DEV ? 'src/' : '';
     const dirPath = 'assets/knowledge-sources/';
     const pageSize = index.count;
-    return [...Array(pageSize).keys()].map(index => `${prefix}${dirPath}${index}.json`);
+    return [...Array(pageSize).keys()].map(index => [`${prefix}${dirPath}${index}.json`, index] satisfies [string, number]).toReversed();
   }
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function KnowledgeSources() {
 
   return (
     <div className='knw-source'>
-      {knowledgeSources.map((source, idx) => <KnowledgeSourceLoader key={idx} filePath={source} />)}
+      {knowledgeSources.map(([source, idx], key) => <KnowledgeSourceLoader key={key} idx={idx} filePath={source} />)}
     </div>
   )
 }

@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 import './KnowledgeSourceItem.css'
 import { KnowledgeSource } from '../schemas/knowledge-source';
 import KnowledgeSourceItem from './KnowledgeSourceItem';
-import { bustCache } from '../data/knowledge-sources-index';
+import { bustCache, index } from '../data/knowledge-sources-index';
 
-function KnowledgeSourceLoader({ filePath }: {filePath: string}) {
+function KnowledgeSourceLoader({ filePath, idx }: {filePath: string; idx: number}) {
   const [source, setSource] = useState<KnowledgeSource | undefined>()
 
   function loadData(filePath: string, retriesCount = 0, maxRetriesCount = 5) {
@@ -18,11 +18,13 @@ function KnowledgeSourceLoader({ filePath }: {filePath: string}) {
   }
 
   useEffect(() => {
-    loadData(filePath + '?cb=' + bustCache);
+    if (!index.status.planned?.includes(idx)) {
+      loadData(filePath + '?cb=' + bustCache);
+    }
   }, []);
 
   return (
-    source && source.status != 'planned' && <KnowledgeSourceItem source={source} />
+    source && <KnowledgeSourceItem source={source} />
   )
 }
 

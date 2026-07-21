@@ -19,7 +19,7 @@ function defaultdict<T>(defaultFactory: () => T) {
 async function loadThoughts() {
   const dir =  join(process.cwd(), 'data/knowledge-sources');
 
-  const sourceNames = (await fs.readFile(join(dir, 'list.txt'), {encoding: 'utf8'})).split('\n').filter(Boolean);
+  const sourceNames = (await fs.readFile(join(dir, 'list.txt'), {encoding: 'utf8'})).split('\n').filter(Boolean).reverse();
 
   return await Promise.all<KnowledgeSource>(sourceNames.map(async file => {
     const filePath = join(dir, file);
