@@ -1,0 +1,10 @@
+{
+  "kind": "book",
+  "status": "planned",
+  "title": {
+    "uk": "Fluent Python (2nd edition)",
+    "en": "Fluent Python (2nd edition)"
+  },
+  "access": "paid",
+  "link": "https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/"
+}

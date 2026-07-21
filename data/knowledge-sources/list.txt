@@ -1,3 +1,6 @@
+fluent-python.json
+nodejs-design-patterns.json
+
 distributed-message-broker-queues.json
 
 ai-engineer.json
