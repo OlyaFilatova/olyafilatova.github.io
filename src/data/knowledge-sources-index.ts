@@ -1,7 +1,7 @@
 
 import type { ThoughtsIndex } from '../schemas/knowledge-source.ts';
 
-export const bustCache = 28;
+export const bustCache = 29;
 
 export const index: ThoughtsIndex = {
   "count": 33,
@@ -23,17 +23,17 @@ export const index: ThoughtsIndex = {
       22,
       23,
       24,
-      30
+      29
     ],
     "Software Architecture": [
       1,
-      27
+      26
     ],
     "JS": [
       14,
       19,
       20,
-      29
+      28
     ],
     "Python": [
       15,
@@ -66,25 +66,25 @@ export const index: ThoughtsIndex = {
     ],
     "RabbitMQ": [
       25,
-      26,
-      28,
-      31
-    ],
-    "AI": [
-      27
-    ],
-    "AMQP": [
-      28,
+      27,
+      30,
       32
     ],
+    "AI": [
+      26
+    ],
+    "AMQP": [
+      27,
+      31
+    ],
     "Kafka": [
-      28
+      27
     ],
     "Node.js": [
-      29
+      28
     ],
     "AMQP 0-9-1": [
-      31
+      30
     ]
   },
   "kind": {
@@ -110,9 +110,9 @@ export const index: ThoughtsIndex = {
       22,
       23,
       24,
-      27,
-      29,
-      30
+      26,
+      28,
+      29
     ],
     "documentation": [
       15,
@@ -120,16 +120,16 @@ export const index: ThoughtsIndex = {
       17,
       18,
       25,
-      26
+      32
     ],
     "paper": [
-      28
+      27
     ],
     "web-page": [
-      31
+      30
     ],
     "specification": [
-      32
+      31
     ]
   },
   "access": {
@@ -155,8 +155,8 @@ export const index: ThoughtsIndex = {
       22,
       23,
       25,
-      26,
-      28,
+      27,
+      30,
       31,
       32
     ],
@@ -166,9 +166,9 @@ export const index: ThoughtsIndex = {
       12,
       13,
       24,
-      27,
-      29,
-      30
+      26,
+      28,
+      29
     ]
   },
   "status": {
@@ -191,9 +191,8 @@ export const index: ThoughtsIndex = {
       23,
       24,
       25,
-      26,
-      29,
-      30
+      28,
+      29
     ],
     "paused": [
       14
@@ -205,13 +204,14 @@ export const index: ThoughtsIndex = {
       18,
       19,
       20,
+      26,
       27,
-      28,
-      31,
-      32
+      30,
+      31
     ],
     "in-progress-first-read": [
-      21
+      21,
+      32
     ]
   }
 }

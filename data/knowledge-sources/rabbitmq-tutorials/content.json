@@ -1,15 +1,15 @@
 [
   {
-    "uk": "RubleMQ підтримує принаймні два протоколи: AMQP 1.0 і AMQP 0-9-1 (насправді, за допомогою plugins він може підтримувати MQTT, Web MQTT, STOMP, Web STOMP). Але уроки з JS і Python показують лише AMQP 0-9-1.",
+    "uk": "Уроки для JS і Python показують як створити прості черги, черги задач, publish/subscribe, routing, топіки, RPC і черги-потоки (з та без стеження за offset)",
+    "en": "Tutorials for JS and Python cover queue, work queue, publish/subscribe, routing, topics, RPC, and stream queues (with and without offset tracking)"
+  },
+  {
+    "uk": "RabbitMQ підтримує принаймні два протоколи: AMQP 1.0 і AMQP 0-9-1 (насправді, за допомогою плагінів він може підтримувати MQTT, Web MQTT, STOMP, Web STOMP). Але уроки з JS і Python показують лише AMQP 0-9-1.",
     "en": "RabbitMQ supports at least two protocols: AMQP 1.0 and AMQP 0-9-1 (in fact more, through plugins it can support MQTT, Web MQTT, STOMP, Web STOMP). But JS and Python tutorials showcase only AMQP 0-9-1."
   },
   {
     "uk": "Уроки мовою Python використовують бібліотеки pika і rstream, а уроки з JS використовують amqplib і rabbitmq-stream-js-client. Крім того, команда веде список інших доступних бібліотек за адресою https://www.rabbitmq.com/client-libraries/devtools",
     "en": "Python tutorials use pika and rstream libraries, and JS tutorials use amqplib and rabbitmq-stream-js-client. Additionally, team lists other available libraries at https://www.rabbitmq.com/client-libraries/devtools"
-  },
-  {
-    "uk": "Уроки для JS і Python показують як створити прості черги, черги задач, publish/subscribe, routing, топіки, RPC і черги-потоки (з та без стеження за offset)",
-    "en": "Tutorials for JS and Python cover queue, work queue, publish/subscribe, routing, topics, RPC, and stream queues (with and without offset tracking)"
   },
   {
     "uk": "Посилання на клієнти AMQP 1.0 можна знайти на сторінці https://www.rabbitmq.com/client-libraries/amqp-client-libraries",
