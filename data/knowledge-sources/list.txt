@@ -1,3 +1,4 @@
+AMQP-0-9-1-specification.json
 AMQP-0-9-1-model-explained.json
 
 fluent-python.json
