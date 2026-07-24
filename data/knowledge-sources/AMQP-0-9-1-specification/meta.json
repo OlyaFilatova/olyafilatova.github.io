@@ -1,6 +1,6 @@
 {
   "kind": "specification",
-  "status": "in-progress-first-read",
+  "status": "first-read",
   "title": {
     "uk": "AMQP 0-9-1 specification",
     "en": "AMQP 0-9-1 specification"
