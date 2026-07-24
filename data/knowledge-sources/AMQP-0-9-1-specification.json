@@ -7,7 +7,7 @@
   },
   "categories": ["AMQP"],
   "access": "free",
-  "link": "https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf?utm_source=chatgpt.com",
+  "link": "https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf",
   "thoughts": [
     {
       "uk": "Документ визначає мережевий протокол, Advanced Message Queuing Protocol (AMQP).",
