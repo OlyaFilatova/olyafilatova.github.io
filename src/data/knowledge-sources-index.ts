@@ -1,14 +1,13 @@
 
 import type { ThoughtsIndex } from '../schemas/knowledge-source.ts';
 
-export const bustCache = 18;
+export const bustCache = 20;
 
 export const index: ThoughtsIndex = {
   "count": 32,
   "categories": {
     "Non": [
       0,
-      1,
       2,
       3,
       4,
@@ -24,17 +23,17 @@ export const index: ThoughtsIndex = {
       22,
       23,
       24,
-      25,
-      26,
-      27,
-      29,
-      30,
-      31
+      30
+    ],
+    "Software Architecture": [
+      1,
+      27
     ],
     "JS": [
       14,
       19,
-      20
+      20,
+      29
     ],
     "Python": [
       15,
@@ -66,10 +65,25 @@ export const index: ThoughtsIndex = {
       21
     ],
     "RabbitMQ": [
+      25,
+      26,
+      28,
+      31
+    ],
+    "AI": [
+      27
+    ],
+    "AMQP": [
       28
     ],
     "Kafka": [
       28
+    ],
+    "Node.js": [
+      29
+    ],
+    "AMQP 0-9-1": [
+      31
     ]
   },
   "kind": {

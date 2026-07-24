@@ -5,6 +5,9 @@
     "uk": "Node.js Design Patterns (3rd edition)",
     "en": "Node.js Design Patterns (3rd edition)"
   },
+  "categories": [
+    "JS", "Node.js"
+  ],
   "access": "paid",
   "link": "https://www.oreilly.com/library/view/node-js-design-patterns/9781839214110/"
 }

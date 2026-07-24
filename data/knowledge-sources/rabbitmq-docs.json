@@ -5,6 +5,7 @@
     "uk": "RabbitMQ /docs/",
     "en": "RabbitMQ /docs/"
   },
+  "categories": ["RabbitMQ"],
   "access": "free",
   "link": "https://github.com/OlyaFilatova/olyafilatova.github.io/issues/6"
 }
