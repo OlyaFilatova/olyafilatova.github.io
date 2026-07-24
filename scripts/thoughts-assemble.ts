@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import { join } from 'node:path';
 import type { ThoughtsIndex } from '../src/schemas/knowledge-source.ts';
-import { KnowledgeSource } from '../src/schemas/knowledge-source.ts';
+import { KnowledgeSource, KnowledgeSourceContent, KnowledgeSourceMeta } from '../src/schemas/knowledge-source.ts';
 import { getGitFileDate } from './helpers/git-file-date.ts';
 
 function defaultdict<T>(defaultFactory: () => T) {
@@ -17,18 +17,28 @@ function defaultdict<T>(defaultFactory: () => T) {
 }
 
 async function loadThoughts() {
-  const dir =  join(process.cwd(), 'data/knowledge-sources');
+  const dir = join(process.cwd(), 'data/knowledge-sources');
 
   const sourceNames = (await fs.readFile(join(dir, 'list.txt'), {encoding: 'utf8'})).split('\n').filter(Boolean).reverse();
 
-  return await Promise.all<KnowledgeSource>(sourceNames.map(async file => {
-    const filePath = join(dir, file);
-    const fileContent = await fs.readFile(filePath, { encoding: 'utf8' });
-    const date = await getGitFileDate(filePath);
-    const fileData = JSON.parse(fileContent);
-    const source = KnowledgeSource.parse(fileData);
+  return await Promise.all<KnowledgeSource>(sourceNames.map(async folder => {
+    const metaFilePath = join(dir, folder, 'meta.json');
+    const metaFileContent = await fs.readFile(metaFilePath, { encoding: 'utf8' });
+    const metaFileData = JSON.parse(metaFileContent);
+    const source = KnowledgeSourceMeta.parse(metaFileData);
+    
+    const contentFilePath = join(dir, folder, 'content.json');
+    const contentFileContent = await fs.readFile(contentFilePath, { encoding: 'utf8' });
+    const contentFileData = JSON.parse(contentFileContent);
+    const date = await getGitFileDate(contentFilePath);
+
+    const thoughts = KnowledgeSourceContent.parse(contentFileData);
     source.date = date;
-    return source;
+
+    return {
+      ...source,
+      ...(thoughts.length ? { thoughts }: {})
+    };
   }));
 }
 
