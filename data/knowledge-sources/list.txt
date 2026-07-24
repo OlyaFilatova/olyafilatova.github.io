@@ -1,3 +1,5 @@
+AMQP-0-9-1-model-explained.json
+
 fluent-python.json
 nodejs-design-patterns.json
 
