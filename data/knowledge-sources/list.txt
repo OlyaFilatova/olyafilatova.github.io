@@ -1,3 +1,4 @@
+rabbitmq-tutorials
 AMQP-0-9-1-specification
 AMQP-0-9-1-model-explained
 
@@ -8,7 +9,6 @@ distributed-message-broker-queues
 
 ai-engineer
 
-rabbitmq-tutorials
 rabbitmq-docs
 
 hands-on-ml
