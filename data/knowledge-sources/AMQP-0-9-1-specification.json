@@ -5,6 +5,7 @@
     "uk": "AMQP 0-9-1 specification",
     "en": "AMQP 0-9-1 specification"
   },
+  "categories": ["AMQP"],
   "access": "free",
   "link": "https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf?utm_source=chatgpt.com",
   "thoughts": [
