@@ -1,0 +1,13 @@
+{
+  "kind": "specification",
+  "status": "in-progress-first-read",
+  "title": {
+    "uk": "AMQP 0-9-1 specification",
+    "en": "AMQP 0-9-1 specification"
+  },
+  "categories": [
+    "AMQP"
+  ],
+  "access": "free",
+  "link": "https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf"
+}

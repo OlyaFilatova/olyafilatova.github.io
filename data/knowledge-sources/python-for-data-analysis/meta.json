@@ -1,0 +1,17 @@
+{
+  "kind": "book",
+  "status": "in-progress-first-read",
+  "title": {
+    "uk": "Python for Data Analysis (3rd edition)",
+    "en": "Python for Data Analysis (3rd edition)"
+  },
+  "access": "free",
+  "link": "https://wesmckinney.com/book/",
+  "categories": [
+    "Python",
+    "Data analysis",
+    "NumPy",
+    "Pandas",
+    "matplotlib"
+  ]
+}

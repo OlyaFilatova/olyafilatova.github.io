@@ -1,0 +1,13 @@
+{
+  "kind": "book",
+  "status": "paused",
+  "title": {
+    "uk": "You Don't Know JS (1st and 2nd editions)",
+    "en": "You Don't Know JS (1st and 2nd editions)"
+  },
+  "access": "free",
+  "link": "https://github.com/getify/You-Dont-Know-JS",
+  "categories": [
+    "JS"
+  ]
+}

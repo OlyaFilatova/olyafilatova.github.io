@@ -1,0 +1,14 @@
+{
+  "kind": "documentation",
+  "status": "first-read",
+  "title": {
+    "uk": "Django overview /intro/",
+    "en": "Django overview /intro/"
+  },
+  "access": "free",
+  "link": "https://docs.djangoproject.com/en/6.0/intro/",
+  "categories": [
+    "Python",
+    "Django"
+  ]
+}

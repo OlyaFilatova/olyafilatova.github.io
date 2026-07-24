@@ -1,0 +1,14 @@
+{
+  "kind": "web-page",
+  "status": "first-read",
+  "title": {
+    "uk": "AMQP 0-9-1 Model Explained",
+    "en": "AMQP 0-9-1 Model Explained"
+  },
+  "access": "free",
+  "link": "https://www.rabbitmq.com/tutorials/amqp-concepts",
+  "categories": [
+    "AMQP 0-9-1",
+    "RabbitMQ"
+  ]
+}

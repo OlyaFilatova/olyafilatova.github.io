@@ -1,0 +1,14 @@
+{
+  "kind": "documentation",
+  "status": "first-read",
+  "title": {
+    "uk": "Django topics /http/",
+    "en": "Django topics /http/"
+  },
+  "access": "free",
+  "link": "https://docs.djangoproject.com/en/6.0/topics/http/",
+  "categories": [
+    "Python",
+    "Django"
+  ]
+}

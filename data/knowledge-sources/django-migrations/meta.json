@@ -1,0 +1,14 @@
+{
+  "kind": "documentation",
+  "status": "first-read",
+  "title": {
+    "uk": "Django topics /migrations/",
+    "en": "Django topics /migrations/"
+  },
+  "access": "free",
+  "link": "https://docs.djangoproject.com/en/6.0/topics/migrations/",
+  "categories": [
+    "Python",
+    "Django"
+  ]
+}

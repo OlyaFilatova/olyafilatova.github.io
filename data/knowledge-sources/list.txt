@@ -1,44 +1,44 @@
-AMQP-0-9-1-specification.json
-AMQP-0-9-1-model-explained.json
+AMQP-0-9-1-specification
+AMQP-0-9-1-model-explained
 
-fluent-python.json
-nodejs-design-patterns.json
+fluent-python
+nodejs-design-patterns
 
-distributed-message-broker-queues.json
+distributed-message-broker-queues
 
-ai-engineer.json
+ai-engineer
 
-rabbitmq-tutorials.json
-rabbitmq-docs.json
+rabbitmq-tutorials
+rabbitmq-docs
 
-hands-on-ml.json
-deep-learning-with-python.json
-dive-into-deep-learning.json
+hands-on-ml
+deep-learning-with-python
+dive-into-deep-learning
 
-python-for-data-analysis.json
+python-for-data-analysis
 
-mostly-adequate-guide.json
-functional-light-js.json
+mostly-adequate-guide
+functional-light-js
 
-django-intro.json
-django-http.json
-django-db.json
-django-migrations.json
+django-intro
+django-http
+django-db
+django-migrations
 
-ydkjs.json
+ydkjs
 
-hands-on-llm.json
-desigining-ml-systems.json
-intro-to-sl.json
-elements-of-sl.json
+hands-on-llm
+desigining-ml-systems
+intro-to-sl
+elements-of-sl
 
-ddia.json
-os-three-easy-pieces.json
-security-engineering.json
-sre.json
-art-unix-programming.json
-sicp.json
-game-programming-patterns.json
-eloquent-js.json
-fundamentals-of-sa.json
-distributed-for-fun-and-profit.json
+ddia
+os-three-easy-pieces
+security-engineering
+sre
+art-unix-programming
+sicp
+game-programming-patterns
+eloquent-js
+fundamentals-of-sa
+distributed-for-fun-and-profit

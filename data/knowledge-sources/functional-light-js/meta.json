@@ -1,0 +1,14 @@
+{
+  "kind": "book",
+  "status": "first-read",
+  "title": {
+    "uk": "Functional-Light JavaScript",
+    "en": "Functional-Light JavaScript"
+  },
+  "access": "free",
+  "link": "https://github.com/getify/Functional-Light-JS/blob/master/manuscript/README.md",
+  "categories": [
+    "JS",
+    "Functional programming"
+  ]
+}

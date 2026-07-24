@@ -1,0 +1,14 @@
+{
+  "kind": "book",
+  "status": "first-read",
+  "title": {
+    "uk": "Professor Frisby's Mostly Adequate Guide to Functional Programming",
+    "en": "Professor Frisby's Mostly Adequate Guide to Functional Programming"
+  },
+  "access": "free",
+  "link": "https://github.com/MostlyAdequate/mostly-adequate-guide",
+  "categories": [
+    "JS",
+    "Functional programming"
+  ]
+}
