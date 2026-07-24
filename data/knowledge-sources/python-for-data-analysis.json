@@ -8,26 +8,7 @@
   "access": "free",
   "link": "https://wesmckinney.com/book/",
   "categories": [
-    {
-      "uk": "Python",
-      "en": "Python"
-    },
-    {
-      "uk": "Data analysis",
-      "en": "Data analysis"
-    },
-    {
-      "uk": "NumPy",
-      "en": "NumPy"
-    },
-    {
-      "uk": "Pandas",
-      "en": "Pandas"
-    },
-    {
-      "uk": "matplotlib",
-      "en": "matplotlib"
-    }
+    "Python", "Data analysis", "NumPy", "Pandas", "matplotlib"
   ],
   "thoughts": [
     {

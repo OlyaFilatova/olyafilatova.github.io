@@ -8,14 +8,7 @@
   "access": "free",
   "link": "https://github.com/MostlyAdequate/mostly-adequate-guide",
   "categories": [
-    {
-      "uk": "JS",
-      "en": "JS"
-    },
-    {
-      "uk": "Functional programming",
-      "en": "Functional programming"
-    }
+    "JS", "Functional programming"
   ],
   "thoughts": [
     {

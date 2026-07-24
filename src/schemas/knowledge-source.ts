@@ -15,7 +15,7 @@ export const KnowledgeSource = zod.object({
   "access": Access,
   "link": zod.string().min(1),
   "thoughts": zod.optional(zod.array(localizedString)),
-  "categories": zod.optional(zod.array(localizedString)),
+  "categories": zod.optional(zod.array(zod.string())),
   "date": zod.optional(zod.string().pipe(zod.coerce.date()))
 });
 

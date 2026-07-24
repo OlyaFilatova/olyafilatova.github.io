@@ -57,26 +57,7 @@ export const knowledgeSources: KnowledgeSource[] = [
       }
     ],
     "categories": [
-      {
-        "en": "Python",
-        "uk": "Python"
-      },
-      {
-        "en": "Data analysis",
-        "uk": "Data analysis"
-      },
-      {
-        "en": "NumPy",
-        "uk": "NumPy"
-      },
-      {
-        "en": "Pandas",
-        "uk": "Pandas"
-      },
-      {
-        "en": "matplotlib",
-        "uk": "matplotlib"
-      }
+      "Python", "Data analysis", "NumPy", "Pandas", "matplotlib"
     ]
   },
   {
@@ -135,14 +116,7 @@ export const knowledgeSources: KnowledgeSource[] = [
       }
     ],
     "categories": [
-      {
-        "en": "JS",
-        "uk": "JS"
-      },
-      {
-        "en": "Functional programming",
-        "uk": "Functional programming"
-      }
+      "JS",  "Functional programming"
     ]
   },
   {
@@ -197,14 +171,7 @@ export const knowledgeSources: KnowledgeSource[] = [
       }
     ],
     "categories": [
-      {
-        "en": "JS",
-        "uk": "JS"
-      },
-      {
-        "en": "Functional programming",
-        "uk": "Functional programming"
-      }
+      "JS",  "Functional programming"
     ]
   },
   {
@@ -223,10 +190,7 @@ export const knowledgeSources: KnowledgeSource[] = [
       }
     ],
     "categories": [
-      {
-        "en": "JS",
-        "uk": "JS"
-      }
+      "JS"
     ]
   },
   {
@@ -285,14 +249,7 @@ export const knowledgeSources: KnowledgeSource[] = [
       }
     ],
     "categories": [
-      {
-        "en": "Python",
-        "uk": "Python"
-      },
-      {
-        "en": "Django",
-        "uk": "Django"
-      }
+      "Python", "Django"
     ]
   },
   {
@@ -343,14 +300,7 @@ export const knowledgeSources: KnowledgeSource[] = [
       }
     ],
     "categories": [
-      {
-        "en": "Python",
-        "uk": "Python"
-      },
-      {
-        "en": "Django",
-        "uk": "Django"
-      }
+      "Python", "Django"
     ]
   },
   {
@@ -405,14 +355,7 @@ export const knowledgeSources: KnowledgeSource[] = [
       }
     ],
     "categories": [
-      {
-        "en": "Python",
-        "uk": "Python"
-      },
-      {
-        "en": "Django",
-        "uk": "Django"
-      }
+      "Python", "Django"
     ]
   },
   {
@@ -455,14 +398,7 @@ export const knowledgeSources: KnowledgeSource[] = [
       }
     ],
     "categories": [
-      {
-        "en": "Python",
-        "uk": "Python"
-      },
-      {
-        "en": "Django",
-        "uk": "Django"
-      }
+      "Python", "Django"
     ]
   },
   {

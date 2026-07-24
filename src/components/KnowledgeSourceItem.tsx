@@ -27,7 +27,7 @@ function KnowledgeSourceItem({ source }: {source: KnowledgeSource}) {
         {source.categories ? <div className="meta">
           {source.categories.map((category, idx) => <React.Fragment key={idx}>
             {idx != 0 ? separator : undefined}
-            <span>{category[currentLanguage]}</span>
+            <span>{category}</span>
           </React.Fragment>)}
         </div> : undefined}
         <a href={source.link} target='_blank'>{source.link}</a>

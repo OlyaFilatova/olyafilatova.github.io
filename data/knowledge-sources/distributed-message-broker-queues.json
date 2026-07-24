@@ -8,14 +8,7 @@
   "access": "free",
   "link": "https://arxiv.org/pdf/1704.00411",
   "categories": [
-    {
-      "uk": "RabbitMQ",
-      "en": "RabbitMQ"
-    },
-    {
-      "uk": "Kafka",
-      "en": "Kafka"
-    }
+    "RabbitMQ", "Kafka"
   ],
   "thoughts": [
     {

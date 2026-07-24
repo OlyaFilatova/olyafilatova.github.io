@@ -8,14 +8,7 @@
   "access": "free",
   "link": "https://docs.djangoproject.com/en/6.0/topics/migrations/",
   "categories": [
-    {
-      "uk": "Python",
-      "en": "Python"
-    },
-    {
-      "uk": "Django",
-      "en": "Django"
-    }
+    "Python", "Django"
   ],
   "thoughts": [
     {

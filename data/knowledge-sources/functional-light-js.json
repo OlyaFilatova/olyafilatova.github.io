@@ -8,14 +8,7 @@
   "access": "free",
   "link": "https://github.com/getify/Functional-Light-JS/blob/master/manuscript/README.md",
   "categories": [
-    {
-      "uk": "JS",
-      "en": "JS"
-    },
-    {
-      "uk": "Functional programming",
-      "en": "Functional programming"
-    }
+    "JS", "Functional programming"
   ],
   "thoughts": [
     {

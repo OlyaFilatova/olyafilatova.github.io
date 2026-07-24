@@ -39,7 +39,7 @@ function createThoughtsIndex(sources: KnowledgeSource[]) {
     kind: source.kind,
     access: source.access
   })).reduce((prev, curr, idx) => {
-    const categories = (curr.categories.length) ? curr.categories.map(category => category.en) : ['Non'];
+    const categories = (curr.categories.length) ? curr.categories : ['Non'];
     
     categories.forEach(category => prev.categories[category].push(idx))
 
