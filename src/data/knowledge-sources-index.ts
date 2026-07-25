@@ -1,7 +1,7 @@
 
 import type { ThoughtsIndex } from '../schemas/knowledge-source.ts';
 
-export const bustCache = 31;
+export const bustCache = 32;
 
 export const index: ThoughtsIndex = {
   "count": 33,
@@ -207,11 +207,11 @@ export const index: ThoughtsIndex = {
       26,
       27,
       30,
-      31
+      31,
+      32
     ],
     "in-progress-first-read": [
-      21,
-      32
+      21
     ]
   }
 }
