@@ -22,12 +22,12 @@ export const statusTextMapping: Record<Status, Record<string, string>> = {
     "en": "Planned"
   },
   'in-progress-first-read': {
-    "uk": "Читаю (перше читання)",
-    "en": "In progress (first read)"
+    "uk": "Читаю",
+    "en": "In progress"
   },
   'first-read': {
-    "uk": "Прочитала (перше читання)",
-    "en": "Read (first read)"
+    "uk": "Прочитала",
+    "en": "Read"
   },
   'in-progress-thorough-read': {
     "uk": "Читаю (повторне читання)",
