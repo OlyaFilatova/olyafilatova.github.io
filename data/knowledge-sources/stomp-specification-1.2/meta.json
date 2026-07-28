@@ -1,0 +1,13 @@
+{
+  "kind": "specification",
+  "status": "first-read",
+  "title": {
+    "uk": "STOMP 1.2 specification",
+    "en": "STOMP 1.2 specification"
+  },
+  "categories": [
+    "STOMP"
+  ],
+  "access": "free",
+  "link": "https://stomp.github.io/stomp-specification-1.2.html"
+}
