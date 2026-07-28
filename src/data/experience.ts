@@ -182,7 +182,7 @@ export const experience: Experience[] = [
       "uk": "TypeScript/Python"
     },
     "from": {
-      "en": "Apr 2018",
+      "en": "Apr 2022",
       "uk": "Квітень 2022"
     },
     "to": {
