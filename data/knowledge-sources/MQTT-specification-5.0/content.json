@@ -16,63 +16,63 @@
     "en": "A Subscription comprises a Topic Filter and a maximum QoS."
   },
   {
-    "uk": "Кожна з підписок в сесії має унікальний Topic Filter.",
+    "uk": "Кожна з Subscription в Session має унікальний Topic Filter.",
     "en": "Each Subscription within a Session has a different Topic Filter."
   },
   {
-    "uk": "Повідомлення програми, що відповідає спільному підписанню, буде надіслано клієнту, пов' язаному з одним з сеансів, пов' язаних з підпискою.",
+    "uk": "Application Message, що відповідає Shared Subscription, буде надіслано лише одному з клієнтів, пов'язаних з однією із Sessions, пов'язаних з Subscription.",
     "en": "An Application Message that matches a Shared Subscription is only sent to the Client associated with one of the Sessions associated with the Subscription."
   },
   {
-    "uk": "Підписування до шаблонів - це підписка з підпискою на тему фільтра, що містить один або декілька шаблонів заміни. Таким чином, підписка на одну з назв тем відповідає декілька літер.",
+    "uk": "Wildcard Subscription - це підписка з Topic Filter, що містить один або декілька символів заміни. Це дозволяє одній subscription відповідати декільком Topic Name.",
     "en": "A Wildcard Subscription is a Subscription with a Topic Filter containing one or more wildcard characters. This allows the subscription to match more than one Topic Name."
   },
   {
-    "uk": "Пакет керування MQTT: пакет інформації, який буде надіслано через мережеве з' єднання.",
+    "uk": "MQTT Control Packet: пакет інформації, який буде надіслано через мережеве з'єднання.",
     "en": "MQTT Control Packet: A packet of information that is sent across the Network Connection."
   },
   {
-    "uk": "Повідомлення: Повідомлення програми, яке було оприлюднено сервером після закриття з' єднання з мережею у випадку, коли з' єднання з мережею не було закрито у звичайному режимі.",
+    "uk": "Will Message: Application Message, яке було оприлюднено сервером після закриття мережевого з'єднання у випадку, коли з'єднання з мережею не було закрито у звичайному режимі.",
     "en": "Will Message: An Application Message which is published by the Server after the Network Connection is closed in cases where the Network Connection is not closed normally."
   },
   {
-    "uk": "Клієнт MQTT і реалізація сервера Вам слід надати розпізнавання, уповноваження та безпечні параметри зв' язку",
-    "en": "MQTT Client and Server implementations SHOULD offer Authentication, Authorization and secure communication options"
+    "uk": "Клієнту MQTT і реалізації сервера слід надавати Authentication, Authorization та безпечні параметри зв'язку.",
+    "en": "MQTT Client and Server implementations SHOULD offer Authentication, Authorization and secure communication options."
   },
   {
-    "uk": "Назва теми: мітка, долучена до повідомлення програми, яка відповідає підпискам, відомих на сервері.",
+    "uk": "Topic Name: мітка, долучена до Application Message, яка зіставлєтьс із Subscriptions, відомими на сервері.",
     "en": "Topic Name: The label attached to an Application Message which is matched against the Subscriptions known to the Server."
   },
   {
-    "uk": "Типи даних: біти, ціле число двох байтів, чотири ціле число байтів, кодований рядок UTF- 8, змінні ціле число байтів, двійкові дані, пара рядків UTF- 8.",
+    "uk": "Типи даних, якими оперує протокол: bits, two byte integer, four byte integer, UTF-8 encoded string, variable byte integer, binary data, UTF-8 string pair.",
     "en": "Data types: bits, two byte integer, four byte integer, UTF-8 encoded string, variable byte integer, binary data, UTF-8 string pair."
   },
   {
-    "uk": "Пакет керування MQTT: CONNECT, CONNACK, PUBLISH, PUBACK, PUBREC, PUBREL, PUBCOMP, SUBSCRIBE, SUBACK, UN SUBSCRIBE, UN SUBACK, PINGREQ, PINGRERESP, DISCONNECT, AUTH.",
+    "uk": "MQTT Control Packet типи: CONNECT, CONNACK, PUBLISH, PUBACK, PUBREC, PUBREL, PUBCOMP, SUBSCRIBE, SUBACK, UNSUBSCRIBE, UNSUBACK, PINGREQ, PINGRESP, DISCONNECT, AUTH.",
     "en": "MQTT Control Packet types: CONNECT, CONNACK, PUBLISH, PUBACK, PUBREC, PUBREL, PUBCOMP, SUBSCRIBE, SUBACK, UNSUBSCRIBE, UNSUBACK, PINGREQ, PINGRESP, DISCONNECT, AUTH."
   },
   {
-    "uk": "Фіксований заголовок складається з типу пакета керування, прапорців, що відповідають йому, і тривалості, що залишилася.",
+    "uk": "Fixed Header складається з типу пакета керування, прапорців, що відповідають йому, і довжині, що залишилася.",
     "en": "Fixed Header consists of the control packet type, flags specific to it and remaining length."
   },
   {
-    "uk": "Пакет керування MQTT завжди має фіксований заголовок, іноді у ньому може бути змінний заголовок і/ або вантаж, залежно від типу пакета.",
+    "uk": "Пакет керування MQTT завжди має Fixed Header, іноді у ньому може бути Variable Header і/або payload, залежно від типу пакета.",
     "en": "MQTT Control Packet always has a fixed header and sometimes can have variable header and/or payload depending on the packet type."
   },
   {
-    "uk": "Вміст заголовка змінної залежить від типу пакета.",
+    "uk": "Вміст Variable Header залежить від типу пакета.",
     "en": "The content of the Variable Header varies depending on the packet type."
   },
   {
-    "uk": "Ідентифікатор пакета Packet стає доступним для повторного використання після обробки відповідного пакета розпізнавання, визначеного наступним чином.",
-    "en": "The Packet Identifier becomes available for reuse after the sender has processed the corresponding acknowledgement packet, defined as follows."
+    "uk": "The Packet Identifier стає доступним для повторного використання після підтвердження обробки відповідного пакета.",
+    "en": "The Packet Identifier becomes available for reuse after the sender has processed the corresponding acknowledgement packet."
   },
   {
-    "uk": "Ідентифікатор пакета не можна використовувати у будь- який час декількома командами.",
+    "uk": "A Packet Identifier не можна використовувати у будь-який час більш ніж однією командою.",
     "en": "A Packet Identifier cannot be used by more than one command at any time."
   },
   {
-    "uk": "Набір властивостей складається з довжини властивості, за якою слідує Властивості.",
+    "uk": "Набір властивостей складається з довжини властивості, за якою слідують Властивості.",
     "en": "The set of Properties is composed of a Property Length followed by the Properties."
   },
   {
@@ -80,51 +80,51 @@
     "en": "A Property consists of an Identifier which defines its usage and data type, followed by a value."
   },
   {
-    "uk": "Можливі властивості: Заповнення формату, Індикатор часу вивантаження повідомлень, Інтервал вивантаження повідомлень, Тип автентифікації, Інформація щодо даних щодо відповіді, Тема відповіді, Дані щодо відповіді, Повідомлення Ідентифікатору, Інтервал між сеансами, Призначити ідентифікатор клієнта, Сервер Зберегти життя, Метод розпізнавання, Дані розпізнавання, Інформація про помилку, Час очікування, Запитати інформацію про реанімацію, Довідковий зв' язок, Рядок причини, Отримати максимальний розмір, адресні псевдонімів, Максимальний QoS, Доступний, Доступний, Доступний розмір пакетів, Підзаголовок шаблонів наявний, Спільний ідентифікатор, доступний спільний підпис.",
+    "uk": "Можливі властивості: Payload Format Indicator, Message Expiry Interval, Content Type, Response Topic, Correlation Data, Subscription Identifier, Session Expiry Interval, Assigned Client Identifier, Server Keep Alive, Authentication Method, Authentication Data, Request Problem Information, Will Delay Interval, Request Response Information, Response Information, Server Reference, Reason String, Receive Maximum, Topic Alias Maximum, Topic Alias, Maximum QoS, Retain Available, User Property, Maximum Packet Size, Wildcard Subscription Available, Subscription Identifier Available, Shared Subscription Available.",
     "en": "Possible properties: Payload Format Indicator, Message Expiry Interval, Content Type, Response Topic, Correlation Data, Subscription Identifier, Session Expiry Interval, Assigned Client Identifier, Server Keep Alive, Authentication Method, Authentication Data, Request Problem Information, Will Delay Interval, Request Response Information, Response Information, Server Reference, Reason String, Receive Maximum, Topic Alias Maximum, Topic Alias, Maximum QoS, Retain Available, User Property, Maximum Packet Size, Wildcard Subscription Available, Subscription Identifier Available, Shared Subscription Available."
   },
   {
-    "uk": "Типи пакетів, які завжди мають вантаж: CONNECT, SUBSCRIBE, SUBACK, UN SUBSCRIBE, UN SUBACK.",
+    "uk": "Типи пакетів, які завжди мають payload: CONNECT, SUBSCRIBE, SUBACK, UNSUBSCRIBE, UNSUBACK.",
     "en": "Packet types that must always have a payload: CONNECT, SUBSCRIBE, SUBACK, UNSUBSCRIBE, UNSUBACK."
   },
   {
-    "uk": "Типи пакетів, які можуть мати вантаж: PUBLISH.",
+    "uk": "Типи пакетів, які можуть мати payload: PUBLISH.",
     "en": "Packet types that may have a payload: PUBLISH."
   },
   {
-    "uk": "У пакетах CONNACK, PUBCK, PUBRECK, PUBREL, PUBCOMP, DISCONNECT і AUT Control PUBCK є код з однієї причини, який входить до заголовків змінних. У пакетах SUBACK і UN SUBACK міститься список одного або декількох кодів з причин у пакунку.",
+    "uk": "Пакети CONNACK, PUBACK, PUBREC, PUBREL, PUBCOMP, DISCONNECT і AUTH мають один Reason Code, який входить до Variable Header. У пакетах SUBACK і UNSUBACK міститься список з одного або декількох Reason Codes у Payload.",
     "en": "The CONNACK, PUBACK, PUBREC, PUBREL, PUBCOMP, DISCONNECT and AUTH Control Packets have a single Reason Code as part of the Variable Header. The SUBACK and UNSUBACK packets contain a list of one or more Reason Codes in the Payload."
   },
   {
-    "uk": "Код причина - це одне непідписане байтами значення, яке вказує на результат операції. Специфічний список наборів кодів причин.",
+    "uk": "Reason Code - це значення, яке вказує на результат операції. Специфікація має перелік таких кодів.",
     "en": "A Reason Code is a one byte unsigned value that indicates the result of an operation. Specification lists preset list of reason codes."
   },
   {
-    "uk": "Після встановлення з' єднання з мережею клієнтом на сервер, перший пакет, надісланий від клієнта на сервер має бути пакетом CONNECT",
+    "uk": "Після встановлення з'єднання з мережею клієнтом до сервера, перший пакет, надісланий від клієнта на сервер має бути пакетом CONNECT",
     "en": "After a Network Connection is established by a Client to a Server, the first packet sent from the Client to the Server MUST be a CONNECT packet"
   },
   {
-    "uk": "Клієнт може надсилати пакет CONNECT лише один раз через мережеве з' єднання.",
+    "uk": "Клієнт може надсилати пакет CONNECT лише один раз через мережеве з'єднання.",
     "en": "A Client can only send the CONNECT packet once over a Network Connection."
   },
   {
-    "uk": "Повідомлення має бути опубліковано після того, як з' єднання з мережею буде закрито, або проіснує інтервал затримки за will Session або завершиться сеанс, якщо повідомлення Will не було вилучено сервером під час перевірки пакета DISCONNECT з Загальним кодом 0x00 (нормальне роз' єднання) або новим мережевим з' єднанням для клієнтського ідентифікатора до того, як мине інтервал Затримки Уілл.",
+    "uk": "Will Message має бути опубліковано після того, як з'єднання з мережею буде закрито, та або Will Delay Interval пройшов або завершилась Session, за виключенням того, коли повідомлення Will Message було вилучено сервером під час отримки пакета DISCONNECT з Reason Code 0x00 (нормальне роз'єднання) або нове мережеве з'єднання для ClientID було відкрито до того, як минув Will Delay Interval.",
     "en": "The Will Message MUST be published after the Network Connection is subsequently closed and either the Will Delay Interval has elapsed or the Session ends, unless the Will Message has been deleted by the Server on receipt of a DISCONNECT packet with Reason Code 0x00 (Normal disconnection) or a new Network Connection for the ClientID is opened before the Will Delay Interval has elapsed"
   },
   {
-    "uk": "Якщо значення \" Залишати живим \" є ненульовим, а сервер не отримує пакет керування MQTT від клієнта протягом півтора рази періоду \" Залишати живим ,\" він повинен закрити мережеве з' єднання з клієнтом, як якби мережа зазнала невдачі",
-    "en": "If the Keep Alive value is non-zero and the Server does not receive an MQTT Control Packet from the Client within one and a half times the Keep Alive time period, it MUST close the Network Connection to the Client as if the network had failed"
+    "uk": "Якщо значення Keep Alive є ненульовим, а сервер не отримує MQTT Control Packet від клієнта протягом періоду рівного півтора значенн Keep Alive, він повинен закрити мережеве з'єднання з клієнтом, вважаючи, що мережа зазнала невдачі.",
+    "en": "If the Keep Alive value is non-zero and the Server does not receive an MQTT Control Packet from the Client within one and a half times the Keep Alive time period, it MUST close the Network Connection to the Client as if the network had failed."
   },
   {
-    "uk": "Якщо пакет CONNECT отримується за допомогою пункту \" Очистити початок \" буде встановлено у значення 1, клієнт і сервер не повинен змінювати будь- який з існуючих сеансів і розпочати новий сеанс",
-    "en": "If a CONNECT packet is received with Clean Start is set to 1, the Client and Server MUST discard any existing Session and start a new Session"
+    "uk": "Якщо пакет CONNECT у прапорці Clean Start має значення 1, клієнт і сервер повинні відкинути існуючу Session і розпочати нову Session.",
+    "en": "If a CONNECT packet is received with Clean Start is set to 1, the Client and Server MUST discard existing Session and start a new Session."
   },
   {
-    "uk": "Якщо пакет CONNECT отримується з Pack CONNECT, встановленого у значення 0 і існує сеанс, пов' язаний з ідентифікатором клієнта, серверу слід поновити обмін даними з клієнтом на основі стану існуючого сеансу. Якщо пакет CONNECT отримується за допомогою значення \" Очистити початок \" 0 і немає сеансу, пов' язаного з ідентифікатором клієнта, сервер MOST створить новий сеанс",
+    "uk": "Якщо пакет CONNECT отримано із Clean Start, встановленого у значення 0 і існує Session, пов'язаний з Client Identifier, сервер має поновити обмін даними з клієнтом на основі стану існуючої Session. Якщо пакет CONNECT отримано із Clean Start рівним 0 і немає Session, пов'язаного з ідентифікатором клієнта, сервер має створить новий Session.",
     "en": "If a CONNECT packet is received with Clean Start set to 0 and there is a Session associated with the Client Identifier, the Server MUST resume communications with the Client based on state from the existing Session. If a CONNECT packet is received with Clean Start set to 0 and there is no Session associated with the Client Identifier, the Server MUST create a new Session"
   },
   {
-    "uk": "Кожен клієнт, що з' єднується з сервером, має унікальний ідентифікатор клієнта.",
+    "uk": "Кожен клієнт, що з'єднується з сервером, має унікальний ClientID.",
     "en": "Each Client connecting to the Server has a unique ClientID."
   },
   {
@@ -132,119 +132,119 @@
     "en": "The CONNACK packet is the packet sent by the Server in response to a CONNECT packet received from a Client."
   },
   {
-    "uk": "Прапорець Передавання сеансу інформує клієнта про те, чи використовує сервер стан сеансу з попереднього з' єднання для цього ClientID.",
+    "uk": "Прапорець Session Present інформує клієнта про те, чи використовує сервер Session з попереднього з'єднання для цього ClientID.",
     "en": "The Session Present flag informs the Client whether the Server is using Session State from a previous connection for this ClientID."
   },
   {
-    "uk": "Пакунок PUBLISH надсилається з клієнта на сервер або з сервера на клієнта для надсилання повідомлення програми.",
+    "uk": "Пакет PUBLISH надсилається від клієнта на сервер або з сервера до клієнта для надсилання Application Message.",
     "en": "A PUBLISH packet is sent from a Client to a Server or from a Server to a Client to transport an Application Message."
   },
   {
-    "uk": "Якщо біт DUP встановлено у значення 0, це вказує на те, що це перша спроба клієнта або сервера надіслати цей пакет PUBLISH. Якщо біт DUP встановлено у значення 1, це означає, що це може бути повторна спроба надсилання пакета раніше.",
+    "uk": "Якщо флаг DUP встановлено у значення 0, це вказує на те, що це перша спроба клієнта або сервера надіслати цей пакет PUBLISH. Якщо флаг DUP встановлено у значення 1, це означає, що це може бути повторна спроба надсилання пакета.",
     "en": "If the DUP flag is set to 0, it indicates that this is the first occasion that the Client or Server has attempted to send this PUBLISH packet. If the DUP flag is set to 1, it indicates that this might be re-delivery of an earlier attempt to send the packet."
   },
   {
-    "uk": "біт DUP посилається на сам пакет керування MQTT, а не на повідомлення програми, яке він містить.",
+    "uk": "Флаг DUP посилається на сам MQTT Control Packet, а не на Application Message, яке він містить.",
     "en": "the DUP flag refers to the MQTT Control Packet itself and not to the Application Message that it contains."
   },
   {
-    "uk": "Якщо біт RETAIN встановлено у значення 1 у пакунку PUBLISH, надісланому клієнтом на сервер, сервер MEGS замінить будь- яке збережене повідомлення для цієї теми і збереже повідомлення програми",
-    "en": "If the RETAIN flag is set to 1 in a PUBLISH packet sent by a Client to a Server, the Server MUST replace any existing retained message for this topic and store the Application Message"
+    "uk": "Якщо флаг RETAIN встановлено у значення 1 у пакеті PUBLISH, надісланому клієнтом на сервер, сервер має замінити будь-яке збережене повідомлення для цієї topic і зберегти нове Application Message.",
+    "en": "If the RETAIN flag is set to 1 in a PUBLISH packet sent by a Client to a Server, the Server MUST replace any existing retained message for this topic and store the Application Message."
   },
   {
-    "uk": "Назва теми визначає інформаційний канал, на який буде оприлюднено дані за запитом.",
+    "uk": "Topic Name визначає інформаційний канал, на який буде відправлено Payload дані.",
     "en": "The Topic Name identifies the information channel to which Payload data is published."
   },
   {
-    "uk": "Тема відповіді використовується як тема повідомлення відповіді.",
+    "uk": "Response Topic використовується як Topic Name повідомлення-відповіді.",
     "en": "Response Topic is used as the Topic Name for a response message."
   },
   {
-    "uk": "Дані Correation використовується відправником повідомлення запиту, щоб визначити, для чого слід використовувати повідомлення про відповідь, якщо його було отримано.",
+    "uk": "Correlation Data використовується відправником Request Message, щоб визначити при отриманні, до якого запиту належить Response Message.",
     "en": "The Correlation Data is used by the sender of the Request Message to identify which request the Response Message is for when it is received."
   },
   {
-    "uk": "Очікувалися відповіді на пакети PUBLISH. QOS 0 - None, QOS 1 - PUBACK, QOS 2 - PUBREC.",
+    "uk": "Очікувані відповіді на пакет PUBLISH в залежності від QoS. QoS 0 - None, QoS 1 - PUBACK, QoS 2 - PUBREC.",
     "en": "Expected PUBLISH packet responses. QoS 0 - None, QoS 1 - PUBACK, QoS 2 - PUBREC."
   },
   {
-    "uk": "Клієнт використовує пакет PUBLISH для надсилання повідомлення програми на сервер, для розповсюдження клієнтам відповідних підписок.",
+    "uk": "Клієнт використовує пакет PUBLISH для надсилання Application Message на сервер, для розповсюдження клієнтам відповідних підписок.",
     "en": "The Client uses a PUBLISH packet to send an Application Message to the Server, for distribution to Clients with matching subscriptions."
   },
   {
-    "uk": "Сервер використовує пакет PUBLISH, щоб надіслати повідомлення програми кожному клієнту, який має відповідну підписку.",
+    "uk": "Сервер використовує пакет PUBLISH, щоб надіслати Application Message кожному клієнту, який має відповідну підписку.",
     "en": "The Server uses a PUBLISH packet to send an Application Message to each Client which has a matching subscription."
   },
   {
-    "uk": "Якщо сервер надсилає окрему копію повідомлення, його слід включити до пакета PUBLISH, то ідентифікатори підписки для всіх відповідних підписок, які мають підписку Idefinators, їх порядок не є значним.",
+    "uk": "Якщо сервер надсилає окрему копію повідомлення, він має включити до пакету PUBLISH, то Subscription Identifiers всіх відповідних підписок, які мають Subscription Identifiers, їх порядок не є значним.",
     "en": "If the Server sends a single copy of the message it MUST include in the PUBLISH packet the Subscription Identifiers for all matching subscriptions which have a Subscription Identifiers, their order is not significant"
   },
   {
-    "uk": "Пакет PUBLISH, надісланий з клієнта на сервер НЕ повинен містити ідентифікатора підписки",
-    "en": "A PUBLISH packet sent from a Client to a Server MUST NOT contain a Subscription Identifier"
+    "uk": "Пакет PUBLISH, надісланий з клієнта на сервер має не містити Subscription Identifiers.",
+    "en": "A PUBLISH packet sent from a Client to a Server MUST NOT contain a Subscription Identifier."
   },
   {
-    "uk": "Пакет PUBACK - це відповідь на пакет PUBLISH з QOS 1.",
+    "uk": "Пакет PUBACK - це відповідь на пакет PUBLISH з QoS 1.",
     "en": "A PUBACK packet is the response to a PUBLISH packet with QoS 1."
   },
   {
-    "uk": "Пакун PUBREC - це відповідь на пакет PUBLISH з використанням QOS 2. Це другий пакет обміну протоколами QOS 2.",
+    "uk": "Пакет PUBREC - це відповідь на пакет PUBLISH з QoS 2. Це другий пакет обміну при QoS 2.",
     "en": "A PUBREC packet is the response to a PUBLISH packet with QoS 2. It is the second packet of the QoS 2 protocol exchange."
   },
   {
-    "uk": "Пакунком PUBREL (Publish випуск) є відповідь на пакет PUBREC. Це третій пакет обміну протоколами QOS 2.",
+    "uk": "Пакет PUBREL (Publish release) є відповіддю на пакет PUBREC. Це третій пакет обміну при QoS 2.",
     "en": "A PUBREL (Publish release) packet is the response to a PUBREC packet. It is the third packet of the QoS 2 protocol exchange."
   },
   {
-    "uk": "Пакун PUBCOMP (повний Publish) - це відповідь на пакет PUBREL. Це четвертий і останній пакет обміну протоколами QOS 2.",
+    "uk": "Пакет PUBCOMP (Publish complete) - це відповідь на пакет PUBREL. Це четвертий і останній пакет обміну при QoS 2.",
     "en": "The PUBCOMP (Publish complete) packet is the response to a PUBREL packet. It is the fourth and final packet of the QoS 2 protocol exchange."
   },
   {
-    "uk": "Пакунок SUBSCRIBE надсилається з клієнта на сервер для створення одного або декількох підписок. Кожне підписування реєструє відсотки клієнтів у одній або декількох темах. Сервер надсилає пакети PUBLISH до клієнта для пересилання Повідомлення програм, які було оприлюднено для тем, що відповідають цим підпискам. Пакунок SUBSCRIBE також визначає (для кожного з підписок) максимальне значення QOS, за допомогою якого сервер може надсилати повідомлення програм до клієнта.",
+    "uk": "Пакет SUBSCRIBE надсилається з клієнта на сервер для створення однієї або декількох Subscriptions. Кожна Subscription реєструє зацікавлення клієнта у одній або декількох Topics. Сервер надсилає пакети PUBLISH до клієнта для пересилання Application Messages, які було відправлено на Topics, що відповідають цим Subscriptions. Пакет SUBSCRIBE також визначає (для кожної з Subscription) максимальне значення QoS, з яким сервер може надсилати Application Message до клієнта.",
     "en": "The SUBSCRIBE packet is sent from the Client to the Server to create one or more Subscriptions. Each Subscription registers a Client’s interest in one or more Topics. The Server sends PUBLISH packets to the Client to forward Application Messages that were published to Topics that match these Subscriptions. The SUBSCRIBE packet also specifies (for each Subscription) the maximum QoS with which the Server can send Application Messages to the Client."
   },
   {
-    "uk": "Завантаження пакета SUBSCRIBE містить список фільтрів топіків, які позначають теми, на які клієнт хоче підписатися.",
+    "uk": "Payload пакета SUBSCRIBE містить список Topic Filters, які позначають Topics, на які клієнт хоче підписатися.",
     "en": "The Payload of a SUBSCRIBE packet contains a list of Topic Filters indicating the Topics to which the Client wants to subscribe."
   },
   {
-    "uk": "не локальний параметр. Якщо значенням є 1, Повідомлення програми НЕ можна переспрямовувати на з' єднання з клієнтським ідентифікатором, що дорівнює клієнтському ідентифікатору з' єднання",
+    "uk": "No Local параметр. Якщо значенням є 1, Application Messages не можуть бути переспрямовані на з'єднання з ClientID, що дорівнює ClientID з'єднання-відправника.",
     "en": "the No Local option. If the value is 1, Application Messages MUST NOT be forwarded to a connection with a ClientID equal to the ClientID of the publishing connection"
   },
   {
-    "uk": "параметр \" Затримувати обробку .\" За допомогою цього пункту можна вказати, чи надсилатимуться повідомлення, які зберігатимуться після встановлення підписки.",
+    "uk": "параметр Retain Handling. За допомогою цього параметру можна вказати, чи надсилатимуться збережені повідомлення після встановлення підписки.",
     "en": "the Retain Handling option. This option specifies whether retained messages are sent when the subscription is established."
   },
   {
-    "uk": "Серверу дозволено надсилати дублікати копій повідомлення передплатнику, у випадку, коли було опубліковано початкове повідомлення за допомогою QOS 1, а максимальним надано QOS 0.",
+    "uk": "Серверу дозволено надсилати дублікати копій повідомлення підписнику, у випадку, коли було опубліковано початкове повідомлення із QoS 1, але максимальним дозволеним QoS є 0.",
     "en": "The server is permitted to send duplicate copies of a message to a subscriber in the case where the original message was published with QoS 1 and the maximum QoS granted was QoS 0."
   },
   {
-    "uk": "Пакунок SUBACK, який надсилається клієнтом на сервер для підтвердження отримання і обробки пакета SUBSCRIBE.",
+    "uk": "Пакет SUBACK, надсилається сервером клієнту для підтвердження отримання і обробки пакета SUBSCRIBE.",
     "en": "A SUBACK packet is sent by the Server to the Client to confirm receipt and processing of a SUBSCRIBE packet."
   },
   {
-    "uk": "Сервер, який надсилає пакет SUBACK, використовує один з кодів для підписування для кожного отриманого фільтра тем",
+    "uk": "Сервер, який надсилає пакет SUBACK, має вказати один з Subscribe Reason Codes для кожної з отриманих Topic Filter.",
     "en": "The Server sending a SUBACK packet MUST use one of the Subscribe Reason Codes for each Topic Filter received"
   },
   {
-    "uk": "Пакунок UN SUBSCRIBE є надісланим клієнтом на сервер, щоб скасувати підписку на теми.",
+    "uk": "Пакет UNSUBSCRIBE надсилається клієнтом на сервер, щоб скасувати підписку на topics.",
     "en": "An UNSUBSCRIBE packet is sent by the Client to the Server, to unsubscribe from topics."
   },
   {
-    "uk": "У пакунку UN SUBSCRIBE міститься список фільтрів топіків, на які клієнт бажає скасувати підписку.",
+    "uk": "У пакеті UNSUBSCRIBE міститься список Topic Filters, на які клієнт бажає скасувати підписку.",
     "en": "The Payload for the UNSUBSCRIBE packet contains the list of Topic Filters that the Client wishes to unsubscribe from."
   },
   {
-    "uk": "Пакунок UN SUBACK, який надсилається клієнтом на підтвердження отримання пакета UNSUBRIBEE.",
+    "uk": "Пакет UNSUBACK, надсилається клієнту сервером для підтвердження отримання пакета UNSUBSCRIBE.",
     "en": "The UNSUBACK packet is sent by the Server to the Client to confirm receipt of an UNSUBSCRIBE packet."
   },
   {
-    "uk": "Сервер, який надсилає пакет UNUBACK, має використовувати одне з значень коду без підписки для кожного отриманого фільтра теми",
-    "en": "The Server sending an UNSUBACK packet MUST use one of the Unsubscribe Reason Code values for each Topic Filter received"
+    "uk": "Сервер, який надсилає пакет UNSUBACK, має використовувати один з Unsubscribe Reason Code для кожного отриманого Topic Filter.",
+    "en": "The Server sending an UNSUBACK packet MUST use one of the Unsubscribe Reason Code values for each Topic Filter received."
   },
   {
-    "uk": "Пакунок PINGREQ надсилається з клієнта на сервер. Його можна використовувати до сервера: вкажіть на сервері, що клієнт живий, попросіть, щоб сервер відповів на підтвердження того, що він живий, налаштувавши налаштування мережі, щоб позначити, що мережеве з' єднання активне.",
+    "uk": "Пакет PINGREQ надсилається з клієнта на сервер. Його можна використовувати: 1. Вказати серверу, що клієнт живий. 2. Зробити запит, щоб сервер відповів і підтвердив, що він живий. 3. Визначити, що мережеве з'єднання активне.",
     "en": "The PINGREQ packet is sent from a Client to the Server. It can be used to: Indicate to the Server that the Client is alive, Request that the Server responds to confirm that it is alive, Exercise the network to indicate that the Network Connection is active."
   },
   {
@@ -252,179 +252,179 @@
     "en": "A PINGRESP Packet is sent by the Server to the Client in response to a PINGREQ packet. It indicates that the Server is alive."
   },
   {
-    "uk": "Пакунком DISCONNECT є останній пакет керування MQTT, надісланий клієнтом або сервером. Це вказує на причину закриття мережевого з' єднання. Клієнт або сервер може надіслати пакет DICNECT перед закриттям мережевого з' єднання.",
+    "uk": "Пакет DISCONNECT є останнім MQTT Control Packet, надісланим клієнтом або сервером. Він вказує причину закриття мережевого з'єднання. Клієнт або сервер може надіслати пакет DISCONNECT перед закриттям мережевого з'єднання.",
     "en": "The DISCONNECT packet is the final MQTT Control Packet sent from the Client or the Server. It indicates the reason why the Network Connection is being closed. The Client or Server MAY send a DISCONNECT packet before closing the Network Connection."
   },
   {
-    "uk": "Клієнт або сервер, який надсилає пакет DICONNECT MOUT використовувати одне з значень коду DISCONNECT",
-    "en": "The Client or Server sending the DISCONNECT packet MUST use one of the DISCONNECT Reason Code values"
+    "uk": "Клієнт або сервер, який надсилає пакет DICONNECT має використовувати одне з Reason Code values.",
+    "en": "The Client or Server sending the DISCONNECT packet MUST use one of the DISCONNECT Reason Code values."
   },
   {
-    "uk": "Пакунок AUTH надсилається від клієнта на сервер або сервер до клієнта як частина розширеного обміну автентифікацією, зокрема розпізнавання за викликом або відповіддю.",
+    "uk": "Пакет AUTH надсилається від клієнта на сервер або від сервера до клієнта як частина розширеного обміну автентифікацією, зокрема автентифікація challenge / response.",
     "en": "An AUTH packet is sent from Client to Server or Server to Client as part of an extended authentication exchange, such as challenge / response authentication."
   },
   {
-    "uk": "Для того, щоб реалізувати протокол QoS 1 і QoS 2, клієнт і сервер повинні асоціювати його з ідентифікатором клієнта, це називається Станом сеансу. Крім того, сервер зберігає підписки як частину стану сеансу.",
+    "uk": "Для того, щоб реалізувати протокол QoS 1 і QoS 2, клієнт і сервер повинні асоціювати стан з Client Identifier, це називається Session State. Крім того, сервер зберігає підписки як частину Session State.",
     "en": "In order to implement QoS 1 and QoS 2 protocol flows the Client and Server need to associate state with the Client Identifier, this is referred to as the Session State. The Server also stores the subscriptions as part of the Session State."
   },
   {
-    "uk": "TCP/IP можна використовувати для MQTT v5. 0. Можна використовувати такі протоколи: TLS, WebSocket.",
+    "uk": "TCP/IP можна використовувати для MQTT v5.0. Можна використовувати також такі протоколи: TLS, WebSocket.",
     "en": "TCP/IP can be used for MQTT v5.0. The following transport protocols are also suitable: TLS, WebSocket."
   },
   {
-    "uk": "QoS 0: не більше ніж один раз доставки. Повідомлення буде доставлено відповідно до можливостей основної мережі. Відповідь не надсилається отримувачем, а повторну спробу виконує відправник. Повідомлення надходить або до отримувача один раз, або взагалі не надсилається.",
+    "uk": "QoS 0: Не більше одного разу. Повідомлення буде доставлено відповідно до можливостей мережі. Отримувач не надсилає відповідь, відправник не виконує повторних спроб. Повідомлення надходить до отримувача один раз, або взагалі не надходить.",
     "en": "QoS 0: At most once delivery. The message is delivered according to the capabilities of the underlying network. No response is sent by the receiver and no retry is performed by the sender. The message arrives at the receiver either once or not at all."
   },
   {
-    "uk": "QoS 1: хоча б один раз доставки. Ця якість рівня служб гарантує, що повідомлення надходить принаймні до отримувача. Пакунок QOS 1 PUBLISH має ідентифікатор пакета Packet Identer у його заголовку змінних, його визнає пакет PUBACK.",
+    "uk": "QoS 1: Принаймні один раз. Ця Quality of Service гарантує, що повідомлення надходить до отримувача принаймні один раз. QoS 1 PUBLISH пакет має Packet Identifier у його Variable Header, та отримує підтвердженн пакетом PUBACK.",
     "en": "QoS 1: At least once delivery. This Quality of Service level ensures that the message arrives at the receiver at least once. A QoS 1 PUBLISH packet has a Packet Identifier in its Variable Header and is acknowledged by a PUBACK packet."
   },
   {
-    "uk": "Після того, як він надіслав пакет PUBACK, отримувач повинен обробляти будь-який вхідний пакет PUBLISH, який містить той самий ідентифікатор пакета Packet як нове повідомлення програми, незалежно від значення параметра його прапорця DUP",
-    "en": "After it has sent a PUBACK packet the receiver MUST treat any incoming PUBLISH packet that contains the same Packet Identifier as being a new Application Message, irrespective of the setting of its DUP flag"
+    "uk": "Після того, як він надіслав пакет PUBACK, отримувач повинен обробляти будь-який вхідний пакет PUBLISH, який містить той самий Packet Identifier як нове Application Message, незалежно від значення прапорця DUP.",
+    "en": "After it has sent a PUBACK packet the receiver MUST treat any incoming PUBLISH packet that contains the same Packet Identifier as being a new Application Message, irrespective of the setting of its DUP flag."
   },
   {
-    "uk": "Ідентифікатор пакета Packet стає доступним для повторного використання після отримання пакета PUBACK.",
-    "en": "The Packet Identifier becomes available for reuse once the sender has received the PUBACK packet."
+    "uk": "Packet Identifier (при використанні QoS 1) стає доступним для повторного використання після отримання пакета PUBACK.",
+    "en": "The Packet Identifier (when using QoS 1) becomes available for reuse once the sender has received the PUBACK packet."
   },
   {
-    "uk": "Це найвища якість рівня служби, якщо ні втрата, ні дублювання повідомлень не є прийнятними.",
+    "uk": "QoS 2: Рівно один раз. Це найвищий рівень Quality of Service, використовується, коли ні втрата, ні дублювання повідомлень не є прийнятними.",
     "en": "QoS 2: Exactly once delivery. This is the highest Quality of Service level, for use when neither loss nor duplication of messages are acceptable."
   },
   {
-    "uk": "Ідентифікатор пакета Packet стає доступним для повторного використання після отримання пакета PUBCOMP або PUBREC з Кодом причини 0x80 або більшим.",
-    "en": "The Packet Identifier becomes available for reuse once the sender has received the PUBCOMP packet or a PUBREC with a Reason Code of 0x80 or greater."
+    "uk": "Packet Identifier (при використанні QoS 2) стає доступним для повторного використання після отримання пакета PUBCOMP або після отримання пакета PUBREC з Reason Code 0x80 або більшим.",
+    "en": "The Packet Identifier (when using QoS 2) becomes available for reuse once the sender has received the PUBCOMP packet or a PUBREC with a Reason Code of 0x80 or greater."
   },
   {
-    "uk": "Після повторного з' єднання клієнта з пунктом меню Очистити Запускати встановлено у значення 0 і наявний сеанс, як клієнт, так і сервер не повинні надсилати ваші непізнані пакети PUBLISH (де QOS > 0) і пакети PUBREL за допомогою їх початкових пакетів Packet Identifiers.",
+    "uk": "Після повторного з'єднання клієнта з Clean Start рівним 0 і наявна session, як клієнт, так і сервер повинні надіслати будь-які пакети (без підтвердження отримання) PUBLISH (де QoS > 0) і пакети PUBREL використовуючи їх початкові Packet Identifiers.",
     "en": "When a Client reconnects with Clean Start set to 0 and a session is present, both the Client and Server MUST resend any unacknowledged PUBLISH packets (where QoS > 0) and PUBREL packets using their original Packet Identifiers."
   },
   {
-    "uk": "Випереджувальна частина (⇩/ } U+002F) використовується для відокремлення кожного рівня всередині дерева теми і забезпечення ієрархічної структури назв тем.",
+    "uk": "Слеш (‘/’ U+002F) використовується для відокремлення кожного рівня всередині topic tree і забезпечує ієрархічну структуру Topic Names.",
     "en": "The forward slash (‘/’ U+002F) is used to separate each level within a topic tree and provide a hierarchical structure to the Topic Names."
   },
   {
-    "uk": "Числовний знак (} # =U+0023) - це шаблонний символ, який відповідає будь- якій кількості рівнів у темі.",
+    "uk": "Хеш (‘#’ U+0023) - це шаблонний символ, який відповідає будь-якій кількості рівнів у topic.",
     "en": "The number sign (‘#’ U+0023) is a wildcard character that matches any number of levels within a topic."
   },
   {
-    "uk": "Символ шаблону з декількома рівнями MURT слід вказувати або окремо, або слідувати роздільнику рівня теми. У будь- якому разі він має бути останнім символом, визначеним у фільтрі тем",
-    "en": "The multi-level wildcard character MUST be specified either on its own or following a topic level separator. In either case it MUST be the last character specified in the Topic Filter"
+    "uk": "Символ шаблону ‘#’ має бути вказаний або окремо, або слідувати за ‘/’. У будь-якому разі він має бути останнім символом, зазначеним у Topic Filter.",
+    "en": "The multi-level wildcard character MUST be specified either on its own or following a topic level separator. In either case it MUST be the last character specified in the Topic Filter."
   },
   {
-    "uk": "Знак плюса (} +] U+002B) - це шаблонний символ, який відповідає лише одному рівню теми.",
+    "uk": "Знак плюс (‘+’ U+002B) - це шаблонний символ, який відповідає лише одному рівню topic.",
     "en": "The plus sign (‘+’ U+002B) is a wildcard character that matches only one topic level."
   },
   {
-    "uk": "Шаблон для одного рівня можна використовувати на будь- якому рівні у фільтрі тем, зокрема на першому і останньому рівнях. Там, де його буде використано, шаблон MUSE має займати весь рівень фільтра.",
-    "en": "The single-level wildcard can be used at any level in the Topic Filter, including first and last levels. Where it is used, it MUST occupy an entire level of the filter"
+    "uk": "Символ шаблону ‘+’ можна використовувати на будь-якому рівні у Topic Filter, зокрема на першому і останньому рівнях. Шаблон має займати весь рівень фільтра.",
+    "en": "The single-level wildcard can be used at any level in the Topic Filter, including first and last levels. Where it is used, it MUST occupy an entire level of the filter."
   },
   {
-    "uk": "Оскільки шаблон одного рівня відповідає лише одному рівні, 'sport / +] не відповідає הsпорту, але він збігається з msport/ }",
-    "en": "because the single-level wildcard matches only a single level, “sport/+” does not match “sport” but it does match “sport/”"
+    "uk": "Оскільки шаблон ‘+’ відповідає лише одному рівню, “sport/+” не відповідає “sport”, але відповідає “sport/”.",
+    "en": "because the single-level wildcard matches only a single level, “sport/+” does not match “sport” but it does match “sport/”."
   },
   {
-    "uk": "Сервер НЕ повинен відповідати фільтрам тем, які починаються з шаблона символів (# або +) з назвою теми, що починається з символу $",
-    "en": "The Server MUST NOT match Topic Filters starting with a wildcard character (# or +) with Topic Names beginning with a $ character"
+    "uk": "Сервер не повинен відповідати Topic Filters, які починаються з шаблона символів (# або +) з Topic Names, що починаються з символу $.",
+    "en": "The Server MUST NOT match Topic Filters starting with a wildcard character (# or +) with Topic Names beginning with a $ character."
   },
   {
-    "uk": "Програми не можуть використовувати тему з головним символом $ для власних цілей",
-    "en": "Applications cannot use a topic with a leading $ character for their own purposes"
+    "uk": "Програми не можуть використовувати topic з першим символом $ для власних цілей.",
+    "en": "Applications cannot use a topic with a leading $ character for their own purposes."
   },
   {
-    "uk": "MQTT складається з двох видів підписки, що є спільними і розділеними.",
+    "uk": "MQTT має два види Subscription, Shared і Non‑shared.",
     "en": "MQTT provides two kinds of Subscription, Shared and Non‑shared."
   },
   {
-    "uk": "Підписування, що складається з частин, пов'язане лише з сеансом MQTTT, який його створив.",
+    "uk": "Non‑shared Subscription, пов'язане лише з Session MQTT, яка його створила.",
     "en": "A Non‑shared Subscription is associated only with the MQTT Session that created it."
   },
   {
-    "uk": "У сеансі не може бути більше ніж одна підписка з тим самим фільтром теми, отже, фільтр топіків можна використовувати як ключ для визначення передплати у цьому сеансі.",
+    "uk": "У Session не може бути більше ніж одна Non‑shared Subscription з тим самим Topic Filter, отже, Topic Filter можна використовувати як ключ для визначення subscription у цьому Session.",
     "en": "A Session cannot have more than one Non‑shared Subscription with the same Topic Filter, so the Topic Filter can be used as a key to identify the subscription within that Session."
   },
   {
-    "uk": "Якщо є декілька клієнтів, кожен з них має власну підписку на однакову тему, кожен клієнт отримає власну копію Повідомлення програми, опубліковану на цій сторінці.",
+    "uk": "Якщо є декілька клієнтів, кожен з них має власну Non‑shared Subscription на однакову Topic, кожен клієнт отримає власну копію Application Messages, опублікованих на цій Topic.",
     "en": "If there are multiple Clients, each with its own Non‑shared Subscription to the same Topic, each Client gets its own copy of the Application Messages that are published on that Topic."
   },
   {
-    "uk": "Спільна підписка може бути пов' язано з декількома підписками на сеанси MQTT. Подібно до підзапису, який складається з тек, у ньому є параметри фільтра теми і підписки; але публікацію, яка відповідає фільтру теми, буде надіслано лише до одного з її підзаписів.",
+    "uk": "Shared Subscription може бути пов'язана з декількома підписавшимися MQTT Sessions. Подібно до Non‑shared Subscription, вона складається з Topic Filter і Subscription Options; але публікацію, яка відповідає Topic Filter, буде надіслано лише до однієї з підписавшихся Sessions.",
     "en": "A Shared Subscription can be associated with multiple subscribing MQTT Sessions. Like a Non‑shared Subscription, it has a Topic Filter and Subscription Options; however, a publication that matches its Topic Filter is only sent to one of its subscribing Sessions."
   },
   {
-    "uk": "Спільне підписування визначається за допомогою особливого стилю фільтра топіків. Формат цього фільтра: $preat / {ShareName} / {filter}",
+    "uk": "Shared Subscription визначається за допомогою особливого стилю Topic Filter. Формат цього фільтра: $share/{ShareName}/{filter}",
     "en": "A Shared Subscription is identified using a special style of Topic Filter. The format of this filter is: $share/{ShareName}/{filter}"
   },
   {
-    "uk": "Спільна підписка закінчується, всі повідомлення, пов' язані з цією програмою, буде вилучено, якщо сеанси більше не підписуються на неї.",
+    "uk": "Коли Shared Subscription закінчується, всі повідомлення, пов'язані з цією підпискою, буде вилучено, якщо не залишилиться підписаних на неї Sessions.",
     "en": "A Shared Subscription ends, and any undelivered messages associated with it are deleted, when there are no longer any Sessions subscribed to it."
   },
   {
-    "uk": "Кожне спільне підписування є незалежним від будь- якого іншого. Можна використовувати два спільних підписки з фільтрами перекриття. У таких випадках повідомлення, що відповідає обом спільним підпискам, буде оброблено окремо.",
+    "uk": "Кожна Shared Subscription є незалежною від будь-якої іншої. Можна використовувати два Shared Subscription зі збігом у фільтрах. У таких випадках повідомлення, що відповідає обом Shared Subscriptions, буде оброблено окремо кожною підпискою.",
     "en": "Each Shared Subscription is independent from any other. It is possible to have two Shared Subscriptions with overlapping filters. In such cases a message that matches both Shared Subscriptions will be processed separately by both of them."
   },
   {
-    "uk": "Максимом отримання є квота надсилання, яка використовується для обмеження кількості пакетів PUBLISH QOS > 0, які можна надсилати без отримання PUBACK (для QOS 1) або PUBCOMP (для QOS 2).",
-    "en": "The Receive Maximum establishes a send quota which is used to limit the number of PUBLISH QOS > 0 packets which can be sent without receiving an PUBACK (for QoS 1) or PUBCOMP (for QoS 2)."
+    "uk": "Receive Maximum вказує квоту надсилання, яка використовується для обмеження кількості пакетів PUBLISH QoS > 0, які можна надсилати до отримання PUBACK (при QoS 1) або PUBCOMP (при QoS 2).",
+    "en": "The Receive Maximum establishes a send quota which is used to limit the number of PUBLISH QoS > 0 packets which can be sent without receiving an PUBACK (for QoS 1) or PUBCOMP (for QoS 2)."
   },
   {
-    "uk": "Деякі з програм або стандартів можуть забажати виконання взаємодії Respons через MQTT. У цій версії MQTT містяться чотири властивості, які можна використовувати для цієї мети: Тема відповіді, Дані кореляції, запит щодо відповіді, Інформація про відповідь.",
+    "uk": "Деякі з програм або стандартів можуть забажати виконання Request/Response через MQTT. У цій версії MQTT містяться чотири властивості, які можна використовувати для цієї мети: Response Topic, Correlation Data, Request Response Information, Response Information.",
     "en": "Some applications or standards might wish to run a Request/Response interaction over MQTT. This version of MQTT includes four properties that can be used for this purpose: Response Topic, Correlation Data, Request Response Information, Response Information."
   },
   {
-    "uk": "Сервер може вимагати, щоб клієнт використовував інший сервер, відсилаючи CONNACK або DISCNECT з кодами Reath 0x9C (Використовувати інший сервер) або 0x9D (послано сервер). При надсиланні одного з цих кодів причин, сервер може також містити властивість Довідки сервера, щоб вказати адресу сервера або серверів, які клієнтові слід використовувати.",
+    "uk": "Сервер може вимагати, щоб клієнт використовував інший сервер, надсилаючи CONNACK або DISCNECT з Reason Codes 0x9C (Використовуйте інший сервер) або 0x9D (Сервер переміщено). При надсиланні одного з цих Reason Codes, сервер може також додати властивість Server Reference, щоб вказати адресу сервера або серверів, які клієнтові слід використовувати.",
     "en": "A Server can request that the Client uses another Server by sending CONNACK or DISCONNECT with Reason Codes 0x9C (Use another server), or 0x9D (Server moved). When sending one of these Reason Codes, the Server MAY also include a Server Reference property to indicate the location of the Server or Servers the Client SHOULD use."
   },
   {
-    "uk": "Пакет MQTT CONNECT підтримує базову автентифікацію мережевого з' єднання за допомогою полів Ім' я користувача і Пароль. Хоча ці поля мають назву для простого розпізнавання за паролем, ними можна скористатися для перенесення інших форм розпізнавання, таких, як передавання ключа з паролем.",
+    "uk": "Пакет MQTT CONNECT підтримує базову автентифікацію мережевого з'єднання за допомогою полів User Name і Password. Хоча ці поля мають назву для простого розпізнавання за паролем, ними можна скористатися для інших форм розпізнавання, таких, як передавання токена у Password.",
     "en": "The MQTT CONNECT packet supports basic authentication of a Network Connection using the User Name and Password fields. While these fields are named for a simple password authentication, they can be used to carry other forms of authentication such as passing a token as the Password."
   },
   {
-    "uk": "Покращена автентифікація розширює це базове розпізнавання, щоб включити автентифікацію у стилі query / answer. Можливо, це стосується обміну пакетами AUTH між клієнтом і сервером після CONNECT і до пакетів CONNACK.",
+    "uk": "Enhanced authentication розширює це азову автентифікацію, щоб включити автентифікацію у стилі challenge / response. Воно може включати обмін пакетами AUTH між клієнтом і сервером після CONNECT і до пакетів CONNACK.",
     "en": "Enhanced authentication extends this basic authentication to include challenge / response style authentication. It might involve the exchange of AUTH packets between the Client and the Server after the CONNECT and before the CONNACK packets."
   },
   {
-    "uk": "Якщо сервер розпізнає неправильно сформований пакет або протокол помилки, а код причина вказано у специфікації, він має закрити з' єднання з мережею",
-    "en": "When a Server detects a Malformed Packet or Protocol Error, and a Reason Code is given in the specification, it MUST close the Network Connection"
+    "uk": "Якщо сервер розпізнає Malformed Packet або Protocol Error, а Reason Code вказано у специфікації, він має закрити мережеве з'єднання.",
+    "en": "When a Server detects a Malformed Packet or Protocol Error, and a Reason Code is given in the specification, it MUST close the Network Connection."
   },
   {
     "uk": "Віртуальна приватна мережа (VPN) між клієнтами і серверами може надати впевненість у тому, що дані отримуватимуться лише від уповноважених клієнтів.",
     "en": "A Virtual Private Network (VPN) between the Clients and Servers can provide confidence that data is only being received from authorized Clients."
   },
   {
-    "uk": "реалізація повинна перевірити, чи клієнт уповноважений використовувати ідентифікатор клієнта, оскільки це надає доступ до стану сеансу MQTTT",
-    "en": "the implementation should check that the Client is authorized to use the Client Identifier as this gives access to the MQTT Session State"
+    "uk": "реалізація повинна перевірити, чи клієнт уповноважений використовувати Client Identifier, оскільки це надає доступ до MQTT Session State.",
+    "en": "the implementation should check that the Client is authorized to use the Client Identifier as this gives access to the MQTT Session State."
   },
   {
-    "uk": "Під час використання базового розпізнавання для клієнта не передбачено механізму розпізнавання на сервері. Деякі з форм розширеної автентифікації дозволяють взаємну автентифікацію.",
+    "uk": "Під час використання базової автентифікації для клієнта не передбачено механізму автентифікації сервера. Деякі з форм розширеної автентифікації дозволяють взаємну автентифікацію.",
     "en": "When using basic authentication, there is no mechanism for the Client to authenticate the Server. Some forms of extended authentication do allow for mutual authentication."
   },
   {
-    "uk": "Окремі програми можуть включати значення хешів у власні повідомлення програм. Це може надати цілісність вмісту пакетів оприлюднення у мережі та у стані спокою.",
+    "uk": "Окремі програми можуть незалежно включати хеш-значення в Application Messages. Це може надати цілісність вмісту Publish пакетів у мережі та у стані спокою.",
     "en": "Applications can independently include hash values in their Application Messages. This can provide integrity of the contents of Publish packets across the network and at rest."
   },
   {
-    "uk": "Програма може незалежно шифрувати вміст повідомлень програми. Це може надати конфіденційність повідомлення програми як у мережі, так і у стані спокою. Це не надає конфіденційності для інших властивостей повідомлення програми, таких як Назва теми.",
+    "uk": "Програма може незалежно шифрувати вміст Application Messages. Це може надати конфіденційність Application Messages як у мережі, так і у стані спокою. Це не надає конфіденційності для інших властивостей Application Messages, таких як Topic Name.",
     "en": "An application might independently encrypt the contents of its Application Messages. This could provide privacy of the Application Message both over the network and at rest. This would not provide privacy for other Properties of the Application Message such as Topic Name."
   },
   {
-    "uk": "Деякі з умов, за яких клієнт видавництва може наказати клієнту підписки закрити з' єднання з мережею.",
+    "uk": "Деякі з умов, за яких клієнт-відправник може спричинити закриття з'єднання з мережею у клієнта-підписника.",
     "en": "These are some conditions under which a publishing Client can cause the subscribing Client to close the Network Connection."
   },
   {
-    "uk": "Під час використання профілю чистого зв' язку протокол MQTT працює у відкритій мережі без додаткових механізмів безпечного обміну даними.",
+    "uk": "Під час використання прозорого профілю обміну даними протокол MQTT працює у відкритій мережі без додаткових механізмів убезпечння обміну даними.",
     "en": "When using the clear communication profile, the MQTT protocol runs over an open network with no additional secure communication mechanisms in place."
   },
   {
-    "uk": "Під час використання профілю безпечного обміну даними мережею протокол MQTT запускається у фізичній або віртуальній мережі, яка має регулятори безпеки, наприклад, VPNs або фізично безпечній мережі.",
+    "uk": "Під час використання профілю обміну даними у захищеній мережі протокол MQTT запускається у фізичній або віртуальній мережі, яка має регулятори безпеки, наприклад, VPNs або фізично безпечна мережа.",
     "en": "When using the secured network communication profile, the MQTT protocol runs over a physical or virtual network which has security controls e.g., VPNs or physically secure network."
   },
   {
-    "uk": "Під час використання профілю перевезень, протокол MQTT буде запущено у фізичній або віртуальній мережі і за допомогою TLS, що забезпечує автентифікацію, цілісність і конфіденційність.",
+    "uk": "Під час використання захищеного транспортного профілю, протокол MQTT буде запущено у фізичній або віртуальній мережі і за допомогою TLS, що забезпечує автентифікацію, цілісність і конфіденційність.",
     "en": "When using the secured transport profile, the MQTT protocol runs over a physical or virtual network and using TLS which provides authentication, integrity and privacy."
   },
   {
-    "uk": "Можливості, додані за допомогою MQTT v5. 0: Вигульк за сеансами, застаріла мова повідомлень, Код з причини у всіх регістрах, Рядок Причина на всіх банках, Роз' єднання сервера, формат заповнення і вміст, Запит / відповідь, спільні підписки, ідентифікатори підписки, Правління мережею, Властивості користувача, Максимальний розмір пакетів, Доступність до додаткових можливостей сервера, Покращена автентифікація, параметри підписки, Затримка затримки, Зберігати живий сервер, Призначений ідентифікатор клієнта, посилання на сервер.",
+    "uk": "Функції, додані у MQTT v5.0: Session expiry, Message expiry, Reason code on all ACKs, Reason string on all ACKs, Server disconnect, Payload format and content type, Request / Response, Shared Subscriptions, Subscription ID, Topic Alias, Flow control, User properties, Maximum Packet Size, Optional Server feature availability, Enhanced authentication, Subscription options, Will delay, Server Keep Alive, Assigned ClientID, Server reference.",
     "en": "Features added with MQTT v5.0: Session expiry, Message expiry, Reason code on all ACKs, Reason string on all ACKs, Server disconnect, Payload format and content type, Request / Response, Shared Subscriptions, Subscription ID, Topic Alias, Flow control, User properties, Maximum Packet Size, Optional Server feature availability, Enhanced authentication, Subscription options, Will delay, Server Keep Alive, Assigned ClientID, Server reference."
   }
 ]
