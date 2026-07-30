@@ -1,0 +1,13 @@
+{
+  "kind": "specification",
+  "status": "first-read",
+  "title": {
+    "uk": "MQTT 5.0 specification",
+    "en": "MQTT 5.0 specification"
+  },
+  "categories": [
+    "MQTT"
+  ],
+  "access": "free",
+  "link": "https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html"
+}
