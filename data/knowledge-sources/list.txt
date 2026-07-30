@@ -1,3 +1,4 @@
+MQTT-specification-5.0
 stomp-specification-1.2
 rabbitmq-tutorials
 AMQP-0-9-1-specification
