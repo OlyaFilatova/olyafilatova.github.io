@@ -53,7 +53,7 @@ def translate_pages(pages):
       "en": en
     } for en, uk in zip(notes, translated)]
 
-    return counter, {
+    return counter, ({
       "kind": "unknown",
       "status": "first-read",
       "title": {
@@ -61,21 +61,24 @@ def translate_pages(pages):
         "en": "Unknown"
       },
       "access": "free",
-      "link": page["url"],
-      "thoughts": thoughts
-    }
+      "categories": [],
+      "link": page["url"]
+    }, thoughts)
 
   return [(idx, translate_page(page, idx)) for idx, page in enumerate(pages)]
     
 def store_pages(pages, root_dir):
   def create_result_path(root_dir: Path, counter: int):
-    return root_dir / 'formatted' / f'{counter}.json'
+    return root_dir / 'formatted' / f'{counter}'
 
-  def store_result(result_path: Path, res):
-    with open(result_path, 'w') as f:
-      json.dump(res, f, ensure_ascii=False, indent=2)
+  def store_result(result_path: Path, meta, content):
+    with open(result_path / 'meta.json', 'w') as f:
+      json.dump(meta, f, ensure_ascii=False, indent=2)
 
-  [store_result(create_result_path(root_dir, idx), page) for idx, page in pages]
+    with open(result_path / 'content.json', 'w') as f:
+      json.dump(content, f, ensure_ascii=False, indent=2)
+
+  [store_result(create_result_path(root_dir, idx), meta, content) for idx, (meta, content) in pages]
 
 script_dir = get_script_dir()
 
