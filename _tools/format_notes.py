@@ -35,53 +35,56 @@ def format_pages(mappingsByUrlList: list[dict[str, Mapping]]):
       "notes": [note["text"] for note in value["notes"]]
     } for mapping in mappingsByUrlList for value in mapping.values()]
 
-def create_result_path(root_dir: Path, counter: int):
-  return root_dir / 'formatted' / f'{counter}.json'
+def translate_pages(pages):
+  def translate_page(page, counter):
+    url = "http://localhost:8000/translate"
+    notes = [*reversed(page["notes"])]
+    payload = {
+      "texts": notes,
+      "direction": "en_to_uk"
+    }
 
-def translate_page(page, counter):
-  url = "http://localhost:8000/translate"
-  notes = [*reversed(page["notes"])]
-  payload = {
-    "texts": notes,
-    "direction": "en_to_uk"
-  }
+    response = requests.post(url, json=payload)
 
-  response = requests.post(url, json=payload)
+    translated = response.json()["translations"]
 
-  translated = response.json()["translations"]
+    thoughts = [{
+      "uk": uk,
+      "en": en
+    } for en, uk in zip(notes, translated)]
 
-  thoughts = [{
-    "uk": uk,
-    "en": en
-  } for en, uk in zip(notes, translated)]
+    return counter, {
+      "kind": "unknown",
+      "status": "first-read",
+      "title": {
+        "uk": "Unknown",
+        "en": "Unknown"
+      },
+      "access": "free",
+      "link": page["url"],
+      "thoughts": thoughts
+    }
 
-  return counter, {
-    "kind": "unknown",
-    "status": "first-read",
-    "title": {
-      "uk": "Unknown",
-      "en": "Unknown"
-    },
-    "access": "free",
-    "link": page["url"],
-    "thoughts": thoughts
-  }
+  return [(idx, translate_page(page, idx)) for idx, page in enumerate(pages)]
+    
+def store_pages(pages, root_dir):
+  def create_result_path(root_dir: Path, counter: int):
+    return root_dir / 'formatted' / f'{counter}.json'
 
-def store_result(result_path: Path, res):
-  with open(result_path, 'w') as f:
-    json.dump(res, f, ensure_ascii=False, indent=2)
+  def store_result(result_path: Path, res):
+    with open(result_path, 'w') as f:
+      json.dump(res, f, ensure_ascii=False, indent=2)
 
-def translate_pages(pages, root_dir):
-  for idx, page in enumerate(pages):
-    store_result(create_result_path(root_dir, idx), translate_page(page, idx))
+  [store_result(create_result_path(root_dir, idx), page) for idx, page in pages]
 
 script_dir = get_script_dir()
 
-translate_pages(
-  format_pages(
-    read_files(
-      get_files(
-        get_notes_dir(
-          script_dir)))),
-  script_dir
-)
+store_pages(
+  translate_pages(
+    format_pages(
+      read_files(
+        get_files(
+          get_notes_dir(
+            script_dir
+          ))))),
+  script_dir)
