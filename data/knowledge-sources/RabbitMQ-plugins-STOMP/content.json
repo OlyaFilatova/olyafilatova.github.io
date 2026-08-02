@@ -22,5 +22,14 @@
   {
     "uk": "Durable subscriptions дозволяють клієнтам у разі потреби від'єднатися від і відновити зв'язок з брокером STOMP, без втрати повідомлень, які надсилаються на цей topic.",
     "en": "Durable subscriptions allow clients to disconnect from and reconnect to the STOMP broker as needed, without missing messages that are sent to the topic."
+  },
+
+  {
+    "uk": "Плагін Web STOMP надає змогу використовувати STOMP через WebSocket з'єднання.",
+    "en": "The Web STOMP plugin makes it possible to use STOMP over a WebSocket connection."
+  },
+  {
+    "uk": "Для того, щоб користуватися STOMP у контексті веб-браузера, потрібна бібліотека JavaScript STOMP. Команда пропонує скористатися бібліотекою stomp-websocket (https://github.com/jmesnil/stomp-websocket/).",
+    "en": "In order to use STOMP in a Web browser context, a JavaScript STOMP library is required. Team suggest using stomp-websocket (https://github.com/jmesnil/stomp-websocket/) library."
   }
 ]
