@@ -36,7 +36,7 @@
     "en": "Will Message: An Application Message which is published by the Server after the Network Connection is closed in cases where the Network Connection is not closed normally."
   },
   {
-    "uk": "Клієнту MQTT і реалізації сервера слід надавати Authentication, Authorization та безпечні параметри зв'язку.",
+    "uk": "Клієнт MQTT і реалізація сервера мають надавати Authentication, Authorization та безпечні параметри зв'язку.",
     "en": "MQTT Client and Server implementations SHOULD offer Authentication, Authorization and secure communication options."
   },
   {
@@ -52,7 +52,7 @@
     "en": "MQTT Control Packet types: CONNECT, CONNACK, PUBLISH, PUBACK, PUBREC, PUBREL, PUBCOMP, SUBSCRIBE, SUBACK, UNSUBSCRIBE, UNSUBACK, PINGREQ, PINGRESP, DISCONNECT, AUTH."
   },
   {
-    "uk": "Fixed Header складається з типу пакета керування, прапорців, що відповідають йому, і довжині, що залишилася.",
+    "uk": "Fixed Header складається з типу пакета керування, прапорців, що відповідають йому, і довжини, що залишилася.",
     "en": "Fixed Header consists of the control packet type, flags specific to it and remaining length."
   },
   {
@@ -68,7 +68,7 @@
     "en": "The Packet Identifier becomes available for reuse after the sender has processed the corresponding acknowledgement packet."
   },
   {
-    "uk": "A Packet Identifier не можна використовувати у будь-який час більш ніж однією командою.",
+    "uk": "Packet Identifier не можна використовувати у будь-який час більш ніж однією командою.",
     "en": "A Packet Identifier cannot be used by more than one command at any time."
   },
   {
@@ -112,7 +112,7 @@
     "en": "The Will Message MUST be published after the Network Connection is subsequently closed and either the Will Delay Interval has elapsed or the Session ends, unless the Will Message has been deleted by the Server on receipt of a DISCONNECT packet with Reason Code 0x00 (Normal disconnection) or a new Network Connection for the ClientID is opened before the Will Delay Interval has elapsed"
   },
   {
-    "uk": "Якщо значення Keep Alive є ненульовим, а сервер не отримує MQTT Control Packet від клієнта протягом періоду рівного півтора значенн Keep Alive, він повинен закрити мережеве з'єднання з клієнтом, вважаючи, що мережа зазнала невдачі.",
+    "uk": "Якщо значення Keep Alive є ненульовим, а сервер не отримує MQTT Control Packet від клієнта протягом періоду рівному півтора значення Keep Alive, він повинен закрити мережеве з'єднання з клієнтом, вважаючи, що мережа зазнала невдачі.",
     "en": "If the Keep Alive value is non-zero and the Server does not receive an MQTT Control Packet from the Client within one and a half times the Keep Alive time period, it MUST close the Network Connection to the Client as if the network had failed."
   },
   {
@@ -120,7 +120,7 @@
     "en": "If a CONNECT packet is received with Clean Start is set to 1, the Client and Server MUST discard existing Session and start a new Session."
   },
   {
-    "uk": "Якщо пакет CONNECT отримано із Clean Start, встановленого у значення 0 і існує Session, пов'язаний з Client Identifier, сервер має поновити обмін даними з клієнтом на основі стану існуючої Session. Якщо пакет CONNECT отримано із Clean Start рівним 0 і немає Session, пов'язаного з ідентифікатором клієнта, сервер має створить новий Session.",
+    "uk": "Якщо пакет CONNECT отримано із Clean Start, встановленого у значення 0 і існує Session, пов'язаний з Client Identifier, сервер має поновити обмін даними з клієнтом на основі стану існуючої Session. Якщо пакет CONNECT отримано із Clean Start рівним 0 і немає Session, пов'язаного з ідентифікатором клієнта, сервер має створити новий Session.",
     "en": "If a CONNECT packet is received with Clean Start set to 0 and there is a Session associated with the Client Identifier, the Server MUST resume communications with the Client based on state from the existing Session. If a CONNECT packet is received with Clean Start set to 0 and there is no Session associated with the Client Identifier, the Server MUST create a new Session"
   },
   {
@@ -164,7 +164,7 @@
     "en": "The Correlation Data is used by the sender of the Request Message to identify which request the Response Message is for when it is received."
   },
   {
-    "uk": "Очікувані відповіді на пакет PUBLISH в залежності від QoS. QoS 0 - None, QoS 1 - PUBACK, QoS 2 - PUBREC.",
+    "uk": "Очікувані відповіді на пакет PUBLISH в залежності від QoS. QoS 0 - жодної, QoS 1 - PUBACK, QoS 2 - PUBREC.",
     "en": "Expected PUBLISH packet responses. QoS 0 - None, QoS 1 - PUBACK, QoS 2 - PUBREC."
   },
   {
@@ -176,8 +176,8 @@
     "en": "The Server uses a PUBLISH packet to send an Application Message to each Client which has a matching subscription."
   },
   {
-    "uk": "Якщо сервер надсилає окрему копію повідомлення, він має включити до пакету PUBLISH, то Subscription Identifiers всіх відповідних підписок, які мають Subscription Identifiers, їх порядок не є значним.",
-    "en": "If the Server sends a single copy of the message it MUST include in the PUBLISH packet the Subscription Identifiers for all matching subscriptions which have a Subscription Identifiers, their order is not significant"
+    "uk": "Якщо сервер надсилає окрему копію повідомлення, він має включити до пакету PUBLISH, Subscription Identifiers всіх відповідних підписок, які мають Subscription Identifiers, їх порядок не має значення.",
+    "en": "If the Server sends a single copy of the message it MUST include in the PUBLISH packet the Subscription Identifiers for all matching subscriptions which have a Subscription Identifiers, their order is not significant."
   },
   {
     "uk": "Пакет PUBLISH, надісланий з клієнта на сервер має не містити Subscription Identifiers.",
@@ -244,7 +244,7 @@
     "en": "The Server sending an UNSUBACK packet MUST use one of the Unsubscribe Reason Code values for each Topic Filter received."
   },
   {
-    "uk": "Пакет PINGREQ надсилається з клієнта на сервер. Його можна використовувати: 1. Вказати серверу, що клієнт живий. 2. Зробити запит, щоб сервер відповів і підтвердив, що він живий. 3. Визначити, що мережеве з'єднання активне.",
+    "uk": "Пакет PINGREQ надсилається з клієнта на сервер. Його можна використовувати задля: 1. Вказати серверу, що клієнт живий. 2. Зробити запит, щоб сервер відповів і підтвердив, що він живий. 3. Визначити, що мережеве з'єднання активне.",
     "en": "The PINGREQ packet is sent from a Client to the Server. It can be used to: Indicate to the Server that the Client is alive, Request that the Server responds to confirm that it is alive, Exercise the network to indicate that the Network Connection is active."
   },
   {
@@ -252,7 +252,7 @@
     "en": "A PINGRESP Packet is sent by the Server to the Client in response to a PINGREQ packet. It indicates that the Server is alive."
   },
   {
-    "uk": "Пакет DISCONNECT є останнім MQTT Control Packet, надісланим клієнтом або сервером. Він вказує причину закриття мережевого з'єднання. Клієнт або сервер може надіслати пакет DISCONNECT перед закриттям мережевого з'єднання.",
+    "uk": "Пакет DISCONNECT є останнім MQTT Control Packet, надісланим клієнтом або сервером. Він вказує причину закриття мережевого з'єднання. Клієнт або сервер можуть надіслати пакет DISCONNECT перед закриттям мережевого з'єднання.",
     "en": "The DISCONNECT packet is the final MQTT Control Packet sent from the Client or the Server. It indicates the reason why the Network Connection is being closed. The Client or Server MAY send a DISCONNECT packet before closing the Network Connection."
   },
   {
@@ -260,7 +260,7 @@
     "en": "The Client or Server sending the DISCONNECT packet MUST use one of the DISCONNECT Reason Code values."
   },
   {
-    "uk": "Пакет AUTH надсилається від клієнта на сервер або від сервера до клієнта як частина розширеного обміну автентифікацією, зокрема автентифікація challenge / response.",
+    "uk": "Пакет AUTH надсилається від клієнта на сервер або від сервера до клієнта як частина розширеного обміну автентифікацією, зокрема для автентифікації типу challenge / response.",
     "en": "An AUTH packet is sent from Client to Server or Server to Client as part of an extended authentication exchange, such as challenge / response authentication."
   },
   {
@@ -296,7 +296,7 @@
     "en": "The Packet Identifier (when using QoS 2) becomes available for reuse once the sender has received the PUBCOMP packet or a PUBREC with a Reason Code of 0x80 or greater."
   },
   {
-    "uk": "Після повторного з'єднання клієнта з Clean Start рівним 0 і наявна session, як клієнт, так і сервер повинні надіслати будь-які пакети (без підтвердження отримання) PUBLISH (де QoS > 0) і пакети PUBREL використовуючи їх початкові Packet Identifiers.",
+    "uk": "Після повторного з'єднання клієнта з Clean Start рівним 0 і при умові наявності session, як клієнт, так і сервер повинні надіслати будь-які пакети (які були відправлені раніше та не отримали підтвердження) PUBLISH (де QoS > 0) і пакети PUBREL використовуючи їх початкові Packet Identifiers.",
     "en": "When a Client reconnects with Clean Start set to 0 and a session is present, both the Client and Server MUST resend any unacknowledged PUBLISH packets (where QoS > 0) and PUBREL packets using their original Packet Identifiers."
   },
   {
@@ -324,7 +324,7 @@
     "en": "because the single-level wildcard matches only a single level, “sport/+” does not match “sport” but it does match “sport/”."
   },
   {
-    "uk": "Сервер не повинен відповідати Topic Filters, які починаються з шаблона символів (# або +) з Topic Names, що починаються з символу $.",
+    "uk": "Сервер не повинен співставляти Topic Filters, які починаються з шаблона символів (# або +) з Topic Names, що починаються з символу $.",
     "en": "The Server MUST NOT match Topic Filters starting with a wildcard character (# or +) with Topic Names beginning with a $ character."
   },
   {
@@ -332,7 +332,7 @@
     "en": "Applications cannot use a topic with a leading $ character for their own purposes."
   },
   {
-    "uk": "MQTT має два види Subscription, Shared і Non‑shared.",
+    "uk": "MQTT має два види Subscription: Shared і Non‑shared.",
     "en": "MQTT provides two kinds of Subscription, Shared and Non‑shared."
   },
   {
@@ -356,7 +356,7 @@
     "en": "A Shared Subscription is identified using a special style of Topic Filter. The format of this filter is: $share/{ShareName}/{filter}"
   },
   {
-    "uk": "Коли Shared Subscription закінчується, всі повідомлення, пов'язані з цією підпискою, буде вилучено, якщо не залишилиться підписаних на неї Sessions.",
+    "uk": "Shared Subscription вилучається, а заразом і всі повідомлення, пов'язані з цією підпискою, буде вилучено, якщо не залишилиться Sessions підписаних на цю Subscription.",
     "en": "A Shared Subscription ends, and any undelivered messages associated with it are deleted, when there are no longer any Sessions subscribed to it."
   },
   {
@@ -376,15 +376,15 @@
     "en": "A Server can request that the Client uses another Server by sending CONNACK or DISCONNECT with Reason Codes 0x9C (Use another server), or 0x9D (Server moved). When sending one of these Reason Codes, the Server MAY also include a Server Reference property to indicate the location of the Server or Servers the Client SHOULD use."
   },
   {
-    "uk": "Пакет MQTT CONNECT підтримує базову автентифікацію мережевого з'єднання за допомогою полів User Name і Password. Хоча ці поля мають назву для простого розпізнавання за паролем, ними можна скористатися для інших форм розпізнавання, таких, як передавання токена у Password.",
-    "en": "The MQTT CONNECT packet supports basic authentication of a Network Connection using the User Name and Password fields. While these fields are named for a simple password authentication, they can be used to carry other forms of authentication such as passing a token as the Password."
+    "uk": "Пакет CONNECT підтримує базову автентифікацію мережевого з'єднання за допомогою полів User Name і Password. Хоча ці поля мають назву для простого розпізнавання за паролем, ними можна скористатися для інших форм розпізнавання, таких, як передавання токена у Password.",
+    "en": "The CONNECT packet supports basic authentication of a Network Connection using the User Name and Password fields. While these fields are named for a simple password authentication, they can be used to carry other forms of authentication such as passing a token as the Password."
   },
   {
-    "uk": "Enhanced authentication розширює це азову автентифікацію, щоб включити автентифікацію у стилі challenge / response. Воно може включати обмін пакетами AUTH між клієнтом і сервером після CONNECT і до пакетів CONNACK.",
+    "uk": "Enhanced authentication розширює базову автентифікацію, щоб включити автентифікацію у стилі challenge / response. Вона може включати обмін пакетами AUTH між клієнтом і сервером після пакету CONNECT і до пакету CONNACK.",
     "en": "Enhanced authentication extends this basic authentication to include challenge / response style authentication. It might involve the exchange of AUTH packets between the Client and the Server after the CONNECT and before the CONNACK packets."
   },
   {
-    "uk": "Якщо сервер розпізнає Malformed Packet або Protocol Error, а Reason Code вказано у специфікації, він має закрити мережеве з'єднання.",
+    "uk": "Коли сервер виявить Malformed Packet або Protocol Error, а Reason Code вказано у специфікації, він має закрити мережеве з'єднання.",
     "en": "When a Server detects a Malformed Packet or Protocol Error, and a Reason Code is given in the specification, it MUST close the Network Connection."
   },
   {
@@ -392,8 +392,8 @@
     "en": "A Virtual Private Network (VPN) between the Clients and Servers can provide confidence that data is only being received from authorized Clients."
   },
   {
-    "uk": "реалізація повинна перевірити, чи клієнт уповноважений використовувати Client Identifier, оскільки це надає доступ до MQTT Session State.",
-    "en": "the implementation should check that the Client is authorized to use the Client Identifier as this gives access to the MQTT Session State."
+    "uk": "Реалізація повинна перевірити, чи клієнт уповноважений використовувати Client Identifier, оскільки він надає доступ до MQTT Session State.",
+    "en": "The implementation should check that the Client is authorized to use the Client Identifier as this gives access to the MQTT Session State."
   },
   {
     "uk": "Під час використання базової автентифікації для клієнта не передбачено механізму автентифікації сервера. Деякі з форм розширеної автентифікації дозволяють взаємну автентифікацію.",
@@ -404,11 +404,11 @@
     "en": "Applications can independently include hash values in their Application Messages. This can provide integrity of the contents of Publish packets across the network and at rest."
   },
   {
-    "uk": "Програма може незалежно шифрувати вміст Application Messages. Це може надати конфіденційність Application Messages як у мережі, так і у стані спокою. Це не надає конфіденційності для інших властивостей Application Messages, таких як Topic Name.",
+    "uk": "Програма може незалежно шифрувати вміст Application Messages. Це може надати конфіденційність Application Messages як у мережі, так і у стані спокою. Це не надає конфіденційності інших властивостей Application Messages, таких як Topic Name.",
     "en": "An application might independently encrypt the contents of its Application Messages. This could provide privacy of the Application Message both over the network and at rest. This would not provide privacy for other Properties of the Application Message such as Topic Name."
   },
   {
-    "uk": "Деякі з умов, за яких клієнт-відправник може спричинити закриття з'єднання з мережею у клієнта-підписника.",
+    "uk": "Можливі умови, за яких клієнт-відправник може спричинити закриття з'єднання з мережею у клієнта-підписника.",
     "en": "These are some conditions under which a publishing Client can cause the subscribing Client to close the Network Connection."
   },
   {
