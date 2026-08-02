@@ -1,10 +1,10 @@
 
 import type { ThoughtsIndex } from '../schemas/knowledge-source.ts';
 
-export const bustCache = 35;
+export const bustCache = 36;
 
 export const index: ThoughtsIndex = {
-  "count": 35,
+  "count": 38,
   "categories": {
     "Non": [
       0,
@@ -68,7 +68,10 @@ export const index: ThoughtsIndex = {
       25,
       27,
       30,
-      32
+      32,
+      35,
+      36,
+      37
     ],
     "AI": [
       26
@@ -87,10 +90,12 @@ export const index: ThoughtsIndex = {
       30
     ],
     "STOMP": [
-      33
+      33,
+      35
     ],
     "MQTT": [
-      34
+      34,
+      36
     ]
   },
   "kind": {
@@ -126,7 +131,10 @@ export const index: ThoughtsIndex = {
       17,
       18,
       25,
-      32
+      32,
+      35,
+      36,
+      37
     ],
     "paper": [
       27
@@ -168,7 +176,10 @@ export const index: ThoughtsIndex = {
       31,
       32,
       33,
-      34
+      34,
+      35,
+      36,
+      37
     ],
     "paid": [
       1,
@@ -220,10 +231,13 @@ export const index: ThoughtsIndex = {
       31,
       32,
       33,
-      34
+      34,
+      35,
+      36
     ],
     "in-progress-first-read": [
-      21
+      21,
+      37
     ]
   }
 }

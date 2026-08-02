@@ -1,9 +1,9 @@
 {
-  "kind": "unknown",
+  "kind": "documentation",
   "status": "first-read",
   "title": {
-    "uk": "Unknown",
-    "en": "Unknown"
+    "uk": "RabbitMQ - STOMP Plugin",
+    "en": "RabbitMQ - STOMP Plugin"
   },
   "access": "free",
   "categories": [
