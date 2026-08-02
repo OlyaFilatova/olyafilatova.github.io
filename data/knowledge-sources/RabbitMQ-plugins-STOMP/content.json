@@ -1,11 +1,11 @@
 [
   {
-    "uk": "Типовим обмеженням розміру фрейма є 4Mb.",
-    "en": "By default frame size limit is 4Mb."
-  },
-  {
     "uk": "RabbitMQ STOMP адаптер підтримує декілька типів destination: /exchange, /queue, /amq/queue, /topic, /temp-queue.",
     "en": "The RabbitMQ STOMP adapter supports a number of different destination types: /exchange, /queue, /amq/queue, /topic, /temp-queue."
+  },
+  {
+    "uk": "Типовим обмеженням розміру фрейма є 4Mb.",
+    "en": "By default frame size limit is 4Mb."
   },
   {
     "uk": "Якщо не буде вказано параметрів черги, чергу буде використано як durable, non-exclusive, non-autodeleted.",

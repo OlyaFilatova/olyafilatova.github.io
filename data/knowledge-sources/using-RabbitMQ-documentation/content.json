@@ -1,6 +1,6 @@
 [
   {
-    "uk": "У AMQP 0-9-1 publishers опублікують до exchanges. У AMQP 1.0 відправка відбувається на link. У MQTT publishers публікують на topics. І нарешті, STOMP підтримує різноманітні типи destination: topics, queues, AMQP 0-9-1 exchanges.",
+    "uk": "У AMQP 0-9-1 publishers публікують до exchanges. У AMQP 1.0 відправка відбувається на link. У MQTT publishers публікують на topics. І нарешті, STOMP підтримує різноманітні типи destination: topics, queues, AMQP 0-9-1 exchanges.",
     "en": "In AMQP 0-9-1, publishers publish to exchanges. In AMQP 1.0, publishing happens on a link. In MQTT, publishers publish to topics. Finally, STOMP supports a variety of destination types: topics, queues, AMQP 0-9-1 exchanges."
   },
   {
@@ -25,11 +25,11 @@
   },
 
   {
-    "uk": "RabbitMQ поставляєтьс із декількома типами exchange: Fanout, Topic, Direct, Default direct exchange, Local Random, Modulus Hash, JMS Topic, Consistent Hashing exchange, Random exchange, Recent history exchange, Headers.",
+    "uk": "RabbitMQ поставляється із декількома типами exchange: Fanout, Topic, Direct, Default direct exchange, Local Random, Modulus Hash, JMS Topic, Consistent Hashing exchange, Random exchange, Recent history exchange, Headers.",
     "en": "RabbitMQ ships with multiple exchange types: Fanout, Topic, Direct, Default direct exchange, Local Random, Modulus Hash, JMS Topic, Consistent Hashing exchange, Random exchange, Recent history exchange, Headers."
   },
   {
-    "uk": "Exchange JMS Topic Було впроваджено, щоб реалізувати певні функції JMS для RabbitMQ JMS клієнта.",
+    "uk": "Exchange JMS Topic було впроваджено, щоб реалізувати певні функції JMS для RabbitMQ JMS клієнта.",
     "en": "JMS Topic exchange was introduced to implement certain JMS features for the RabbitMQ JMS client."
   },
   {
@@ -73,12 +73,12 @@
     "en": "A load balancer in front of RabbitMQ would make it virtually impossible to use this exchange type effectively."
   },
   {
-    "uk": "Дизайн цього типу exchange припускає, що у кожному з вузлів цього кластеру споживачі присутні в мережі. У іншому випадку, повідомлення, опубліковані на вузлі без жодного споживача, буде втрачено.",
+    "uk": "Дизайн цього типу exchange припускає, що у кожному з вузлів кластеру споживачі присутні в мережі. У іншому випадку, повідомлення, опубліковані на вузлі без жодного споживача, буде втрачено.",
     "en": "The design of this exchange type assumes that there are online consumers on each of the nodes in the cluster. Otherwise, messages published on the node with no consumers will be dropped."
   },
 
   {
-    "uk": "x-modulus-hash exchange є вбудованим типом exchange у RabbitMQ, який розповсюджує повідомлення у обмежених чергах, застосовуючи хеш ключа routing.",
+    "uk": "x-modulus-hash exchange є вбудованим типом exchange у RabbitMQ, який розповсюджує повідомлення у bound чергах, застосовуючи хеш ключа routing.",
     "en": "The x-modulus-hash exchange is a built-in exchange type in RabbitMQ that distributes messages across bound queues based on a hash of the routing key."
   },
   {
@@ -99,7 +99,7 @@
     "en": "The broker sends a connection.blocked method when the connection is blocked, and a connection.unblocked method when it is unblocked."
   },
   {
-    "uk": "Щоб отримувати ці сповіщення, клієнт повинен вказати таблицю capabilities у своїх client-properties: connection.blocked зі значенням true.",
+    "uk": "Щоб отримувати ці сповіщення, клієнт повинен вказати у таблиці capabilities у своїх client-properties: connection.blocked зі значенням true.",
     "en": "To receive these notifications, the client must present a capabilities table in its client-properties in which there is a key connection.blocked and a boolean value true."
   },
   {
@@ -143,11 +143,11 @@
     "en": "The Consumer Capacity Metric is computed as a fraction of the time that the queue is able to immediately deliver messages to consumers. It helps the operator notice conditions where it may be worthwhile adding more consumers (application instances) to the queue."
   },
   {
-    "uk": "Після скасування клієнта повідомлення не буде надіслано до нього. Зауважте, що можуть залишитися повідомлення \"в процесі\" відправлені раніше. Скасовування споживача не призведе ні до видалення ні до повторної їх відправки.",
+    "uk": "Після скасування клієнта повідомлення більше не будуть надіслано до нього. Зауважте, що можуть залишитися повідомлення \"в процесі\" відправлені раніше. Скасовування споживача не призведе ні до видалення таких повідомлень ні до повторної їх відправки.",
     "en": "After a consumer is cancelled there will be no future deliveries dispatched to it. Note that there can still be \"in flight\" deliveries dispatched previously. Cancelling a consumer will neither discard nor requeue them."
   },
   {
-    "uk": "Щоб перевідправити запити \"в процесі\", програма має закрити канал.",
+    "uk": "Щоб перевідправити запити які зависли \"в процесі\", програма має закрити канал.",
     "en": "To re-queue in-flight deliveries, the application must close the channel."
   },
   {
@@ -159,7 +159,7 @@
     "en": "If a consumer does not ack its delivery within the timeout value, its channel is closed with a PRECONDITION_FAILED channel exception."
   },
   {
-    "uk": "У деяких ситуаціях, коли може статися витоку споживача, було б добре обмежити кількість споживачів, які можуть бути активними на кожному каналі.",
+    "uk": "У деяких ситуаціях, коли може статися витік споживачів, варто обмежити кількість споживачів, які можуть бути активними на кожному каналі.",
     "en": "In some scenarios where consumer leaks can happen it is good to limit the number of consumers that can be active on each channel."
   },
   {
@@ -171,11 +171,11 @@
     "en": "If the exclusive consumer is cancelled or dies, this is the application responsibility to register a new one to keep on consuming from the queue."
   },
   {
-    "uk": "Single Active Consumer (SAC) надає можливість мати лише одного споживача, який споживає час з черги. Якщо активного споживача було скасовано або від'єднано, його місце займе інший зареєстрований споживач.",
+    "uk": "Single Active Consumer (SAC) надає можливість мати лише одного споживача, який споживає з черги в окремий момент. Якщо активного споживача було скасовано або від'єднано, його місце займе інший зареєстрований споживач.",
     "en": "Single Active Consumer (SAC) makes it possible to only have one consumer at a time consuming from a queue. If the active consumer is cancelled or disconnects, another registered consumer takes its place."
   },
   {
-    "uk": "якщо не увімкнено Single Active Consumer, повідомлення буде надіслано всім споживачам із використанням round-robin.",
+    "uk": "Якщо не увімкнено Single Active Consumer, повідомлення буде надіслано всім споживачам із використанням round-robin.",
     "en": "Without the single active consumer feature enabled, messages would be dispatched to all consumers using round-robin."
   },
   {
@@ -226,7 +226,7 @@
     "en": "basic.reject method that allows clients to reject individual, delivered messages."
   },
   {
-    "uk": "basic.reject не підтримує від'ємного підтвердження повідомлень попакетно. RabbitMQ підтримує basic.nack метод, за допомогою якого можна виконувати всі функціональні можливості basic.reject, а також надає змогу обробляти пакети повідомлень.",
+    "uk": "basic.reject не підтримує від'ємного підтвердження повідомлень групами. RabbitMQ підтримує basic.nack метод, за допомогою якого можна виконувати всі функціональні можливості basic.reject, а також надає змогу обробляти групи повідомлень.",
     "en": "basic.reject provides no support for negatively acknowledging messages in bulk. RabbitMQ supports the basic.nack method that provides all the functionality of basic.reject whilst also allowing for bulk processing of messages."
   },
   {
