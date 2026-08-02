@@ -1,0 +1,13 @@
+{
+  "kind": "documentation",
+  "status": "first-read",
+  "title": {
+    "uk": "RabbitMQ documentation - using RabbitMQ",
+    "en": "RabbitMQ documentation - using RabbitMQ"
+  },
+  "access": "free",
+  "categories": [
+    "RabbitMQ"
+  ],
+  "link": "https://github.com/OlyaFilatova/olyafilatova.github.io/issues/6"
+}

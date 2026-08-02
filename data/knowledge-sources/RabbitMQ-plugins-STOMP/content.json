@@ -1,0 +1,26 @@
+[
+  {
+    "uk": "Типовим обмеженням розміру фрейма є 4Mb.",
+    "en": "By default frame size limit is 4Mb."
+  },
+  {
+    "uk": "RabbitMQ STOMP адаптер підтримує декілька типів destination: /exchange, /queue, /amq/queue, /topic, /temp-queue.",
+    "en": "The RabbitMQ STOMP adapter supports a number of different destination types: /exchange, /queue, /amq/queue, /topic, /temp-queue."
+  },
+  {
+    "uk": "Якщо не буде вказано параметрів черги, чергу буде використано як durable, non-exclusive, non-autodeleted.",
+    "en": "If no queue parameters are specified, queue will be assumed to be durable, non-exclusive, non-autodeleted."
+  },
+  {
+    "uk": "Щоб надіслати повідомлення до існуючих черг, створених поза STOMP адаптером, ви можете скористатися destination виду /amq/queue/<name>.",
+    "en": "To address existing queues created outside the STOMP adapter, destinations of the form /amq/queue/<name> can be used."
+  },
+  {
+    "uk": "Повідомлення, надіслані до topic destination, у якому ще немає активних підписників, просто видаляються.",
+    "en": "Messages sent to a topic destination that has no active subscribers are simply discarded."
+  },
+  {
+    "uk": "Durable subscriptions дозволяють клієнтам у разі потреби від'єднатися від і відновити зв'язок з брокером STOMP, без втрати повідомлень, які надсилаються на цей topic.",
+    "en": "Durable subscriptions allow clients to disconnect from and reconnect to the STOMP broker as needed, without missing messages that are sent to the topic."
+  }
+]

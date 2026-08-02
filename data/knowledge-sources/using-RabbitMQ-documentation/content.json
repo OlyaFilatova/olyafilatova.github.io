@@ -1,0 +1,64 @@
+[
+  {
+    "uk": "У AMQP 0-9-1 publishers опублікують до exchanges. У AMQP 1.0 відправка відбувається на link. У MQTT publishers публікують на topics. І нарешті, STOMP підтримує різноманітні типи destination: topics, queues, AMQP 0-9-1 exchanges.",
+    "en": "In AMQP 0-9-1, publishers publish to exchanges. In AMQP 1.0, publishing happens on a link. In MQTT, publishers publish to topics. Finally, STOMP supports a variety of destination types: topics, queues, AMQP 0-9-1 exchanges."
+  },
+  {
+    "uk": "Відкриття з'єднання або каналу (сесії) для відправки одного повідомлення не є оптимальним.",
+    "en": "Opening a connection or channel (session) to publish a single message is not optimal."
+  },
+  {
+    "uk": "Retained (збережено для майбутньої доставки новим підписникам).",
+    "en": "Retained (stored for future delivery to new subscribers)."
+  },
+  {
+    "uk": "Можна зберігати лише крайнє відправлене повідомлення для кожної з тем.",
+    "en": "Only the latest published message for each topic can be retained."
+  },
+  {
+    "uk": "У MQTT 3.1 і 3.1.1, окрім закриття з'єднання, не існує механізму, за допомогою якого сервер може передавати клієнту повідомлення про помилку відправки.",
+    "en": "In MQTT 3.1 and 3.1.1, other than closing the connection, there is no mechanism by which the server can communicate a publishing error to the client."
+  },
+  {
+    "uk": "Додаткові типи exchange можна додати плагінами. Consistent hashing exchange, random routing exchange, internal event exchange - це плагіни, які поставлються разом з RabbitMQ.",
+    "en": "More exchange types can be provided by plugins. Consistent hashing exchange, random routing exchange, internal event exchange are exchange plugins that ship with RabbitMQ."
+  },
+
+  {
+    "uk": "RabbitMQ поставляєтьс із декількома типами exchange: Fanout, Topic, Direct, Default direct exchange, Local Random, Modulus Hash, JMS Topic, Consistent Hashing exchange, Random exchange, Recent history exchange, Headers.",
+    "en": "RabbitMQ ships with multiple exchange types: Fanout, Topic, Direct, Default direct exchange, Local Random, Modulus Hash, JMS Topic, Consistent Hashing exchange, Random exchange, Recent history exchange, Headers."
+  },
+  {
+    "uk": "Exchange JMS Topic Було впроваджено, щоб реалізувати певні функції JMS для RabbitMQ JMS клієнта.",
+    "en": "JMS Topic exchange was introduced to implement certain JMS features for the RabbitMQ JMS client."
+  },
+  {
+    "uk": "Програма повинна створити binding між exchange і чергою або потоком.",
+    "en": "An application must create a binding between the exchange and a queue or a stream."
+  },
+  {
+    "uk": "Binding успадковує durability з джерела та місця призначення.",
+    "en": "Bindings inherit durability from their source and destination."
+  },
+  {
+    "uk": "У майбутньому підтримку semi-durable і fully transient прив'язок буде прибрано.",
+    "en": "Support for semi-durable and fully transient bindings will be dropped in the future."
+  },
+  {
+    "uk": "Auto-deleted exchanges видаляються після вилучення останньої binding.",
+    "en": "Auto-deleted exchanges are deleted when their last binding is removed."
+  },
+
+  {
+    "uk": "Direct Reply-To надає можливість реалізувати RPC (запит/відповідь) паттерни без створення призначеної черги відповідей.",
+    "en": "Direct Reply-To lets you implement RPC (request/reply) patterns without creating a dedicated reply queue."
+  },
+  {
+    "uk": "Direct Reply-To має семантику доставки не-більше-одного-разу для відповідей.",
+    "en": "Direct Reply-To has at-most-once delivery semantics for replies."
+  },
+  {
+    "uk": "Внутрішньо, RabbitMQ реалізує Direct Reply-To використовуючи rabbit_volatile_queue тип черги. “Volatile” описує семантику: non-durable, zero-buffer, at-most-once, may drop, and not stored in the metadata store.",
+    "en": "Internally, RabbitMQ implements Direct Reply-To using the rabbit_volatile_queue queue type. “Volatile” describes the semantics: non-durable, zero-buffer, at-most-once, may drop, and not stored in the metadata store."
+  }
+]

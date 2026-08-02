@@ -1,0 +1,13 @@
+{
+  "kind": "unknown",
+  "status": "first-read",
+  "title": {
+    "uk": "Unknown",
+    "en": "Unknown"
+  },
+  "access": "free",
+  "categories": [
+    "RabbitMQ", "STOMP"
+  ],
+  "link": "https://www.rabbitmq.com/docs/stomp"
+}

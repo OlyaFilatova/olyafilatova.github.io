@@ -1,0 +1,13 @@
+{
+  "kind": "documentation",
+  "status": "first-read",
+  "title": {
+    "uk": "RabbitMQ - MQTT Plugin",
+    "en": "RabbitMQ - MQTT Plugin"
+  },
+  "access": "free",
+  "categories": [
+    "RabbitMQ", "MQTT"
+  ],
+  "link": "https://www.rabbitmq.com/docs/mqtt"
+}
