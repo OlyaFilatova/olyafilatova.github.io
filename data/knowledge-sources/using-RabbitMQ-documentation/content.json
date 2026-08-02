@@ -48,7 +48,6 @@
     "uk": "Auto-deleted exchanges видаляються після вилучення останньої binding.",
     "en": "Auto-deleted exchanges are deleted when their last binding is removed."
   },
-
   {
     "uk": "Direct Reply-To надає можливість реалізувати RPC (запит/відповідь) паттерни без створення призначеної черги відповідей.",
     "en": "Direct Reply-To lets you implement RPC (request/reply) patterns without creating a dedicated reply queue."
@@ -60,5 +59,74 @@
   {
     "uk": "Внутрішньо, RabbitMQ реалізує Direct Reply-To використовуючи rabbit_volatile_queue тип черги. “Volatile” описує семантику: non-durable, zero-buffer, at-most-once, may drop, and not stored in the metadata store.",
     "en": "Internally, RabbitMQ implements Direct Reply-To using the rabbit_volatile_queue queue type. “Volatile” describes the semantics: non-durable, zero-buffer, at-most-once, may drop, and not stored in the metadata store."
+  },
+  {
+    "uk": "Local random exchange - це новий тип exchange у RabbitMQ 4.0. Його здебільшого розроблено для request-reply (\"RPC\") випадків.",
+    "en": "Local random exchange is a new exchange type in RabbitMQ 4.0. It is primarily designed for request-reply (\"RPC\") use cases."
+  },
+  {
+    "uk": "Комбінація з Local random exchange та exclusive queues гарантує, що процес відправки та споживання відбувається без передачі повідомлення між вузлами кластерів.",
+    "en": "The combination of a local random exchange and exclusive queues guarantees that the publishing and consumption process take place without the message being passed between cluster nodes."
+  },
+  {
+    "uk": "Розміщення load balancer перед RabbitMQ зробить практично неможливим використання цього типу exchange ефективним.",
+    "en": "A load balancer in front of RabbitMQ would make it virtually impossible to use this exchange type effectively."
+  },
+  {
+    "uk": "Дизайн цього типу exchange припускає, що у кожному з вузлів цього кластеру споживачі присутні в мережі. У іншому випадку, повідомлення, опубліковані на вузлі без жодного споживача, буде втрачено.",
+    "en": "The design of this exchange type assumes that there are online consumers on each of the nodes in the cluster. Otherwise, messages published on the node with no consumers will be dropped."
+  },
+
+  {
+    "uk": "x-modulus-hash exchange є вбудованим типом exchange у RabbitMQ, який розповсюджує повідомлення у обмежених чергах, застосовуючи хеш ключа routing.",
+    "en": "The x-modulus-hash exchange is a built-in exchange type in RabbitMQ that distributes messages across bound queues based on a hash of the routing key."
+  },
+  {
+    "uk": "Цей exchange розроблено для поділу повідомлень на декілька звичайних черг (shards) із забезпеченням стабільного маршрутизування.",
+    "en": "It is designed to partition messages across a number of regular queues (shards) while guaranteeing stable routing."
+  },
+  {
+    "uk": "Цей exchange ігнорує значення binding ключів.",
+    "en": "This exchange ignores the values of the binding keys."
+  },
+  {
+    "uk": "Consistent Hash Exchange зменшує кількість перестановок, при додаванні або видаленні черг, що робить їх кращими для динамічних топологій.",
+    "en": "Consistent Hash Exchange minimizes reshuffling when queues are added or removed, making it better for dynamic topologies."
+  },
+
+  {
+    "uk": "Брокер надсилає connection.blocked метод, якщо з'єднання заблоковано, і метод connection.unblocked, коли з'єднання розблоковано.",
+    "en": "The broker sends a connection.blocked method when the connection is blocked, and a connection.unblocked method when it is unblocked."
+  },
+  {
+    "uk": "Щоб отримувати ці сповіщення, клієнт повинен вказати таблицю capabilities у своїх client-properties: connection.blocked зі значенням true.",
+    "en": "To receive these notifications, the client must present a capabilities table in its client-properties in which there is a key connection.blocked and a boolean value true."
+  },
+  {
+    "uk": "exchange.bind метод пов'язує один exchange з іншим exchange. Прив'язка семантично ідентична прив'язкам exchange на queue: unidirectional, binding ключі і типи exchange працюють як звичайні, але обидві кінцеві точки (вихідний і призначення) прив'язки є exchanges.",
+    "en": "exchange.bind method binds one exchange to another exchange. The binding is semantically identical to exchange-to-queue bindings: unidirectional, binding keys and exchange types operate as normal, but both endpoints (the source and destination) of the binding are exchanges."
+  },
+
+  {
+    "uk": "Alternate Exchanges дозволяють клієнтам обробляти повідомлення, які exchange не зміг доручити.",
+    "en": "Alternate Exchanges let clients handle messages that an exchange was unable to route."
+  },
+  {
+    "uk": "Для будь-якого з цих exchange, окрім default, Alternate Exchange може бути визначено клієнтами, використовуючи policies.",
+    "en": "For any given exchange except for the default one, an Alternate Exchange can be defined by clients using policies."
+  },
+
+  {
+    "uk": "За бажанням, AMQP publisher може надіслати повідомлення з декількома routing ключами. Під час маршрутизації, RabbitMQ візьме до уваги всі routing ключі, що містяться у заголовках повідомлення.",
+    "en": "An AMQP publisher can optionally send a message with multiple routing keys. During routing, RabbitMQ will take all routing keys provided in the message headers into account."
+  },
+
+  {
+    "uk": "RabbitMQ перевірить user-id властивість повідомлення, якщо її встановлено.",
+    "en": "RabbitMQ will validate the user-id message property if it is set."
+  },
+  {
+    "uk": "Значення параметра user-id має дорівнювати імені користувача з'єднання.",
+    "en": "Its value must be equal to the name of the connection's user."
   }
 ]
