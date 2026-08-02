@@ -52,7 +52,7 @@
     "en": "SUBSCRIBE headers. REQUIRED: destination, id. OPTIONAL: ack."
   },
   {
-    "uk": "Заголовки UNSUBSCRIBE. REQURED: id. OPTIONAL: none.",
+    "uk": "Заголовки UNSUBSCRIBE. REQURED: id. OPTIONAL: жодних.",
     "en": "UNSUBSCRIBE headers. REQUIRED: id. OPTIONAL: none."
   },
   {
@@ -60,11 +60,11 @@
     "en": "ACK or NACK headers. REQUIRED: id. OPTIONAL: transaction."
   },
   {
-    "uk": "BEGIN, COMMIT або ABORT headers. REQURED: transaction. OPTIONAL: none.",
+    "uk": "BEGIN, COMMIT або ABORT заголовки. REQURED: transaction. OPTIONAL: жодних.",
     "en": "BEGIN or COMMIT or ABORT headers. REQUIRED: transaction. OPTIONAL: none."
   },
   {
-    "uk": "Заголовки DISCONNECT. REQURED: none. OPTIONAL: receipt.",
+    "uk": "Заголовки DISCONNECT. REQURED: жодних. OPTIONAL: receipt.",
     "en": "DISCONNECT headers. REQUIRED: none. OPTIONAL: receipt."
   },
   {
@@ -72,11 +72,11 @@
     "en": "MESSAGE headers. REQUIRED: destination, message-id, subscription. OPTIONAL: ack."
   },
   {
-    "uk": "Заголовки RECEIPT. REQUREDED: receipt-id. OPTIONAL: none.",
+    "uk": "Заголовки RECEIPT. REQUREDED: receipt-id. OPTIONAL: жодних.",
     "en": "RECEIPT headers. REQUIRED: receipt-id. OPTIONAL: none."
   },
   {
-    "uk": "ERROR заголовки. REQUIRED: none. OPTIONAL: message.",
+    "uk": "ERROR заголовки. REQUIRED: жодних. OPTIONAL: message.",
     "en": "ERROR headers. REQUIRED: none. OPTIONAL: message."
   },
   {
@@ -96,7 +96,7 @@
     "en": "The server can reject any connection attempt. The server SHOULD respond back with an ERROR frame explaining why"
   },
   {
-    "uk": "Сервери STOMP МАЮТЬ працювати з фреймом STOMP у той самий спосіб, що і з фреймом CONNECT.",
+    "uk": "Сервери STOMP мають працювати з фреймом STOMP у той самий спосіб, що і з фреймом CONNECT.",
     "en": "STOMP servers MUST handle a STOMP frame in the same manner as a CONNECT frame."
   },
   {
@@ -112,7 +112,7 @@
     "en": "destination, which indicates where to send the message"
   },
   {
-    "uk": "Фрейм SUBSCRIBE використовується для того, щоб підписатись задану destination.",
+    "uk": "Фрейм SUBSCRIBE використовується для того, щоб підписатись на задану destination.",
     "en": "The SUBSCRIBE frame is used to register to listen to a given destination."
   },
   {
@@ -132,7 +132,7 @@
     "en": "The UNSUBSCRIBE frame is used to remove an existing subscription."
   },
   {
-    "uk": "ACK використовується для підтвердження отримання повідомлення з підпискиколи використовується client або client-individual підтвердження.",
+    "uk": "ACK використовується для підтвердження отримання повідомлення з підписки коли використовується client або client-individual підтвердження.",
     "en": "ACK is used to acknowledge consumption of a message from a subscription using client or client-individual acknowledgment."
   },
   {
@@ -164,7 +164,7 @@
     "en": "MESSAGE frames are used to convey messages from subscriptions to the client."
   },
   {
-    "uk": "Фрейм RECEIPT буде надіслано з сервера до клієнта після успішного обробки сервером клієнтського фрема, який надсилає запит на receipt.",
+    "uk": "Фрейм RECEIPT буде надіслано з сервера до клієнта після успішної обробки сервером клієнтського фрема, який надсіслав запит на receipt.",
     "en": "A RECEIPT frame is sent from the server to the client once a server has successfully processed a client frame that requests a receipt."
   },
   {
