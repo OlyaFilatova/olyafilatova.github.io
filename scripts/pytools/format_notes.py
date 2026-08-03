@@ -1,5 +1,3 @@
-# used to format and translate notes created using chrome extension https://github.com/OlyaFilatova/page-notes
-# IMPORTANT: uses translate service(services/translate) start it using command `docker compose up translate`.
 import json
 import os
 from pathlib import Path

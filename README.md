@@ -6,7 +6,7 @@
 
 ### run specific service
 
-`docker compose up github_issue`
+`docker compose up -d github_issue`
 
 ## install python dependencies
 

@@ -7,7 +7,7 @@ requires-python = ">=3.13"
 members = [
   "services/*",
   "shared",
-  "_tools"
+  "scripts/pytools"
 ]
 
 [dependency-groups]

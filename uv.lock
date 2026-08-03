@@ -1384,7 +1384,7 @@ wheels = [
 [[package]]
 name = "tools"
 version = "0.1.0"
-source = { virtual = "_tools" }
+source = { virtual = "scripts/pytools" }
 dependencies = [
     { name = "requests" },
 ]
