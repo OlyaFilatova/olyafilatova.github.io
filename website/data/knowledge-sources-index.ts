@@ -1,10 +1,10 @@
 
 import type { ThoughtsIndex } from '../schemas/knowledge-source.ts';
 
-export const bustCache = 39;
+export const bustCache = 40;
 
 export const index: ThoughtsIndex = {
-  "count": 38,
+  "count": 37,
   "categories": {
     "Non": [
       0,
@@ -23,17 +23,17 @@ export const index: ThoughtsIndex = {
       22,
       23,
       24,
-      29
+      28
     ],
     "Software Architecture": [
       1,
-      26
+      25
     ],
     "JS": [
       14,
       19,
       20,
-      28
+      27
     ],
     "Python": [
       15,
@@ -64,38 +64,37 @@ export const index: ThoughtsIndex = {
     "matplotlib": [
       21
     ],
-    "RabbitMQ": [
-      25,
-      27,
-      30,
-      32,
-      35,
-      36,
-      37
-    ],
     "AI": [
-      26
+      25
+    ],
+    "RabbitMQ": [
+      26,
+      29,
+      31,
+      34,
+      35,
+      36
     ],
     "AMQP": [
-      27,
-      31
-    ],
-    "Kafka": [
-      27
-    ],
-    "Node.js": [
-      28
-    ],
-    "AMQP 0-9-1": [
+      26,
       30
     ],
+    "Kafka": [
+      26
+    ],
+    "Node.js": [
+      27
+    ],
+    "AMQP 0-9-1": [
+      29
+    ],
     "STOMP": [
-      33,
-      35
+      32,
+      34
     ],
     "MQTT": [
-      34,
-      36
+      33,
+      35
     ]
   },
   "kind": {
@@ -121,31 +120,30 @@ export const index: ThoughtsIndex = {
       22,
       23,
       24,
-      26,
-      28,
-      29
+      25,
+      27,
+      28
     ],
     "documentation": [
       15,
       16,
       17,
       18,
-      25,
-      32,
+      31,
+      34,
       35,
-      36,
-      37
+      36
     ],
     "paper": [
-      27
+      26
     ],
     "web-page": [
-      30
+      29
     ],
     "specification": [
-      31,
-      33,
-      34
+      30,
+      32,
+      33
     ]
   },
   "access": {
@@ -170,16 +168,15 @@ export const index: ThoughtsIndex = {
       21,
       22,
       23,
-      25,
-      27,
+      26,
+      29,
       30,
       31,
       32,
       33,
       34,
       35,
-      36,
-      37
+      36
     ],
     "paid": [
       1,
@@ -187,9 +184,9 @@ export const index: ThoughtsIndex = {
       12,
       13,
       24,
-      26,
-      28,
-      29
+      25,
+      27,
+      28
     ]
   },
   "status": {
@@ -211,9 +208,8 @@ export const index: ThoughtsIndex = {
       22,
       23,
       24,
-      25,
-      28,
-      29
+      27,
+      28
     ],
     "paused": [
       14
@@ -225,19 +221,19 @@ export const index: ThoughtsIndex = {
       18,
       19,
       20,
+      25,
       26,
-      27,
+      29,
       30,
       31,
       32,
       33,
       34,
-      35,
-      36
+      35
     ],
     "in-progress-first-read": [
       21,
-      37
+      36
     ]
   }
 }
