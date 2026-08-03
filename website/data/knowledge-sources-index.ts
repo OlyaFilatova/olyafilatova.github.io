@@ -1,7 +1,7 @@
 
 import type { ThoughtsIndex } from '../schemas/knowledge-source.ts';
 
-export const bustCache = 40;
+export const bustCache = 41;
 
 export const index: ThoughtsIndex = {
   "count": 37,
@@ -81,6 +81,17 @@ export const index: ThoughtsIndex = {
     ],
     "Kafka": [
       26
+    ],
+    "event-driven": [
+      26,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36
     ],
     "Node.js": [
       27

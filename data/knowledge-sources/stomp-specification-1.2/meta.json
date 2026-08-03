@@ -6,7 +6,8 @@
     "en": "STOMP 1.2 specification"
   },
   "categories": [
-    "STOMP"
+    "STOMP",
+    "event-driven"
   ],
   "access": "free",
   "link": "https://stomp.github.io/stomp-specification-1.2.html"

@@ -6,7 +6,8 @@
     "en": "AMQP 0-9-1 specification"
   },
   "categories": [
-    "AMQP"
+    "AMQP",
+    "event-driven"
   ],
   "access": "free",
   "link": "https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf"

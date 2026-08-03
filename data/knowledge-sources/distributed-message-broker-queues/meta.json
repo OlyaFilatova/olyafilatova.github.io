@@ -10,6 +10,7 @@
   "categories": [
     "RabbitMQ",
     "AMQP",
-    "Kafka"
+    "Kafka",
+    "event-driven"
   ]
 }

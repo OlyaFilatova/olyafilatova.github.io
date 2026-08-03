@@ -7,7 +7,8 @@
   },
   "access": "free",
   "categories": [
-    "RabbitMQ"
+    "RabbitMQ",
+    "event-driven"
   ],
   "link": "https://github.com/OlyaFilatova/olyafilatova.github.io/issues/6"
 }

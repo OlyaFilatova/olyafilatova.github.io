@@ -7,7 +7,9 @@
   },
   "access": "free",
   "categories": [
-    "RabbitMQ", "STOMP"
+    "RabbitMQ",
+    "STOMP",
+    "event-driven"
   ],
   "link": "https://www.rabbitmq.com/docs/stomp"
 }

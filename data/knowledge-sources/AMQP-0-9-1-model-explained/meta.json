@@ -9,6 +9,7 @@
   "link": "https://www.rabbitmq.com/tutorials/amqp-concepts",
   "categories": [
     "AMQP 0-9-1",
-    "RabbitMQ"
+    "RabbitMQ",
+    "event-driven"
   ]
 }

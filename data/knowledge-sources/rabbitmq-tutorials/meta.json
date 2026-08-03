@@ -6,7 +6,8 @@
     "en": "RabbitMQ /tutorials/"
   },
   "categories": [
-    "RabbitMQ"
+    "RabbitMQ",
+    "event-driven"
   ],
   "access": "free",
   "link": "https://github.com/OlyaFilatova/olyafilatova.github.io/issues/5"
