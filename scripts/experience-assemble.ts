@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import { join } from 'node:path';
-import { Experience } from '../src/schemas/experience.ts';
+import { Experience } from '../website/schemas/experience.ts';
 
 async function loadAndParseExperience() {
   const dir =  join(process.cwd(), 'data/experience');
@@ -12,7 +12,7 @@ async function loadAndParseExperience() {
     return Experience.parse(fileData);
   }));
 
-  await fs.writeFile(join(process.cwd(), 'src/data/experience.ts'), `import { Experience } from '../schemas/experience.ts';
+  await fs.writeFile(join(process.cwd(), 'website/data/experience.ts'), `import { Experience } from '../schemas/experience.ts';
 
 export const experience: Experience[] = ${JSON.stringify(experiences, undefined, 2)};
 `)

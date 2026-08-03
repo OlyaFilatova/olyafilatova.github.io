@@ -17,7 +17,7 @@ function KnowledgeSources() {
   }, [currentLanguage]);
 
   function getFilesToLoad() {
-    const prefix = import.meta.env.DEV ? 'src/' : '';
+    const prefix = import.meta.env.DEV ? 'website/' : '';
     const dirPath = 'assets/knowledge-sources/';
     const pageSize = index.count;
     return [...Array(pageSize).keys()].map(index => [`${prefix}${dirPath}${index}.json`, index] satisfies [string, number]).toReversed();

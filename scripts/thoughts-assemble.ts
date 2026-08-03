@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import { join } from 'node:path';
-import type { ThoughtsIndex } from '../src/schemas/knowledge-source.ts';
-import { KnowledgeSource, KnowledgeSourceContent, KnowledgeSourceMeta } from '../src/schemas/knowledge-source.ts';
+import type { ThoughtsIndex } from '../website/schemas/knowledge-source.ts';
+import { KnowledgeSource, KnowledgeSourceContent, KnowledgeSourceMeta } from '../website/schemas/knowledge-source.ts';
 import { getGitFileDate } from './helpers/git-file-date.ts';
 
 function defaultdict<T>(defaultFactory: () => T) {
@@ -70,7 +70,7 @@ function createThoughtsIndex(sources: KnowledgeSource[]) {
 }
 
 async function storeThoughtsJSON(sources: KnowledgeSource[]) {
-  const dirPath = join(process.cwd(), 'src/assets/knowledge-sources');
+  const dirPath = join(process.cwd(), 'website/assets/knowledge-sources');
 
   const files = await fs.readdir(dirPath);
   await Promise.all(files.map(file => 
@@ -81,7 +81,7 @@ async function storeThoughtsJSON(sources: KnowledgeSource[]) {
 }
 
 async function storeThoughtsIndex(index: ThoughtsIndex) {
-  const filePath = join(process.cwd(), 'src/data/knowledge-sources-index.ts');
+  const filePath = join(process.cwd(), 'website/data/knowledge-sources-index.ts');
 
   const prevContent = await fs.readFile(filePath, {encoding: 'utf8'});
 
