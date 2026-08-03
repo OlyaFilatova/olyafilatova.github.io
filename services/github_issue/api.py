@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-from _common.load_env import get_env
+from shared.load_env import get_env
 
 from github_issue.extract_links import extract_links
 from github_issue.format_url import format_issue_url

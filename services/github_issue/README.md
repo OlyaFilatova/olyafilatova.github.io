@@ -34,6 +34,6 @@ Start containers `docker compose up -d`
 
 curl -G \
   -H "Accept: application/json" \
-  -d "link=https://github.com/OlyaFilatova/olyafilatova.github.io/issues/6" \
+  -d "url=https://github.com/OlyaFilatova/olyafilatova.github.io/issues/6" \
   http://localhost:8000/issue-links
 

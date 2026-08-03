@@ -11,7 +11,7 @@ COPY pyproject.toml uv.lock ./
 
 COPY services/github_issue/*.py github_issue/
 COPY services/github_issue/*.toml github_issue/
-COPY services/_common ./_common
+COPY shared ./shared
 
 # Install only this package and its dependencies
 RUN uv sync \
