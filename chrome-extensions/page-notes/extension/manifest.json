@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Page notes",
+  "version": "0.2.0",
+  "description": "Store notes to pages locally.",
+  "permissions": ["storage", "sidePanel", "activeTab", "scripting", "tabs"],
+  "host_permissions": [],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/web-page.js"],
+      "css": ["content/web-page.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "side_panel": {
+    "default_path": "extension/ui/index.html"
+  },
+  "action": {
+    "default_title": "Page Notes"
+  }
+}

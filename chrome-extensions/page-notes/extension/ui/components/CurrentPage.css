@@ -1,0 +1,13 @@
+#new-note-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#new-note-form textarea {
+  height: 120px;
+}
+
+#new-note-form button {
+  height: 32px;
+}

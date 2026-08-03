@@ -1,0 +1,100 @@
+import { copyFileSync, mkdirSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import react from "@vitejs/plugin-react";
+import { defineConfig, type UserConfig } from "vite";
+
+const staticFiles = [
+  ["extension/manifest.json", "dist/manifest.json"],
+  ["extension/content/web-page.css", "dist/content/web-page.css"]
+];
+
+function copyStaticExtensionFiles() {
+  return {
+    name: "copy-static-extension-files",
+    closeBundle() {
+      for (const [from, to] of staticFiles) {
+        const target = resolve(to);
+        mkdirSync(dirname(target), { recursive: true });
+        copyFileSync(resolve(from), target);
+      }
+    }
+  };
+}
+
+type BuildConfig = {
+  input: string;
+  fileName?: string;
+  emptyOutDir: boolean;
+  html?: boolean;
+};
+
+const buildsByMode: Record<string, BuildConfig> = {
+  background: {
+    input: "extension/background/service-worker.ts",
+    fileName: "background/service-worker.js",
+    emptyOutDir: true
+  },
+
+  content: {
+    input: "extension/content/web-page.ts",
+    fileName: "content/web-page.js",
+    emptyOutDir: false
+  },
+
+  ui: {
+    // React entry
+    input: "extension/ui/index.html",
+    emptyOutDir: false,
+    html: true
+  }
+};
+
+export default defineConfig(({ mode }) => {
+  const build = buildsByMode[mode] ?? buildsByMode.background;
+
+  return {
+    plugins: [
+      react(),
+      ...(mode === "background" ? [copyStaticExtensionFiles()] : [])
+    ],
+
+    build: build.html
+      ? createHtmlBuild(build.input, build.emptyOutDir)
+      : createSingleEntryBuild(
+          build.input,
+          build.fileName!,
+          build.emptyOutDir
+        )
+  } satisfies UserConfig;
+});
+
+function createSingleEntryBuild(
+  input: string,
+  fileName: string,
+  emptyOutDir: boolean
+): UserConfig["build"] {
+  return {
+    outDir: "dist",
+    emptyOutDir,
+    rollupOptions: {
+      input,
+      output: {
+        entryFileNames: fileName,
+        inlineDynamicImports: true
+      }
+    }
+  };
+}
+
+function createHtmlBuild(
+  input: string,
+  emptyOutDir: boolean
+): UserConfig["build"] {
+  return {
+    outDir: "dist",
+    emptyOutDir,
+    rollupOptions: {
+      input: resolve(input)
+    }
+  };
+}

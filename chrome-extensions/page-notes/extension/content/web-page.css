@@ -1,0 +1,24 @@
+
+
+.save-note-button {
+  position: fixed;
+  z-index: 2147483647;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #1f2933;
+}
+
+.save-note-button {
+  border: 1px solid #2f6fed;
+  border-radius: 6px;
+  background: #2f6fed;
+  color: #fff;
+  padding: 6px 10px;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(31, 41, 51, 0.22);
+}
+
+.save-note-button[hidden] {
+  display: none;
+}
