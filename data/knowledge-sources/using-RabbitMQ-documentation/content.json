@@ -232,5 +232,30 @@
   {
     "uk": "Для того, щоб відхиляти повідомлення групами, клієнти встановлюють прапорець multiple методу basic.nack у значення true.",
     "en": "To reject messages in bulk, clients set the multiple flag of the basic.nack method to true."
+  },
+
+  {
+    "uk": "queue у RabbitMQ - це впорядкована збірка повідомлень. Повідомлення додаються до черги і забираються з черги (відправляються споживачам) у спосіб (FIFO (\"першим увійшов, першим вийшов\").",
+    "en": "A queue in RabbitMQ is an ordered collection of messages. Messages are enqueued and dequeued (delivered to consumers) in a (FIFO (\"first in, first out\") manner."
+  },
+  {
+    "uk": "Streams - це альтернативна структура даних обміну повідомленнями, доступна у RabbitMQ. Потоки надають різні функціональні можливості черг.",
+    "en": "Streams is an alternative messaging data structure available in RabbitMQ. Streams provide different features from queues."
+  },
+  {
+    "uk": "Якщо у вexclusive queues використано добре відомі (статичні) назви, у випадку роз'єднання клієнта і негайного повторного з'єднання, між вузлами RabbitMQ буде природньо створено конкуренцію за ресурс, яка вилучить такі черги і відновлюючихся клієнтів, які будуть намагатися повторно оголосити ці черги.",
+    "en": "When exclusive queues use well-known (static) names, in case of client disconnection and immediate reconnection there will be a natural race condition between RabbitMQ nodes that will delete such queues and recovering clients that will try to re-declare them."
+  },
+  {
+    "uk": "Навіть якщо RabbitMQ має намір зберегти черговість, наступні моменти змінять діючу черговість доставки: пріоритети повідомлень, декілька активних споживачів у одній черзі і перевідправка.",
+    "en": "Even if RabbitMQ aims to preserve order, the following will change effective delivery order: Message priorities, Multiple active consumers on the same queue and redelivery."
+  },
+  {
+    "uk": "Щоб зберегти черговість повідомлень у RabbitMQ, ви можете скористатися двома варіантами: використовувати потік, скористатися чергою з одним активним споживачем.",
+    "en": "To preserve message order in RabbitMQ you have two options: Use a stream, Use a queue with a single active consumer."
+  },
+  {
+    "uk": "У випадках, коли стійкість важлива, програми мають застосовувати durable queues та видавці мають позначати відправлені повідомлення як persisted.",
+    "en": "In environments and use cases where durability is important, applications must use durable queues and make sure that publishers mark published messages as persisted."
   }
 ]

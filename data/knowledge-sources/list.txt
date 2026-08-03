@@ -14,8 +14,6 @@ distributed-message-broker-queues
 
 ai-engineer
 
-rabbitmq-docs
-
 hands-on-ml
 deep-learning-with-python
 dive-into-deep-learning

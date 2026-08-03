@@ -1,0 +1,36 @@
+[project]
+name = "my-platform"
+version = "0.1.0"
+requires-python = ">=3.13"
+
+[tool.uv.workspace]
+members = [
+  "services/*",
+  "_tools"
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.4",
+  "pytest-asyncio>=1.1",
+  "ruff>=0.12",
+  "mypy>=1.17",
+  "poethepoet>=0.48.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+
+[tool.poe.tasks]
+install_all = "uv sync --package common --package github-issue-links --package my-platform --package tools --package translate"

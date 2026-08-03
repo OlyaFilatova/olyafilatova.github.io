@@ -1,5 +1,5 @@
 # used to format and translate notes created using chrome extension https://github.com/OlyaFilatova/page-notes
-# IMPORTANT: uses service from https://github.com/OlyaFilatova/ai_projects/tree/main/03_translate
+# IMPORTANT: uses translate service(services/translate) start it using command `docker compose up translate`.
 import json
 import os
 from pathlib import Path
@@ -35,7 +35,7 @@ def format_file(mappingsByUrl: dict[str, Mapping]):
     } for value in mappingsByUrl.values()]
 
 def translate_page(page):
-  url = "http://localhost:8000/translate"
+  url = "http://localhost:8001/translate"
   notes = [*reversed(page["notes"])]
   payload = {
     "texts": notes,

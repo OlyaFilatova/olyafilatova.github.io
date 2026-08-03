@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  github_issue:
+    build: 
+      context: .
+      dockerfile: services/github_issue/Dockerfile
+    container_name: github-issue-links
+    env_file:
+      - services/github_issue/.env
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  translate:
+    build:
+      context: .
+      dockerfile: services/translate/Dockerfile
+    container_name: translate
+
+    ports:
+      - "8001:8001"
+
+    volumes:
+      - huggingface_cache:/models
+
+    environment:
+      HF_HOME: /models
+      TRANSFORMERS_CACHE: /models
+
+    restart: unless-stopped
+
+volumes:
+  huggingface_cache:
