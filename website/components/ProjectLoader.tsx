@@ -1,9 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import Project from './Project';
 import { bustCache } from '../data/projects-index';
+import { LanguageContext, type Language } from '../i18n/config';
 
-function ProjectLoader({ filePath }: { filePath: string; }) {
+function ProjectLoader({ project }: {project: {
+    dirPath: string;
+    translations: Record<Language, string>;
+  }}) {
   const [source, setSource] = useState<string | undefined>()
+
+  const currentLanguage = useContext(LanguageContext);
 
   function loadData(filePath: string, retriesCount = 0, maxRetriesCount = 5) {
     fetch(filePath).then(async resp => {
@@ -16,8 +22,8 @@ function ProjectLoader({ filePath }: { filePath: string; }) {
   }
 
   useEffect(() => {
-    loadData(filePath + '?cb=' + bustCache);
-  }, []);
+    loadData(`${project.dirPath}${project.translations[currentLanguage]}` + '?cb=' + bustCache);
+  }, [currentLanguage]);
 
   return (
     source && <Project source={source} />

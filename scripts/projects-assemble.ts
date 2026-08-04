@@ -58,27 +58,20 @@ async function storeProjectFiles(projects: [[string, string, string], string][][
   } catch {}
 
   await Promise.all(projects.flat().map(async project => {
-    console.log(project[0][2])
     await fs.mkdir(join(dirPath, project[0][0]), { recursive: true });
 
-    console.log('here 1')
     await fs.writeFile(join(dirPath, project[0][2]), project[1]);
-    console.log('here 2')
   }));
 }
 
 async function storeProjectsIndex(projects: [[string, string, string], string][][]) {
-  console.log('storeProjectsIndex')
   const filePath = join(process.cwd(), 'website/data/projects-index.ts');
   
-  console.log(filePath)
   const prevContent = await fs.readFile(filePath, {encoding: 'utf8'});
-  console.log('prevContent')
   
   const match = [...prevContent.matchAll(/export const bustCache = (\d+)/g)].map(el => el[1])[0] || '0';
   
   const bustCache = Number(match) + 1;
-  console.log(bustCache)
 
   await fs.writeFile(filePath, `
 export const bustCache = ${bustCache};

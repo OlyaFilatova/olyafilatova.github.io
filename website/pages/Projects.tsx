@@ -2,13 +2,16 @@ import { useContext, useEffect, useState } from 'react';
 
 import './Projects.css';
 
-import { LanguageContext } from '../i18n/config';
+import { LanguageContext, type Language } from '../i18n/config';
 import { texts } from '../i18n/projects';
 import ProjectLoader from '../components/ProjectLoader';
 import { index } from '../data/projects-index';
 
 function KnowledgeSources() {
-  const [projects, setProjects] = useState<string[]>([]);
+  const [projects, setProjects] = useState<{
+    dirPath: string;
+    translations: Record<Language, string>;
+  }[]>([]);
 
   const currentLanguage = useContext(LanguageContext);
 
@@ -18,7 +21,10 @@ function KnowledgeSources() {
 
   function getFilesToLoad() {
     const dirPath = 'assets/projects/';
-    return index.map(fileName => `${dirPath}${fileName}`).toReversed();
+    return index.map(({ translations }) => ({
+      dirPath,
+      translations
+    })).toReversed();
   }
 
   useEffect(() => {
@@ -27,7 +33,7 @@ function KnowledgeSources() {
 
   return (
     <div className='project'>
-      {projects.map((filePath, key) => <ProjectLoader key={key} filePath={filePath} />)}
+      {projects.map((project, key) => <ProjectLoader key={key} project={project} />)}
     </div>
   )
 }
