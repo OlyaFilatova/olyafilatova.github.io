@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import { join } from 'node:path';
-import { Experience } from '../website/schemas/experience.ts';
+import { Experience } from '@olyafilatova.github.io/website/schemas/experience.ts';
 
 async function loadAndParseExperience() {
   const dir =  join(process.cwd(), 'data/experience');

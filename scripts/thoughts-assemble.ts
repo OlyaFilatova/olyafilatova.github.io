@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import { join } from 'node:path';
-import type { ThoughtsIndex } from '../website/schemas/knowledge-source.ts';
-import { KnowledgeSource, KnowledgeSourceContent, KnowledgeSourceMeta } from '../website/schemas/knowledge-source.ts';
+import type { ThoughtsIndex } from '@olyafilatova.github.io/website/schemas/knowledge-source.ts';
+import { KnowledgeSource, KnowledgeSourceContent, KnowledgeSourceMeta } from '@olyafilatova.github.io/website/schemas/knowledge-source.ts';
 import { getGitFileDate } from './helpers/git-file-date.ts';
 
 function defaultdict<T>(defaultFactory: () => T) {

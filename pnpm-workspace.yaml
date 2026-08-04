@@ -1,0 +1,5 @@
+packages:
+  - "chrome-extensions/*"
+  - "services/*"
+  - "website"
+  - "scripts"

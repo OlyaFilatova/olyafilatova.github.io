@@ -19,9 +19,9 @@ jobs:
         with:
           node-version: 26
 
-      - run: npm install
-      - run: npm run build
-      - run: npm run copy-json-assets
+      - run: pnpm i
+      - run: pnpm --filter @olyafilatova.github.io/website build
+      - run: pnpm --filter @olyafilatova.github.io/website copy-json-assets
 
       - uses: actions/upload-pages-artifact@v3
         with:
