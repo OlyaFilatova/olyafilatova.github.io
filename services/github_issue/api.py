@@ -11,7 +11,7 @@ from github_issue.get_body import get_issue_body
 app = FastAPI()
 
 class LinksResponse(BaseModel):
-  links: list[str]
+  links: list[tuple[str, str]]
 
 @app.get("/health")
 def health():

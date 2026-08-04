@@ -1,13 +1,14 @@
-import { notifySidePanel } from "./extension";
 import type {
   Note,
   PageAggregate,
-  NoteStorage
+  NoteStorage,
+  CurrentIssue
 } from "./note";
 
 const DB_NAME = "page-notes";
-const DB_VERSION = 1;
+const DB_VERSION = 3;
 const NOTE_STORE = "pages";
+const ISSUE_STORE = "issue";
 const STORAGE_REQUEST_TYPE = "NOTE_STORAGE_REQUEST";
 const STORAGE_REQUEST_RETRY_COUNT = 2;
 const STORAGE_REQUEST_RETRY_DELAY_MS = 100;
@@ -24,6 +25,9 @@ export interface NoteRepository {
   createNote(input: CreateNoteInput): Promise<{ note: Note; created: boolean; reason?: string }>;
   deleteNote(note: Note): Promise<void>;
   clearNotes(): Promise<void>;
+  storeCurrentIssue(issue: CurrentIssue): Promise<void>;
+  clearCurrentIssue(): Promise<void>;
+  getCurrentIssue(): Promise<undefined | CurrentIssue>
 }
 
 type StorageMethod = keyof NoteRepository;
@@ -40,6 +44,11 @@ export class ChromeNoteRepository implements NoteRepository {
   async getAllNotes(): Promise<Note[]> {
     const storage = await this.getStorage();
     return [...storage.notes];
+  }
+
+  async getCurrentIssue(): Promise<CurrentIssue | undefined> {
+    const storage = await this.getStorage();
+    return storage.currentIssue;
   }
 
   async getAggregates(): Promise<Record<string, PageAggregate>> {
@@ -90,10 +99,29 @@ export class ChromeNoteRepository implements NoteRepository {
   }
 
   async clearNotes(): Promise<void> {
-    await this.getStorage();
+    const storage = await this.getStorage();
     await this.saveStorage({
       notes: [],
-      mappingsByUrl: {}
+      mappingsByUrl: {},
+      currentIssue: storage.currentIssue
+    });
+  }
+
+  async clearCurrentIssue(): Promise<void> {
+    const storage = await this.getStorage();
+    await this.saveStorage({
+      notes: storage.notes,
+      mappingsByUrl: storage.mappingsByUrl,
+      currentIssue: undefined
+    });
+  }
+
+  async storeCurrentIssue(currentIssue: CurrentIssue): Promise<void> {
+    const storage = await this.getStorage();
+    await this.saveStorage({
+      notes: storage.notes,
+      mappingsByUrl: storage.mappingsByUrl,
+      currentIssue
     });
   }
 
@@ -103,15 +131,18 @@ export class ChromeNoteRepository implements NoteRepository {
 
   private async readIndexedDbStorage(): Promise<NoteStorage> {
     const database = await this.getDatabase();
-    const transaction = database.transaction([NOTE_STORE], "readonly");
+    const transaction = database.transaction([NOTE_STORE, ISSUE_STORE], "readonly");
     const noteStore = transaction.objectStore(NOTE_STORE);
+    const issueStore = transaction.objectStore(ISSUE_STORE);
     const done = transactionToPromise(transaction);
-    const [notes] = await Promise.all([
-      requestToPromise<Note[]>(noteStore.getAll())
+    const [notes, currentIssue] = await Promise.all([
+      requestToPromise<Note[]>(noteStore.getAll()),
+      requestToPromise<CurrentIssue | undefined>(issueStore.get("currentIssue"))
     ]);
     await done;
 
-    const sortedNotes = notes.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
+    const sortedNotes = notes.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
+
 
     return {
       notes: sortedNotes,
@@ -127,17 +158,20 @@ export class ChromeNoteRepository implements NoteRepository {
         aggregates[note.url].notes.push(note);
 
         return aggregates
-      }, {})
+      }, {}),
+      currentIssue
     };
   }
 
   private async writeIndexedDbStorage(storage: NoteStorage): Promise<void> {
     const database = await this.getDatabase();
-    const transaction = database.transaction([NOTE_STORE], "readwrite");
+    const transaction = database.transaction([NOTE_STORE, ISSUE_STORE], "readwrite");
     const noteStore = transaction.objectStore(NOTE_STORE);
+    const issueStore = transaction.objectStore(ISSUE_STORE);
     const done = transactionToPromise(transaction);
     const requests: Array<Promise<unknown>> = [
       requestToPromise(noteStore.clear()),
+      requestToPromise(issueStore.clear())
     ];
 
     for (const note of storage.notes) {
@@ -145,6 +179,8 @@ export class ChromeNoteRepository implements NoteRepository {
         requests.push(requestToPromise(noteStore.put(recordForNoteStore(noteStore, note))));
       }
     }
+
+    requests.push(requestToPromise(issueStore.put(storage.currentIssue, 'currentIssue')))
 
     await Promise.all(requests);
     await done;
@@ -196,6 +232,18 @@ class RuntimeNoteRepository implements NoteRepository {
 
   getAggregates(): Promise<Record<string, PageAggregate>> {
     return sendStorageRequest("getAggregates");
+  }
+
+  clearCurrentIssue(): Promise<void> {
+    return sendStorageRequest("clearCurrentIssue");
+  }
+
+  storeCurrentIssue(issue: CurrentIssue): Promise<void> {
+    return sendStorageRequest("storeCurrentIssue");
+  }
+
+  getCurrentIssue(): Promise<CurrentIssue | undefined> {
+    return sendStorageRequest("getCurrentIssue");
   }
 }
 
@@ -321,6 +369,9 @@ function openDatabase(): Promise<IDBDatabase> {
       if (!database.objectStoreNames.contains(NOTE_STORE)) {
         const store = database.createObjectStore(NOTE_STORE, { keyPath: "id" });
         store.createIndex?.("id", "id", { unique: true });
+      }
+      if (!database.objectStoreNames.contains(ISSUE_STORE)) {
+        database.createObjectStore(ISSUE_STORE);
       }
     };
     request.onsuccess = () => resolve(request.result);

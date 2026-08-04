@@ -7,9 +7,11 @@ import Pagination from "./components/Pagination";
 
 import { noteRepository } from "../shared/storage";
 import { PageAggregate } from "../shared/note";
+import { fetchGithubIssueData } from "../shared/fetch";
 import { GlobalState } from "./types";
 
 import './App.css';
+import { CurrentGithubIssue } from "./components/GithubIssue";
 
 async function getActiveTabUrl(): Promise<string> {
   const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -40,10 +42,25 @@ export default function App() {
   const [currentPageAggregate, setCurrentPageAggregate] = useState<PageAggregate>(getDefaultAggregate());
   const [visibleAggregates, setVisibleAggregates] = useState<PageAggregate[]>([]);
   const [newNote, setNewNote] = useState("");
+  const [issueUrl, setIssueUrl] = useState("");
+  const [linksDone, setLinksDone] = useState<string[]>([]);
+  const [linksPlanned, setLinksPlanned] = useState<string[]>([]);
 
   function reload() {
     setScrollTop(preserveScroll ? getScrollTop() : null);
     noteRepository.getAggregates().then(setAggregates);
+    noteRepository.getCurrentIssue().then(currentIssue => {
+      console.log('currentIssue', currentIssue);
+      if (currentIssue) {
+        state.setIssueUrl(currentIssue.url);
+        state.setLinksDone(currentIssue.links.filter(link => link.status == 'DONE').map(link => link.url));
+        state.setLinksPlanned(currentIssue.links.filter(link => link.status == 'PLANNED').map(link => link.url));
+      } else {
+        state.setIssueUrl('');
+        state.setLinksDone([]);
+        state.setLinksPlanned([]);
+      }
+    })
   }
 
   const state: GlobalState = {
@@ -54,6 +71,13 @@ export default function App() {
     preserveScroll,
     search,
     totalItems,
+    issueUrl,
+    linksDone,
+    linksPlanned,
+    aggregates,
+    setLinksPlanned,
+    setLinksDone,
+    setIssueUrl,
     setCurrentPage,
     setNewNote,
     setPageSize,
@@ -120,6 +144,32 @@ export default function App() {
     setVisibleAggregates(filteredAggregates.slice(pageStart, pageStart + pageSize));
   }, [filteredAggregates]);
 
+  useEffect(() => {
+    if (state.issueUrl == '') {
+      state.setLinksDone([]);
+      state.setLinksPlanned([]);
+      void noteRepository.clearCurrentIssue();
+    } else {
+      fetchGithubIssueData(state.issueUrl).then(res => {
+        state.setLinksDone(res.filter(el => el[0] == 'DONE').map(el => el[1]));
+        state.setLinksPlanned(res.filter(el => el[0] == 'PLANNED').map(el => el[1]));
+        noteRepository.storeCurrentIssue({
+          url: state.issueUrl,
+          links: res.map(el => ({
+            status: el[0] as 'DONE' | 'PLANNED',
+            url: el[1]
+          }))
+        }).then(res => `Issue saved ${res}`)
+      }, err => {
+        console.log(err)
+        // state.setIssueUrl('');
+        // state.setLinksDone([]);
+        // state.setLinksPlanned([]);
+        // void noteRepository.clearCurrentIssue();
+      });
+    }
+  }, [state.issueUrl])
+
   function filterAggregates(aggregates: Record<string, PageAggregate>): PageAggregate[] {
     return Object.values(aggregates)
       .filter((aggregate) => {
@@ -145,6 +195,7 @@ export default function App() {
   return (
     <main className="app">
       <div>
+        <CurrentGithubIssue state={state} />
         <AppHeader state={state} />
         <Filters state={state} />
         <CurrentPage state={state} aggregate={currentPageAggregate} />

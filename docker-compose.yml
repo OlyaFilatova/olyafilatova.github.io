@@ -1,11 +1,11 @@
 version: "3.9"
 
 services:
-  github_issue:
+  parse_github_issue:
     build: 
       context: .
       dockerfile: services/github_issue/Dockerfile
-    container_name: github-issue-links
+    container_name: parse-github-issue
     env_file:
       - services/github_issue/.env
     ports:

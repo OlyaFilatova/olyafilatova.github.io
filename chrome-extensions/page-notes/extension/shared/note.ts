@@ -24,7 +24,18 @@ export interface PageAggregate {
   lastUpdatedAt: Date;
 }
 
+interface Link {
+  status: 'DONE' | 'PLANNED';
+  url: string;
+}
+
+export interface CurrentIssue {
+  url: string;
+  links: Link[];
+}
+
 export interface NoteStorage {
   notes: Note[];
   mappingsByUrl: Record<string, PageAggregate>;
+  currentIssue: undefined | CurrentIssue;
 }

@@ -1,0 +1,43 @@
+.current-github-issue {
+  margin-bottom: 12px;
+}
+
+.set-issue {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  margin-left: auto;
+  cursor: pointer;
+  display: block;
+}
+
+.set-issue:hover {
+  background-color: whitesmoke;
+}
+
+.set-issue-input {
+  margin: 8px 0;
+}
+
+.issue-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.issue-controls button {
+  border: 1px solid #c8d1dc;
+  border-radius: 6px;
+  background: #fff;
+  color: #1f2933;
+  padding: 7px 9px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.issue-controls .clear-issue {
+  border-color: #d24b4b;
+  background: #fff5f5;
+  color: #9f1d1d;
+}

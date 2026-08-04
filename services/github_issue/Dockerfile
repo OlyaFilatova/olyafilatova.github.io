@@ -15,7 +15,7 @@ COPY shared ./shared
 
 # Install only this package and its dependencies
 RUN uv sync \
-    --package github-issue-links \
+    --package parse-github-issue \
     --no-dev \
     --frozen
 

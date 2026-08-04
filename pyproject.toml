@@ -34,4 +34,4 @@ python_version = "3.13"
 strict = true
 
 [tool.poe.tasks]
-install_all = "uv sync --package common --package github-issue-links --package my-platform --package tools --package translate"
+install_all = "uv sync --package common --package parse-github-issue --package my-platform --package tools --package translate"

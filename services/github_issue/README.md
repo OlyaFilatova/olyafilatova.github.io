@@ -30,7 +30,7 @@ Start containers `docker compose up -d`
 
 `pip install -r requirements.txt`
 
-## using github_issue service
+## using parse_github_issue service
 
 curl -G \
   -H "Accept: application/json" \

@@ -35,8 +35,31 @@ export default function AppHeader({ state: { setCurrentPage, totalItems, reload 
   }
 
   async function exportJson(): Promise<void> {
-    const storage = await noteRepository.getStorage();
-    downloadJson(storage, `notes.json`);
+    const { currentIssue, mappingsByUrl } = await noteRepository.getStorage();
+    if (!currentIssue || !currentIssue.links.length) {
+      downloadJson({
+        mappingsByUrl
+      }, 'notes.json');
+    } else {
+      const currentIssueLinks = currentIssue.links.map(link => link.url);
+
+      const storedUrls = Object.keys(mappingsByUrl);
+
+      const currentIssueUrls = currentIssueLinks.filter(link => storedUrls.includes(link));
+
+      const otherUrls = storedUrls.filter(link => !currentIssueLinks.includes(link));
+
+      const mapping = {
+        ...((currentIssueUrls.length) ? {
+          [currentIssue.url]: currentIssueUrls.toReversed().map(url => mappingsByUrl[url].notes).flat()
+        } : {}),
+        ...(otherUrls.length ? Object.fromEntries(Object.entries(mappingsByUrl).filter(entry => otherUrls.includes(entry[0]))) : {})
+      }
+
+      downloadJson({
+        mappingsByUrl: mapping
+      }, 'notes.json')
+    }
   }
 
   function downloadJson(value: unknown, filename: string): void {
