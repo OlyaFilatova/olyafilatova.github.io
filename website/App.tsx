@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { HashRouter, Routes, Route } from "react-router";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 import './App.css'
 import Sidebar from './components/Sidebar'
@@ -14,21 +14,21 @@ function App() {
   return (
     <LanguageContext.Provider value={currentLanguage}>
       <div className='app'>
-        <div className='app-sidebar'>
-          <Sidebar onLangChange={lang => {
-            changeCurrentLanguage(lang);
-            setLang(lang);
-          }} />
-        </div>
-        <main className='app-content'>
-          <HashRouter>
+        <HashRouter>
+          <div className='app-sidebar'>
+            <Sidebar onLangChange={lang => {
+              changeCurrentLanguage(lang);
+              setLang(lang);
+            }} />
+          </div>
+          <main className='app-content'>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/knowledge-sources" element={<KnowledgeSources />} />
               <Route path="/history" element={<History />} />
             </Routes>
-          </HashRouter>
-        </main>
+          </main>
+        </HashRouter>
       </div>
     </LanguageContext.Provider>
   )
