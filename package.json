@@ -7,7 +7,8 @@
     "dev:website": "pnpm --filter @olyafilatova.github.io/website dev",
     "build": "pnpm -r build",
     "experience-assemble": "npx tsx scripts/experience-assemble.ts",
-    "thoughts-assemble": "npx tsx scripts/thoughts-assemble.ts"
+    "thoughts-assemble": "npx tsx scripts/thoughts-assemble.ts",
+    "projects-assemble": "npx tsx scripts/projects-assemble.ts"
   },
   "devDependencies": {
     "@types/node": "~26.1.2",

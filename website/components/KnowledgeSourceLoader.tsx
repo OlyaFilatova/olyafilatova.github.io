@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './KnowledgeSourceItem.css'
 import { KnowledgeSource } from '../schemas/knowledge-source';
 import KnowledgeSourceItem from './KnowledgeSourceItem';
 import { bustCache, index } from '../data/knowledge-sources-index';

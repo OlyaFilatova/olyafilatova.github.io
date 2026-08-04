@@ -7,6 +7,7 @@ import { changeCurrentLanguage, getCurrentLanguage, LanguageContext, type Langua
 import KnowledgeSources from './pages/KnowledgeSources';
 import History from './pages/History';
 import Home from './pages/Home';
+import Projects from './pages/Projects';
 
 function App() {
   const [currentLanguage, setLang] = useState<Language>(getCurrentLanguage());
@@ -25,6 +26,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/knowledge-sources" element={<KnowledgeSources />} />
+              <Route path="/projects" element={<Projects />} />
               <Route path="/history" element={<History />} />
             </Routes>
           </main>
