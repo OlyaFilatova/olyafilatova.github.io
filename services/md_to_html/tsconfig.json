@@ -3,11 +3,14 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "types": ["node"],
-    "allowImportingTsExtensions": true,
-    "noEmit": true
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": false,
+    "erasableSyntaxOnly": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
-  "files": [],
   "include": [
-    "./**/*.ts"
+    "src/**/*.ts"
   ]
 }

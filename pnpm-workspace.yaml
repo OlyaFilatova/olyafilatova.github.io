@@ -3,3 +3,8 @@ packages:
   - "services/*"
   - "website"
   - "scripts"
+allowBuilds:
+  '@nestjs/core': true
+  esbuild: true
+minimumReleaseAge: 1440
+injectWorkspacePackages: true

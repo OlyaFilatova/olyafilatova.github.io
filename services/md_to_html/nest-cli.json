@@ -1,0 +1,11 @@
+{
+  "monorepo": true,
+  "projects": {
+    "markdown-to-html": {
+      "type": "application",
+      "root": "services/md_to_html",
+      "entryFile": "main",
+      "sourceRoot": "services/md_to_html/src"
+    }
+  }
+}

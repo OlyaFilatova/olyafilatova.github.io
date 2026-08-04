@@ -30,5 +30,14 @@ services:
 
     restart: unless-stopped
 
+  md_to_ntml:
+    build: 
+      context: .
+      dockerfile: services/md_to_html/Dockerfile
+    container_name: markdown-to-html
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
 volumes:
   huggingface_cache:

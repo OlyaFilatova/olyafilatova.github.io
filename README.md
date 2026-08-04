@@ -14,4 +14,4 @@
 
 ## install node dependencies
 
-`npm i`
+`pnpm i`

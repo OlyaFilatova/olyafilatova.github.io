@@ -12,19 +12,21 @@
     "lint": "eslint \"src/**/*.ts\""
   },
   "dependencies": {
-    "@nestjs/common": "^11.0.0",
-    "@nestjs/core": "^11.0.0",
-    "@nestjs/platform-express": "^11.0.0",
-    "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.0"
+    "@nestjs/common": "11.0.0",
+    "@nestjs/core": "11.0.0",
+    "@nestjs/platform-express": "11.0.0",
+    "reflect-metadata": "0.2.2",
+    "rxjs": "7.8.0",
+    "markdown-it": "15.0.0",
+    "class-validator": "0.15.1"
   },
   "devDependencies": {
-    "@nestjs/cli": "^11.0.0",
-    "@nestjs/schematics": "^11.0.0",
-    "@nestjs/testing": "^11.0.0",
-    "@types/node": "^24.0.0",
-    "typescript": "^5.8.0",
-    "ts-node": "^10.9.2",
-    "eslint": "^9.0.0"
+    "@nestjs/cli": "11.0.0",
+    "@nestjs/schematics": "11.0.0",
+    "@nestjs/testing": "11.0.0",
+    "@types/node": "24.0.0",
+    "typescript": "5.4.5",
+    "ts-node": "10.9.2",
+    "eslint": "9.0.0"
   }
 }
