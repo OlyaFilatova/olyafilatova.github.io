@@ -15,17 +15,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+
       - uses: actions/setup-node@v4
         with:
-          node-version: 26
+          node-version: 22
+          cache: pnpm
 
-      - run: pnpm i
+      - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @olyafilatova.github.io/website build
       - run: pnpm --filter @olyafilatova.github.io/website copy-json-assets
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: website/dist
 
   deploy:
     needs: build
