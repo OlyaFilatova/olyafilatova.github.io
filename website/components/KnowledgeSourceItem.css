@@ -27,9 +27,25 @@
     line-height: 1.7;
     max-width: 75ch;
   }
+  details {
+    padding-top: 12px;
+  }
   summary {
-    padding-top: 16px;
+    padding: 4px;
     cursor: pointer;
+  }
+  summary:hover {
+    background-color: ghostwhite;
+    transition: background .5s;
+  }
+
+  summary::marker {
+    content: "▼ ";
+  }
+
+  /* Change the symbol when the details container is open */
+  details[open] summary::marker {
+    content: "▲ ";
   }
 
   ul {
