@@ -51,7 +51,10 @@ export default function AppHeader({ state: { setCurrentPage, totalItems, reload 
 
       const mapping = {
         ...((currentIssueUrls.length) ? {
-          [currentIssue.url]: currentIssueUrls.toReversed().map(url => mappingsByUrl[url].notes).flat()
+          [currentIssue.url]: {
+            url: currentIssue.url,
+            notes: currentIssueUrls.toReversed().map(url => mappingsByUrl[url].notes).flat()
+          }
         } : {}),
         ...(otherUrls.length ? Object.fromEntries(Object.entries(mappingsByUrl).filter(entry => otherUrls.includes(entry[0]))) : {})
       }
