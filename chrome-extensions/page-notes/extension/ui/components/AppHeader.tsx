@@ -81,8 +81,8 @@ export default function AppHeader({ state: { setCurrentPage, totalItems, reload 
         <h1>Notes</h1>
         <p id="summary">{
           totalItems ?
-          `${totalItems} pages` :
-          "No notes saved yet"
+          `${totalItems} other pages` :
+          "No other pages saved yet"
         }</p>
       </div>
       <div className="header-actions">
