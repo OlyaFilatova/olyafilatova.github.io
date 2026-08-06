@@ -32,7 +32,7 @@ function KnowledgeSources() {
   }, [])
 
   return (
-    <div className='project'>
+    <div className='projects'>
       {projects.map((project, key) => <ProjectLoader key={key} project={project} />)}
     </div>
   )

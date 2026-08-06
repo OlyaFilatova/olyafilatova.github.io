@@ -1,0 +1,8 @@
+.project h3, .project h4 {
+  border-bottom: solid 1px;
+  padding-bottom: 8px;
+}
+
+.project h4 {
+  border-color: rgba(0, 0, 0, 0.2);
+}

@@ -1,8 +1,10 @@
 import parse from 'html-react-parser';
 
+import './Project.css';
+
 function ProjectItem({ source }: {source: string}) {
   return (
-    <article className="item knowledge-source">
+    <article className="project">
       {parse(source)}
     </article>
   )
