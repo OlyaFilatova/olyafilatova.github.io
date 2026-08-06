@@ -109,7 +109,7 @@ Extension in this repo is extended to use services, namely Parse GitHub Issue se
 
 **Requirements:** Parse Github Issue service up and running locally on port 8000.
 
-**Functionality:** When extension Side Panel is opened the form of the current page is shown. Notes can be saved using the form or directly from the page: 1. select text, 2. click "Save Note" that appears near the selection. When textarea value is changed its value is stored in browser cache mapped to the current page URL.
+**Functionality:** When extension Side Panel is opened the form of the current page is shown. Notes can be saved using the form or directly from the page: 1. select text, 2. click **Save Note** that appears near the selection. When textarea value is changed its value is stored in browser cache mapped to the current page URL.
 
 Notes from other pages saved previously are listed below the block of the current page. Notes can be deleted. The list can be searched through. The list has pagination by 10/25/50 pages per page. Notes are stored using IndexedDB.
 
