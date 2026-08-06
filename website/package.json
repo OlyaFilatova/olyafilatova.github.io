@@ -8,8 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "data-assemble": "npm run experience-assemble && npm run thoughts-assemble",
-    "copy-json-assets": "cp -r assets/knowledge-sources dist/assets/knowledge-sources"
+    "copy-json-assets": "cp -r assets/knowledge-sources dist/assets/knowledge-sources && cp -r assets/projects dist/assets/projects"
   },
   "dependencies": {
     "html-react-parser": "^6.1.5",

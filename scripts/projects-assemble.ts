@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
-import path, { join } from 'node:path';
+import { join } from 'node:path';
+import { MarkdownService } from '@olyafilatova.github.io/markdown-to-html/src/markdown/markdown.service.ts';
 
 const languages = ['uk', 'en'];
 
@@ -25,21 +26,7 @@ async function loadProjects(fileNames: string[]) {
     translations
   }) => {
     return (await Promise.all(translations.map(async translation => {
-      const response = await fetch("http://localhost:3000/markdown/convert", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          markdown: translation.content
-        })
-      });
-
-      const json = await response.json() as {
-        html: string
-      };
-      const text = (json)["html"];
+      const text = new MarkdownService().convert(translation.content);
       return [[fileName, translation.lang, createNewName(fileName, translation.lang)], text] as [[string, string, string], string]
     })));
     

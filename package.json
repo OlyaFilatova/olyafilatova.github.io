@@ -8,7 +8,8 @@
     "build": "pnpm -r build",
     "experience-assemble": "npx tsx scripts/experience-assemble.ts",
     "thoughts-assemble": "npx tsx scripts/thoughts-assemble.ts",
-    "projects-assemble": "npx tsx scripts/projects-assemble.ts"
+    "projects-assemble": "npx tsx scripts/projects-assemble.ts",
+    "data-assemble": "pnpm run experience-assemble && pnpm run thoughts-assemble && pnpm run projects-assemble"
   },
   "devDependencies": {
     "@types/node": "~26.1.2",

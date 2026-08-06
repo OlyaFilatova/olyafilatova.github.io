@@ -60,6 +60,9 @@ importers:
 
   scripts:
     dependencies:
+      '@olyafilatova.github.io/markdown-to-html':
+        specifier: workspace:*
+        version: link:../services/md_to_html
       '@olyafilatova.github.io/website':
         specifier: workspace:*
         version: link:../website
