@@ -1,0 +1,132 @@
+{
+  "event-driven": {
+    "event-driven protocols": {
+      "STOMP": {},
+      "MQTT": {},
+      "AMQP 0-9-1": {},
+      "AMQP 1.0": {},
+      "Kafka": {},
+      "NATS": {},
+      "DDS": {},
+      "ZMTP": {}
+    },
+    "mediators": {
+      "queue-based message brokers": {
+        "RabbitMQ": {},
+        "ActiveMQ": {}
+      },
+      "event streaming platforms": {
+        "Apache Kafka": {},
+        "Apache Pulsar": {},
+        "Amazon Kinesis": {},
+        "Redpanda": {}
+      },
+      "managed cloud services": {
+        "Amazon EventBridge": {},
+        "Amazon SQS": {},
+        "Amazon SNS": {},
+        "Google Cloud Pub/Sub": {},
+        "Azure Service Bus": {},
+        "Azure Event Hubs": {}
+      },
+      "append only log": {
+        "Redis Streams": {}
+      },
+      "Apache Flink": {},
+      "Apache Spark": {}
+    },
+    "patterns": {
+      "Event Sourcing": {},
+      "CQRS": {},
+      "Saga Pattern": {},
+      "Transactional Outbox": {},
+      "Inbox Pattern": {},
+      "Dead Letter Queue (DLQ)": {},
+      "Retry Pattern": {},
+      "Competing Consumers": {},
+      "Choreography": {},
+      "Orchestration": {}
+    }
+  },
+  "web development": {
+    "backend framework": {
+      "Express.js": {},
+      "Nest.js": {},
+      "Fastify": {},
+      "FastAPI": {},
+      "Django": {},
+      "Flask": {},
+      "Tornado": {},
+      "Pyramid": {}
+    },
+    "API types": {
+      "REST": {},
+      "GraphQL": {},
+      "gRPC": {},
+      "SOAP": {},
+      "WebSocket": {}
+    },
+    "databases": {
+      "SQL": {
+        "PostgreSQL": {},
+        "MySQL": {},
+        "MariaDB": {},
+        "SQLite": {}
+      },
+      "NoSQL": {
+        "Document databases": {
+          "MongoDB": {},
+          "CouchDB": {},
+          "Amazon DocumentDB": {}
+        },
+        "Key-Value Databases": {
+          "Redis": {},
+          "Amazon DynamoDB": {},
+          "Riak": {}
+        },
+        "Column-Family Databases": {
+          "Apache Cassandra": {},
+          "Apache HBase": {},
+          "ScyllaDB": {}
+        },
+        "Graph Databases": {
+          "Neo4j": {},
+          "Amazon Neptune": {},
+          "ArangoDB": {}
+        },
+        "Browser-based Databases": {
+          "IndexedDB": {}
+        }
+      }
+    },
+    "ORM": {
+      "SQLModel": {},
+      "SQLAlchemy": {},
+      "Django ORM": {},
+      "Peewee": {},
+      "asyncpg": {},
+      "Prisma": {},
+      "TypeORM": {},
+      "Sequelize": {},
+      "Drizzle ORM": {},
+      "Knex.js": {}
+    },
+    "Cloud platforms": {
+      "Amazon Web Services": {},
+      "Microsoft Azure": {},
+      "Google Cloud": {}
+    },
+    "Architecture concepts": {
+      "Microservices": {},
+      "Monoliths": {},
+      "Event-driven architecture": {},
+      "Domain-Driven Design (DDD)": {},
+      "CQRS": {},
+      "Event Sourcing": {},
+      "Clean Architecture": {},
+      "Hexagonal Architecture": {},
+      "Repository Pattern": {},
+      "Dependency Injection": {}
+    }
+  }
+}
