@@ -1,5 +1,7 @@
 # olyafilatova.github.io - Personal website and tools
 
+[GitHub Repo](https://github.com/OlyaFilatova/olyafilatova.github.io)
+
 The project is a monorepo that includes website sources, chrome extension to store page notes, various tools for preparing content and helper services.
 
 The main goal of this project is to store my notes and thoughts without additional cost for hosting. Thus I decided to use GitHub pages based on public repo; the tools that require additional compute (eg. translate) are used only locally and storage solutions are either browser-based or are the static website content.
