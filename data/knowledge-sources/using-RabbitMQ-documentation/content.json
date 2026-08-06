@@ -235,8 +235,8 @@
   },
 
   {
-    "uk": "queue у RabbitMQ - це впорядкована збірка повідомлень. Повідомлення додаються до черги і забираються з черги (відправляються споживачам) у спосіб (FIFO (\"першим увійшов, першим вийшов\").",
-    "en": "A queue in RabbitMQ is an ordered collection of messages. Messages are enqueued and dequeued (delivered to consumers) in a (FIFO (\"first in, first out\") manner."
+    "uk": "queue у RabbitMQ - це впорядкована збірка повідомлень. Повідомлення додаються до черги і забираються з черги (відправляються споживачам) у спосіб FIFO (\"першим увійшов, першим вийшов\").",
+    "en": "A queue in RabbitMQ is an ordered collection of messages. Messages are enqueued and dequeued (delivered to consumers) in a FIFO (\"first in, first out\") manner."
   },
   {
     "uk": "Streams - це альтернативна структура даних обміну повідомленнями, доступна у RabbitMQ. Потоки надають різні функціональні можливості черг.",
@@ -468,183 +468,183 @@
     "en": "Quorum queues are designed to trade latency for throughput."
   },
   {
-    "uk": "ППропускна здатність quorum черги залежить від розміру повідомлень і кількості учасників.",
+    "uk": "Пропускна здатність quorum черги залежить від розміру повідомлень і кількості учасників.",
     "en": "Quorum queue throughput is affected by message sizes and the number of members."
   },
   {
-    "uk": "Черги Quorum у вказаному вузлі мають спільний доступ до журналу запису (WAL) для всіх операцій. У WAL міститься обмежена кількість нещодавніх операцій у черзі. Записи WAL зберігаються у пам' яті і записуються на диск.",
+    "uk": "Quorum черги на вузлі мають спільний доступ до write-ahead-log (WAL) для всіх операцій. У WAL міститься обмежена кількість нещодавніх операцій у черзі. Записи WAL зберігаються і у пам'яті і записуються на диск.",
     "en": "Quorum queues on a given node share a write-ahead-log (WAL) for all operations. The WAL contains a limited number of recent operations on the queue. WAL entries are stored both in memory and written to disk."
   },
   {
-    "uk": "Оскільки пам' ять не гарантована тим, що система працює негайно, команда рекомендує, щоб вузол RabbitMQ виділявся принаймні у 3 рази більше, ніж на пам' ять ефективного обмеження розміру файлів WAL. Більше буде потрібно у системах високої дискети. 4 рази - це гарна відправна точка для цих файлів.",
-    "en": "Because memory is not guaranteed to be deallocated instantly by the runtime, team recommends that the RabbitMQ node is allocated at least 3 times the memory of the effective WAL file size limit. More will be required in high-throughput systems. 4 times is a good starting point for those."
+    "uk": "Оскільки не гарантовано, що пам'ять буде звільнено негайно середою виконання, рекомендовано, щоб вузолу RabbitMQ виділялося принаймні у 3 рази більше памʼяті, за діюче обмеження розміру файлів WAL. Більше буде потрібно у системах високої пропускної здатності. У 4 рази - це гарна відправна точка для таких систем.",
+    "en": "Because memory is not guaranteed to be deallocated instantly by the runtime, it is recommended that the RabbitMQ node is allocated at least 3 times the memory of the effective WAL file size limit. More will be required in high-throughput systems. 4 times is a good starting point for those."
   },
   {
-    "uk": "До RabbitMQ 4,3 одно незначене повідомлення може запобігти обрізанню журналу, що призведе до необмеженого росту на диску.",
+    "uk": "До RabbitMQ 4.3 одно не підтверджене повідомлення могло запобігти чкороченню журналу, що призводило до необмеженого росту на диску.",
     "en": "Prior to RabbitMQ 4.3, a single unacknowledged message could prevent the log from being truncated, leading to unbounded disk growth."
   },
   {
-    "uk": "У середовищах з використанням важкої черги кворум і/або великими повідомленнями, що протікають через них, дуже важливо бачити надмірний простір на диску",
-    "en": "In environments with heavy quorum queue usage and/or large messages flowing through them, it is very important to overprovision disk space"
+    "uk": "У середовищах із активним використанням quorum черги і/або великими повідомленнями, що протікають через черги, дуже важливо забезпечити додатковий простір на диску.",
+    "en": "In environments with heavy quorum queue usage and/or large messages flowing through them, it is very important to overprovision disk space."
   },
   {
-    "uk": "Рекомендуємо досить низький час розпізнавання доставки, щоб зменшити амплітуду письма над копіюванням незнаних повідомлень під час основної ущільнення.",
-    "en": "A reasonably low delivery acknowledgement timeout is recommended to reduce the write amplification overhead of copying unacknowledged messages during major compaction"
+    "uk": "Рекомендовано встановлювати досить низький ліміт часу на підтвердження, щоб зменшити витрати над копіювання непідтверджених повідомлень під час значного стиснення.",
+    "en": "A reasonably low delivery acknowledgement timeout is recommended to reduce the write amplification overhead of copying unacknowledged messages during major compaction."
   },
   {
-    "uk": "Більші повідомлення можна зберігати у сховищі як альтернативу, а відповідні метадані передаватимуться у повідомленнях, що проходять через черги кворум",
-    "en": "Larger messages can be stored in a blob store as an alternative, with relevant metadata being passed around in messages flowing through quorum queues"
+    "uk": "Як альтернатива, більші повідомлення можна зберігати у сховищі, а відповідні метадані передаватимуться у повідомленнях, що проходять через quorum черги.",
+    "en": "Larger messages can be stored in a blob store as an alternative, with relevant metadata being passed around in messages flowing through quorum queues."
   },
   {
-    "uk": "Починаючи з RabbitMQ 4. 0, черги кворум вводять типову межу доставки у 20 на основі кількості доставки. Якщо кількість доставки повідомлень перевищить цю межу, програма або скине її, або виведе з ладу (якщо налаштовано DLX).",
+    "uk": "Починаючи з RabbitMQ 4.0, quorum черги забезпечують типову delivery-limit у 20 на основі delivery-count. Якщо delivery count повідомлення перевищить цю межу, програма або видалить повідомлення, або відправить до dead-letter (якщо налаштовано DLX).",
     "en": "Starting with RabbitMQ 4.0, quorum queues enforce a default delivery-limit of 20 based on delivery-count. When a message's delivery count exceeds this limit, it is either dropped or dead-lettered (if a DLX is configured)."
   },
   {
-    "uk": "операції requeue можуть не збільшувати delivery count",
-    "en": "requeue operations may not increment the delivery count"
+    "uk": "Але операції requeue можуть не збільшувати delivery count.",
+    "en": "But requeue operations may not increment the delivery count."
   },
   {
-    "uk": "Замість того щоб покладатися на обмеження доставки для того, щоб отримати сумнівні повідомлення, скористайтеся призупиненими спробами, щоб реалізувати інтелігентне повернення назад.",
+    "uk": "Замість того, щоб покладатися на delivery limit для того, щоб обробити проблемні повідомлення, скористайтеся delayed retry, щоб реалізувати розумне відкладання.",
     "en": "Rather than relying on the delivery limit to catch problematic messages, use delayed retry to implement intelligent backoff"
   },
   {
-    "uk": "Внутрішня реалізація черги кворум перетворює назву черги на атом Erlang. Якщо черги з довільними назвами безперервно створюються і вилучаються, вона може загрожувати довгостроковій стабільності системи RabbitMQ, якщо розмір таблиці атомів досягне типового обмеження 5 мільйонів.",
+    "uk": "Внутрішня реалізація quorum черги перетворює назву черги на атом Erlang. Якщо черги з довільними назвами безперервно створюються і вилучаються, це може загрожувати довгостроковій стабільності системи RabbitMQ, якщо розмір таблиці атомів досягне типового обмеження у 5 мільйонів.",
     "en": "The internal implementation of quorum queues converts the queue name into an Erlang atom. If queues with arbitrary names are continuously created and deleted it may threaten the long term stability of the RabbitMQ system if the size of the atom table reaches the default limit of 5 million."
   },
   {
-    "uk": "дані, що зберігаються у класичних чергах, не відтворюються.",
-    "en": "the data stored in classic queues is not replicated."
+    "uk": "Дані, що зберігаються у класичних чергах, не реплікуються.",
+    "en": "The data stored in classic queues is not replicated."
   },
   {
-    "uk": "Класичні черги є типовим типом черги, якщо типовий тип черги не буде перевизначено для віртуального вузла.",
+    "uk": "Класичні черги є типовим типом черги, коли типовий тип черги не перевизначено для virtual host.",
     "en": "Classic queues are the default queue type as long as the default queue type is not overridden for the virtual host."
   },
   {
-    "uk": "Класичні черги підтримують мертві обміни листами за винятком при зупинці мертвих коли-небудь мертвих.",
+    "uk": "Класичні черги підтримують dead letter exchanges за винятком at-least-once dead-lettering.",
     "en": "Classic queues support dead letter exchanges with the exception of at-least-once dead-lettering."
   },
   {
-    "uk": "Класичні черги не підтримують керування отруйними повідомленнями",
-    "en": "Classic queues do not support poison message handling"
+    "uk": "Класичні черги не підтримують обробку poison message.",
+    "en": "Classic queues do not support poison message handling."
   },
   {
-    "uk": "Хоча класичні черги можна оголошувати як транзитні, це ускладнює створення черги у разі перезапуску вузлів під час оновлення або подібного, отже використання періодичних черг буде вимкнено.",
+    "uk": "Хоча класичні черги можна оголошувати як transient, це ускладнює аргументування видалення черги у разі перезапуску вузлів під час оновлення і т.і., отже використання transient черг знеохочується.",
     "en": "While classic queues can be declared as transient, this makes queue removal difficult to reason about in case of node restarts during upgrades and such, so the use of transient queues is discouraged."
   },
   {
-    "uk": "Загалом повідомлення не зберігаються у пам' яті, якщо швидкість споживання повідомлень не є достатньо високою, щоб повідомлення, які знаходяться у пам' яті, було використано протягом наступної секунди.",
+    "uk": "Загалом повідомлення не зберігаються у пам'яті, за виключеннм того, коли швидкість споживання повідомлень є достатньо високою, щоб повідомлення, які знаходяться у пам'яті, було спожито протягом наступної секунди.",
     "en": "In general messages are not kept in memory unless the rate of consumption of messages is high enough that the messages that are in memory are expected to be consumed within the next second."
   },
   {
-    "uk": "Більші повідомлення не зачитуються в пам'ять аж до моменту, коли їх слід надсилати споживачам.",
+    "uk": "Більші повідомлення не зчитуються в пам'ять аж до моменту, коли їх слід надіслати споживачам.",
     "en": "Larger messages are not read into memory until the moment when they have to be sent to consumers."
   },
   {
-    "uk": "Рішення зберігати повідомлення у черзі або у спільному сховищі повідомлень засновано на розмірі повідомлення, зокрема заголовках.",
+    "uk": "Рішення зберігати повідомлення у черзі або у спільному сховищі повідомлень засновано на розмірі повідомлення, у тому числі заголовків.",
     "en": "The decision to store messages in the queue or in the shared message store is based on the size of the message, including headers."
   },
   {
-    "uk": "За допомогою CrootMQ ви можете встановити параметр TTL (час до життя) або правила для повідомлень і черг.",
+    "uk": "За допомогою RabbitMQ ви можете встановити параметр або правило TTL (time-to-live) для повідомлень і черг.",
     "en": "With RabbitMQ, you can set a TTL (time-to-live) argument or policy for messages and queues."
   },
   {
-    "uk": "\"Discarded\" означає, що повідомлення не буде доставлено жодному споживачу, який підписувався на нього, і його не буде доступно за допомогою base. get прикладено безпосередньо у черзі.",
+    "uk": "\"Discarded\" означає, що повідомлення не буде доставлено жодному споживачу, і воно не буде доступно за допомогою basic.get методу викликаного безпосередньо до черги.",
     "en": "\"Discarded\" means that the message will not be delivered to any of subscribed consumers and won't be accessible through basic.get method applied directly on queue."
   },
   {
-    "uk": "Встановлення TTL (експірацій) у чергах, зазвичай, має сенс лише для періодичних (неможливих) класичних черг.",
+    "uk": "Встановлення TTL (закінчення терміну дії) до черг, зазвичай, має сенс лише для transient (non-durable) класичних черг.",
     "en": "Setting TTL (expiration) on queues generally only makes sense for transient (non-durable) classic queues."
   },
   {
-    "uk": "Ви можете встановити TTL повідомлення для вказаної черги встановленням параметра ttl повідомлення",
-    "en": "Message TTL can be set for a given queue by setting the message-ttl argument"
+    "uk": "Ви можете встановити TTL повідомлення для всієї черги, встановивши параметр message-ttl.",
+    "en": "Message TTL can be set for a given queue by setting the message-ttl argument."
   },
   {
-    "uk": "Встановлення значення TTL у 0 призведе до того, що повідомлення буде прострочено після досягнення черги, якщо їх не буде негайно доставлено споживачу. Таким чином, передбачено альтернативну можливість показу прапорця негайного оприлюднення, яку не підтримує сервер RockMQ. На відміну від цього прапорця, не буде виведено базових. returns, якщо встановлено застарілу літеру обміну повідомленнями, повідомлення буде вимкнено.",
+    "uk": "Встановлення значення TTL у 0 призведе до того, що повідомлення буде прострочено у момент досягнення черги, якщо їх не буде негайно доставлено споживачу. Таким чином, можна створити альтернативне рішення immediate publishing прапорця, який не підтримує сервер RabbitMQ. На відміну від цього прапорця, не буде використано basic.returns і, якщо встановлено dead letter exchange, повідомлення буде відправлено до dead-letter exchange.",
     "en": "Setting the TTL to 0 causes messages to be expired upon reaching a queue unless they can be delivered to a consumer immediately. Thus this provides an alternative to the immediate publishing flag, which the RabbitMQ server does not support. Unlike that flag, no basic.returns are issued, and if a dead letter exchange is set then messages will be dead-lettered."
   },
   {
-    "uk": "Quorum чергує до черги застарілі повідомлення, коли вони досягають голови черги.",
+    "uk": "Quorum черги відправляють до dead letter exchange застарілі повідомлення, коли ті досягають голови черги.",
     "en": "Quorum queues dead letter expired messages when they reach the head of the queue."
   },
   {
-    "uk": "Класичні черги невиконаних повідомлень у декількох випадках: 1. Після того, як повідомлення досягне голови черги. 2. Після того, як чергу буде повідомлено про зміну правил, яка вплине на неї.",
+    "uk": "Класичні черги відправляють на dead letter exchange застарілі повідомлення у декількох випадках: 1. Після того, як повідомлення досягне голови черги. 2. Після того, як чергу буде повідомлено про зміну правил, які впливають на неї.",
     "en": "Classic queues dead letter expired messages in a few cases: 1. When the message reaches the head of the queue. 2. When the queue is notified of a policy change that affects it."
   },
   {
-    "uk": "Невикористана черга означає, що у черзі немає споживачів, черга не була нещодавно оголошена (відновлення відновлює орендну плату) і базовий. get не було викликано принаймні протягом певного періоду придатності.",
+    "uk": "Невикористана черга означає, що у черзі немає споживачів, черга не була нещодавно переоголошена (переоголошення відновлює lease) і basic.get не було викликано принаймні протягом терміну дії.",
     "en": "Unused queue means the queue has no consumers, the queue has not been recently redeclared (redeclaring renews the lease), and basic.get has not been invoked for a duration of at least the expiration period."
   },
   {
-    "uk": "Сервер гарантує вилучення черги, якщо цю чергу не буде використано принаймні для періоду строку строку дії. Не буде надано гарантій щодо швидкості вилучення черги після завершення строку строку строку дії.",
+    "uk": "Сервер гарантує вилучення черги, якщо цю чергу не буде використано принаймні у період строку дії. Не буде надано гарантій щодо того, як швидко буде вилучено чергу після завершення строку дії.",
     "en": "The server guarantees that the queue will be deleted, if unused for at least the expiration period. No guarantee is given as to how promptly the queue will be removed after the expiration period has elapsed."
   },
   {
-    "uk": "Ви можете встановити максимальну довжину у черзі. Обмеження максимальної довжини можна встановити до кількості повідомлень або встановити у значення кількості байтів (загальність всіх довжини тексту повідомлення, ігнорування властивостей повідомлення та будь- яких надкладних значень) або обидва варіанти.",
+    "uk": "Ви можете встановити максимальну довжину черги. Обмеження максимальної довжини можна встановити як кількість повідомлень або як кількість байтів (загальна сума довжин тіл повідомлень, ігноруючи властивості повідомлень та будь-які overheads) або обидва варіанти.",
     "en": "You can set a maximum length on a queue. The maximum length limit can be set to a number of messages, or set to a number of bytes (the total of all message body lengths, ignoring message properties and any overheads), or both."
   },
   {
-    "uk": "Типова поведінка для RabbitMQ, якщо встановлено максимальну довжину або розмір черги, а максимальне значення досягається скиданням або надсилання повідомлень з передньої черги",
-    "en": "The default behaviour for RabbitMQ when a maximum queue length or size is set and the maximum is reached is to drop or dead-letter messages from the front of the queue"
+    "uk": "Типовою поведінкою для RabbitMQ, якщо встановлено максимальну довжину або розмір черги, а максимальне значення досягнуто, є видалення повідомлень або надсилання повідомлень на dead-letter exchange з голови черги.",
+    "en": "The default behaviour for RabbitMQ when a maximum queue length or size is set and the maximum is reached is to drop or dead-letter messages from the front of the queue."
   },
   {
-    "uk": "RabbitMQ більше не підтримує режим \" лінивий .\"",
+    "uk": "RabbitMQ більше не підтримує \"lazy\" режим.",
     "en": "RabbitMQ no longer supports the \"lazy\" mode."
   },
   {
-    "uk": "До використання RabbitMQ 3.12 класичні черги можна було налаштувати для роботи у лінивому режимі, що означає, що вони записуватимуть все повідомлення на диск і не зберігатимуть повідомлення у пам'яті.",
+    "uk": "До RabbitMQ 3.12 класичні черги можна було налаштувати для роботи у лінивому режимі, що означає, що вони записуватимуть все повідомлення на диск і не зберігатимуть повідомлення у пам'яті взагалі.",
     "en": "Until RabbitMQ 3.12, classic queues could be configured to operate in the lazy mode, which means they would write all message to disk and wouldn't keep messages in memory at all."
   },
   {
-    "uk": "Повідомлення з черги можуть бути \" застарілими ,\" це означає, що ці повідомлення буде передруковано у обмін, якщо станеться якась з чотирьох подій: 1. Повідомлення буде негативно визнано отримувачем AMQP 1. 0 з відмовленим результатом або клієнтом AMQP 0. 9. 1 за допомогою базових. reject або базових параметрів. nack з параметром requeue встановленою у значення false. 2. Повідомлення застаріє через одне повідомлення TTL 3. Повідомлення буде відкинуто через те, що його черга перевищила обмеження на довжину. 4. Повідомлення буде повернуто у чергу більше разів, ніж обмеження на доставку.",
-    "en": "Messages from a queue can be \"dead-lettered\", which means these messages are republished to an exchange when any of the following four events occur: 1. The message is negatively acknowledged by an AMQP 1.0 receiver using the rejected outcome or by an AMQP 0.9.1 consumer using basic.reject or basic.nack with requeue parameter set to false. . 2. The message expires due to per-message TTL. 3. The message is dropped because its queue exceeded a length limit. 4. The message is returned more times to a quorum queue than the delivery-limit."
+    "uk": "Повідомлення з черги можуть бути \"dead-lettered\", це означає, що ці повідомлення буде відправлено до dead-letter exchange, якщо станеться якась з чотирьох подій: 1. Повідомлення буде негативно підтверджено отримувачем AMQP 1.0 із rejected результатом або клієнтом AMQP 0.9.1 за допомогою basic.reject або basic.nack з параметром requeue встановленим у значення false. 2. Повідомлення застаріло через TTL повідомлення. 3. Повідомлення видалено через те, що його черга перевищила обмеження на довжину. 4. Повідомлення було повернуто у quorum чергу більше разів, ніж встановлений delivery-limit.",
+    "en": "Messages from a queue can be \"dead-lettered\", which means these messages are republished to an exchange when any of the following four events occur: 1. The message is negatively acknowledged by an AMQP 1.0 receiver using the rejected outcome or by an AMQP 0.9.1 consumer using basic.reject or basic.nack with requeue parameter set to false. 2. The message expires due to per-message TTL. 3. The message is dropped because its queue exceeded a length limit. 4. The message is returned more times to a quorum queue than the delivery-limit."
   },
   {
-    "uk": "Якщо строк дії у цілій черзі закінчиться, повідомлення у черзі не буде вимкнено.",
+    "uk": "Якщо строк дії цілої черги закінчиться, повідомлення черги не буде dead-lettered.",
     "en": "If an entire queue expires, the messages in the queue are not dead-lettered."
   },
   {
-    "uk": "Мертві обміни літерами (DLXs) є звичайними обмінами. Ці обміни можуть бути будь- якими звичайними типами, їх оголошують у звичайному вигляді.",
+    "uk": "Dead letter exchanges (DLXs) є звичайними exchange. Ці exchange можуть бути будь-якого із звичайних типів, та їх оголошують як звичайні exchange.",
     "en": "Dead letter exchanges (DLXs) are normal exchanges. They can be any of the usual types and are declared as normal."
   },
   {
-    "uk": "key- letter- move- move- key: ключ маршрутизації, який буде використано, якщо повідомлення не буде позначено. Якщо не встановлено клавішу маршрутизації, буде використано власні маршрутизаційні клавіші повідомлення.",
+    "uk": "dead-letter-routing-key: routing ключ, який буде використано, якщо повідомлення буде dead-lettered. Якщо не встановлено ключ dead-letter-routing-key, буде використано routing ключ повідомлення.",
     "en": "dead-letter-routing-key: a routing key to use when the messages are being dead-lettered. If the routing key is not set, the message's own routing keys are used."
   },
   {
-    "uk": "Ви можете створити цикл повідомлення, у якому одне повідомлення знаходитиметься у одній черзі двічі. Це може статися, наприклад, якщо до черги \" мертвих \" повідомлень до типового обміну без визначення клавіші routter routing.",
+    "uk": "Є вірогідність створення dead-lettering циклу повідомлення, при якому одне повідомлення потрапляє у ту саму чергу двічі. Це може статися, наприклад, якщо черга \"dead-letters\" повідомлення до типового обміну без зазначення dead-letter routing ключа.",
     "en": "It is possible to form a cycle of message dead-lettering where the same message reaches the same queue twice. For example, this can happen when a queue \"dead-letters\" messages to the default exchange without specifying a dead-letter routing key."
   },
   {
-    "uk": "Здублення тексту повідомлення може змінити деякі з його заголовків: назву обміну, клавішу routing, Копію, Потайну копію.",
+    "uk": "Dead-lettering повідомлення може змінити деякі з його заголовків: exchange name, routing key, CC, BCC.",
     "en": "Dead-lettering a message may modify some of its headers: exchange name, routing key, CC, BCC."
   },
   {
-    "uk": "Повідомлення AMQP 1. 0 міститиме анотацію повідомлення з символічним ключем x- opt- mars",
-    "en": "An AMQP 1.0 message will contain a message annotation with a symbolic key x-opt-deaths"
+    "uk": "Повідомлення AMQP 1.0 міститиме анотацію повідомлення з символічним ключем x-opt-deaths.",
+    "en": "An AMQP 1.0 message will contain a message annotation with a symbolic key x-opt-deaths."
   },
   {
-    "uk": "Повідомлення AMQP 0. 9. 1 міститиме заголовок \" Смерть \" x",
+    "uk": "Повідомлення AMQP 0.9.1 міститиме заголовок \"x-death\"",
     "en": "An AMQP 0.9.1 message will contain an x-death header"
   },
   {
-    "uk": "Крім того, наступні шість анотації до повідомлень AMQP 1. 0 або заголовки AMQP 0. 9. 1 додаються для найпершої невмируючої події: x- first- queue, x- first- смерть- з причини, x- першого- зміни смерті, x- last- death- queue, x- last- trad- exchange, x- last- exchange.",
+    "uk": "Крім того, наступні шість анотації до повідомлень AMQP 1.0 або заголовків AMQP 0.9.1 додаються для найпершої dead-lettering події: x-first-death-queue, x-first-death-reason, x-first-death-exchange, x-last-death-queue, x-last-death-reason, x-last-death-exchange.",
     "en": "In addition, the following six AMQP 1.0 message annotations or AMQP 0.9.1 headers are added for the very first dead-lettering event: x-first-death-queue, x-first-death-reason, x-first-death-exchange, x-last-death-queue, x-last-death-reason, x-last-death-exchange."
   },
   {
-    "uk": "Черги пріоритету надсилають повідомлення за порядком пріоритетів. Пріоритет повідомлень - це позитивне ціле значення, що встановлюється видавцями під час оприлюднення.",
+    "uk": "Черги пріоритету надсилають повідомлення за порядком пріоритетів. Пріоритет повідомлень - це позитивне ціле значення, що встановлюється видавцями під час відправки.",
     "en": "Priority queues deliver messages in the order of message priorities. A message priority is a positive integer value set by publishers at publishing time."
   },
   {
-    "uk": "Порядок доставки може трохи відрізнятися в практиці, коли пріоритетна черга має конкурентних споживачів, повторну доставку або автоматичну зміну у випадку втрати споживчих зв'язків або невдалості застосувань.",
+    "uk": "Порядок доставки може трохи відрізнятися на практиці, коли пріоритетна черга має конкуруючих споживачів, повторно поставлені в чергу повідомлення або автоматично повторно поставлені в чергу повідомлення у випадку втрати звʼязку зі споживчем чи збою програми-споживача.",
     "en": "Delivery order can slightly vary in practice when a priority queue has competing consumers, requeued deliveries, or automatic requeueing in case of consumer connection loss or consumer application failure."
   },
   {
-    "uk": "У класичних чергах пріоритету повідомлення буде застаріло, лише якщо вони досягнуть голови черги. Отже, повідомлення про те, що має нижчий пріоритет, може перевищити значення TTL, а повідомлення про вищу пріоритетність - бути попереду. Такі застарілі повідомлення не надсилаються споживачам, але вони з' являться у статистичних даних черги, аж доки їх не буде вилучено з черги.",
+    "uk": "У класичних чергах пріоритету повідомлення буде застаріло, лише коли вони досягнуть голови черги. Отже, повідомлення, що має нижчий пріоритет, може перевищити значення TTL, поки повідомлення з вищим пріоритетом обробляються. Такі застарілі повідомлення не надсилаються споживачам, але вони з'являться у статистичних даних черги, аж доки вони не досягнуть голови черги і їх не буде вилучено з черги.",
     "en": "For classic priority queues, messages are only expired when they reach the head of the queue. A lower-priority message can therefore exceed its TTL while a higher-priority message remains ahead of it. Such expired messages are not delivered to consumers, but they appear in queue statistics until they reach the head and are removed."
   },
   {
-    "uk": "Черги, у яких повідомлення про пропускання максимальної довжини є звичайними з голови черги для примусового виконання обмеження. Це означає, що повідомлення з вищим пріоритетом може бути скинено так, щоб повідомлення з вищим пріоритетом скидалися для повідомлень з нижчим пріоритетом.",
+    "uk": "Черги із встановленим параметром max-length, завжди відкидають повідомлення з початку черги, щоб забезпечити дотримання обмеження. Це означає, що повідомлення з вищим пріоритетом можуть бути відкинуті, замість повідомлень з нижчим пріоритетом.",
     "en": "Queues which have a max-length set drop messages as usual from the head of the queue to enforce the limit. This means that higher priority messages might be dropped to make way for lower priority ones"
   }
 ]
