@@ -1,2 +1,27 @@
 <h1>olyafilatova.github.io - Personal website and tools</h1>
 <p>The project is a monorepo that includes website sources, chrome extension to store page notes, various tools for preparing content and helper services.</p>
+<p>The main goal of this project is to store my notes and thoughts without additional cost for hosting. Thus I decided to use GitHub pages based on public repo; the tools that require additional compute (eg. translate) are used only locally and storage solutions are either browser-based or are the static website content.</p>
+<h2>Tech stack</h2>
+<p>Languages: TypeScript, Python.</p>
+<p>Front-end: React.js, Manifest V3.</p>
+<p>Infrastructure: Docker, docker-compose, GitHub Pages, GitHub Actions, monorepo (pnpm, uv).</p>
+<h2>Project breakdown</h2>
+<h3>Website</h3>
+<p>Deployed on GitHub Pages, written using React.js with Functional Components.</p>
+<p>Written in two languages: ukrainian and english. After using the language switch, the chosen language is stored in the browser cache.</p>
+<p>Pages: main page, notes on knowledge sources, projects, experience history.</p>
+<p>Content for pages is stored in the assets folders either as .json or .html files and loaded on-demand. Pages “projects” and “notes” use generated index objects to request content.</p>
+<p>Preparation of the website before deploying uses tools “experience assemble”, “thoughts assemble”, “projects assemble”.</p>
+<h3>Services</h3>
+<h4>Parse GitHub issue</h4>
+<h4>Markdown to HTML</h4>
+<h4>Translate</h4>
+<h3>Chrome extensions</h3>
+<h4>Page notes</h4>
+<h3>scripts</h3>
+<h4>experience assemble</h4>
+<h4>thoughts assemble</h4>
+<h4>projects assemble</h4>
+<h4>format notes</h4>
+<h3>GitHub Actions</h3>
+<h4>Deploy GitHub Pages</h4>

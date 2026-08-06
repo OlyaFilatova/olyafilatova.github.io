@@ -84,3 +84,23 @@ getFileNames().then(async fileNames => {
   
   console.log('Projects assemble script finished.')
 }, err => console.log('Load projects step failed.', err));
+
+/**
+ * Possible subproject structure.
+
+  (Short intro description)
+
+  **Deployed:**
+
+  **Language:**
+
+  **Frameworks and libraries:**
+
+  **Storage:**
+
+  **Prerequisites:**
+
+  **Requirements:**
+
+  **Pages:** / **Functionality:**
+ */
