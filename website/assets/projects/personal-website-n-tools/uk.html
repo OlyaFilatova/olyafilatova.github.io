@@ -1,2 +1,93 @@
-<h1>olyafilatova.github.io - Персональний вебсайт та інструменти</h1>
-<p>Проєкт являє собою монорепозиторій, який включає вихідні коди цього веб-сайту, розширення Chrome для збереження нотаток на сторінках, різні інструменти для підготовки контенту та допоміжні сервіси.</p>
+<h1>olyafilatova.github.io - Особистий вебсайт та інструменти</h1>
+<p>Проєкт є монорепозиторієм, який містить вихідний код вебсайту, Chrome-розширення для збереження нотаток до сторінок, різноманітні інструменти для підготовки контенту та допоміжні сервіси.</p>
+<p>Основна мета цього проєкту - зберігати мої нотатки та думки без додаткових витрат на хостинг. Тому я вирішила використовувати GitHub Pages на основі публічного репозиторію. Інструменти, які потребують додаткових обчислювальних ресурсів (наприклад, переклад), використовуються лише локально, а рішення для зберігання даних базуються або на сховищі браузера, або на статичному вмісті вебсайту.</p>
+<h2>Основний стек технологій</h2>
+<p><strong>Мови програмування:</strong> TypeScript, Python.</p>
+<p><strong>Front-end:</strong> React.js, Manifest V3.</p>
+<p><strong>Back-end:</strong> Nest.js, FastAPI.</p>
+<p><strong>Інфраструктура:</strong> Docker, docker-compose, GitHub Pages, GitHub Actions, монорепозиторій (pnpm, uv).</p>
+<p><strong>Моделі:</strong> Helsinki-NLP/opus-mt-en-uk, Helsinki-NLP/opus-mt-uk-en.</p>
+<h2>Підпроєкти</h2>
+<h3>Вебсайт</h3>
+<p>Особистий вебсайт.</p>
+<p><strong>Розгорнуто:</strong> на GitHub Pages.</p>
+<p><strong>Мова:</strong> TypeScript.</p>
+<p><strong>Фреймворки та бібліотеки:</strong> React.js (Functional Components), html-react-parser, zod.</p>
+<p><strong>Сховище:</strong> IndexedDB, localStorage.</p>
+<p><strong>Підтримує дві мови:</strong> українську та англійську. Після перемикання мови обрана мова зберігається в кеші браузера.</p>
+<p><strong>Сторінки:</strong> головна сторінка, нотатки про джерела знань, проєкти, хронологія досвіду.</p>
+<p>Контент сторінок зберігається в папках <code>assets</code> у файлах <code>.json</code> або <code>.html</code> та завантажується за потреби. Сторінки “Проєкти” та “Нотатки” використовують згенеровані індекс-об’єкти для отримання контенту. Вміст JSON-файлів перевіряється за допомогою бібліотеки zod.</p>
+<p>Підготовка вебсайту перед розгортанням використовує інструменти <code>experience assemble</code>, <code>thoughts assemble</code> та <code>projects assemble</code>.</p>
+<h3>Сервіси</h3>
+<h4>Parse GitHub Issue</h4>
+<p>Парсить список посилань певного формату з GitHub Issue.</p>
+<p><strong>Розгорнуто:</strong> локально за допомогою Docker.</p>
+<p><strong>Мова:</strong> Python.</p>
+<p><strong>Фреймворки та бібліотеки:</strong> FastAPI, Pydantic, requests.</p>
+<p><strong>Вимоги:</strong> GitHub-токен із правом доступу <strong>Read Issue</strong>.</p>
+<p><strong>Функціональність:</strong> Приймає Issue URL, отримує його вміст через GitHub API та витягує список посилань із тексту.</p>
+<p>Очікуваний формат тіла Issue:</p>
+<ul>
+<li>список посилань у вигляді чекліста;</li>
+<li>лише одне посилання в одному рядку;</li>
+<li>посилання має бути наприкінці текстового рядка.</li>
+</ul>
+<h4>Markdown to HTML</h4>
+<p>Перетворює Markdown-текст на HTML.</p>
+<p><strong>Розгорнуто:</strong> локально за допомогою Docker.</p>
+<p><strong>Мова:</strong> TypeScript.</p>
+<p><strong>Фреймворки та бібліотеки:</strong> Nest.js, markdown-it.</p>
+<p><strong>Функціональність:</strong> Приймає Markdown-текст і повертає HTML-результат.</p>
+<h4>Translate</h4>
+<p>Перекладає список текстів з української на англійську або з англійської на українську.</p>
+<p><strong>Розгорнуто:</strong> локально за допомогою Docker.</p>
+<p><strong>Мова:</strong> Python.</p>
+<p><strong>Фреймворки та бібліотеки:</strong> FastAPI, pydantic, torch, transformers.</p>
+<p><strong>Вимоги:</strong> Пристрій, здатний запускати моделі <code>Helsinki-NLP/opus-mt-*</code>.</p>
+<p><strong>Функціональність:</strong></p>
+<ul>
+<li>Під час першого запуску попередньо завантажує моделі.</li>
+<li>Приймає напрямок перекладу та список рядків.</li>
+<li>Повертає список перекладених рядків у тому самому порядку, що й у вхідному списку.</li>
+</ul>
+<h3>Chrome-розширення</h3>
+<h4>Page Notes</h4>
+<p>Локальне зберігання нотаток, згруповано за сторінками.</p>
+<p>Chrome-розширення побудоване на основі репозиторію <a href="https://github.com/OlyaFilatova/page-notes">https://github.com/OlyaFilatova/page-notes</a>.</p>
+<p>Версію розширення в цьому репозиторії розширено підтримкою сервісів, зокрема сервісу Parse GitHub Issue.</p>
+<p><strong>Розгорнуто:</strong> локально як unpacked extension.</p>
+<p><strong>Мова:</strong> TypeScript.</p>
+<p><strong>Фреймворки та бібліотеки:</strong> React.js.</p>
+<p><strong>Сховище:</strong> IndexedDB, localStorage.</p>
+<p><strong>Вимоги:</strong> Локально запущений сервіс Parse GitHub Issue на порту 8000.</p>
+<p><strong>Функціональність:</strong> Під час відкриття Side Panel розширення відображається форма для поточної сторінки. Нотатки можна зберігати через форму або безпосередньо зі сторінки: 1. виділити текст, 2. натиснути кнопку <strong>Save Note</strong>, яка з’являється поруч із виділенням. Якщо значення текстового поля змінюється, воно автоматично зберігається в кеші браузера з прив’язкою до URL поточної сторінки.</p>
+<p>Нижче блоку поточної сторінки відображаються раніше збережені нотатки з інших сторінок. Нотатки можна видаляти. Список підтримує пошук і пагінацію по 10/25/50 сторінок на сторінку. Нотатки зберігаються в IndexedDB.</p>
+<p>Кнопка <strong>Set current GitHub issue</strong> відкриває форму, за допомогою якої можна отримати список посилань із GitHub Issue. Посилання відображаються під формою, згруповані за статусами:</p>
+<ul>
+<li><strong>planned</strong> - прапорець у чеклісті Issue не встановлений;</li>
+<li><strong>in progress</strong> - посилання відповідає умовам статусу <em>planned</em>, але для нього вже існують нотатки в розширенні;</li>
+<li><strong>done</strong> - прапорець у чеклісті Issue встановлений.</li>
+</ul>
+<p>Кнопка <strong>Export JSON</strong> експортує сторінки та їхні нотатки у форматі JSON. Зазвичай сторінки експортуються під власними URL. Якщо налаштовано поточний GitHub Issue, усі сторінки, перелічені в ньому, групуються та експортуються під URL цього Issue.</p>
+<p>Кнопка <strong>Clear all</strong> після підтвердження очищає всі збережені нотатки з бази даних браузера.</p>
+<h3>Скрипти</h3>
+<h4>experience assemble</h4>
+<p><strong>Мова:</strong> TypeScript.</p>
+<p><strong>Функціональність:</strong> Зчитує файли з папки <code>data/experience</code> та генерує файл <code>website/data/experience.ts</code>, який використовується для завантаження сторінки “Хронологія досвіду”.</p>
+<h4>thoughts assemble</h4>
+<p><strong>Мова:</strong> TypeScript.</p>
+<p><strong>Функціональність:</strong> Зчитує файл <code>list.txt</code> із папки <code>data/knowledge-sources</code>. Завантажує дані з кожної папки, переліченої у файлі, оновлює поле <code>updatedAt</code> на основі дати файлу в Git для <code>content.json</code>, зберігає файли до папки <code>website/assets/knowledge-sources</code>. Оновлює файл <code>website/data/knowledge-sources-index.ts</code>: збільшує <code>bustCache</code> та індексує файли за статусом, типом, доступом і категоріями.</p>
+<h4>projects assemble</h4>
+<p><strong>Мова:</strong> TypeScript.</p>
+<p><strong>Функціональність:</strong> Зчитує файли з папки <code>data/projects</code> для кожної мовної версії вебсайту. Перетворює файли з формату Markdown у HTML. Зберігає нові файли в папці <code>website/assets/projects</code>. Генерує індекс у файлі <code>website/data/projects-index.ts</code>.</p>
+<h4>format notes</h4>
+<p>Перекладає нотатки, експортовані з розширення Page Notes, та готує їх для вебсайту.</p>
+<p><strong>Мова:</strong> Python.</p>
+<p><strong>Бібліотеки:</strong> requests.</p>
+<p><strong>Передумови:</strong> Експортовані файли з розширення Page Notes.</p>
+<p><strong>Вимоги:</strong> Локально запущений сервіс Translate на порту 8001.</p>
+<p><strong>Функціональність:</strong> Зчитує файли з папки <code>scripts/pytools/notes</code>. Вважає, що весь вміст записаний англійською мовою. Для кожної сторінки надсилає нотатки до сервісу Translate та зберігає результат в окрему папку <code>{file_idx}-{page_idx}</code> у каталозі <code>scripts/pytools/formatted</code>. Результат розділяється на файли <code>meta.json</code> та <code>content.json</code>. <code>meta.json</code> містить метадані (наприклад, URL), а <code>content.json</code> - список перекладених нотаток.</p>
+<p>Після вичитки перекладів файли переміщуються до папки <code>data/knowledge-sources</code>.</p>
+<h3>GitHub Actions</h3>
+<h4>Deploy GitHub Pages</h4>
+<p>Збирає та розгортає <code>/website</code> на GitHub Pages.</p>

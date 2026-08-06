@@ -1,27 +1,93 @@
 <h1>olyafilatova.github.io - Personal website and tools</h1>
 <p>The project is a monorepo that includes website sources, chrome extension to store page notes, various tools for preparing content and helper services.</p>
 <p>The main goal of this project is to store my notes and thoughts without additional cost for hosting. Thus I decided to use GitHub pages based on public repo; the tools that require additional compute (eg. translate) are used only locally and storage solutions are either browser-based or are the static website content.</p>
-<h2>Tech stack</h2>
-<p>Languages: TypeScript, Python.</p>
-<p>Front-end: React.js, Manifest V3.</p>
-<p>Infrastructure: Docker, docker-compose, GitHub Pages, GitHub Actions, monorepo (pnpm, uv).</p>
-<h2>Project breakdown</h2>
+<h2>Main tech stack</h2>
+<p><strong>Languages:</strong> TypeScript, Python.</p>
+<p><strong>Front-end:</strong> React.js, Manifest V3.</p>
+<p><strong>Back-end:</strong> Nest.js, FastAPI.</p>
+<p><strong>Infrastructure:</strong> Docker, docker-compose, GitHub Pages, GitHub Actions, monorepo (pnpm, uv).</p>
+<p><strong>Models:</strong> Helsinki-NLP/opus-mt-en-uk, Helsinki-NLP/opus-mt-uk-en.</p>
+<h2>Subprojects</h2>
 <h3>Website</h3>
-<p>Deployed on GitHub Pages, written using React.js with Functional Components.</p>
-<p>Written in two languages: ukrainian and english. After using the language switch, the chosen language is stored in the browser cache.</p>
-<p>Pages: main page, notes on knowledge sources, projects, experience history.</p>
-<p>Content for pages is stored in the assets folders either as .json or .html files and loaded on-demand. Pages “projects” and “notes” use generated index objects to request content.</p>
+<p>Personal website.</p>
+<p><strong>Deployed:</strong> on GitHub Pages.</p>
+<p><strong>Language:</strong> TypeScript.</p>
+<p><strong>Frameworks and libraries:</strong> React.js with Functional Components, html-react-parser, zod.</p>
+<p><strong>Storage:</strong> IndexedDB, localStorage.</p>
+<p><strong>Supported languages:</strong> ukrainian and english. After using the language switch, the chosen language is stored in the browser cache.</p>
+<p><strong>Pages:</strong> main page, notes on knowledge sources, projects, experience history.</p>
+<p>Content for pages is stored in the assets folders either as <code>.json</code> or <code>.html</code> files and loaded on-demand. Pages “projects” and “notes” use generated index objects to request content. Content of JSON files is verified using zod library.</p>
 <p>Preparation of the website before deploying uses tools “experience assemble”, “thoughts assemble”, “projects assemble”.</p>
 <h3>Services</h3>
 <h4>Parse GitHub issue</h4>
+<p>Parse list of links of specific format from a GitHub issue.</p>
+<p><strong>Deployed:</strong> locally using Docker.</p>
+<p><strong>Language:</strong> Python</p>
+<p><strong>Frameworks and libraries:</strong> FastAPI, Pydantic, requests.</p>
+<p><strong>Requirements:</strong> GitHub token with <strong>Read Issue</strong> access.</p>
+<p><strong>Functionality:</strong> Accepts issue URL, fetches issue body from GitHub and extracts list of links from the text.</p>
+<p>Expected format of the issue body:</p>
+<ul>
+<li>Checklist of links.</li>
+<li>Only one link per text line.</li>
+<li>Link must be at the end of the text line.</li>
+</ul>
 <h4>Markdown to HTML</h4>
+<p>Convert markdown text to HTML text.</p>
+<p><strong>Deployed:</strong> locally using Docker.</p>
+<p><strong>Language:</strong> TypeScript.</p>
+<p><strong>Frameworks and libraries:</strong> Nest.js, markdown-it.</p>
+<p><strong>Functionality:</strong> Accepts markdown text and returns HTML result.</p>
 <h4>Translate</h4>
+<p>Translate list of texts either from ukrainian to english or from english to ukrainian.</p>
+<p><strong>Deployed:</strong> locally using Docker.</p>
+<p><strong>Language:</strong> Python.</p>
+<p><strong>Frameworks and libraries:</strong> FastAPI, pydantic, torch, transformers</p>
+<p><strong>Requirements:</strong> Device that can run “Helsinki-NLP/opus-mt-*” models.</p>
+<p><strong>Functionality:</strong></p>
+<ul>
+<li>On the first start preloads models.</li>
+<li>Accepts direction of translation and list of strings</li>
+<li>Returns list of translated strings in the same order as the input list.</li>
+</ul>
 <h3>Chrome extensions</h3>
 <h4>Page notes</h4>
+<p>Locally store notes grouped by pages.</p>
+<p>Chrome extension build on base of the <a href="https://github.com/OlyaFilatova/page-notes">https://github.com/OlyaFilatova/page-notes</a> extension.</p>
+<p>Extension in this repo is extended to use services, namely Parse GitHub Issue service.</p>
+<p><strong>Deployed:</strong> locally as unpacked extension.</p>
+<p><strong>Language:</strong> TypeScript</p>
+<p><strong>Frameworks and libraries:</strong> React.js</p>
+<p><strong>Storage:</strong> IndexedDB, localStorage.</p>
+<p><strong>Requirements:</strong> Parse Github Issue service up and running locally on port 8000.</p>
+<p><strong>Functionality:</strong> When extension Side Panel is opened the form of the current page is shown. Notes can be saved using the form or directly from the page: 1. select text, 2. click “Save Note” that appears near the selection. When textarea value is changed its value is stored in browser cache mapped to the current page URL.</p>
+<p>Notes from other pages saved previously are listed below the block of the current page. Notes can be deleted. The list can be searched through. The list has pagination by 10/25/50 pages per page. Notes are stored using IndexedDB.</p>
+<p>Button <strong>Set current GitHub issue</strong> opens a form using which it is possible to parse list of links from GitHub issue. These links will be listed under the form split by status:</p>
+<ul>
+<li><strong>planned</strong> - checkbox unchecked in the list in the issue</li>
+<li><strong>in progress</strong> - link satisfies rules for planned status and has notes stored in the extension</li>
+<li><strong>done</strong> - checkbox checked in the list in the issue.</li>
+</ul>
+<p>Button export JSON exports pages and their notes in JSON format. Pages are exported under their link, but if a current GitHub issue is configured all pages that are listed in the issue will be grouped and exported under the issue link instead.</p>
+<p>Clear all button after confirmation clears all stored notes from the browser DB.</p>
 <h3>scripts</h3>
 <h4>experience assemble</h4>
+<p><strong>Language:</strong> TypeScript.</p>
+<p><strong>Functionality:</strong> Reads files from the <code>data/experience</code> folder and generates the <code>website/data/experience.ts</code> file that is used for loading “Experience Chronology” page.</p>
 <h4>thoughts assemble</h4>
+<p><strong>Language:</strong> TypeScript.</p>
+<p><strong>Functionality:</strong> Reads list.txt file from the <code>data/knowledge-sources</code> folder. Loads data from each of the folders in the list, changes updatedAt using git file date for content.json files, stores files under <code>website/assets/knowledge-sources</code> folder. Updates <code>website/data/knowledge-sources-index.ts</code>: increments bustCache, indexes files by their status, type, access, categories.</p>
 <h4>projects assemble</h4>
+<p><strong>Language:</strong> TypeScript.</p>
+<p><strong>Functionality:</strong> Reads files from <code>data/projects</code> folder for each of the website languages. Converts files from markdown format to html. Stores new files under <code>website/assets/projects</code> folder. Generates index at <code>website/data/projects-index.ts</code>.</p>
 <h4>format notes</h4>
+<p>Translate notes exported from Page Notes extension and prepare for website.</p>
+<p><strong>Languages:</strong> Python.</p>
+<p><strong>Libraries:</strong> requests.</p>
+<p><strong>Prerequisites:</strong> Export files from the Page Notes extension.</p>
+<p><strong>Requirements:</strong> translate service up and running locally at port 8001.</p>
+<p><strong>Functionality:</strong> Reads files from the <code>scripts/pytools/notes</code> folder. Assumes that content is in english. For each page from the files sends notes to the translate service and stores in a separate folder <code>{file_idx}-{page_idx}</code> under the <code>scripts/pytools/formatted</code> folder. Result is split into <code>meta.json</code> and <code>content.json</code> files. <code>meta.json</code> contains meta data like url, while <code>content.json</code> contains list of the translated notes.</p>
+<p>After manual check of the translations the files are moved into the <code>data/knowledge-sources</code> folder.</p>
 <h3>GitHub Actions</h3>
 <h4>Deploy GitHub Pages</h4>
+<p>Builds and deploys /website on GitHub Pages.</p>
