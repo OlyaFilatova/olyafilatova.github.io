@@ -7,7 +7,8 @@
   },
   "categories": [
     "STOMP",
-    "event-driven"
+    "event-driven",
+    "distributed"
   ],
   "access": "free",
   "link": "https://stomp.github.io/stomp-specification-1.2.html"

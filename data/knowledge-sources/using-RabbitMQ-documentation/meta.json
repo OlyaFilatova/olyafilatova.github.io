@@ -2,13 +2,14 @@
   "kind": "documentation",
   "status": "in-progress-first-read",
   "title": {
-    "uk": "RabbitMQ documentation - using RabbitMQ",
-    "en": "RabbitMQ documentation - using RabbitMQ"
+    "uk": "RabbitMQ 4.3 documentation - using RabbitMQ",
+    "en": "RabbitMQ 4.3 documentation - using RabbitMQ"
   },
   "access": "free",
   "categories": [
     "RabbitMQ",
-    "event-driven"
+    "event-driven",
+    "distributed"
   ],
   "link": "https://github.com/OlyaFilatova/olyafilatova.github.io/issues/6"
 }
