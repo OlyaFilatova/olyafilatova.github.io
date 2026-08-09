@@ -1,0 +1,85 @@
+# python -m scripts.pytools.seed
+from pathlib import Path
+
+from shared.load_env import load_dotenv
+
+load_dotenv(Path(__file__).resolve().parent / ".env")
+
+import asyncio
+from functools import reduce
+import json
+import os
+
+from services.skill_manager.models.skill import Familiarity, SkillType, Temperature
+from services.skill_manager.repositories.skill import SkillRepository
+from services.skill_manager.repositories.skill_synonym import SkillSynonymRepository
+
+def literal_to_skill_type(text: str):
+  if text == "Approach":
+    return SkillType.APPROACH
+  elif text == "Application":
+    return SkillType.APPLICATION
+  elif text == "Non-skill":
+    return SkillType.NON_SKILL
+  else:
+    raise Exception(f"Unknown skill \"{text}\"")
+
+def literal_to_familiarity(text: str):
+  if text == "know-in-depth":
+    return Familiarity.KNOW_IN_DEPTH
+  elif text == "study":
+    return Familiarity.STUDY
+  elif text == "actively-using":
+    return Familiarity.ACTIVELY_STUDYING
+  elif text == "know-a-bit":
+    return Familiarity.KNOW_A_BIT
+  elif text == "unknown":
+    return Familiarity.UNKNOWN
+  else:
+    raise Exception(f"Unknown familiarity \"{text}\"")
+  
+def literal_to_temperature(text: str):
+  if text == "interested":
+    return Temperature.INTERESTED
+  elif text == "meh":
+    return Temperature.MEH
+  elif text == "avoid!":
+    return Temperature.AVOID
+  else:
+    raise Exception(f"Unknown skill \"{text}\"")
+
+async def seed():
+  with open(Path(__file__).resolve().parent / 'seed_data/prefill-skills.json') as f:
+    prefill_items = json.load(f)
+
+  existing_skills = await SkillRepository().get_all()
+  if existing_skills:
+    return
+
+  cache = []
+
+  def remove_duplicates(aggregator, item):
+    if not item["normalized_text"] in cache:
+      cache.append(item["normalized_text"])
+      aggregator.append(item)
+    else:
+      print(item)
+    return aggregator
+  
+  skills = reduce(remove_duplicates, [{
+    "text": item["text"],
+    "normalized_text": item["normalizedText"],
+    "type": literal_to_skill_type(item["type"]),
+    "familiarity": literal_to_familiarity(item["familiarity"]),
+    "temperature": literal_to_temperature(item["temperature"]),
+  } for item in prefill_items if 'synonymSkillId' not in item], [])
+  synonyms = [{
+    "text": item["text"],
+    "normalized_text": item["normalizedText"],
+    "origin_normalized_text": item["synonymSkillId"] if "synonymSkillId" in item else item["normalizedText"],
+  } for item in prefill_items]
+
+  await SkillRepository().create_many(skills)
+  await SkillSynonymRepository().create_many(synonyms)
+
+asyncio.run(seed())

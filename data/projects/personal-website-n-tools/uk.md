@@ -18,6 +18,9 @@
 
 **Моделі:** Helsinki-NLP/opus-mt-en-uk, Helsinki-NLP/opus-mt-uk-en.
 
+<details>
+  <summary>Підпроєкти...</summary>
+
 ## Підпроєкти
 
 ### Вебсайт
@@ -30,7 +33,7 @@
 
 **Фреймворки та бібліотеки:** React.js (Functional Components), html-react-parser, zod.
 
-**Сховище:** IndexedDB, localStorage.
+**Сховище:** localStorage, static assets.
 
 **Підтримує дві мови:** українську та англійську. Після перемикання мови обрана мова зберігається в кеші браузера.
 
@@ -167,3 +170,5 @@ Chrome-розширення побудоване на основі репози�
 #### Deploy GitHub Pages
 
 Збирає та розгортає `/website` на GitHub Pages.
+
+</details>

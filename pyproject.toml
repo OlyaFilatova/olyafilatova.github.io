@@ -9,6 +9,7 @@ members = [
   "shared",
   "scripts/pytools"
 ]
+exclude = ["services/md_to_html"]
 
 [dependency-groups]
 dev = [
@@ -34,4 +35,4 @@ python_version = "3.13"
 strict = true
 
 [tool.poe.tasks]
-install_all = "uv sync --package common --package parse-github-issue --package my-platform --package tools --package translate"
+install_all = "uv sync --package common --package parse-github-issue --package my-platform --package tools --package translate --package parse-job-posting --package skill-manager"

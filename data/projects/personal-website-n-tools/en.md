@@ -18,8 +18,10 @@ The main goal of this project is to store my notes and thoughts without addition
 
 **Models:** Helsinki-NLP/opus-mt-en-uk, Helsinki-NLP/opus-mt-uk-en.
 
-## Subprojects
+<details>
+  <summary>Subprojects...</summary>
 
+## Subprojects
 ### Website
 
 Personal website.
@@ -30,7 +32,7 @@ Personal website.
 
 **Frameworks and libraries:** React.js with Functional Components, html-react-parser, zod.
 
-**Storage:** IndexedDB, localStorage.
+**Storage:** localStorage, static assets.
 
 **Supported languages:** ukrainian and english. After using the language switch, the chosen language is stored in the browser cache.
 
@@ -166,3 +168,4 @@ After manual check of the translations the files are moved into the `data/knowle
 #### Deploy GitHub Pages
 
 Builds and deploys /website on GitHub Pages.
+</details>
