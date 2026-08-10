@@ -10,10 +10,9 @@ load_dotenv()
 app = FastAPI()
 
 SERVICES = {
-  "job_profiles": os.getenv("JOB_PARSER_SERVICE"),
+  "job-postings": os.getenv("JOB_PARSER_SERVICE"),
   "skills": os.getenv("SKILL_MANAGER_SERVICE"),
 }
-
 
 @app.api_route(
   "/api/{service}/{path:path}",

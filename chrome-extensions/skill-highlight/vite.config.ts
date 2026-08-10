@@ -1,7 +1,7 @@
 import { copyFileSync, mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import react from "@vitejs/plugin-react";
-import { defineConfig, type UserConfig } from "vite";
+import { defineConfig, loadEnv, type UserConfig } from "vite";
 
 const staticFiles = [
   ["extension/manifest.json", "dist/manifest.json"],
@@ -49,9 +49,14 @@ const buildsByMode: Record<string, BuildConfig> = {
 };
 
 export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
   const build = buildsByMode[mode] ?? buildsByMode.background;
 
   return {
+    define: {
+      'import.meta': 'process',
+      API_URL: `\"${env.VITE_GATEWAY}\"`,
+    },
     plugins: [
       react(),
       ...(mode === "background" ? [copyStaticExtensionFiles()] : [])
