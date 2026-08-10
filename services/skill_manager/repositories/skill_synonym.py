@@ -18,7 +18,7 @@ class SkillSynonymRepository(BaseRepository):
       result = await session.execute(stmt)
       return result.scalars().first()
 
-  async def filter_by_normalized_text(self, normalized_text: str) -> list[SkillSynonym] | None:
+  async def get_by_key(self, normalized_text: str) -> list[SkillSynonym]:
     async with postgresql_manager.get_async_session() as session:
       stmt = select(SkillSynonym).filter(SkillSynonym.normalized_text == normalized_text)
       result = await session.execute(stmt)

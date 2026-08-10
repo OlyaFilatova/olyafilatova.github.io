@@ -12,11 +12,17 @@ class SkillRepository(BaseRepository):
   def __init__(self) -> None:
     super().__init__(Skill)
 
-  async def get_by_normalized_text(self, normalized_text: str) -> Skill | None:
+  async def get_by_key(self, normalized_text: str) -> Skill | None:
     async with postgresql_manager.get_async_session() as session:
       stmt = select(Skill).filter(Skill.normalized_text == normalized_text)
       result = await session.execute(stmt)
       return result.scalars().first()
+
+  async def get_by_keys(self, keys: list[str]) -> list[Skill]:
+    async with postgresql_manager.get_async_session() as session:
+      stmt = select(Skill).filter(Skill.normalized_text.in_(keys))
+      result = await session.execute(stmt)
+      return [*result.scalars().all()]
 
   async def get_all(self) -> list[Skill] | None:
     async with postgresql_manager.get_async_session() as session:

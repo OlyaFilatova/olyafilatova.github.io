@@ -4,7 +4,9 @@ from typing import cast
 from fastapi import FastAPI
 from pydantic import BaseModel
 
+
 from .models.skill import Familiarity, SkillType, Temperature
+from .repositories.skill import SkillRepository
 from .repositories.skill_synonym import SkillSynonymRepository
 
 app = FastAPI()
@@ -47,6 +49,12 @@ class CreateSkillRequest(BaseModel):
 class HealthResponse(BaseModel):
   status: str
 
+class SkillsRequest(BaseModel):
+  skill_ids: list[str]
+
+class SkillsResponse(BaseModel):
+  skills: list[Skill]
+
 
 @app.get("/health")
 def health() -> HealthResponse:
@@ -66,5 +74,24 @@ async def get_all_skill_synonyms() -> SkillSynonymsResponse:
         updated_at=cast(datetime.datetime, synonym.updated_at),
       )
       for synonym in synonyms
+    ]
+  )
+
+
+@app.get("/skills")
+async def get_skills(req: SkillsRequest) -> SkillsResponse:
+  skills = await SkillRepository().get_by_keys(req.skill_ids)
+  return SkillsResponse(
+    skills=[
+      Skill(
+        normalized_text=str(skill.normalized_text),
+        text=str(skill.text),
+        type=skill.type,
+        familiarity=skill.familiarity,
+        temperature=skill.temperature,
+        created_at=cast(datetime.datetime, skill.created_at),
+        updated_at=cast(datetime.datetime, skill.updated_at),
+      )
+      for skill in skills
     ]
   )

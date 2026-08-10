@@ -1,5 +1,6 @@
+import datetime
 import os
-from typing import cast
+from typing import Any, TypedDict, cast
 
 import requests
 from fastapi import FastAPI
@@ -13,7 +14,7 @@ app = FastAPI()
 
 
 class JobPostingResponse(BaseModel):
-  skills: list[str]
+  skills: list[tuple[Skill, str]]
 
 
 class JobPostingRequest(BaseModel):
@@ -27,24 +28,52 @@ class HealthResponse(BaseModel):
   status: str
 
 
+class Skill(TypedDict):
+  normalized_text: str
+  text: str
+  type: Any # TODO move types to the shared package
+  familiarity: Any
+  temperature: Any
+  created_at: datetime.datetime
+  updated_at: datetime.datetime
+
+
+class SkillSynonym(TypedDict):
+  text: str
+  origin_normalized_text: str
+  normalized_text: str
+  created_at: datetime.datetime
+  updated_at: datetime.datetime
+
+
 @app.get("/health")
 def health() -> HealthResponse:
   return HealthResponse(status="ok")
 
 
-async def get_skill_synonyms() -> list[str]:
+async def get_skill_synonyms() -> list[SkillSynonym]:
   url = os.getenv("SKILLS_MANAGER_SERVICE")
   url = f"{url}synonyms"
 
   response = requests.get(url)
 
-  return [skill["normalized_text"] for skill in response.json()["skills"]]
+  return response.json()["skills"]
 
 
-async def parse_skills(body: str) -> list[str]:
+async def get_skills(skill_ids: list[str]) -> list[Skill]:
+  url = os.getenv("SKILLS_MANAGER_SERVICE")
+  url = f"{url}skills"
+
+  response = requests.get(url, json={
+    "skill_ids": skill_ids
+  })
+
+  return response.json()["skills"]
+
+
+async def parse_skills(body: str, skill_synonyms: list[str]) -> list[str]:
   url = os.getenv("PARSE_SKILLS_SERVICE")
   url = f"{url}parse"
-  skill_synonyms = await get_skill_synonyms()
 
   payload = {"body": body, "skill_synonyms": skill_synonyms}
 
@@ -72,22 +101,39 @@ async def process(request: JobPostingRequest) -> JobPostingResponse:
       await JobPostingSkillRepository().delete_by_url(request.url)
       await repo.update(request.url, request.body)
   else:
-    print(
-      await repo.create(
-        {
-          "body": request.body,
-          "category": request.category,
-          "company": request.company,
-          "url": request.url,
-        }
-      )
+    await repo.create(
+      {
+        "body": request.body,
+        "category": request.category,
+        "company": request.company,
+        "url": request.url,
+      }
     )
 
-  skills = await JobPostingSkillRepository().get_by_url(request.url)
+  job_skills = await JobPostingSkillRepository().get_by_url(request.url)
 
-  if not len(skills):
-    matched_skills = await parse_skills(request.body)
+  skill_synonyms = await get_skill_synonyms()
+  if not len(job_skills):
+    matched_skills = await parse_skills(
+      request.body, [skill["normalized_text"] for skill in skill_synonyms]
+    )
+    
     await JobPostingSkillRepository().create_many(request.url, matched_skills)
-    skills = await JobPostingSkillRepository().get_by_url(request.url)
+    job_skills = await JobPostingSkillRepository().get_by_url(request.url)
 
-  return JobPostingResponse(skills=[str(skill.skill_normalized_text) for skill in skills])
+  skill_keys = [str(skill.skill_normalized_text) for skill in job_skills]
+  main_skill_mapping = [
+    (synonym["origin_normalized_text"], synonym["normalized_text"])
+    for synonym in skill_synonyms
+    if synonym["normalized_text"] in skill_keys
+  ]
+  skills = await get_skills(list(set([mapping[0] for mapping in main_skill_mapping])))
+  skill_dict = { skill["normalized_text"] : skill for skill in skills}
+  print('skill_dict', skill_dict)
+
+  main_skill_mapping = [(
+    skill_dict[mapping[0]], mapping[1]
+  ) for mapping in main_skill_mapping]
+  print('main_skill_mapping', main_skill_mapping)
+
+  return JobPostingResponse(skills=main_skill_mapping)
