@@ -45,16 +45,14 @@ export function getTextNodes(root: HTMLElement): Text[] {
   return nodes;
 }
 
-export function unwrapHighlights(root: HTMLElement): void {
-  root.querySelectorAll<HTMLElement>(HIGHLIGHT_SELECTOR).forEach((highlight) => {
-    unwrapElement(highlight);
-  });
-}
-
 export function unwrapElements(root: HTMLElement, selector: string): void {
   root.querySelectorAll<HTMLElement>(selector).forEach((element) => {
     unwrapElement(element);
   });
+}
+
+export function unwrapHighlights(root: HTMLElement): void {
+  unwrapElements(root, HIGHLIGHT_SELECTOR);
 }
 
 function unwrapElement(element: HTMLElement): void {
