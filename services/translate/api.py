@@ -1,19 +1,15 @@
 from contextlib import asynccontextmanager
 from enum import Enum
+from typing import Any, Generator
 
 import torch
 from fastapi import FastAPI
 from pydantic import BaseModel
 from transformers import MarianMTModel, MarianTokenizer
-
 from translate.config import MODEL_EN_TO_UK, MODEL_UK_TO_EN
 
 DEVICE = (
-  "mps"
-  if torch.backends.mps.is_available()
-  else "cuda"
-  if torch.cuda.is_available()
-  else "cpu"
+  "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu"
 )
 
 
@@ -34,9 +30,11 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-class TranslationDirectionEnum(str, Enum):
-    EN_TO_UK = "en_to_uk"
-    UK_TO_EN = "uk_to_en"
+
+class TranslationDirectionEnum(Enum):
+  EN_TO_UK = "en_to_uk"
+  UK_TO_EN = "uk_to_en"
+
 
 class TranslationRequest(BaseModel):
   texts: list[str]
@@ -46,18 +44,26 @@ class TranslationRequest(BaseModel):
 class TranslationResponse(BaseModel):
   translations: list[str]
 
+
+class HealthResponse(BaseModel):
+  status: str
+  device: str
+  model_uk_to_en: str
+  model_en_to_uk: str
+
+
 @app.get("/health")
-def health():
-  return {
-    "status": "ok",
-    "device": DEVICE,
-    "model_uk_to_en": MODEL_UK_TO_EN,
-    "model_en_to_uk": MODEL_EN_TO_UK,
-  }
+def health() -> HealthResponse:
+  return HealthResponse(
+    status="ok",
+    device=DEVICE,
+    model_uk_to_en=MODEL_UK_TO_EN,
+    model_en_to_uk=MODEL_EN_TO_UK,
+  )
 
 
 @app.post("/translate", response_model=TranslationResponse)
-def translate(req: TranslationRequest):
+def translate(req: TranslationRequest) -> TranslationResponse:
 
   tokenizer, model = app.state[req.direction]
 

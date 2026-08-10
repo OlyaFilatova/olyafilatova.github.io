@@ -4,10 +4,12 @@ from typing import TypedDict
 from dotenv import load_dotenv
 
 loaded = False
-GITHUB_TOKEN = ''
+GITHUB_TOKEN = ""
+
 
 class Env(TypedDict):
   GITHUB_TOKEN: str
+
 
 def get_env() -> Env:
   global loaded, GITHUB_TOKEN

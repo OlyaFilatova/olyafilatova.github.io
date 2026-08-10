@@ -23,6 +23,8 @@ dev = [
 [tool.ruff]
 line-length = 100
 target-version = "py313"
+ignore = ["E402"]
+indent-width = 2
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
@@ -33,6 +35,10 @@ testpaths = ["tests"]
 [tool.mypy]
 python_version = "3.13"
 strict = true
+explicit_package_bases = true
 
 [tool.poe.tasks]
 install_all = "uv sync --package common --package parse-github-issue --package my-platform --package tools --package translate --package parse-job-posting --package skill-manager"
+lint = "ruff check ."
+format = "ruff format ."
+mypy = "mypy ."

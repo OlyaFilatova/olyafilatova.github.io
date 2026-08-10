@@ -1,25 +1,24 @@
-from typing import Optional, Dict, Any
+from typing import Any
 
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
-from .base import BaseRepository
-
-from ..models.skill_synonym import SkillSynonym
 from ..database.postgres_manager import postgresql_manager
+from ..models.skill_synonym import SkillSynonym
+from .base import BaseRepository
 
 
 class SkillSynonymRepository(BaseRepository):
-  def __init__(self):
+  def __init__(self) -> None:
     super().__init__(SkillSynonym)
 
-  async def get_by_text(self, text: str) -> Optional[SkillSynonym]:
+  async def get_by_text(self, text: str) -> SkillSynonym | None:
     async with postgresql_manager.get_async_session() as session:
       stmt = select(SkillSynonym).filter(SkillSynonym.text == text)
       result = await session.execute(stmt)
       return result.scalars().first()
 
-  async def filter_by_normalized_text(self, normalized_text: str) -> Optional[list[SkillSynonym]]:
+  async def filter_by_normalized_text(self, normalized_text: str) -> list[SkillSynonym] | None:
     async with postgresql_manager.get_async_session() as session:
       stmt = select(SkillSynonym).filter(SkillSynonym.normalized_text == normalized_text)
       result = await session.execute(stmt)
@@ -31,7 +30,7 @@ class SkillSynonymRepository(BaseRepository):
       result = await session.execute(stmt)
       return [*result.scalars().all()]
 
-  async def create(self, data: Dict[str, Any]) -> SkillSynonym:
+  async def create(self, data: dict[str, Any]) -> SkillSynonym:
     async with postgresql_manager.get_async_session() as session:
       try:
         item = SkillSynonym(**data)
@@ -41,9 +40,9 @@ class SkillSynonymRepository(BaseRepository):
         return item
       except IntegrityError as e:
         await session.rollback()
-        raise ValueError(f"SkillSynonym creation failed: {e}")
+        raise ValueError(f"SkillSynonym creation failed: {e}") from e
 
-  async def create_many(self, items_data: list[Dict[str, Any]]) -> None:
+  async def create_many(self, items_data: list[dict[str, Any]]) -> None:
     async with postgresql_manager.get_async_session() as session:
       try:
         items = [SkillSynonym(**data) for data in items_data]
@@ -51,4 +50,4 @@ class SkillSynonymRepository(BaseRepository):
         await session.commit()
       except IntegrityError as e:
         await session.rollback()
-        raise ValueError(f"SkillSynonym batch creation failed: {e}")
+        raise ValueError(f"SkillSynonym batch creation failed: {e}") from e

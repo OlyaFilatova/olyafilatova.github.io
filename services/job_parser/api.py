@@ -1,18 +1,18 @@
 import os
 
-from fastapi import FastAPI
-from pydantic import BaseModel
 import requests
-
+from fastapi import FastAPI
 from job_parser.repositories.job import JobPostingRepository
 from job_parser.repositories.job_history import JobPostingHistoryRepository
 from job_parser.repositories.job_skill import JobPostingSkillRepository
-
+from pydantic import BaseModel
 
 app = FastAPI()
 
+
 class JobPostingResponse(BaseModel):
   skills: list[str]
+
 
 class JobPostingRequest(BaseModel):
   body: str
@@ -20,11 +20,15 @@ class JobPostingRequest(BaseModel):
   company: str
   url: str
 
+
+class HealthResponse(BaseModel):
+  status: str
+
+
 @app.get("/health")
-def health():
-  return {
-    "status": "ok"
-  }
+def health() -> HealthResponse:
+  return HealthResponse(status="ok")
+
 
 async def get_skill_synonyms() -> list[str]:
   url = os.getenv("SKILLS_MANAGER_SERVICE")
@@ -33,17 +37,14 @@ async def get_skill_synonyms() -> list[str]:
   response = requests.get(url)
 
   return [skill["normalized_text"] for skill in response.json()["skills"]]
-  
 
-async def parse_skills(body) -> list[str]:
+
+async def parse_skills(body: str) -> list[str]:
   url = os.getenv("PARSE_SKILLS_SERVICE")
   url = f"{url}parse"
   skill_synonyms = await get_skill_synonyms()
 
-  payload = {
-    "body": body,
-    "skill_synonyms": skill_synonyms
-  }
+  payload = {"body": body, "skill_synonyms": skill_synonyms}
 
   response = requests.post(url, json=payload)
 
@@ -52,30 +53,36 @@ async def parse_skills(body) -> list[str]:
 
 
 @app.post("/process-job-posting", response_model=JobPostingResponse)
-async def process(request: JobPostingRequest):
+async def process(request: JobPostingRequest) -> JobPostingResponse:
   repo = JobPostingRepository()
   existing_job = await repo.get_by_url(request.url)
-  if (existing_job):
+  if existing_job:
     if str(existing_job.body) != request.body:
-      await JobPostingHistoryRepository().create({
-        "url": existing_job.url,
-        "body": existing_job.body,
-        "category": existing_job.category,
-        "company": existing_job.company,
-        "created_at": existing_job.updated_at,
-      })
+      await JobPostingHistoryRepository().create(
+        {
+          "url": existing_job.url,
+          "body": existing_job.body,
+          "category": existing_job.category,
+          "company": existing_job.company,
+          "created_at": existing_job.updated_at,
+        }
+      )
       await JobPostingSkillRepository().delete_by_url(request.url)
       await repo.update(request.url, request.body)
   else:
-    print(await repo.create({
-      "body": request.body,
-      "category": request.category,
-      "company": request.company,
-      "url": request.url
-    }))
-  
+    print(
+      await repo.create(
+        {
+          "body": request.body,
+          "category": request.category,
+          "company": request.company,
+          "url": request.url,
+        }
+      )
+    )
+
   skills = await JobPostingSkillRepository().get_by_url(request.url)
-  
+
   if not len(skills):
     matched_skills = await parse_skills(request.body)
     await JobPostingSkillRepository().create_many(request.url, matched_skills)
