@@ -5,6 +5,7 @@ import { defineConfig, loadEnv, type UserConfig } from "vite";
 
 const staticFiles = [
   ["extension/manifest.json", "dist/manifest.json"],
+  ["extension/content/website.css", "dist/content/website.css"],
 ];
 
 function copyStaticExtensionFiles() {

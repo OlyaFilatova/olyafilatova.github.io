@@ -24,4 +24,15 @@ export type ExtensionMessage = {
   category: string;
   company: string;
   url: string;
+} | {
+  type: "SKILLS_PARSED";
+  skills: Array<[{
+    normalized_text: string;
+    text: string
+    type: string;
+    familiarity: string;
+    temperature: string;
+    created_at: string;
+    updated_at: string;
+  }, string]> 
 };

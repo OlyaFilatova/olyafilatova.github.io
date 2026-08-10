@@ -37,18 +37,6 @@ chrome.runtime.onMessage.addListener((
   }
 
   if (
-    message.type === "RELOAD_HIGHLIGHTS" ||
-    message.type === "SKILL_CREATED" ||
-    message.type === "SKILL_UPDATED"
-  ) {
-    broadcastMessage(
-      sender.tab?.id !== undefined ? [sender.tab.id] : [],
-      URLS,
-      { type: "RELOAD_HIGHLIGHTS" }
-    ).catch(console.error);
-  }
-
-  if (
     message.type === "JOB_PAGE_OPENED"
   ) {
     handleSkillStorageMessage({
@@ -65,8 +53,8 @@ chrome.runtime.onMessage.addListener((
     }, response => {
       if (response.ok) {
         void broadcastMessage([], [message.url], {
-          "request": message as any,
-          "response": response.result as any
+          "type": "SKILLS_PARSED",
+          "skills": response.result as any
         });
         sendResponse(response);
       } else {

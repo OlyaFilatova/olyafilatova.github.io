@@ -1,0 +1,89 @@
+.skill-highlight {
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 0 3px;
+  cursor: pointer;
+  line-height: 1.45;
+  text-decoration: none;
+}
+
+.skill-highlight:focus {
+  outline: 2px solid rgba(25, 118, 210, 0.45);
+  outline-offset: 2px;
+}
+
+.skill--new,
+.skill--unknown {
+  color: rgb(55, 65, 81);
+  background: rgba(107, 114, 128, 0.14);
+  border-color: rgb(107, 114, 128);
+}
+
+.skill--know-in-depth {
+  color: rgb(22, 101, 52);
+  background: rgba(74, 222, 128, 0.16);
+  border-color: rgb(34, 197, 94);
+}
+
+.skill--actively-using {
+  color: rgb(20, 83, 45);
+  background: rgba(21, 128, 61, 0.24);
+  border-color: rgb(21, 128, 61);
+}
+
+.skill--study {
+  color: rgb(124, 45, 18);
+  background: rgba(249, 115, 22, 0.22);
+  border-color: rgb(234, 88, 12);
+}
+
+.skill--know-a-bit {
+  color: rgb(120, 53, 15);
+  background: rgba(234, 179, 8, 0.14);
+  border-color: rgb(202, 138, 4);
+}
+
+.skill--temperature-avoid {
+  color: rgb(127, 29, 29);
+  background: rgba(220, 38, 38, 0.18);
+  border-color: rgb(185, 28, 28);
+}
+
+.skill--temperature-cool {
+  color: rgb(30, 64, 175);
+  background: rgba(59, 130, 246, 0.14);
+  border-color: rgb(37, 99, 235);
+}
+
+.skill--temperature-avoid {
+  background: rgba(211, 47, 47, 0.18);
+  border-color: rgb(183, 28, 28);
+  color: #7f1d1d;
+}
+
+.skill--popular-medium {
+  font-weight: 600;
+}
+
+.skill--popular-high {
+  font-weight: 700;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+}
+
+.skill--type-Approach {
+  opacity: .6;
+  font-style: italic;
+  border-style: none;
+}
+
+.skill--type-Non-skill {
+  font-weight: normal !important;
+  background: none;
+  border-color: whitesmoke;
+}
+
+
+a.is-visited {
+  opacity: .5 !important;
+  font-style: italic !important;
+}
