@@ -1,7 +1,7 @@
 import json
 import os
 from pathlib import Path
-from typing import TypedDict
+from typing import TypedDict, cast
 
 import requests
 
@@ -20,7 +20,7 @@ class Page(TypedDict):
   notes: list[str]
 
 
-class Thought(TypedDict):
+class InternationalizedString(TypedDict):
   uk: str
   en: str
 
@@ -28,7 +28,7 @@ class Thought(TypedDict):
 class Meta(TypedDict):
   kind: str
   status: str
-  title: dict
+  title: InternationalizedString
   access: str
   categories: list[str]
   link: str
@@ -49,7 +49,7 @@ def get_files(dir: Path) -> list[Path]:
 def read_file(file: Path) -> dict[str, Mapping]:
   with open(file) as f:
     content = json.load(f)
-    return content["mappingsByUrl"]
+    return cast(dict[str, Mapping], content["mappingsByUrl"])
 
 
 def format_file(mappingsByUrl: dict[str, Mapping]) -> list[Page]:
@@ -71,8 +71,10 @@ def translate_page(page: Page) -> list[tuple[str, str]]:
   return list(zip(notes, translated, strict=True))
 
 
-def format_page(page: Page, notes: list[tuple[str, str]]) -> tuple[Meta, list[Thought]]:
-  thoughts: list[Thought] = [{"uk": uk, "en": en} for en, uk in notes]
+def format_page(
+  page: Page, notes: list[tuple[str, str]]
+) -> tuple[Meta, list[InternationalizedString]]:
+  thoughts: list[InternationalizedString] = [{"uk": uk, "en": en} for en, uk in notes]
 
   return (
     {
@@ -91,7 +93,7 @@ def create_result_path(root_dir: Path, dir_name: str) -> Path:
   return root_dir / "formatted" / f"{dir_name}"
 
 
-def store_page(result_path: Path, page: tuple[Meta, list[Thought]]) -> None:
+def store_page(result_path: Path, page: tuple[Meta, list[InternationalizedString]]) -> None:
   meta, content = page
   os.makedirs(result_path, exist_ok=True)
   with open(result_path / "meta.json", "w") as f:

@@ -1,13 +1,12 @@
 # python -m scripts.pytools.seed
 from pathlib import Path
 
-from shared.load_env import load_dotenv
+from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).resolve().parent / ".env")
 
 import asyncio
 import json
-from functools import reduce
 
 from services.skill_manager.models.skill import Familiarity, SkillType, Temperature
 from services.skill_manager.repositories.skill import SkillRepository
@@ -59,31 +58,7 @@ async def seed() -> None:
   if existing_skills:
     return
 
-  cache = []
-
-  def remove_duplicates(aggregator, item):
-    if item["normalized_text"] not in cache:
-      cache.append(item["normalized_text"])
-      aggregator.append(item)
-    else:
-      print(item)
-    return aggregator
-
-  skills = reduce(
-    remove_duplicates,
-    [
-      {
-        "text": item["text"],
-        "normalized_text": item["normalizedText"],
-        "type": literal_to_skill_type(item["type"]),
-        "familiarity": literal_to_familiarity(item["familiarity"]),
-        "temperature": literal_to_temperature(item["temperature"]),
-      }
-      for item in prefill_items
-      if "synonymSkillId" not in item
-    ],
-    [],
-  )
+  skills = prefill_items
   synonyms = [
     {
       "text": item["text"],

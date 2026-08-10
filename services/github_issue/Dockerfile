@@ -9,8 +9,8 @@ RUN pip install --no-cache-dir uv
 
 COPY pyproject.toml uv.lock ./
 
-COPY services/github_issue/*.py github_issue/
-COPY services/github_issue/*.toml github_issue/
+COPY services/github_issue/*.py services/github_issue/
+COPY services/github_issue/*.toml services/github_issue/
 COPY shared ./shared
 
 # Install only this package and its dependencies
@@ -23,4 +23,4 @@ ENV PATH="/app/.venv/bin:$PATH"
 
 EXPOSE 8000
 
-CMD ["uvicorn", "github_issue.api:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]
+CMD ["uvicorn", "services.github_issue.api:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]

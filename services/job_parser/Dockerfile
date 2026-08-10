@@ -8,7 +8,7 @@ WORKDIR /app
 RUN pip install --no-cache-dir uv
 
 COPY pyproject.toml uv.lock ./
-COPY services/job_parser/*.toml job_parser/
+COPY services/job_parser/*.toml services/job_parser/
 
 # Install only this package and its dependencies
 RUN uv sync \
@@ -17,13 +17,13 @@ RUN uv sync \
     --frozen
 
 COPY shared ./shared
-COPY services/job_parser/*.py job_parser/
-COPY services/job_parser/database/*.py job_parser/database/
-COPY services/job_parser/models/*.py job_parser/models/
-COPY services/job_parser/repositories/*.py job_parser/repositories/
+COPY services/job_parser/*.py services/job_parser/
+COPY services/job_parser/database/*.py services/job_parser/database/
+COPY services/job_parser/models/*.py services/job_parser/models/
+COPY services/job_parser/repositories/*.py services/job_parser/repositories/
 
 ENV PATH="/app/.venv/bin:$PATH"
 
 EXPOSE 9001
 
-CMD ["uvicorn", "job_parser.api:app", "--host", "0.0.0.0", "--port", "9001", "--workers", "2"]
+CMD ["uvicorn", "services.job_parser.api:app", "--host", "0.0.0.0", "--port", "9001", "--workers", "2"]

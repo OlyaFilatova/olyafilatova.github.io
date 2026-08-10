@@ -1,11 +1,13 @@
 import os
+from typing import cast
 
 import requests
 from fastapi import FastAPI
-from job_parser.repositories.job import JobPostingRepository
-from job_parser.repositories.job_history import JobPostingHistoryRepository
-from job_parser.repositories.job_skill import JobPostingSkillRepository
 from pydantic import BaseModel
+
+from .repositories.job import JobPostingRepository
+from .repositories.job_history import JobPostingHistoryRepository
+from .repositories.job_skill import JobPostingSkillRepository
 
 app = FastAPI()
 
@@ -48,7 +50,7 @@ async def parse_skills(body: str) -> list[str]:
 
   response = requests.post(url, json=payload)
 
-  matches = response.json()["matches"]
+  matches = cast(list[str], response.json()["matches"])
   return matches
 
 

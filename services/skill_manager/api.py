@@ -1,10 +1,11 @@
 import datetime
+from typing import cast
 
 from fastapi import FastAPI
 from pydantic import BaseModel
-from skill_manager.repositories.skill_synonym import SkillSynonymRepository
 
 from .models.skill import Familiarity, SkillType, Temperature
+from .repositories.skill_synonym import SkillSynonymRepository
 
 app = FastAPI()
 
@@ -58,11 +59,11 @@ async def get_all_skill_synonyms() -> SkillSynonymsResponse:
   return SkillSynonymsResponse(
     skills=[
       SkillSynonym(
-        text=synonym.text,
-        origin_normalized_text=synonym.origin_normalized_text,
-        normalized_text=synonym.normalized_text,
-        created_at=synonym.created_at,
-        updated_at=synonym.updated_at,
+        text=str(synonym.text),
+        origin_normalized_text=str(synonym.origin_normalized_text),
+        normalized_text=str(synonym.normalized_text),
+        created_at=cast(datetime.datetime, synonym.created_at),
+        updated_at=cast(datetime.datetime, synonym.updated_at),
       )
       for synonym in synonyms
     ]

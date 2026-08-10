@@ -1,10 +1,11 @@
 from fastapi import FastAPI
-from github_issue.extract_links import extract_links
-from github_issue.format_url import format_issue_url
-from github_issue.get_body import get_issue_body
 from pydantic import BaseModel
 
 from shared.load_env import get_env
+
+from .extract_links import extract_links
+from .format_url import format_issue_url
+from .get_body import get_issue_body
 
 app = FastAPI()
 

@@ -17,7 +17,7 @@ RUN apt-get update && \
 RUN pip install --no-cache-dir uv
 
 COPY pyproject.toml uv.lock ./
-COPY services/translate/pyproject.toml translate/
+COPY services/translate/pyproject.toml services/translate/
 # Install only this package and its dependencies
 RUN uv sync \
     --package translate \
@@ -28,10 +28,10 @@ ENV PATH="/app/.venv/bin:$PATH"
 
 EXPOSE 8001
 
-COPY services/translate/docker-entrypoint.sh translate/
+COPY services/translate/docker-entrypoint.sh services/translate/
 
-RUN chmod +x translate/docker-entrypoint.sh
+RUN chmod +x services/translate/docker-entrypoint.sh
 
-COPY services/translate/*.py translate/
+COPY services/translate/*.py services/translate/
 
-ENTRYPOINT ["/app/translate/docker-entrypoint.sh"]
+ENTRYPOINT ["/app/services/translate/docker-entrypoint.sh"]

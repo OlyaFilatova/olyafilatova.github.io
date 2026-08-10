@@ -10,4 +10,4 @@ def get_issue_body(url: str, token: str) -> str:
 
   response = requests.get(url, headers=headers)
 
-  return response.json().get("body")
+  return str(response.json().get("body"))

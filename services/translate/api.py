@@ -1,12 +1,13 @@
+from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from enum import Enum
-from typing import Any, Generator
 
 import torch
 from fastapi import FastAPI
 from pydantic import BaseModel
 from transformers import MarianMTModel, MarianTokenizer
-from translate.config import MODEL_EN_TO_UK, MODEL_UK_TO_EN
+
+from .config import MODEL_EN_TO_UK, MODEL_UK_TO_EN
 
 DEVICE = (
   "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu"
@@ -14,15 +15,15 @@ DEVICE = (
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
-  app.state[TranslationDirectionEnum.EN_TO_UK] = (
+async def lifespan(app: FastAPI) -> AsyncIterator[None]:
+  app.state[TranslationDirectionEnum.EN_TO_UK.value] = (
     MarianTokenizer.from_pretrained("Helsinki-NLP/opus-mt-en-uk"),
-    MarianMTModel.from_pretrained("Helsinki-NLP/opus-mt-en-uk").to(DEVICE),
+    MarianMTModel.from_pretrained("Helsinki-NLP/opus-mt-en-uk"),
   )
 
-  app.state[TranslationDirectionEnum.UK_TO_EN] = (
+  app.state[TranslationDirectionEnum.UK_TO_EN.value] = (
     MarianTokenizer.from_pretrained("Helsinki-NLP/opus-mt-uk-en"),
-    MarianMTModel.from_pretrained("Helsinki-NLP/opus-mt-uk-en").to(DEVICE),
+    MarianMTModel.from_pretrained("Helsinki-NLP/opus-mt-uk-en"),
   )
 
   yield
@@ -65,7 +66,7 @@ def health() -> HealthResponse:
 @app.post("/translate", response_model=TranslationResponse)
 def translate(req: TranslationRequest) -> TranslationResponse:
 
-  tokenizer, model = app.state[req.direction]
+  tokenizer, model = app.state[req.direction.value]
 
   inputs = tokenizer(
     req.texts,

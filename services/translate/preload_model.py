@@ -1,7 +1,7 @@
 import asyncio
 
-from translate.config import MODEL_EN_TO_UK, MODEL_UK_TO_EN
-from translate.loader import async_loader
+from .config import MODEL_EN_TO_UK, MODEL_UK_TO_EN
+from .loader import async_loader
 
 models = {MODEL_EN_TO_UK, MODEL_UK_TO_EN}
 

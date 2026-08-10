@@ -1,4 +1,5 @@
 import asyncio
+from typing import Any
 
 from transformers import MarianMTModel, MarianTokenizer
 
@@ -12,5 +13,5 @@ def loader(model: str) -> None:
   print("Model ready.")
 
 
-async def async_loader(model_name: str):
+async def async_loader(model_name: str) -> Any:
   return await asyncio.to_thread(loader, model_name)
