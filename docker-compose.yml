@@ -112,6 +112,23 @@ services:
       - "9002:9002"
     restart: unless-stopped
 
+  job_skills_gateway:
+    build: 
+      context: .
+      dockerfile: services/_skills_gateway/Dockerfile
+    container_name: job-skills-gateway
+    env_file:
+      - .env
+      - services/_skills_gateway/.env
+    depends_on:
+      - parse_job_posting
+      - skill_manager
+    networks:
+      - default
+    ports:
+      - "9000:9000"
+    restart: unless-stopped
+
 volumes:
   huggingface_cache:
   postgres_data:

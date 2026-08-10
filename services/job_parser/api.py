@@ -13,10 +13,6 @@ from .repositories.job_skill import JobPostingSkillRepository
 app = FastAPI()
 
 
-class JobPostingResponse(BaseModel):
-  skills: list[tuple[Skill, str]]
-
-
 class JobPostingRequest(BaseModel):
   body: str
   category: str
@@ -31,11 +27,15 @@ class HealthResponse(BaseModel):
 class Skill(TypedDict):
   normalized_text: str
   text: str
-  type: Any # TODO move types to the shared package
+  type: Any  # TODO move types to the shared package
   familiarity: Any
   temperature: Any
   created_at: datetime.datetime
   updated_at: datetime.datetime
+
+
+class JobPostingResponse(BaseModel):
+  skills: list[tuple[Skill, str]]
 
 
 class SkillSynonym(TypedDict):
@@ -64,9 +64,7 @@ async def get_skills(skill_ids: list[str]) -> list[Skill]:
   url = os.getenv("SKILLS_MANAGER_SERVICE")
   url = f"{url}skills"
 
-  response = requests.get(url, json={
-    "skill_ids": skill_ids
-  })
+  response = requests.get(url, json={"skill_ids": skill_ids})
 
   return response.json()["skills"]
 
@@ -117,7 +115,7 @@ async def process(request: JobPostingRequest) -> JobPostingResponse:
     matched_skills = await parse_skills(
       request.body, [skill["normalized_text"] for skill in skill_synonyms]
     )
-    
+
     await JobPostingSkillRepository().create_many(request.url, matched_skills)
     job_skills = await JobPostingSkillRepository().get_by_url(request.url)
 
@@ -128,12 +126,10 @@ async def process(request: JobPostingRequest) -> JobPostingResponse:
     if synonym["normalized_text"] in skill_keys
   ]
   skills = await get_skills(list(set([mapping[0] for mapping in main_skill_mapping])))
-  skill_dict = { skill["normalized_text"] : skill for skill in skills}
-  print('skill_dict', skill_dict)
+  skill_dict = {skill["normalized_text"]: skill for skill in skills}
+  print("skill_dict", skill_dict)
 
-  main_skill_mapping = [(
-    skill_dict[mapping[0]], mapping[1]
-  ) for mapping in main_skill_mapping]
-  print('main_skill_mapping', main_skill_mapping)
+  main_skill_mapping = [(skill_dict[mapping[0]], mapping[1]) for mapping in main_skill_mapping]
+  print("main_skill_mapping", main_skill_mapping)
 
   return JobPostingResponse(skills=main_skill_mapping)

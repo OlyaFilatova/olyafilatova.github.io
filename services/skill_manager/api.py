@@ -4,7 +4,6 @@ from typing import cast
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-
 from .models.skill import Familiarity, SkillType, Temperature
 from .repositories.skill import SkillRepository
 from .repositories.skill_synonym import SkillSynonymRepository
@@ -49,8 +48,10 @@ class CreateSkillRequest(BaseModel):
 class HealthResponse(BaseModel):
   status: str
 
+
 class SkillsRequest(BaseModel):
   skill_ids: list[str]
+
 
 class SkillsResponse(BaseModel):
   skills: list[Skill]

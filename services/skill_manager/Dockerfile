@@ -12,7 +12,7 @@ COPY services/skill_manager/*.toml services/skill_manager/
 
 # Install only this package and its dependencies
 RUN uv sync \
-    --package parse-job-posting \
+    --package skill-manager \
     --no-dev \
     --frozen
 

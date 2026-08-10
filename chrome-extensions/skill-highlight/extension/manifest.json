@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Highlight skills",
+  "version": "0.2.0",
+  "description": "Highlight skills on Job pages.",
+  "permissions": ["storage", "sidePanel", "activeTab", "scripting", "tabs"],
+  "host_permissions": [],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "side_panel": {
+    "default_path": "extension/side_panel/index.html"
+  },
+  "action": {
+    "default_title": "Highligh Skills"
+  }
+}
