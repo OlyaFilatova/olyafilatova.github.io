@@ -80,10 +80,8 @@ export function highlightSkillsInElement(root: HTMLElement, skills: UniqueSkillF
   const matcher = createSkillMatcher(skills);
   const matchedByText = new Map<string, UniqueSkillForMatching>();
   const textNodes = getTextNodes(root);
-  console.log('textNodes', textNodes)
   for (const textNode of textNodes) {
     for (const match of wrapMatchesInTextNode(textNode, matcher)) {
-      console.log('wrapping')
       matchedByText.set(match.skill.normalizedText, match.skill);
     }
   }

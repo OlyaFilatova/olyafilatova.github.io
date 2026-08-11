@@ -9,7 +9,7 @@ members = [
   "shared",
   "scripts/pytools"
 ]
-exclude = ["services/md_to_html"]
+exclude = ["services/md_to_html", "services/job_matcher", "services/skill_synonyms"]
 
 [dependency-groups]
 dev = [
@@ -38,7 +38,7 @@ strict = true
 explicit_package_bases = true
 
 [tool.poe.tasks]
-install_all = "uv sync --package common --package parse-github-issue --package my-platform --package tools --package translate --package parse-job-posting --package skill-manager"
+install_all = "uv sync --package common --package parse-github-issue --package my-platform --package tools --package translate --package parse-job-posting --package skills --package job-skills"
 lint = "ruff check ."
 format = "ruff format ."
 mypy = "mypy ."

@@ -56,7 +56,6 @@ class SkillsRequest(BaseModel):
 class SkillsResponse(BaseModel):
   skills: list[Skill]
 
-
 @app.get("/health")
 def health() -> HealthResponse:
   return HealthResponse(status="ok")

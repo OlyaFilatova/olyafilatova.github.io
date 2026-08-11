@@ -18,6 +18,32 @@ export interface JobPostingData {
   company: string;
 }
 
+export interface SkillFilters {
+  currentPage: number;
+  pageSize: number;
+  search: string;
+  category: string;
+  type: SkillType;
+  familiarity: Familiarity; 
+  temperature: Temperature;
+  sort: string;
+  jobUrl?: string;
+}
+
+export interface SkillAggregate {
+  normalizedText: string;
+  displayText: string;
+  familiarity: Familiarity;
+  temperature: Temperature;
+  type: SkillType;
+  normalizedSynonyms: string[];
+  synonymTexts: string[];
+  categories: string[];
+  mentions: string[];
+  companyCount: number;
+  companies: string[];
+}
+
 export type ExtensionMessage = {
   type: "JOB_PAGE_OPENED";
   body: string;
@@ -35,4 +61,6 @@ export type ExtensionMessage = {
     created_at: string;
     updated_at: string;
   }, string]> 
+} | {
+  type: "RELOAD_HIGHLIGHTS"
 };

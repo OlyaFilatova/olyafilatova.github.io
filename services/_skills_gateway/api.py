@@ -11,7 +11,8 @@ app = FastAPI()
 
 SERVICES = {
   "job-postings": os.getenv("JOB_PARSER_SERVICE"),
-  "skills": os.getenv("SKILL_MANAGER_SERVICE"),
+  "skills": os.getenv("SKILLS_SERVICE"),
+  "job-skills": os.getenv("JOB_SKILLS_SERVICE"),
 }
 
 @app.api_route(

@@ -1,8 +1,10 @@
-import { JobPostingData } from "./types";
+import { JobPostingData, SkillAggregate, SkillFilters } from "./types";
 
 
 interface SkillRepository {
   getJobPostingSkills(jobPostingData: JobPostingData): Promise<any>;
+  getSkills(skillFilters: SkillFilters): Promise<SkillAggregate[]>;
+  getCategories(): Promise<string[]>
 }
 
 type StorageResponse<T = unknown> = { ok: true; result: T } | { ok: false; error: string };
@@ -35,6 +37,47 @@ class ChromeSkillRepository implements SkillRepository {
 
     return (await response.json())["skills"];
   }
+
+  async getCategories(): Promise<string[]> {
+    const response = await fetch(`${API_URL}/api/job-skills/categories`, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      }
+    });
+
+    return (await response.json());
+  }
+
+  async getSkills(skillFilters: SkillFilters): Promise<SkillAggregate[]> {
+    const params = new URLSearchParams();
+    Object.entries(skillFilters).filter(entry => !!entry[1]).forEach(([key, value]) => params.append(key, value.toString()));
+
+    const response = await fetch(`${API_URL}/api/job-skills/filter?${params.toString()}`, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      }
+    });
+
+    const result = await response.json();
+
+    return [result["total_rows"], result["skills"].map((skill: any) => ({
+      normalizedText: skill.normalized_text,
+      displayText: skill.display_text,
+      familiarity: skill.familiarity,
+      temperature: skill.temperature,
+      type: skill.type,
+      normalizedSynonyms: skill.synonyms,
+      synonymTexts: skill.synonym_texts,
+      categories: skill.categories,
+      mentions: skill.urls,
+      companyCount: skill.company_count,
+      companies: skill.companies,
+    }))];
+  }
 }
 
 function getErrorMessage(error: unknown): string {
@@ -48,6 +91,10 @@ async function invokeStorageMethod(message: StorageRequest): Promise<unknown> {
   switch (message.method) {
     case "getJobPostingSkills":
       return extensionSkillRepository.getJobPostingSkills(message.args[0] as any);
+    case "getSkills":
+      return extensionSkillRepository.getSkills(message.args[0] as any);
+    case "getCategories":
+      return extensionSkillRepository.getCategories();
   }
 }
 

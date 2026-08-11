@@ -1,4 +1,3 @@
-import { URLS } from "../shared/config";
 import { ExtensionMessage } from "../shared/types";
 import { handleSkillStorageMessage } from "../shared/storage";
 
@@ -75,7 +74,7 @@ function isExtensionMessage(
   );
 }
 
-async function broadcastMessage(
+export async function broadcastMessage(
   filterOutTabs: number[],
   urlPatterns: string[],
   message: any): Promise<void> {

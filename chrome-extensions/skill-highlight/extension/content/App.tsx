@@ -15,7 +15,6 @@ export default function App() {
 
     if (adapter) {
       chrome.runtime.onMessage.addListener((message: ExtensionMessage) => {
-        console.log('message', message)
         if (message.type === "SKILLS_PARSED") {
           highlightSkillsInElement(pageContext.descriptionEl!, message.skills.map(skill => ({
             normalizedText: skill[1], // string;

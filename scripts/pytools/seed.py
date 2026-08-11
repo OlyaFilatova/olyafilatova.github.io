@@ -8,9 +8,9 @@ load_dotenv(Path(__file__).resolve().parent / ".env")
 import asyncio
 import json
 
-from services.skill_manager.models.skill import Familiarity, SkillType, Temperature
-from services.skill_manager.repositories.skill import SkillRepository
-from services.skill_manager.repositories.skill_synonym import SkillSynonymRepository
+from services.skills.models.skill import Familiarity, SkillType, Temperature
+from services.skills.repositories.skill import SkillRepository
+from services.skills.repositories.skill_synonym import SkillSynonymRepository
 
 
 def literal_to_skill_type(text: str) -> SkillType:

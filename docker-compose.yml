@@ -1,43 +1,43 @@
 version: "3.9"
 
 services:
-  parse_github_issue:
-    build: 
-      context: .
-      dockerfile: services/github_issue/Dockerfile
-    container_name: parse-github-issue
-    env_file:
-      - services/github_issue/.env
-    ports:
-      - "8000:8000"
-    restart: unless-stopped
+  # parse_github_issue:
+  #   build: 
+  #     context: .
+  #     dockerfile: services/github_issue/Dockerfile
+  #   container_name: parse-github-issue
+  #   env_file:
+  #     - services/github_issue/.env
+  #   ports:
+  #     - "8000:8000"
+  #   restart: unless-stopped
 
-  translate:
-    build:
-      context: .
-      dockerfile: services/translate/Dockerfile
-    container_name: translate
+  # translate:
+  #   build:
+  #     context: .
+  #     dockerfile: services/translate/Dockerfile
+  #   container_name: translate
 
-    ports:
-      - "8001:8001"
+  #   ports:
+  #     - "8001:8001"
 
-    volumes:
-      - huggingface_cache:/models
+  #   volumes:
+  #     - huggingface_cache:/models
 
-    environment:
-      HF_HOME: /models
-      TRANSFORMERS_CACHE: /models
+  #   environment:
+  #     HF_HOME: /models
+  #     TRANSFORMERS_CACHE: /models
 
-    restart: unless-stopped
+  #   restart: unless-stopped
 
-  md_to_html:
-    build: 
-      context: .
-      dockerfile: services/md_to_html/Dockerfile
-    container_name: markdown-to-html
-    ports:
-      - "3000:3000"
-    restart: unless-stopped
+  # md_to_html:
+  #   build: 
+  #     context: .
+  #     dockerfile: services/md_to_html/Dockerfile
+  #   container_name: markdown-to-html
+  #   ports:
+  #     - "3000:3000"
+  #   restart: unless-stopped
 
   postgres:
     image: postgres:15-alpine
@@ -96,20 +96,36 @@ services:
       - "9001:9001"
     restart: unless-stopped
 
-  skill_manager:
+  skills:
     build: 
       context: .
-      dockerfile: services/skill_manager/Dockerfile
-    container_name: manage-skills
+      dockerfile: services/skills/Dockerfile
+    container_name: skills
     env_file:
       - .env
-      - services/skill_manager/.env
+      - services/skills/.env
     depends_on:
       - postgres
     networks:
       - default
     ports:
       - "9002:9002"
+    restart: unless-stopped
+
+  job_skills:
+    build: 
+      context: .
+      dockerfile: services/job_skills/Dockerfile
+    container_name: job-skills
+    env_file:
+      - .env
+      - services/job_skills/.env
+    depends_on:
+      - postgres
+    networks:
+      - default
+    ports:
+      - "9004:9004"
     restart: unless-stopped
 
   job_skills_gateway:
@@ -122,7 +138,7 @@ services:
       - services/_skills_gateway/.env
     depends_on:
       - parse_job_posting
-      - skill_manager
+      - skills
     networks:
       - default
     ports:
