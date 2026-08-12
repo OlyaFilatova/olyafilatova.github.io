@@ -26,7 +26,7 @@ class SkillAggregate(TypedDict):
 
 
 class SkillRepository:
-  async def categories(self):
+  async def categories(self) -> list[str]:
     async with postgresql_manager.get_async_session() as session:
       stmt = select(JobPosting.category).select_from(JobPosting)
 
@@ -51,7 +51,7 @@ class SkillRepository:
 
   async def filter(
     self,
-    main_only=True,
+    main_only: bool = True,
     currentPage: int = 1,
     pageSize: int = 10,
     search: str = "",
@@ -64,43 +64,43 @@ class SkillRepository:
   ) -> tuple[int, list[SkillAggregate]]:
     async with postgresql_manager.get_async_session() as session:
       aggregates = (
-        select(
-          SkillSynonym.origin_normalized_text.label("origin_normalized_text"),
-          func.count(func.distinct(JobPosting.company)).label("company_count"),
-          func.array_agg(func.distinct(JobPosting.company)).label("companies"),
-          func.array_agg(func.distinct(JobPosting.category)).label("categories"),
-          func.array_agg(func.distinct(JobPostingSkill.skill_normalized_text))
-          .filter(JobPostingSkill.skill_normalized_text != SkillSynonym.origin_normalized_text)
-          .label("synonyms"),
-          func.array_agg(func.distinct(SkillSynonym.text))
-          .filter(JobPostingSkill.skill_normalized_text != SkillSynonym.origin_normalized_text)
-          .label("synonyms_texts"),
-          func.array_agg(func.distinct(JobPosting.url)).label("urls"),
+        (
+          select(
+            SkillSynonym.origin_normalized_text.label("origin_normalized_text"),
+            func.count(func.distinct(JobPosting.company)).label("company_count"),
+            func.array_agg(func.distinct(JobPosting.company)).label("companies"),
+            func.array_agg(func.distinct(JobPosting.category)).label("categories"),
+            func.array_agg(func.distinct(JobPostingSkill.skill_normalized_text))
+            .filter(JobPostingSkill.skill_normalized_text != SkillSynonym.origin_normalized_text)
+            .label("synonyms"),
+            func.array_agg(func.distinct(SkillSynonym.text))
+            .filter(JobPostingSkill.skill_normalized_text != SkillSynonym.origin_normalized_text)
+            .label("synonyms_texts"),
+            func.array_agg(func.distinct(JobPosting.url)).label("urls"),
+          )
+          .select_from(JobPostingSkill)
+          .join(
+            JobPosting,
+            JobPostingSkill.job_url == JobPosting.url
+            if not jobUrl and not category
+            else and_(JobPostingSkill.job_url == jobUrl, JobPostingSkill.job_url == JobPosting.url)
+            if not category
+            else and_(JobPosting.category == category, JobPostingSkill.job_url == JobPosting.url)
+            if not jobUrl
+            else and_(
+              JobPosting.category == category,
+              JobPostingSkill.job_url == jobUrl,
+              JobPostingSkill.job_url == JobPosting.url,
+            ),
+          )
+          .join(
+            SkillSynonym,
+            JobPostingSkill.skill_normalized_text == SkillSynonym.normalized_text,
+          )
         )
-        .select_from(JobPostingSkill)
-        .join(
-          JobPosting,
-          JobPostingSkill.job_url == JobPosting.url
-          if not jobUrl and not category
-          else and_(JobPostingSkill.job_url == jobUrl, JobPostingSkill.job_url == JobPosting.url)
-          if not category
-          else and_(JobPosting.category == category, JobPostingSkill.job_url == JobPosting.url)
-          if not jobUrl
-          else and_(
-            JobPosting.category == category,
-            JobPostingSkill.job_url == jobUrl,
-            JobPostingSkill.job_url == JobPosting.url,
-          ),
-        )
-        .join(
-          SkillSynonym,
-          JobPostingSkill.skill_normalized_text == SkillSynonym.normalized_text,
-        )
+        .group_by(SkillSynonym.origin_normalized_text)
+        .subquery("aggregates")
       )
-
-      aggregates = aggregates.group_by(SkillSynonym.origin_normalized_text)
-
-      aggregates = aggregates.subquery("aggregates")
 
       isfullouter = not jobUrl and not category
 
@@ -149,8 +149,8 @@ class SkillRepository:
       result = await session.execute(stmt)
 
       skills = [*result.mappings().all()]
-      skills = [dict(row) for row in skills]
-      skills = [
+      skill_dicts = [dict(row) for row in skills]
+      skill_aggregates: list[SkillAggregate] = [
         SkillAggregate(
           normalized_text=row["origin_normalized_text"] or "",
           company_count=row["company_count"] or 0,
@@ -164,7 +164,7 @@ class SkillRepository:
           type=row["type"],
           display_text=row["display_text"],
         )
-        for row in skills
+        for row in skill_dicts
       ]
 
-      return (total_rows or 0, skills)
+      return (total_rows or 0, skill_aggregates)

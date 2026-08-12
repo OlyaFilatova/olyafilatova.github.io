@@ -57,7 +57,7 @@ async def get_skill_synonyms() -> list[SkillSynonym]:
 
   response = requests.get(url)
 
-  return response.json()["skills"]
+  return cast(list[SkillSynonym], response.json()["skills"])
 
 
 async def get_skills(skill_ids: list[str]) -> list[Skill]:
@@ -66,7 +66,7 @@ async def get_skills(skill_ids: list[str]) -> list[Skill]:
 
   response = requests.get(url, json={"skill_ids": skill_ids})
 
-  return response.json()["skills"]
+  return cast(list[Skill], response.json()["skills"])
 
 
 async def parse_skills(body: str, skill_synonyms: list[str]) -> list[str]:
@@ -128,9 +128,9 @@ async def process(request: JobPostingRequest) -> JobPostingResponse:
   skills = await get_skills(list(set([mapping[0] for mapping in main_skill_mapping])))
   skill_dict = {skill["normalized_text"]: skill for skill in skills}
 
-  main_skill_mapping = [(skill_dict[mapping[0]], mapping[1]) for mapping in main_skill_mapping]
+  skills_mapping = [(skill_dict[mapping[0]], mapping[1]) for mapping in main_skill_mapping]
 
-  return JobPostingResponse(skills=main_skill_mapping)
+  return JobPostingResponse(skills=skills_mapping)
 
 
 class VisitedLinksRequest(BaseModel):
