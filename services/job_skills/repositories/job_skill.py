@@ -106,6 +106,7 @@ class SkillRepository:
 
       stmt = select(
         aggregates,
+        Skill.normalized_text,
         Skill.familiarity,
         Skill.temperature,
         Skill.type,
@@ -128,7 +129,7 @@ class SkillRepository:
         where.append(Skill.type == type)
 
       if search:
-        where.append(aggregates.c.normalized_text.ilike(f"%{search.lower()}%"))
+        where.append(aggregates.c.origin_normalized_text.ilike(f"%{search.lower()}%"))
 
       if where:
         stmt = stmt.where(*where)
@@ -142,7 +143,7 @@ class SkillRepository:
           func.lower(aggregates.c.origin_normalized_text).asc(),
         )
       else:
-        stmt = stmt.order_by(aggregates.c.company_count.desc())
+        stmt = stmt.order_by(aggregates.c.company_count.desc().nulls_last())
 
       stmt = stmt.limit(pageSize).offset((currentPage - 1) * pageSize)
 
@@ -152,7 +153,7 @@ class SkillRepository:
       skill_dicts = [dict(row) for row in skills]
       skill_aggregates: list[SkillAggregate] = [
         SkillAggregate(
-          normalized_text=row["origin_normalized_text"] or "",
+          normalized_text=row["origin_normalized_text"] or row["normalized_text"],
           company_count=row["company_count"] or 0,
           companies=row["companies"] or [],
           categories=row["categories"] or [],

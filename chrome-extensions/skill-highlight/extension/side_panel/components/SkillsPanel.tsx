@@ -81,6 +81,7 @@ export default function SkillsPanel() {
       if (response.ok) {
         setSkills((response.result as any)[1] as SkillAggregate[])
         setTotalItems((response.result as any)[0])
+        console.log(response)
       } else {
         console.log('error', response)
       }
