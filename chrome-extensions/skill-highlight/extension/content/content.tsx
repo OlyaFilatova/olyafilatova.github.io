@@ -7,15 +7,11 @@ const container = document.createElement("div");
 
 container.id = "olyafilatov-skill-highlight-extension-root";
 
-const shadowRoot = container.attachShadow({
-  mode: "open",
-});
-
 document.body.appendChild(container);
 
 const reactRoot = document.createElement("div");
 
-shadowRoot.appendChild(reactRoot);
+container.appendChild(reactRoot);
 
 ReactDOM.createRoot(
     reactRoot

@@ -1,6 +1,7 @@
+from datetime import datetime
 from typing import Any
 
-from sqlalchemy import select
+from sqlalchemy import select, update
 from sqlalchemy.exc import IntegrityError
 
 from ..database.postgres_manager import postgresql_manager
@@ -41,6 +42,19 @@ class SkillRepository(BaseRepository):
       except IntegrityError as e:
         await session.rollback()
         raise ValueError(f"Skill creation failed: {e}") from e
+
+  async def edit(self, normalized_text: str, update_data: dict[str, Any]) -> None:
+    async with postgresql_manager.get_async_session() as session:
+      try:
+        skill = await session.get(Skill, normalized_text)
+        if skill:
+          stmt = update(Skill).where(Skill.normalized_text == normalized_text).values(
+            **update_data
+          )
+          await session.execute(stmt)
+      except IntegrityError as e:
+        await session.rollback()
+        raise ValueError(f"Skill edit failed: {e}") from e
 
   async def create_many(self, items_data: list[dict[str, Any]]) -> None:
     async with postgresql_manager.get_async_session() as session:

@@ -26,10 +26,27 @@ class FilterSkillsResponse(BaseModel):
   total_rows: int
 
 
+class CreateRequest(BaseModel):
+  normalizedText: str
+  url: str
+
+
+class CreateResponse(BaseModel):
+  pass
+
+
+class IgnoreRequest(BaseModel):
+  normalizedText: str
+  url: str
+
+
+class IgnoreResponse(BaseModel):
+  pass
+
+
 # req: FilterSkillsRequest
 @app.get("/filter")
 async def filter_skills(filter_query: Annotated[FilterSkillsRequest, Query()]) -> FilterSkillsResponse:
-  print(filter_query)
   total_rows, skills = await SkillRepository().filter(
     main_only=True,
     currentPage=filter_query.currentPage,
@@ -48,3 +65,14 @@ async def filter_skills(filter_query: Annotated[FilterSkillsRequest, Query()]) -
 @app.get("/categories")
 async def categories() -> list[str]:
   return await SkillRepository().categories()
+
+@app.post("/create")
+async def create(req: CreateRequest) -> CreateResponse:
+  await SkillRepository().create(req.normalizedText, req.url)
+  return CreateResponse()
+
+@app.post("/ignore")
+async def ignore(req: IgnoreRequest) -> IgnoreResponse:
+  await SkillRepository().ignore(req.normalizedText, req.url)
+
+  return IgnoreResponse()

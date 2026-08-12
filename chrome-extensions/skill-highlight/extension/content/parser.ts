@@ -6,13 +6,6 @@ export interface UniqueSkillForMatching {
   familiarity: Familiarity;
   temperature: Temperature;
   type: SkillType;
-  parentSkillId?: string;
-  // companyCount: number;
-  // skillIds: string[];
-  // synonymSkillId?: string;
-  // prefillSkillId?: string;
-  // prefillParentSkillId?: string;
-  // prefillSynonymSkillId?: string;
 }
 
 export interface MatchRange {

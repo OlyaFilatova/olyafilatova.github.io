@@ -1,7 +1,7 @@
-from typing import Any, Literal, Optional, TypedDict
+from typing import Literal, Optional, TypedDict
 
-from sqlalchemy import and_, any_, literal, or_, select, func
-from sqlalchemy.dialects.postgresql import array
+from sqlalchemy import and_, select, func
+from sqlalchemy.exc import IntegrityError
 
 from services.job_parser.models.job import JobPosting
 from services.job_parser.models.job_skill import JobPostingSkill
@@ -34,6 +34,21 @@ class SkillRepository:
       result = await session.execute(stmt)
 
       return [*{*result.scalars().all()}]
+
+  async def create(self, normalized_text: str, url: str) -> JobPostingSkill:
+    async with postgresql_manager.get_async_session() as session:
+      try:
+        item = JobPostingSkill(job_url = url, skill_normalized_text=normalized_text)
+        session.add(item)
+        await session.commit()
+        await session.refresh(item)
+        return item
+      except IntegrityError as e:
+        await session.rollback()
+        raise ValueError(f"Skill creation failed: {e}") from e
+
+  async def ignore(self, normalized_text: str, url: str) -> None:
+    pass
 
   async def filter(
     self,

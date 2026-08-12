@@ -1,11 +1,15 @@
-import { JobPostingData, SkillAggregate, SkillFilters } from "./types";
+import { normalizeSkillText } from "./skill";
+import { JobPostingData, SkillAggregate, SkillEditTriggeredMessage, SkillFilters, SkillIgnoreTriggeredMessage, SkillSaveTriggeredMessage } from "./types";
 
 
 interface SkillRepository {
   getJobPostingSkills(jobPostingData: JobPostingData): Promise<any>;
   getSkills(skillFilters: SkillFilters): Promise<SkillAggregate[]>;
-  getCategories(): Promise<string[]>
-  getVisitedLinks(links: string[]): Promise<string[]>
+  getCategories(): Promise<string[]>;
+  getVisitedLinks(links: string[]): Promise<string[]>;
+  createSkill(skillData: Omit<SkillSaveTriggeredMessage, 'type'>): Promise<void>;
+  editSkill(skillData: Omit<SkillEditTriggeredMessage, 'type'>): Promise<void>;
+  ignoreSkill(skillData: Omit<SkillIgnoreTriggeredMessage, 'type'>): Promise<void>;
 }
 
 type StorageResponse<T = unknown> = { ok: true; result: T } | { ok: false; error: string };
@@ -92,6 +96,60 @@ class ChromeSkillRepository implements SkillRepository {
       companies: skill.companies,
     }))];
   }
+
+  async createSkill(skillData: Omit<SkillSaveTriggeredMessage, 'type'>): Promise<void> {
+    const skillsResponse = await fetch(`${API_URL}/api/skills/create`, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        displayText: skillData.displayText,
+        normalizedText: normalizeSkillText(skillData.displayText)
+      })
+    });
+    const skillSaveResult = await skillsResponse.json();
+    const normalizedText = skillSaveResult["normalized_text"];
+
+    const jobSkillsResponse = await fetch(`${API_URL}/api/job-skills/create`, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        normalizedText: normalizedText,
+        url: skillData.url
+      })
+    });
+
+    await jobSkillsResponse.json();
+
+    return normalizedText;
+  }
+
+  async editSkill({ url, ...skillData }: Omit<SkillEditTriggeredMessage, 'type'>): Promise<void> {
+    await fetch(`${API_URL}/api/skills/edit`, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(skillData)
+    });
+  }
+
+  async ignoreSkill(skillData: Omit<SkillIgnoreTriggeredMessage, 'type'>): Promise<void> {
+    await fetch(`${API_URL}/api/job-skills/ignore`, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(skillData)
+    });
+  }
 }
 
 function getErrorMessage(error: unknown): string {
@@ -111,6 +169,12 @@ async function invokeStorageMethod(message: StorageRequest): Promise<unknown> {
       return extensionSkillRepository.getCategories();
     case "getVisitedLinks":
       return extensionSkillRepository.getVisitedLinks(message.args[0] as string[]);
+    case "createSkill":
+      return extensionSkillRepository.createSkill(message.args[0] as Omit<SkillSaveTriggeredMessage, 'type'>);
+    case "editSkill":
+      return extensionSkillRepository.editSkill(message.args[0] as Omit<SkillEditTriggeredMessage, 'type'>);
+    case "ignoreSkill":
+      return extensionSkillRepository.ignoreSkill(message.args[0] as Omit<SkillIgnoreTriggeredMessage, 'type'>);
   }
 }
 

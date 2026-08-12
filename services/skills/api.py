@@ -1,8 +1,8 @@
 import datetime
-from typing import cast
+from typing import Any, Optional, cast
 
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from .models.skill import Familiarity, SkillType, Temperature
 from .repositories.skill import SkillRepository
@@ -95,3 +95,56 @@ async def get_skills(req: SkillsRequest) -> SkillsResponse:
       for skill in skills
     ]
   )
+
+class CreateRequest(BaseModel):
+  displayText: str
+  normalizedText: str
+
+class CreateResponse(BaseModel):
+  normalized_text: str
+
+class EditRequest(BaseModel):
+  normalizedText: str
+  skillType: Optional[SkillType] = Field(None)
+  familiarity: Optional[Familiarity] = Field(None)
+  temperature: Optional[Temperature] = Field(None)
+
+class EditResponse(BaseModel):
+  pass
+
+
+@app.post("/create")
+async def create(req: CreateRequest) -> CreateResponse:
+  skill = await SkillRepository().create({
+    "text": req.displayText,
+    "normalized_text": req.normalizedText,
+    "type": SkillType.APPROACH,
+    "familiarity": Familiarity.UNKNOWN,
+    "temperature": Temperature.MEH,
+  })
+  await SkillSynonymRepository().create({
+    "text": req.displayText,
+    "origin_normalized_text": req.normalizedText,
+    "normalized_text": req.normalizedText,
+  })
+  return CreateResponse(normalized_text=str(skill.normalized_text))
+
+
+@app.post("/edit")
+async def edit(req: EditRequest) -> EditResponse:
+  new_data: dict[str, Any] = {}
+
+  if req.skillType:
+    new_data["type"] = req.skillType
+
+  if req.familiarity:
+    new_data["familiarity"] = req.familiarity
+
+  if req.temperature:
+    new_data["temperature"] = req.temperature
+
+  if len(new_data) == 0:
+    raise Exception('No edited values found.')
+
+  await SkillRepository().edit(req.normalizedText, new_data)
+  return EditResponse()

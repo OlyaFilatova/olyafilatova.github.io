@@ -1,6 +1,6 @@
 import { broadcastMessage } from "../../../background/service-worker";
 import { URLS } from "../../../shared/config";
-import { ExtensionMessage, Familiarity, SkillAggregate, SkillType, Temperature } from "../../../shared/types";
+import { ContentMessage, Familiarity, SkillAggregate, SkillType, Temperature } from "../../../shared/types";
 import { FAMILIARITIES, SKILL_TYPES, TEMPERATURES } from "../../config";
 import SelectFilter from "./SelectFilter";
 
@@ -161,7 +161,7 @@ async function ignoreMentionsOnPage(normalizedText: string, url: string): Promis
   // });
 }
 
-async function notifyJobTabs(message: ExtensionMessage): Promise<void> {
+async function notifyJobTabs(message: ContentMessage): Promise<void> {
   broadcastMessage([], URLS, message)
 }
 
@@ -182,11 +182,6 @@ async function updateTemperature(normalizedText: string, temperature: Temperatur
 
 async function updateType(normalizedText: string, type: SkillType): Promise<void> {
   // await skillRepository.updateTypeForText(normalizedText, type);
-  await notifyJobTabs({ type: "RELOAD_HIGHLIGHTS" });
-}
-
-async function updateParent(normalizedText: string, parentSkillId?: string): Promise<void> {
-  // await skillRepository.updateParentForText(normalizedText, parentSkillId);
   await notifyJobTabs({ type: "RELOAD_HIGHLIGHTS" });
 }
 

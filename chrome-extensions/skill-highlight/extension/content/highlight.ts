@@ -1,7 +1,8 @@
 import { getTextNodes, unwrapElements, unwrapHighlights } from "./dom-utils";
 
-import { Familiarity } from "../shared/types";
+import { Familiarity, SkillType, Temperature } from "../shared/types";
 import { createSkillMatcher, MatchRange, SkillMatcher, UniqueSkillForMatching } from "./parser";
+import { normalizeSkillText } from "../shared/skill";
 
 
 function temperatureClass(temperature: UniqueSkillForMatching["temperature"]): string {
@@ -87,4 +88,153 @@ export function highlightSkillsInElement(root: HTMLElement, skills: UniqueSkillF
   }
 
   return [...matchedByText.values()];
+}
+
+export function updateSkillHighlightFamiliarity(
+  root: HTMLElement,
+  normalizedText: string,
+  familiarity: Familiarity
+): void {
+  for (const highlight of root.querySelectorAll<HTMLElement>(".skill-highlight")) {
+    if (highlight.dataset.normalizedText !== normalizedText) {
+      continue;
+    }
+
+    setHighlightFamiliarityClass(highlight, familiarity);
+  }
+}
+
+function setHighlightSkillTypeClass(highlight: HTMLElement, skillType: SkillType): void {
+  for (const className of [...highlight.classList]) {
+    if (className.startsWith("skill--type-")) {
+      highlight.classList.remove(className);
+    }
+  }
+  highlight.classList.add(`skill--type-${skillType}`);
+}
+
+function setHighlightTemperatureClass(highlight: HTMLElement, temperature: Temperature): void {
+  for (const className of [...highlight.classList]) {
+    if (className.startsWith("skill--temperature-")) {
+      highlight.classList.remove(className);
+    }
+  }
+  highlight.classList.add(temperatureClass(temperature));
+}
+
+export function updateSkillHighlightSkillType(
+  root: HTMLElement,
+  normalizedText: string,
+  skillType: SkillType
+): void {
+  for (const highlight of root.querySelectorAll<HTMLElement>(".skill-highlight")) {
+    if (highlight.dataset.normalizedText !== normalizedText) {
+      continue;
+    }
+
+    setHighlightSkillTypeClass(highlight, skillType);
+  }
+}
+
+export function updateSkillHighlightTemperature(
+  root: HTMLElement,
+  normalizedText: string,
+  temperature: Temperature
+): void {
+  for (const highlight of root.querySelectorAll<HTMLElement>(".skill-highlight")) {
+    if (highlight.dataset.normalizedText !== normalizedText) {
+      continue;
+    }
+
+    setHighlightTemperatureClass(highlight, temperature);
+  }
+}
+
+function unwrapHighlight(highlight: HTMLElement): void {
+  const parent = highlight.parentNode;
+  if (!parent) {
+    return;
+  }
+
+  while (highlight.firstChild) {
+    parent.insertBefore(highlight.firstChild, highlight);
+  }
+
+  parent.removeChild(highlight);
+  parent.normalize();
+}
+
+export function removeSkillHighlights(root: HTMLElement, normalizedText: string): void {
+  for (const highlight of root.querySelectorAll<HTMLElement>(".skill-highlight")) {
+    if (
+      highlight.dataset.normalizedText === normalizedText ||
+      normalizeSkillText(highlight.textContent?.trim() ?? "") === normalizedText
+    ) {
+      unwrapHighlight(highlight);
+    }
+  }
+}
+
+export function findNonOverlappingMatches(text: string, skills: UniqueSkillForMatching[]): MatchRange[] {
+  return createSkillMatcher(skills).findMatches(text);
+}
+
+function getTextRangeWithin(root: HTMLElement, element: HTMLElement): { start: number; end: number } | null {
+  const rootRange = document.createRange();
+  const elementRange = document.createRange();
+
+  try {
+    rootRange.selectNodeContents(root);
+    rootRange.setEndBefore(element);
+    elementRange.selectNodeContents(element);
+
+    const start = rootRange.toString().length;
+    return {
+      start,
+      end: start + elementRange.toString().length
+    };
+  } catch {
+    return null;
+  } finally {
+    rootRange.detach();
+    elementRange.detach();
+  }
+}
+
+function rangesOverlap(first: { start: number; end: number }, second: { start: number; end: number }): boolean {
+  return first.start < second.end && first.end > second.start;
+}
+
+function unwrapOverlappingHighlights(root: HTMLElement, skill: UniqueSkillForMatching): void {
+  const text = root.textContent ?? "";
+  const matches = findNonOverlappingMatches(text, [skill]);
+  if (matches.length === 0) {
+    return;
+  }
+
+  const matchedRanges = matches.map(({ start, end }) => ({ start, end }));
+  const highlights = [...root.querySelectorAll<HTMLElement>(".skill-highlight")];
+
+  for (const highlight of highlights) {
+    if (highlight.dataset.normalizedText === skill.normalizedText) {
+      continue;
+    }
+
+    const range = getTextRangeWithin(root, highlight);
+    if (range && matchedRanges.some((match) => rangesOverlap(match, range))) {
+      unwrapHighlight(highlight);
+    }
+  }
+}
+
+export function highlightSkillInElementAndCount(root: HTMLElement, skill: UniqueSkillForMatching): number {
+  unwrapOverlappingHighlights(root, skill);
+  unwrapElements(root, "strong");
+
+  const matcher = createSkillMatcher([skill]);
+  let highlightCount = 0;
+  for (const textNode of getTextNodes(root)) {
+    highlightCount += wrapMatchesInTextNode(textNode, matcher).length;
+  }
+  return highlightCount;
 }

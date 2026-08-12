@@ -127,10 +127,8 @@ async def process(request: JobPostingRequest) -> JobPostingResponse:
   ]
   skills = await get_skills(list(set([mapping[0] for mapping in main_skill_mapping])))
   skill_dict = {skill["normalized_text"]: skill for skill in skills}
-  print("skill_dict", skill_dict)
 
   main_skill_mapping = [(skill_dict[mapping[0]], mapping[1]) for mapping in main_skill_mapping]
-  print("main_skill_mapping", main_skill_mapping)
 
   return JobPostingResponse(skills=main_skill_mapping)
 

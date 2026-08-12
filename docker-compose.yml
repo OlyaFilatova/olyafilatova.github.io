@@ -139,6 +139,7 @@ services:
     depends_on:
       - parse_job_posting
       - skills
+      - job_skills
     networks:
       - default
     ports:
