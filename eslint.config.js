@@ -14,6 +14,16 @@ export default defineConfig([
       tseslint.configs.recommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
+      {
+        rules: {
+          "no-restricted-imports": ["error", {
+            "patterns": [{
+              "group": ["**/background/**"],
+              "message": "Importing from this folder is strictly prohibited."
+            }]
+          }]
+        }
+      },
     ],
     languageOptions: {
       globals: globals.browser,

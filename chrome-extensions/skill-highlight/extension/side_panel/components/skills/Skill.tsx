@@ -1,5 +1,3 @@
-import { broadcastMessage } from "../../../background/service-worker";
-import { URLS } from "../../../shared/config";
 import { ContentMessage, Familiarity, SkillAggregate, SkillType, Temperature } from "../../../shared/types";
 import { FAMILIARITIES, SKILL_TYPES, TEMPERATURES } from "../../config";
 import SelectFilter from "./SelectFilter";
@@ -162,7 +160,7 @@ async function ignoreMentionsOnPage(normalizedText: string, url: string): Promis
 }
 
 async function notifyJobTabs(message: ContentMessage): Promise<void> {
-  broadcastMessage([], URLS, message)
+  // broadcastMessage([], URLS, message)
 }
 
 async function deleteMentions(normalizedText: string): Promise<void> {

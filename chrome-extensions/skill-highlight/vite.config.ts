@@ -56,7 +56,7 @@ export default defineConfig(({ mode }) => {
   return {
     define: {
       'import.meta': 'process',
-      API_URL: `\"${env.VITE_GATEWAY}\"`,
+      API_URL: `"${env.VITE_GATEWAY}"`,
     },
     plugins: [
       react(),
