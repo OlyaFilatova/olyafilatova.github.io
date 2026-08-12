@@ -5,6 +5,7 @@ interface SkillRepository {
   getJobPostingSkills(jobPostingData: JobPostingData): Promise<any>;
   getSkills(skillFilters: SkillFilters): Promise<SkillAggregate[]>;
   getCategories(): Promise<string[]>
+  getVisitedLinks(links: string[]): Promise<string[]>
 }
 
 type StorageResponse<T = unknown> = { ok: true; result: T } | { ok: false; error: string };
@@ -48,6 +49,19 @@ class ChromeSkillRepository implements SkillRepository {
     });
 
     return (await response.json());
+  }
+
+  async getVisitedLinks(links: string[]): Promise<string[]> {
+    const response = await fetch(`${API_URL}/api/job-postings/get-visited`, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ links })
+    });
+
+    return (await response.json())["links"];
   }
 
   async getSkills(skillFilters: SkillFilters): Promise<SkillAggregate[]> {
@@ -95,6 +109,8 @@ async function invokeStorageMethod(message: StorageRequest): Promise<unknown> {
       return extensionSkillRepository.getSkills(message.args[0] as any);
     case "getCategories":
       return extensionSkillRepository.getCategories();
+    case "getVisitedLinks":
+      return extensionSkillRepository.getVisitedLinks(message.args[0] as string[]);
   }
 }
 

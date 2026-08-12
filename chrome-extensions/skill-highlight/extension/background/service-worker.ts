@@ -61,6 +61,25 @@ chrome.runtime.onMessage.addListener((
       }
     })
   }
+
+  if (
+    message.type === "JOB_LIST_PAGE_OPENED"
+  ) {
+    handleSkillStorageMessage({
+      type: 'SKILL_STORAGE_REQUEST',
+      method: 'getVisitedLinks',
+      args: [message.links]
+    }, response => {
+      if (response.ok) {
+        void broadcastMessage([], [message.url], {
+          "type": "VISITED_LINKS_PARSED",
+          "links": response.result as string[]
+        });
+      } else {
+        console.log('error', response)
+      }
+    })
+  }
 });
 
 

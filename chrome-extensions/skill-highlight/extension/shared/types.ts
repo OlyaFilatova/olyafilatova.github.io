@@ -63,4 +63,11 @@ export type ExtensionMessage = {
   }, string]> 
 } | {
   type: "RELOAD_HIGHLIGHTS"
+} | {
+  type: "JOB_LIST_PAGE_OPENED";
+  links: string[];
+  url: string;
+} | {
+  type: "VISITED_LINKS_PARSED";
+  links: string[];
 };

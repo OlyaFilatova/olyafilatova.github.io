@@ -18,6 +18,12 @@ class JobPostingRepository(BaseRepository):
       result = await session.execute(stmt)
       return result.scalars().first()
 
+  async def get_visited_links(self, links: list[str]) -> list[str]:
+    async with postgresql_manager.get_async_session() as session:
+      stmt = select(JobPosting.url).where(JobPosting.url.in_(links))
+      result = await session.execute(stmt)
+      return [*result.scalars().all()]
+
   async def create(self, data: dict[str, Any]) -> JobPosting:
     async with postgresql_manager.get_async_session() as session:
       try:

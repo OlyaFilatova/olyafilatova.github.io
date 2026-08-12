@@ -1,43 +1,43 @@
 version: "3.9"
 
 services:
-  # parse_github_issue:
-  #   build: 
-  #     context: .
-  #     dockerfile: services/github_issue/Dockerfile
-  #   container_name: parse-github-issue
-  #   env_file:
-  #     - services/github_issue/.env
-  #   ports:
-  #     - "8000:8000"
-  #   restart: unless-stopped
+  parse_github_issue:
+    build: 
+      context: .
+      dockerfile: services/github_issue/Dockerfile
+    container_name: parse-github-issue
+    env_file:
+      - services/github_issue/.env
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
 
-  # translate:
-  #   build:
-  #     context: .
-  #     dockerfile: services/translate/Dockerfile
-  #   container_name: translate
+  translate:
+    build:
+      context: .
+      dockerfile: services/translate/Dockerfile
+    container_name: translate
 
-  #   ports:
-  #     - "8001:8001"
+    ports:
+      - "8001:8001"
 
-  #   volumes:
-  #     - huggingface_cache:/models
+    volumes:
+      - huggingface_cache:/models
 
-  #   environment:
-  #     HF_HOME: /models
-  #     TRANSFORMERS_CACHE: /models
+    environment:
+      HF_HOME: /models
+      TRANSFORMERS_CACHE: /models
 
-  #   restart: unless-stopped
+    restart: unless-stopped
 
-  # md_to_html:
-  #   build: 
-  #     context: .
-  #     dockerfile: services/md_to_html/Dockerfile
-  #   container_name: markdown-to-html
-  #   ports:
-  #     - "3000:3000"
-  #   restart: unless-stopped
+  md_to_html:
+    build: 
+      context: .
+      dockerfile: services/md_to_html/Dockerfile
+    container_name: markdown-to-html
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
 
   postgres:
     image: postgres:15-alpine

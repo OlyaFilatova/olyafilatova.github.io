@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import { getCurrentAdapter } from '../shared/adapters/current';
 import { WebsiteAdapter } from '../shared/adapters/types';
-import { notifyJobPageOpened } from './notifications';
+import { notifyJobListPageOpened, notifyJobPageOpened } from './notifications';
 import { ExtensionMessage, Familiarity, SkillType, Temperature } from '../shared/types';
 import { highlightSkillsInElement } from './highlight';
 
@@ -25,6 +25,10 @@ export default function App() {
             ...(skill[0].normalized_text != skill[1] ? {parentSkillId: skill[0].normalized_text} : {})
           })));
         }
+
+        if (message.type === "VISITED_LINKS_PARSED") {
+          adapter.stylizeVisitedLinks(message.links)
+        }
       });
 
       const pageContext = {
@@ -34,15 +38,22 @@ export default function App() {
         descriptionEl: adapter.getDescriptionEl()!
       };
 
-      if (adapter.identifyPageType(url) == 'job') {
+      const pageType = adapter.identifyPageType(url);
+      if (pageType == 'job') {
         notifyJobPageOpened({
           body: pageContext.descriptionEl.innerText,
           category: pageContext.category,
           company: pageContext.company,
           url: pageContext.url
         });
-      }
+      } else if (pageType == 'jobs-list') {
+        const links = adapter.getLinks();
 
+        notifyJobListPageOpened({
+          links,
+          url: pageContext.url
+        });
+      }
     }
   }, []);
 

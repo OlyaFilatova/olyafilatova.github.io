@@ -20,3 +20,22 @@ export function notifyJobPageOpened(message: {
     // No runtime listeners may be available in tests or non-extension contexts.
   }
 }
+
+export function notifyJobListPageOpened(message: {
+  links: string[],
+  url: string
+}): void {
+  try {
+    const result = chrome.runtime?.sendMessage?.({
+      type: "JOB_LIST_PAGE_OPENED",
+      ...message
+    } satisfies ExtensionMessage);
+    if (result && "catch" in result) {
+      result.catch(reason => console.log(
+        `JOB_LIST_PAGE_OPENED notification failed. Reason ${reason}`
+      ));
+    }
+  } catch {
+    // No runtime listeners may be available in tests or non-extension contexts.
+  }
+}
