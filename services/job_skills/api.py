@@ -1,4 +1,4 @@
-from typing import Annotated, Any, Literal, Optional, TypedDict
+from typing import Annotated, Literal
 
 from fastapi import FastAPI, Query
 from pydantic import BaseModel, Field
@@ -6,7 +6,6 @@ from pydantic import BaseModel, Field
 from services.skills.models.skill import Familiarity, SkillType, Temperature
 
 from .repositories.job_skill import SkillAggregate, SkillRepository
-
 
 app = FastAPI()
 
@@ -16,10 +15,10 @@ class FilterSkillsRequest(BaseModel):
   search: str = Field("")
   category: str = Field("")
   sort: Literal['name', 'companyCount'] = Field("name")
-  type: Optional[SkillType] = Field(None)
-  familiarity: Optional[Familiarity] = Field(None)
-  temperature: Optional[Temperature] = Field(None)
-  jobUrl: Optional[str] = Field(None)
+  type: SkillType | None = Field(None)
+  familiarity: Familiarity | None = Field(None)
+  temperature: Temperature | None = Field(None)
+  jobUrl: str | None = Field(None)
 
 class FilterSkillsResponse(BaseModel):
   skills: list[SkillAggregate]
@@ -46,7 +45,9 @@ class IgnoreResponse(BaseModel):
 
 # req: FilterSkillsRequest
 @app.get("/filter")
-async def filter_skills(filter_query: Annotated[FilterSkillsRequest, Query()]) -> FilterSkillsResponse:
+async def filter_skills(
+  filter_query: Annotated[FilterSkillsRequest, Query()]
+) -> FilterSkillsResponse:
   total_rows, skills = await SkillRepository().filter(
     main_only=True,
     currentPage=filter_query.currentPage,

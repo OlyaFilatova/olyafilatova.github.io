@@ -1,11 +1,10 @@
-from typing import Literal, Optional, TypedDict
+from typing import Literal, TypedDict
 
-from sqlalchemy import and_, select, func
+from sqlalchemy import and_, func, select
 from sqlalchemy.exc import IntegrityError
 
 from services.job_parser.models.job import JobPosting
 from services.job_parser.models.job_skill import JobPostingSkill
-
 from services.skills.models.skill import Familiarity, Skill, SkillType, Temperature
 from services.skills.models.skill_synonym import SkillSynonym
 
@@ -58,10 +57,10 @@ class SkillRepository:
     search: str = "",
     sort: Literal["name", "companyCount"] = "name",
     category: str = "",
-    type: Optional[SkillType] = None,
-    familiarity: Optional[Familiarity] = None,
-    temperature: Optional[Temperature] = None,
-    jobUrl: Optional[str] = None
+    type: SkillType | None = None,
+    familiarity: Familiarity | None = None,
+    temperature: Temperature | None = None,
+    jobUrl: str | None = None
   ) -> tuple[int, list[SkillAggregate]]:
     async with postgresql_manager.get_async_session() as session:
       aggregates = (
@@ -174,7 +173,10 @@ class SkillRepository:
       total_rows = await session.scalar(count_stmt)
 
       if sort == 'name':
-        stmt = stmt.order_by(func.lower(Skill.normalized_text).asc(), func.lower(aggregates.c.origin_normalized_text).asc())
+        stmt = stmt.order_by(
+          func.lower(Skill.normalized_text).asc(),
+          func.lower(aggregates.c.origin_normalized_text).asc()
+        )
       else:
         stmt = stmt.order_by(aggregates.c.company_count.desc())
 

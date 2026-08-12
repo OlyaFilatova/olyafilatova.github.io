@@ -1,5 +1,5 @@
 import datetime
-from typing import Any, Optional, cast
+from typing import Any, cast
 
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
@@ -105,9 +105,9 @@ class CreateResponse(BaseModel):
 
 class EditRequest(BaseModel):
   normalizedText: str
-  skillType: Optional[SkillType] = Field(None)
-  familiarity: Optional[Familiarity] = Field(None)
-  temperature: Optional[Temperature] = Field(None)
+  skillType: SkillType | None = Field(None)
+  familiarity: Familiarity | None = Field(None)
+  temperature: Temperature | None = Field(None)
 
 class EditResponse(BaseModel):
   pass
