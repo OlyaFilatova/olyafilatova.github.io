@@ -47,9 +47,7 @@ class SkillRepository(BaseRepository):
       try:
         skill = await session.get(Skill, normalized_text)
         if skill:
-          stmt = update(Skill).where(Skill.normalized_text == normalized_text).values(
-            **update_data
-          )
+          stmt = update(Skill).where(Skill.normalized_text == normalized_text).values(**update_data)
           await session.execute(stmt)
       except IntegrityError as e:
         await session.rollback()

@@ -15,6 +15,7 @@ SERVICES = {
   "job-skills": os.getenv("JOB_SKILLS_SERVICE"),
 }
 
+
 @app.api_route(
   "/api/{service}/{path:path}",
   methods=["GET", "POST", "PUT", "PATCH", "DELETE"],

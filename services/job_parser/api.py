@@ -132,15 +132,16 @@ async def process(request: JobPostingRequest) -> JobPostingResponse:
 
   return JobPostingResponse(skills=main_skill_mapping)
 
+
 class VisitedLinksRequest(BaseModel):
   links: list[str]
+
 
 class VisitedLinksResponse(BaseModel):
   links: list[str]
 
+
 @app.post("/get-visited", response_model=VisitedLinksResponse)
 async def get_visited(request: VisitedLinksRequest) -> VisitedLinksResponse:
   links = await JobPostingRepository().get_visited_links(request.links)
-  return VisitedLinksResponse(
-    links=links
-  )
+  return VisitedLinksResponse(links=links)
