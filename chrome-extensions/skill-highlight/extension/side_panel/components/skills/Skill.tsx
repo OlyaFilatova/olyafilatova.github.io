@@ -16,18 +16,6 @@ export default function Skill({ skill, skillTexts }: {
   const [temperature, setTemperature] = useState(skill.temperature);
   const [type, setType] = useState(skill.type);
 
-  useEffect(() => {
-    void updateFamiliarity(skill.normalizedText, familiarity)
-  }, [familiarity]);
-
-  useEffect(() => {
-    void updateTemperature(skill.normalizedText, temperature)
-  }, [temperature]);
-
-  useEffect(() => {
-    void updateType(skill.normalizedText, type)
-  }, [type]);
-
   return (
     <article className="skill-card">
       <div className="skill-card__top">
@@ -65,7 +53,10 @@ export default function Skill({ skill, skillTexts }: {
                 text: familiarity
               }))}
               currentValue={familiarity}
-              onChange={event => setFamiliarity(event.target.value as Familiarity)}
+              onChange={event => {
+                setFamiliarity(event.target.value as Familiarity);
+                void updateFamiliarity(skill.normalizedText, familiarity);
+              }}
              />
 
             <SelectFilter
@@ -75,7 +66,10 @@ export default function Skill({ skill, skillTexts }: {
                 text: item
               }))}
               currentValue={temperature}
-              onChange={event => setTemperature(event.target.value as Temperature)}
+              onChange={event => {
+                setTemperature(event.target.value as Temperature);
+                void updateTemperature(skill.normalizedText, temperature)
+              }}
              />
 
             <SelectFilter
@@ -85,7 +79,10 @@ export default function Skill({ skill, skillTexts }: {
                 text: item
               }))}
               currentValue={type}
-              onChange={event => setType(event.target.value as SkillType)}
+              onChange={event => {
+                setType(event.target.value as SkillType);
+                void updateType(skill.normalizedText, type)
+              }}
              />
 
             <SelectFilter

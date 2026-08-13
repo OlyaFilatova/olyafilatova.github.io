@@ -38,11 +38,20 @@ chrome.runtime.onMessage.addListener((
 
   const eventListeners: Record<ServiceWorkerMessageType, (sender: any, message: any) => void> = {
     JOB_PAGE_OPENED: (sender, { type, ...message }: JobPageOpenedMessage) => {
+      const url = (() => {
+        const url = new URL(message.url);
+        url.search = '';
+        return url.toString();
+      })();
+
       handleSkillStorageMessage({
         type: 'SKILL_STORAGE_REQUEST',
         method: 'getJobPostingSkills',
         args: [
-          message
+          {
+            ...message,
+            url
+          }
         ]
       }, response => {
         if (response.ok) {
