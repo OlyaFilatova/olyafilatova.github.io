@@ -37,7 +37,7 @@ class SkillRepository(BaseRepository):
 
   async def get_skill_texts(self) -> list[SkillTexts]:
     async with postgresql_manager.get_async_session() as session:
-      stmt = select(Skill.normalized_text, Skill.text)
+      stmt = select(Skill.normalized_text, Skill.text).order_by(Skill.normalized_text)
       result = await session.execute(stmt)
       text_dicts = [dict(mapping) for mapping in result.mappings().all()]
       return [

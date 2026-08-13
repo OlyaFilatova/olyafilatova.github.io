@@ -1,5 +1,5 @@
 import { normalizeSkillText } from "./skill";
-import { Familiarity, JobPostingData, SkillAggregate, SkillEditTriggeredMessage, SkillFilters, SkillIgnoreTriggeredMessage, SkillSaveTriggeredMessage, SkillType, Temperature } from "./types";
+import { Familiarity, JobPostingData, SkillAggregate, SkillEditTriggeredMessage, SkillFilters, SkillSaveTriggeredMessage, SkillType, SynonymAddTriggeredMessage, SynonymRemoveTriggeredMessage, Temperature } from "./types";
 
 
 interface SkillRepository {
@@ -19,7 +19,8 @@ interface SkillRepository {
     normalizedText: string;
   }>>;
   editSkill(skillData: Omit<SkillEditTriggeredMessage, 'type'>): Promise<void>;
-  ignoreSkill(skillData: Omit<SkillIgnoreTriggeredMessage, 'type'>): Promise<void>;
+  addSynonym(skillData: Omit<SynonymAddTriggeredMessage, 'type'>): Promise<void>;
+  removeSynonym(skillData: Omit<SynonymRemoveTriggeredMessage, 'type'>): Promise<void>;
 }
 
 type StorageResponse<T = unknown> = { ok: true; result: T } | { ok: false; error: string };
@@ -179,14 +180,39 @@ class ChromeSkillRepository implements SkillRepository {
     });
   }
 
-  async ignoreSkill(skillData: Omit<SkillIgnoreTriggeredMessage, 'type'>): Promise<void> {
-    await fetch(`${API_URL}/api/job-skills/ignore`, {
+  async addSynonym({
+    synonymNormalizedText,
+    normalizedText,
+  }: Omit<SynonymAddTriggeredMessage, 'type'>): Promise<void> {
+    await fetch(`${API_URL}/api/skills/synonym/create`, {
       method: "POST",
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(skillData)
+      body: JSON.stringify({
+        normalizedText: synonymNormalizedText,
+        originNormalizedText: normalizedText,
+      })
+    });
+  }
+
+  async removeSynonym({
+    synonymText,
+    synonymNormalizedText,
+    normalizedText,
+  }: Omit<SynonymRemoveTriggeredMessage, 'type'>): Promise<void> {
+    await fetch(`${API_URL}/api/skills/synonym/remove`, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        displayText: synonymText,
+        normalizedText: synonymNormalizedText,
+        originNormalizedText: normalizedText,
+      })
     });
   }
 }
@@ -214,8 +240,10 @@ async function invokeStorageMethod(message: StorageRequest): Promise<unknown> {
       return extensionSkillRepository.createSkill(message.args[0] as Omit<SkillSaveTriggeredMessage, 'type'>);
     case "editSkill":
       return extensionSkillRepository.editSkill(message.args[0] as Omit<SkillEditTriggeredMessage, 'type'>);
-    case "ignoreSkill":
-      return extensionSkillRepository.ignoreSkill(message.args[0] as Omit<SkillIgnoreTriggeredMessage, 'type'>);
+    case "addSynonym":
+      return extensionSkillRepository.addSynonym(message.args[0] as Omit<SynonymAddTriggeredMessage, 'type'>);
+    case "removeSynonym":
+      return extensionSkillRepository.removeSynonym(message.args[0] as Omit<SynonymRemoveTriggeredMessage, 'type'>);
   }
 }
 

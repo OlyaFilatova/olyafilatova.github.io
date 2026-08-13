@@ -113,33 +113,28 @@ export type SkillEditedMessage = {
   temperature?: Temperature;
 }
 
-export type SkillIgnoreTriggeredMessage = {
-  type: "SKILL_IGNORE_TRIGGERED";
-  normalizedText: string;
-  url: string;
-}
 
-export type SkillIgnoredMessage = {
-  type: "SKILL_IGNORED";
-  normalizedText: string;
-  url: string;
-}
-
-export type SkillOpenTriggeredMessage = {
-  type: "SKILL_OPEN_TRIGGERED";
-  normalizedText: string;
-  tabId: number | undefined;
-}
-
-export type SkillOpenedMessage = {
-  type: "SKILL_OPENED";
+export type SynonymAddTriggeredMessage = {
+  type: "SYNONYM_ADD_TRIGGERED";
+  synonymNormalizedText: string;
   normalizedText: string;
 }
 
-export type ContentMessage = SkillsParsedMessage | ReloadHighlightsMessage | VisitedLinksParsedMessage | SkillOpenedMessage |
-  SkillSavedMessage | SkillEditedMessage | SkillIgnoredMessage;
+export type SynonymRemoveTriggeredMessage = {
+  type: "SYNONYM_REMOVE_TRIGGERED";
+  synonymText: string;
+  synonymNormalizedText: string;
+  normalizedText: string;
+}
+
+export type SynonymUpdatedMessage = {
+  type: "SYNONYM_UPDATED";
+}
+
+export type ContentMessage = SkillsParsedMessage | ReloadHighlightsMessage | VisitedLinksParsedMessage |
+  SkillSavedMessage | SkillEditedMessage | SynonymUpdatedMessage;
 export type ContentMessageType = ContentMessage["type"];
 
-export type ServiceWorkerMessage = JobPageOpenedMessage | JobListPageOpenedMessage | SkillOpenTriggeredMessage |
-  SkillSaveTriggeredMessage | SkillEditTriggeredMessage | SkillIgnoreTriggeredMessage;
+export type ServiceWorkerMessage = JobPageOpenedMessage | JobListPageOpenedMessage |
+  SkillSaveTriggeredMessage | SkillEditTriggeredMessage | SynonymAddTriggeredMessage | SynonymRemoveTriggeredMessage;
 export type ServiceWorkerMessageType = ServiceWorkerMessage["type"];

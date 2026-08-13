@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { notifySkillEditTriggered } from "../../../shared/notifications";
+import { notifyAddSynonymTriggered, notifyRemoveSynonymTriggered, notifySkillEditTriggered } from "../../../shared/notifications";
 import { Familiarity, SkillAggregate, SkillType, Temperature } from "../../../shared/types";
 import { FAMILIARITIES, SKILL_TYPES, TEMPERATURES } from "../../config";
 import SelectFilter from "./SelectFilter";
@@ -89,7 +89,10 @@ export default function Skill({ skill, skillTexts }: {
               options={[
                 {value: "", text: "Select skill"},
                 ...skillTexts
-                  .filter(skillText => !skill.normalizedSynonyms.includes(skillText.normalizedText))
+                  .filter(skillText => 
+                    !skill.normalizedSynonyms.includes(skillText.normalizedText) &&
+                    skill.normalizedText !== skillText.normalizedText
+                  )
                   .map(skillText => ({
                     value: skillText.normalizedText,
                     text: skillText.displayText
@@ -97,7 +100,7 @@ export default function Skill({ skill, skillTexts }: {
               ]}
               currentValue={""}
               onChange={event => {
-                void updateSynonym(event.target.value, skill.normalizedText);
+                void addSynonym(skill.normalizedText, event.target.value);
               }}
              />
 
@@ -114,7 +117,7 @@ export default function Skill({ skill, skillTexts }: {
               currentValue={""}
               onChange={event => {
                 if (event.target.value) {
-                  void updateSynonym(event.target.value, undefined);
+                  void removeSynonym(skill.normalizedText, event.target.options[event.target.selectedIndex].text, event.target.value);
                 }
               }}
              />
@@ -166,7 +169,18 @@ async function updateType(normalizedText: string, type: SkillType): Promise<void
   });
 }
 
-async function updateSynonym(normalizedText: string, synonymSkillId?: string): Promise<void> {
-  // await skillRepository.updateSynonymForText(normalizedText, synonymSkillId);
-  // await notifyJobTabs({ type: "RELOAD_HIGHLIGHTS" });
+async function addSynonym(normalizedText: string, synonymNormalizedText: string): Promise<void> {
+  notifyAddSynonymTriggered({
+    normalizedText,
+    synonymNormalizedText
+  });
+}
+
+
+async function removeSynonym(normalizedText: string, synonymText: string, synonymNormalizedText: string): Promise<void> {
+  notifyRemoveSynonymTriggered({
+    normalizedText,
+    synonymText,
+    synonymNormalizedText
+  });
 }

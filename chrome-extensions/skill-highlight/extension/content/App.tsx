@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { getCurrentAdapter } from '../shared/adapters/current';
-import { notifyJobListPageOpened, notifyJobPageOpened, notifySkillEditTriggered, notifySkillIgnoreTriggered, notifySkillOpenTriggered, notifySkillSaveTriggered } from '../shared/notifications';
-import { ContentMessage, ContentMessageType, Familiarity, ReloadHighlightsMessage, SkillEditedMessage, SkillIgnoredMessage, SkillOpenedMessage, SkillSavedMessage, SkillsParsedMessage, SkillType, Temperature, VisitedLinksParsedMessage } from '../shared/types';
-import { highlightSavedSkill, highlightSkillsInElement, removeSkillHighlights, updateSkillHighlightFamiliarity, updateSkillHighlightSkillType, updateSkillHighlightTemperature } from './highlight';
+import { notifyJobListPageOpened, notifyJobPageOpened, notifySkillEditTriggered, notifySkillSaveTriggered } from '../shared/notifications';
+import { ContentMessage, ContentMessageType, Familiarity, ReloadHighlightsMessage, SkillEditedMessage, SkillSavedMessage, SkillsParsedMessage, SkillType, Temperature, VisitedLinksParsedMessage } from '../shared/types';
+import { highlightSavedSkill, highlightSkillsInElement, updateSkillHighlightFamiliarity, updateSkillHighlightSkillType, updateSkillHighlightTemperature } from './highlight';
 import { selectionIsInside } from './dom-utils';
 import { FAMILIARITIES, SKILL_TYPES, TEMPERATURES } from '../side_panel/config';
-import { URLS } from '../shared/config';
 
 export default function App() {
   const [selectionPopupOpened, setSelectionPopupOpened] = useState(false);
@@ -84,16 +83,6 @@ export default function App() {
           updateSkillHighlightTemperature(context.descriptionEl, message.normalizedText, message.temperature);
         }
       }
-    },
-    SKILL_IGNORED: (message: SkillIgnoredMessage) => {
-      const context = getPageContext();
-      setHighlightPopupOpened(false);
-      if (context.descriptionEl) {
-        removeSkillHighlights(context.descriptionEl!, normalizedText)
-      }
-    },
-    SKILL_OPENED: (message: SkillOpenedMessage) => {
-      setHighlightPopupOpened(false);
     }
   };
 
@@ -126,13 +115,6 @@ export default function App() {
       url: window.location.href,
       skillType: skillType
     });
-  }
-
-  async function ignoreCurrentMatch(normalizedText: string): Promise<void> {
-    notifySkillIgnoreTriggered({
-      normalizedText,
-      url: window.location.href
-    })
   }
 
   function bindSelectionSave(descriptionEl: HTMLElement): void {
@@ -302,16 +284,6 @@ export default function App() {
               onClick={() => void updateSkillType(normalizedText, type)}>{type}</button>
             )
           }</div>
-          {/* 
-          <br />
-          <div className="skill-popover__buttons">
-            <button
-              type="button"
-              onClick={() => void ignoreCurrentMatch(normalizedText)}>Ignore on this page</button>
-            {/* <button
-              type="button"
-              onClick={() => void openSkill(normalizedText)}>Open Skill</button> * /}
-          </div> */}
         </div>
       </div> : <></>}
     </>

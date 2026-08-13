@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Skill from "./Skill";
-import { SkillAggregate } from "../../../shared/types";
+import { SkillAggregate, SynonymUpdatedMessage } from "../../../shared/types";
 import { handleSkillStorageMessage } from "../../../shared/storage";
 
 export default function SkillList({ skills }: { skills: SkillAggregate[] }) {
@@ -25,6 +25,14 @@ export default function SkillList({ skills }: { skills: SkillAggregate[] }) {
 
   useEffect(() => {
     getSkillTexts();
+
+    chrome.runtime.onMessage.addListener((
+      message: SynonymUpdatedMessage
+    ) => {
+      if (message.type == 'SYNONYM_UPDATED') {
+        getSkillTexts();
+      }
+    });
   }, []);
 
   return (

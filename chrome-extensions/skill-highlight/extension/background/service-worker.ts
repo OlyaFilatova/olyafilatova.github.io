@@ -1,6 +1,6 @@
 import { URLS } from "../shared/config";
 import { handleSkillStorageMessage } from "../shared/storage";
-import { ContentMessage, JobListPageOpenedMessage, JobPageOpenedMessage, ServiceWorkerMessage, ServiceWorkerMessageType, SkillEditTriggeredMessage, SkillIgnoreTriggeredMessage, SkillOpenTriggeredMessage, SkillSaveTriggeredMessage } from "../shared/types";
+import { ContentMessage, JobListPageOpenedMessage, JobPageOpenedMessage, ServiceWorkerMessage, ServiceWorkerMessageType, SkillEditTriggeredMessage, SkillSaveTriggeredMessage, SynonymAddTriggeredMessage, SynonymRemoveTriggeredMessage } from "../shared/types";
 
 chrome.runtime.onInstalled.addListener(() => {
   if (chrome.sidePanel?.setPanelBehavior) {
@@ -127,18 +127,17 @@ chrome.runtime.onMessage.addListener((
         }
       });
     },
-    SKILL_IGNORE_TRIGGERED: (sender, { type, ...message }: SkillIgnoreTriggeredMessage) => {
+    SYNONYM_ADD_TRIGGERED: (sender, { type, ...message }: SynonymAddTriggeredMessage) => {
       handleSkillStorageMessage({
         type: 'SKILL_STORAGE_REQUEST',
-        method: 'ignoreSkill',
+        method: 'addSynonym',
         args: [
           message
         ]
       }, response => {
         if (response.ok) {
-          void broadcastMessage([], [message.url], {
-            "type": "SKILL_IGNORED",
-            ...message
+          void broadcastMessage([], URLS, {
+            "type": "SYNONYM_UPDATED"
           });
           sendResponse(response);
         } else {
@@ -146,11 +145,23 @@ chrome.runtime.onMessage.addListener((
         }
       });
     },
-    SKILL_OPEN_TRIGGERED: (sender, message: SkillOpenTriggeredMessage) => {
-      const path = `side_panel/index.html?normalizedText=${encodeURIComponent(message.normalizedText)}`;
-      if (typeof chrome.sidePanel.setOptions === "function") {
-        void chrome.sidePanel.setOptions({ tabId: message.tabId, path, enabled: true });
-      }
+    SYNONYM_REMOVE_TRIGGERED: (sender, { type, ...message }: SynonymRemoveTriggeredMessage) => {
+      handleSkillStorageMessage({
+        type: 'SKILL_STORAGE_REQUEST',
+        method: 'removeSynonym',
+        args: [
+          message
+        ]
+      }, response => {
+        if (response.ok) {
+          void broadcastMessage([], URLS, {
+            "type": "SYNONYM_UPDATED"
+          });
+          sendResponse(response);
+        } else {
+          sendResponse(response);
+        }
+      });
     },
   };
 

@@ -1,4 +1,4 @@
-import { JobListPageOpenedMessage, JobPageOpenedMessage, SkillEditTriggeredMessage, SkillIgnoreTriggeredMessage, SkillOpenTriggeredMessage, SkillSaveTriggeredMessage } from "./types";
+import { JobListPageOpenedMessage, JobPageOpenedMessage, SkillEditTriggeredMessage, SkillSaveTriggeredMessage, SynonymAddTriggeredMessage, SynonymRemoveTriggeredMessage } from "./types";
 
 export function notifyJobPageOpened(message: Omit<JobPageOpenedMessage, "type">): void {
   const type = "JOB_PAGE_OPENED";
@@ -52,12 +52,12 @@ export function notifySkillEditTriggered(message: Omit<SkillEditTriggeredMessage
   }
 }
 
-export function notifySkillIgnoreTriggered(message: Omit<SkillIgnoreTriggeredMessage, "type">): void {
-  const type = "SKILL_IGNORE_TRIGGERED";
+export function notifyAddSynonymTriggered(message: Omit<SynonymAddTriggeredMessage, "type">): void {
+  const type = "SYNONYM_ADD_TRIGGERED";
   const result = chrome.runtime?.sendMessage?.({
     type,
     ...message
-  } satisfies SkillIgnoreTriggeredMessage);
+  } satisfies SynonymAddTriggeredMessage);
   if (result && "catch" in result) {
     result.catch(reason => console.log(
       `${type} notification failed. Reason ${reason}`
@@ -65,12 +65,12 @@ export function notifySkillIgnoreTriggered(message: Omit<SkillIgnoreTriggeredMes
   }
 }
 
-export function notifySkillOpenTriggered(message: Omit<SkillOpenTriggeredMessage, "type">): void {
-  const type = "SKILL_OPEN_TRIGGERED";
+export function notifyRemoveSynonymTriggered(message: Omit<SynonymRemoveTriggeredMessage, "type">): void {
+  const type = "SYNONYM_REMOVE_TRIGGERED";
   const result = chrome.runtime?.sendMessage?.({
     type,
     ...message
-  } satisfies SkillOpenTriggeredMessage);
+  } satisfies SynonymRemoveTriggeredMessage);
   if (result && "catch" in result) {
     result.catch(reason => console.log(
       `${type} notification failed. Reason ${reason}`

@@ -90,6 +90,28 @@ class SkillTextsResponse(BaseModel):
   texts: list[SkillText]
 
 
+class CreateSynonymRequest(BaseModel):
+  originNormalizedText: str
+  normalizedText: str
+
+
+class CreateSynonymResponse(BaseModel):
+  originNormalizedText: str
+  normalizedText: str
+
+
+class RemoveSynonymRequest(BaseModel):
+  originNormalizedText: str
+  normalizedText: str
+  displayText: str
+
+
+class RemoveSynonymResponse(BaseModel):
+  originNormalizedText: str
+  normalizedText: str
+  displayText: str
+
+
 @app.get("/health")
 def health() -> HealthResponse:
   return HealthResponse(status="ok")
@@ -109,6 +131,34 @@ async def get_all_skill_synonyms() -> SkillSynonymsResponse:
       )
       for synonym in synonyms
     ]
+  )
+
+
+@app.post("/synonym/create")
+async def create_synonym(req: CreateSynonymRequest) -> CreateSynonymResponse:
+  await SkillSynonymRepository().create(
+    origin_normalized_text=req.originNormalizedText,
+    normalized_text=req.normalizedText,
+  )
+
+  return CreateSynonymResponse(
+    normalizedText=req.normalizedText,
+    originNormalizedText=req.originNormalizedText,
+  )
+
+
+@app.post("/synonym/remove")
+async def remove_synonym(req: RemoveSynonymRequest) -> RemoveSynonymResponse:
+  await SkillSynonymRepository().delete(
+    origin_normalized_text=req.originNormalizedText,
+    text=req.displayText,
+    normalized_text=req.normalizedText,
+  )
+
+  return RemoveSynonymResponse(
+    normalizedText=req.normalizedText,
+    displayText=req.displayText,
+    originNormalizedText=req.originNormalizedText,
   )
 
 
