@@ -1,4 +1,4 @@
-import { JobListPageOpenedMessage, JobPageOpenedMessage, SkillEditTriggeredMessage, SkillIgnoreTriggeredMessage, SkillOpenTriggeredMessage, SkillSaveTriggeredMessage } from "../shared/types";
+import { JobListPageOpenedMessage, JobPageOpenedMessage, SkillEditTriggeredMessage, SkillIgnoreTriggeredMessage, SkillOpenTriggeredMessage, SkillSaveTriggeredMessage } from "./types";
 
 export function notifyJobPageOpened(message: Omit<JobPageOpenedMessage, "type">): void {
   const type = "JOB_PAGE_OPENED";

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getCurrentAdapter } from '../shared/adapters/current';
-import { notifyJobListPageOpened, notifyJobPageOpened, notifySkillEditTriggered, notifySkillIgnoreTriggered, notifySkillOpenTriggered, notifySkillSaveTriggered } from './notifications';
+import { notifyJobListPageOpened, notifyJobPageOpened, notifySkillEditTriggered, notifySkillIgnoreTriggered, notifySkillOpenTriggered, notifySkillSaveTriggered } from '../shared/notifications';
 import { ContentMessage, ContentMessageType, Familiarity, ReloadHighlightsMessage, SkillEditedMessage, SkillIgnoredMessage, SkillOpenedMessage, SkillSavedMessage, SkillsParsedMessage, SkillType, Temperature, VisitedLinksParsedMessage } from '../shared/types';
 import { highlightSavedSkill, highlightSkillsInElement, removeSkillHighlights, updateSkillHighlightFamiliarity, updateSkillHighlightSkillType, updateSkillHighlightTemperature } from './highlight';
 import { selectionIsInside } from './dom-utils';

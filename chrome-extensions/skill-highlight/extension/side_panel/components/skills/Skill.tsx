@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { notifySkillEditTriggered } from "../../../shared/notifications";
 import { ContentMessage, Familiarity, SkillAggregate, SkillType, Temperature } from "../../../shared/types";
 import { FAMILIARITIES, SKILL_TYPES, TEMPERATURES } from "../../config";
 import SelectFilter from "./SelectFilter";
@@ -10,6 +12,22 @@ export default function Skill({ skill, skillTexts }: {
   }>
 }) {
   const currentPageUrl = window.location.href;
+  const [familiarity, setFamiliarity] = useState(skill.familiarity);
+  const [temperature, setTemperature] = useState(skill.temperature);
+  const [type, setType] = useState(skill.type);
+
+  useEffect(() => {
+    void updateFamiliarity(skill.normalizedText, familiarity)
+  }, [familiarity]);
+
+  useEffect(() => {
+    void updateTemperature(skill.normalizedText, temperature)
+  }, [temperature]);
+
+  useEffect(() => {
+    void updateType(skill.normalizedText, type)
+  }, [type]);
+
   return (
     <article className="skill-card">
       <div className="skill-card__top">
@@ -20,7 +38,7 @@ export default function Skill({ skill, skillTexts }: {
           </div>
           <div className="meta">
             <p><strong>Categories: {skill.categories.join(", ") || "Unknown"}</strong></p>
-            <p><strong>Companies: {companyListLabel(skill)}</strong></p>
+            {/* <p><strong>Companies: {companyListLabel(skill)}</strong></p> */}
             <p><strong>Synonyms: {skill.synonymTexts.join(", ") || "None"}</strong></p>
           </div>
           <details className="links-accordion">
@@ -42,41 +60,32 @@ export default function Skill({ skill, skillTexts }: {
           <div className="controls">
             <SelectFilter
               label="Familiarity"
-              options={[
-                {value: "", text: "All"},
-                ...FAMILIARITIES.map(familiarity => ({
-                  value: familiarity,
-                  text: familiarity
-                }))
-              ]}
-              currentValue={skill.familiarity}
-              onChange={event => void updateFamiliarity(skill.normalizedText, event.target.value as Familiarity)}
+              options={FAMILIARITIES.map(familiarity => ({
+                value: familiarity,
+                text: familiarity
+              }))}
+              currentValue={familiarity}
+              onChange={event => setFamiliarity(event.target.value as Familiarity)}
              />
 
             <SelectFilter
               label="Temperature"
-              options={[
-                {value: "", text: "All"},
-                ...TEMPERATURES.map(item => ({
-                  value: item,
-                  text: item
-                }))
-              ]}
-              currentValue={skill.temperature}
-              onChange={event => void updateTemperature(skill.normalizedText, event.target.value as Temperature)}
+              options={TEMPERATURES.map(item => ({
+                value: item,
+                text: item
+              }))}
+              currentValue={temperature}
+              onChange={event => setTemperature(event.target.value as Temperature)}
              />
 
             <SelectFilter
               label="Type"
-              options={[
-                {value: "", text: "All"},
-                ...SKILL_TYPES.map(item => ({
-                  value: item,
-                  text: item
-                }))
-              ]}
-              currentValue={skill.type}
-              onChange={event => void updateType(skill.normalizedText, event.target.value as SkillType)}
+              options={SKILL_TYPES.map(item => ({
+                value: item,
+                text: item
+              }))}
+              currentValue={type}
+              onChange={event => setType(event.target.value as SkillType)}
              />
 
             <SelectFilter
@@ -169,18 +178,24 @@ async function deleteMentions(normalizedText: string): Promise<void> {
 }
 
 async function updateFamiliarity(normalizedText: string, familiarity: Familiarity): Promise<void> {
-  // await skillRepository.updateFamiliarityForText(normalizedText, familiarity);
-  await notifyJobTabs({ type: "RELOAD_HIGHLIGHTS" });
+  notifySkillEditTriggered({
+    normalizedText,
+    familiarity
+  });
 }
 
-async function updateTemperature(normalizedText: string, temperature: Temperature | ""): Promise<void> {
-  // await skillRepository.updateTemperatureForText(normalizedText, temperature || undefined);
-  await notifyJobTabs({ type: "RELOAD_HIGHLIGHTS" });
+async function updateTemperature(normalizedText: string, temperature: Temperature): Promise<void> {
+  notifySkillEditTriggered({
+    normalizedText,
+    temperature
+  });
 }
 
 async function updateType(normalizedText: string, type: SkillType): Promise<void> {
-  // await skillRepository.updateTypeForText(normalizedText, type);
-  await notifyJobTabs({ type: "RELOAD_HIGHLIGHTS" });
+  notifySkillEditTriggered({
+    normalizedText,
+    skillType: type
+  });
 }
 
 async function updateSynonym(normalizedText: string, synonymSkillId?: string): Promise<void> {

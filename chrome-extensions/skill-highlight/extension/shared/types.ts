@@ -98,7 +98,7 @@ export type SkillSavedMessage = {
 export type SkillEditTriggeredMessage = {
   type: "SKILL_EDIT_TRIGGERED";
   normalizedText: string;
-  url: string;
+  url?: string;
   skillType?: SkillType;
   familiarity?: Familiarity;
   temperature?: Temperature;
