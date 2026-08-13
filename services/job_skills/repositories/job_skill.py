@@ -52,15 +52,15 @@ class SkillRepository:
   async def filter(
     self,
     main_only: bool = True,
-    currentPage: int = 1,
-    pageSize: int = 10,
+    current_page: int = 1,
+    page_size: int = 10,
     search: str = "",
     sort: Literal["name", "companyCount"] = "name",
     category: str = "",
     type: SkillType | None = None,
     familiarity: Familiarity | None = None,
     temperature: Temperature | None = None,
-    jobUrl: str | None = None,
+    job_url: str | None = None,
   ) -> tuple[int, list[SkillAggregate]]:
     async with postgresql_manager.get_async_session() as session:
       aggregates = (
@@ -82,14 +82,14 @@ class SkillRepository:
           .join(
             JobPosting,
             JobPostingSkill.job_url == JobPosting.url
-            if not jobUrl and not category
-            else and_(JobPostingSkill.job_url == jobUrl, JobPostingSkill.job_url == JobPosting.url)
+            if not job_url and not category
+            else and_(JobPostingSkill.job_url == job_url, JobPostingSkill.job_url == JobPosting.url)
             if not category
             else and_(JobPosting.category == category, JobPostingSkill.job_url == JobPosting.url)
-            if not jobUrl
+            if not job_url
             else and_(
               JobPosting.category == category,
-              JobPostingSkill.job_url == jobUrl,
+              JobPostingSkill.job_url == job_url,
               JobPostingSkill.job_url == JobPosting.url,
             ),
           )
@@ -102,7 +102,7 @@ class SkillRepository:
         .subquery("aggregates")
       )
 
-      isfullouter = not jobUrl and not category
+      isfullouter = not job_url and not category
 
       stmt = select(
         aggregates,
@@ -145,7 +145,7 @@ class SkillRepository:
       else:
         stmt = stmt.order_by(aggregates.c.company_count.desc().nulls_last())
 
-      stmt = stmt.limit(pageSize).offset((currentPage - 1) * pageSize)
+      stmt = stmt.limit(page_size).offset((current_page - 1) * page_size)
 
       result = await session.execute(stmt)
 

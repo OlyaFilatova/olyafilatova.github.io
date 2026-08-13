@@ -1,5 +1,5 @@
 import { normalizeSkillText } from "./skill";
-import { JobPostingData, SkillAggregate, SkillEditTriggeredMessage, SkillFilters, SkillIgnoreTriggeredMessage, SkillSaveTriggeredMessage } from "./types";
+import { Familiarity, JobPostingData, SkillAggregate, SkillEditTriggeredMessage, SkillFilters, SkillIgnoreTriggeredMessage, SkillSaveTriggeredMessage, SkillType, Temperature } from "./types";
 
 
 interface SkillRepository {
@@ -8,11 +8,11 @@ interface SkillRepository {
   getCategories(): Promise<string[]>;
   getVisitedLinks(links: string[]): Promise<string[]>;
   createSkill(skillData: Omit<SkillSaveTriggeredMessage, 'type'>): Promise<{
-    normalizedText: any;
-    displayText: any;
-    familiarity: any;
-    temperature: any;
-    type: any;
+    normalizedText: string;
+    displayText: string;
+    familiarity: Familiarity;
+    temperature: Temperature;
+    type: SkillType;
   }>;
   editSkill(skillData: Omit<SkillEditTriggeredMessage, 'type'>): Promise<void>;
   ignoreSkill(skillData: Omit<SkillIgnoreTriggeredMessage, 'type'>): Promise<void>;
@@ -89,16 +89,16 @@ class ChromeSkillRepository implements SkillRepository {
     const result = await response.json();
 
     return [result["total_rows"], result["skills"].map((skill: any) => ({
-      normalizedText: skill.normalized_text,
-      displayText: skill.display_text,
+      normalizedText: skill.normalizedText,
+      displayText: skill.displayText,
       familiarity: skill.familiarity,
       temperature: skill.temperature,
       type: skill.type,
       normalizedSynonyms: skill.synonyms,
-      synonymTexts: skill.synonym_texts,
+      synonymTexts: skill.synonymTexts,
       categories: skill.categories,
       mentions: skill.urls,
-      companyCount: skill.company_count,
+      companyCount: skill.companyCount,
       companies: skill.companies,
     }))];
   }
@@ -122,7 +122,7 @@ class ChromeSkillRepository implements SkillRepository {
       })
     });
     const skillSaveResult = await skillsResponse.json();
-    const normalizedText = skillSaveResult["normalized_text"];
+    const normalizedText = skillSaveResult["normalizedText"];
 
     const jobSkillsResponse = await fetch(`${API_URL}/api/job-skills/create`, {
       method: "POST",
@@ -139,8 +139,8 @@ class ChromeSkillRepository implements SkillRepository {
     await jobSkillsResponse.json();
 
     return {
-      normalizedText: skillSaveResult["normalized_text"],
-      displayText: skillSaveResult["display_text"],
+      normalizedText: skillSaveResult["normalizedText"],
+      displayText: skillSaveResult["displayText"],
       familiarity: skillSaveResult["familiarity"],
       temperature: skillSaveResult["temperature"],
       type: skillSaveResult["type"],

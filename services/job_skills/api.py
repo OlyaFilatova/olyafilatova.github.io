@@ -1,13 +1,27 @@
-from typing import Annotated, Literal
+from typing import Annotated, Literal, TypedDict
 
 from fastapi import FastAPI, Query
 from pydantic import BaseModel, Field
 
 from services.skills.models.skill import Familiarity, SkillType, Temperature
 
-from .repositories.job_skill import SkillAggregate, SkillRepository
+from .repositories.job_skill import SkillRepository
 
 app = FastAPI()
+
+
+class Skill(TypedDict):
+  normalizedText: str
+  companyCount: int
+  companies: list[str]
+  categories: list[str]
+  synonyms: list[str]
+  synonymTexts: list[str]
+  urls: list[str]
+  familiarity: Familiarity
+  temperature: Temperature
+  type: SkillType
+  displayText: str
 
 
 class FilterSkillsRequest(BaseModel):
@@ -23,8 +37,8 @@ class FilterSkillsRequest(BaseModel):
 
 
 class FilterSkillsResponse(BaseModel):
-  skills: list[SkillAggregate]
-  total_rows: int
+  skills: list[Skill]
+  totalRows: int
 
 
 class CreateRequest(BaseModel):
@@ -52,18 +66,34 @@ async def filter_skills(
 ) -> FilterSkillsResponse:
   total_rows, skills = await SkillRepository().filter(
     main_only=True,
-    currentPage=filter_query.currentPage,
-    pageSize=filter_query.pageSize,
+    current_page=filter_query.currentPage,
+    page_size=filter_query.pageSize,
     search=filter_query.search,
     category=filter_query.category,
     sort=filter_query.sort,
     type=filter_query.type,
     familiarity=filter_query.familiarity,
     temperature=filter_query.temperature,
-    jobUrl=filter_query.jobUrl,
+    job_url=filter_query.jobUrl,
   )
 
-  return FilterSkillsResponse(skills=skills, total_rows=total_rows)
+  response_skills = [
+    Skill(
+      normalizedText = skill['normalized_text'],
+      companyCount = skill['company_count'],
+      companies = skill['companies'],
+      categories = skill['categories'],
+      synonyms = skill['synonyms'],
+      synonymTexts = skill['synonym_texts'],
+      urls = skill['urls'],
+      familiarity = skill['familiarity'],
+      temperature = skill['temperature'],
+      type = skill['type'],
+      displayText = skill['display_text'],
+    ) for skill in skills
+  ]
+
+  return FilterSkillsResponse(skills=response_skills, totalRows=total_rows)
 
 
 @app.get("/categories")

@@ -13,20 +13,20 @@ app = FastAPI()
 
 class SkillSynonym(BaseModel):
   text: str
-  origin_normalized_text: str
-  normalized_text: str
-  created_at: datetime.datetime
-  updated_at: datetime.datetime
+  originNormalizedText: str
+  normalizedText: str
+  createdAt: datetime.datetime
+  updatedAt: datetime.datetime
 
 
 class Skill(BaseModel):
-  normalized_text: str
+  normalizedText: str
   text: str
   type: SkillType
   familiarity: Familiarity
   temperature: Temperature
-  created_at: datetime.datetime
-  updated_at: datetime.datetime
+  createdAt: datetime.datetime
+  updatedAt: datetime.datetime
 
 
 class SkillSynonymsResponse(BaseModel):
@@ -38,7 +38,7 @@ class CreateSkillResponse(BaseModel):
 
 
 class CreateSkillRequest(BaseModel):
-  normalized_text: str
+  normalizedText: str
   text: str
   type: SkillType
   familiarity: Familiarity
@@ -50,52 +50,11 @@ class HealthResponse(BaseModel):
 
 
 class SkillsRequest(BaseModel):
-  skill_ids: list[str]
+  skillIds: list[str]
 
 
 class SkillsResponse(BaseModel):
   skills: list[Skill]
-
-
-@app.get("/health")
-def health() -> HealthResponse:
-  return HealthResponse(status="ok")
-
-
-@app.get("/synonyms")
-async def get_all_skill_synonyms() -> SkillSynonymsResponse:
-  synonyms = await SkillSynonymRepository().get_all()
-  return SkillSynonymsResponse(
-    skills=[
-      SkillSynonym(
-        text=str(synonym.text),
-        origin_normalized_text=str(synonym.origin_normalized_text),
-        normalized_text=str(synonym.normalized_text),
-        created_at=cast(datetime.datetime, synonym.created_at),
-        updated_at=cast(datetime.datetime, synonym.updated_at),
-      )
-      for synonym in synonyms
-    ]
-  )
-
-
-@app.get("/skills")
-async def get_skills(req: SkillsRequest) -> SkillsResponse:
-  skills = await SkillRepository().get_by_keys(req.skill_ids)
-  return SkillsResponse(
-    skills=[
-      Skill(
-        normalized_text=str(skill.normalized_text),
-        text=str(skill.text),
-        type=skill.type,
-        familiarity=skill.familiarity,
-        temperature=skill.temperature,
-        created_at=cast(datetime.datetime, skill.created_at),
-        updated_at=cast(datetime.datetime, skill.updated_at),
-      )
-      for skill in skills
-    ]
-  )
 
 
 class CreateRequest(BaseModel):
@@ -104,8 +63,8 @@ class CreateRequest(BaseModel):
 
 
 class CreateResponse(BaseModel):
-  normalized_text: str
-  display_text: str
+  normalizedText: str
+  displayText: str
   type: SkillType
   familiarity: Familiarity
   temperature: Temperature
@@ -120,6 +79,47 @@ class EditRequest(BaseModel):
 
 class EditResponse(BaseModel):
   pass
+
+
+@app.get("/health")
+def health() -> HealthResponse:
+  return HealthResponse(status="ok")
+
+
+@app.get("/synonyms")
+async def get_all_skill_synonyms() -> SkillSynonymsResponse:
+  synonyms = await SkillSynonymRepository().get_all()
+  return SkillSynonymsResponse(
+    skills=[
+      SkillSynonym(
+        text=str(synonym.text),
+        originNormalizedText=str(synonym.origin_normalized_text),
+        normalizedText=str(synonym.normalized_text),
+        createdAt=cast(datetime.datetime, synonym.created_at),
+        updatedAt=cast(datetime.datetime, synonym.updated_at),
+      )
+      for synonym in synonyms
+    ]
+  )
+
+
+@app.get("/skills")
+async def get_skills(req: SkillsRequest) -> SkillsResponse:
+  skills = await SkillRepository().get_by_keys(req.skillIds)
+  return SkillsResponse(
+    skills=[
+      Skill(
+        normalizedText=str(skill.normalized_text),
+        text=str(skill.text),
+        type=skill.type,
+        familiarity=skill.familiarity,
+        temperature=skill.temperature,
+        createdAt=cast(datetime.datetime, skill.created_at),
+        updatedAt=cast(datetime.datetime, skill.updated_at),
+      )
+      for skill in skills
+    ]
+  )
 
 
 @app.post("/create")
@@ -141,8 +141,8 @@ async def create(req: CreateRequest) -> CreateResponse:
     }
   )
   return CreateResponse(
-    normalized_text=str(skill.normalized_text),
-    display_text=str(skill.text),
+    normalizedText=str(skill.normalized_text),
+    displayText=str(skill.text),
     type=SkillType.APPROACH,
     familiarity=Familiarity.UNKNOWN,
     temperature=Temperature.MEH,

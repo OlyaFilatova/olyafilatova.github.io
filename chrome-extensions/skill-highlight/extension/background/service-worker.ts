@@ -86,8 +86,7 @@ chrome.runtime.onMessage.addListener((
             "type": "SKILL_SAVED",
           });
           const filteroutTabs = sender.tab?.id ? [sender.tab?.id] : [];
-          // const filterOutTabs = []
-          void broadcastMessage(filterOutTabs, URLS, {
+          void broadcastMessage(filteroutTabs, URLS, {
             "type": "RELOAD_HIGHLIGHTS"
           });
           sendResponse(response);

@@ -25,13 +25,13 @@ class HealthResponse(BaseModel):
 
 
 class Skill(TypedDict):
-  normalized_text: str
+  normalizedText: str
   text: str
   type: Any  # TODO move types to the shared package
   familiarity: Any
   temperature: Any
-  created_at: datetime.datetime
-  updated_at: datetime.datetime
+  createdAt: datetime.datetime
+  updatedAt: datetime.datetime
 
 
 class JobPostingResponse(BaseModel):
@@ -40,10 +40,10 @@ class JobPostingResponse(BaseModel):
 
 class SkillSynonym(TypedDict):
   text: str
-  origin_normalized_text: str
-  normalized_text: str
-  created_at: datetime.datetime
-  updated_at: datetime.datetime
+  originNormalizedText: str
+  normalizedText: str
+  createdAt: datetime.datetime
+  updatedAt: datetime.datetime
 
 
 class VisitedLinksRequest(BaseModel):
@@ -67,7 +67,7 @@ async def get_skills(skill_ids: list[str]) -> list[Skill]:
   url = os.getenv("SKILLS_MANAGER_SERVICE")
   url = f"{url}skills"
 
-  response = requests.get(url, json={"skill_ids": skill_ids})
+  response = requests.get(url, json={"skillIds": skill_ids})
 
   return cast(list[Skill], response.json()["skills"])
 
@@ -76,7 +76,7 @@ async def parse_skills(body: str, skill_synonyms: list[str]) -> list[str]:
   url = os.getenv("PARSE_SKILLS_SERVICE")
   url = f"{url}parse"
 
-  payload = {"body": body, "skill_synonyms": skill_synonyms}
+  payload = {"body": body, "skillSynonyms": skill_synonyms}
 
   response = requests.post(url, json=payload)
 
@@ -121,7 +121,7 @@ async def process(request: JobPostingRequest) -> JobPostingResponse:
   skill_synonyms = await get_skill_synonyms()
   if not len(job_skills):
     matched_skills = await parse_skills(
-      request.body, [skill["normalized_text"] for skill in skill_synonyms]
+      request.body, [skill["normalizedText"] for skill in skill_synonyms]
     )
 
     await JobPostingSkillRepository().create_many(request.url, matched_skills)
@@ -129,12 +129,12 @@ async def process(request: JobPostingRequest) -> JobPostingResponse:
 
   skill_keys = [str(skill.skill_normalized_text) for skill in job_skills]
   main_skill_mapping = [
-    (synonym["origin_normalized_text"], synonym["normalized_text"])
+    (synonym["originNormalizedText"], synonym["normalizedText"])
     for synonym in skill_synonyms
-    if synonym["normalized_text"] in skill_keys
+    if synonym["normalizedText"] in skill_keys
   ]
   skills = await get_skills(list(set([mapping[0] for mapping in main_skill_mapping])))
-  skill_dict = {skill["normalized_text"]: skill for skill in skills}
+  skill_dict = {skill["normalizedText"]: skill for skill in skills}
 
   skills_mapping = [(skill_dict[mapping[0]], mapping[1]) for mapping in main_skill_mapping]
 

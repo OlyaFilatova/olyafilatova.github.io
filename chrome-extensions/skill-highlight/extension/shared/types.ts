@@ -56,13 +56,13 @@ export type SkillsParsedMessage = {
   type: "SKILLS_PARSED";
   skills: Array<[
     {
-      normalized_text: string;
+      normalizedText: string;
       text: string;
       type: string;
       familiarity: string;
       temperature: string;
-      created_at: string;
-      updated_at: string;
+      createdAt: string;
+      updatedAt: string;
     },
     string
   ]>;

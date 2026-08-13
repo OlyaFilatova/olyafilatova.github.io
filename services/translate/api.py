@@ -49,8 +49,8 @@ class TranslationResponse(BaseModel):
 class HealthResponse(BaseModel):
   status: str
   device: str
-  model_uk_to_en: str
-  model_en_to_uk: str
+  modelUkToEn: str
+  modelEnToUk: str
 
 
 @app.get("/health")
@@ -58,8 +58,8 @@ def health() -> HealthResponse:
   return HealthResponse(
     status="ok",
     device=DEVICE,
-    model_uk_to_en=MODEL_UK_TO_EN,
-    model_en_to_uk=MODEL_EN_TO_UK,
+    modelUkToEn=MODEL_UK_TO_EN,
+    modelEnToUk=MODEL_EN_TO_UK,
   )
 
 

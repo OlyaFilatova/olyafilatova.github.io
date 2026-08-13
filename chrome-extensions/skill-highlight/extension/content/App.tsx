@@ -65,12 +65,9 @@ export default function App() {
       });
     },
     SKILL_SAVED: (message: SkillSavedMessage) => {
-      console.log('SKILL_SAVED')
       const pageContext = getPageContext();
       setSelectionPopupOpened(false);
-      console.log('hide')
       window.getSelection()?.removeAllRanges();
-      console.log('remove range')
       highlightSavedSkill(pageContext.descriptionEl!, message)
     },
     SKILL_EDITED: (message: SkillEditedMessage) => {
@@ -218,7 +215,6 @@ export default function App() {
     if (adapter) {
       chrome.runtime.onMessage.addListener((message: ContentMessage, sender, sendResponse) => {
         const type = message.type;
-        console.log(type, message)
         if (type in eventListeners) {
           eventListeners[type](message);
           sendResponse({ ok: true});
