@@ -14,6 +14,8 @@ if config.config_file_name is not None:
 
 # add your model's MetaData object here
 # for 'autogenerate' support
+from services.job_parser.models import job_skill, job, job_history
+from services.skills.models import skill, skill_synonym 
 from shared.models.base import Base
 
 target_metadata = Base.metadata

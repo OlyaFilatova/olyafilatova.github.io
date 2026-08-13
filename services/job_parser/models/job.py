@@ -10,7 +10,7 @@ class JobPosting(Base):
   __tablename__ = "job_postings"
 
   url = Column(String(1024), primary_key=True)
-  body = Column(String(10240), unique=False, nullable=False, index=False)
+  body = Column(String(51200), unique=False, nullable=False, index=False)
   category = Column(String(100), unique=False, nullable=False, index=True)
   company = Column(String(100), unique=False, nullable=False, index=True)
   created_at = Column(DateTime(timezone=True), server_default=func.now())
