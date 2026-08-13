@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, TypedDict
 
 from sqlalchemy import select, update
 from sqlalchemy.exc import IntegrityError
@@ -6,6 +6,11 @@ from sqlalchemy.exc import IntegrityError
 from ..database.postgres_manager import postgresql_manager
 from ..models.skill import Skill
 from .base import BaseRepository
+
+
+class SkillTexts(TypedDict):
+  normalized_text: str
+  display_text: str
 
 
 class SkillRepository(BaseRepository):
@@ -24,11 +29,21 @@ class SkillRepository(BaseRepository):
       result = await session.execute(stmt)
       return [*result.scalars().all()]
 
-  async def get_all(self) -> list[Skill] | None:
+  async def get_all(self) -> list[Skill]:
     async with postgresql_manager.get_async_session() as session:
       stmt = select(Skill)
       result = await session.execute(stmt)
       return [*result.scalars().all()]
+
+  async def get_skill_texts(self) -> list[SkillTexts]:
+    async with postgresql_manager.get_async_session() as session:
+      stmt = select(Skill.normalized_text, Skill.text)
+      result = await session.execute(stmt)
+      text_dicts = [dict(mapping) for mapping in result.mappings().all()]
+      return [
+        SkillTexts(display_text=mapping["text"], normalized_text=mapping["normalized_text"])
+        for mapping in text_dicts
+      ]
 
   async def create(self, data: dict[str, Any]) -> Skill:
     async with postgresql_manager.get_async_session() as session:

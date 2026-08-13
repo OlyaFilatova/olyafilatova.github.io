@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { notifySkillEditTriggered } from "../../../shared/notifications";
-import { ContentMessage, Familiarity, SkillAggregate, SkillType, Temperature } from "../../../shared/types";
+import { Familiarity, SkillAggregate, SkillType, Temperature } from "../../../shared/types";
 import { FAMILIARITIES, SKILL_TYPES, TEMPERATURES } from "../../config";
 import SelectFilter from "./SelectFilter";
 
@@ -39,7 +39,6 @@ export default function Skill({ skill, skillTexts }: {
                   target="_blank"
                   rel="noreferrer"
                   className={urlsMatch(url, currentPageUrl) ? 'links__current': ''}>{url}</a>
-                <button type="button" className="link-row__ignore" onClick={() => void ignoreMentionsOnPage(skill.normalizedText, url)}>Ignore page</button>
               </div>)}
             </div>
           </details>
@@ -119,12 +118,6 @@ export default function Skill({ skill, skillTexts }: {
                 }
               }}
              />
-
-            <button
-              type="button"
-              className="delete-button"
-              onClick={() => void deleteMentions(skill.normalizedText)}
-              >Delete mentions</button>
           </div>
         </div>
       </div>
@@ -136,11 +129,6 @@ function companyCountLabel(skill: SkillAggregate): string {
   return `${skill.companyCount} ${skill.companyCount === 1 ? "company" : "companies"}`;
 }
 
-function companyListLabel(aggregate: SkillAggregate): string {
-  const filteredCompanies = aggregate.companies.join(", ") || "Unknown";
-
-  return `${filteredCompanies}`;
-}
 
 function normalizePageUrl(url: string): string {
   try {
@@ -155,23 +143,6 @@ function normalizePageUrl(url: string): string {
 
 function urlsMatch(first: string, second: string): boolean {
   return normalizePageUrl(first) === normalizePageUrl(second);
-}
-
-async function ignoreMentionsOnPage(normalizedText: string, url: string): Promise<void> {
-  // await Promise.all(mentions.map((mention) => skillRepository.ignoreOnPage(mention.normalizedText, mention.url)));
-  // await notifyJobTabs({
-  //   type: "SKILLS_REMOVED",
-  //   normalizedTexts: [...new Set(mentions.map((mention) => mention.normalizedText))]
-  // });
-}
-
-async function notifyJobTabs(message: ContentMessage): Promise<void> {
-  // broadcastMessage([], URLS, message)
-}
-
-async function deleteMentions(normalizedText: string): Promise<void> {
-  // await skillRepository.deleteSkill(normalizedText);
-  await notifyJobTabs({ type: "RELOAD_HIGHLIGHTS" });
 }
 
 async function updateFamiliarity(normalizedText: string, familiarity: Familiarity): Promise<void> {
@@ -197,5 +168,5 @@ async function updateType(normalizedText: string, type: SkillType): Promise<void
 
 async function updateSynonym(normalizedText: string, synonymSkillId?: string): Promise<void> {
   // await skillRepository.updateSynonymForText(normalizedText, synonymSkillId);
-  await notifyJobTabs({ type: "RELOAD_HIGHLIGHTS" });
+  // await notifyJobTabs({ type: "RELOAD_HIGHLIGHTS" });
 }

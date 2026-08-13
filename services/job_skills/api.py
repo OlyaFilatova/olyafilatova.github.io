@@ -79,18 +79,19 @@ async def filter_skills(
 
   response_skills = [
     Skill(
-      normalizedText = skill['normalized_text'],
-      companyCount = skill['company_count'],
-      companies = skill['companies'],
-      categories = skill['categories'],
-      synonyms = skill['synonyms'],
-      synonymTexts = skill['synonym_texts'],
-      urls = skill['urls'],
-      familiarity = skill['familiarity'],
-      temperature = skill['temperature'],
-      type = skill['type'],
-      displayText = skill['display_text'],
-    ) for skill in skills
+      normalizedText=skill["normalized_text"],
+      companyCount=skill["company_count"],
+      companies=skill["companies"],
+      categories=skill["categories"],
+      synonyms=skill["synonyms"],
+      synonymTexts=skill["synonym_texts"],
+      urls=skill["urls"],
+      familiarity=skill["familiarity"],
+      temperature=skill["temperature"],
+      type=skill["type"],
+      displayText=skill["display_text"],
+    )
+    for skill in skills
   ]
 
   return FilterSkillsResponse(skills=response_skills, totalRows=total_rows)

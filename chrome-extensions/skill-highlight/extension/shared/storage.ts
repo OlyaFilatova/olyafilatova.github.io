@@ -14,6 +14,10 @@ interface SkillRepository {
     temperature: Temperature;
     type: SkillType;
   }>;
+  getSkillTexts(): Promise<Array<{
+    displayText: string;
+    normalizedText: string;
+  }>>;
   editSkill(skillData: Omit<SkillEditTriggeredMessage, 'type'>): Promise<void>;
   ignoreSkill(skillData: Omit<SkillIgnoreTriggeredMessage, 'type'>): Promise<void>;
 }
@@ -103,6 +107,23 @@ class ChromeSkillRepository implements SkillRepository {
     }))];
   }
 
+  async getSkillTexts(): Promise<Array<{
+    displayText: string;
+    normalizedText: string;
+  }>> {
+    const response = await fetch(`${API_URL}/api/skills/skill-texts`, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      }
+    });
+
+    const result = await response.json();
+
+    return result["texts"];
+  }
+
   async createSkill(skillData: Omit<SkillSaveTriggeredMessage, 'type'>): Promise<{
     normalizedText: any;
     displayText: any;
@@ -183,6 +204,8 @@ async function invokeStorageMethod(message: StorageRequest): Promise<unknown> {
       return extensionSkillRepository.getJobPostingSkills(message.args[0] as any);
     case "getSkills":
       return extensionSkillRepository.getSkills(message.args[0] as any);
+    case "getSkillTexts":
+      return extensionSkillRepository.getSkillTexts();
     case "getCategories":
       return extensionSkillRepository.getCategories();
     case "getVisitedLinks":

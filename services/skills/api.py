@@ -81,6 +81,15 @@ class EditResponse(BaseModel):
   pass
 
 
+class SkillText(BaseModel):
+  normalizedText: str
+  displayText: str
+
+
+class SkillTextsResponse(BaseModel):
+  texts: list[SkillText]
+
+
 @app.get("/health")
 def health() -> HealthResponse:
   return HealthResponse(status="ok")
@@ -118,6 +127,17 @@ async def get_skills(req: SkillsRequest) -> SkillsResponse:
         updatedAt=cast(datetime.datetime, skill.updated_at),
       )
       for skill in skills
+    ]
+  )
+
+
+@app.get("/skill-texts")
+async def get_skill_texts() -> SkillTextsResponse:
+  texts = await SkillRepository().get_skill_texts()
+  return SkillTextsResponse(
+    texts=[
+      SkillText(normalizedText=text["normalized_text"], displayText=text["display_text"])
+      for text in texts
     ]
   )
 
