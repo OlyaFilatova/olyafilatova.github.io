@@ -14,4 +14,8 @@ export interface WebsiteAdapter {
   getLinks(): string[];
 
   stylizeVisitedLinks(visitedLinks: string[]): void;
+
+  addJobListPageChangedObserver(observer: () => void): void;
+
+  setupJobListPageChangedObserver(): void;
 }

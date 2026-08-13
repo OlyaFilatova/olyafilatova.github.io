@@ -5,6 +5,8 @@ const DOU_JOB_URL_PATTERN = /^https:\/\/jobs\.dou\.ua\/companies\/.+\/vacancies\
 const DOU_JOB_LIST_URL_PATTERN = /^https:\/\/jobs\.dou\.ua\/vacancies\/\?.+/;
 
 export class DouAdapter implements WebsiteAdapter {
+  private jobListPageChangedObservers: Array<() => void> = [];
+
   isCurrent(url: string): boolean {
     return this.identifyPageType(url) !== undefined;
   }
@@ -41,6 +43,21 @@ export class DouAdapter implements WebsiteAdapter {
 
   stylizeVisitedLinks(visitedLinks: string[]) {
     stylizeVisitedLinks('.l-vacancy a.vt', visitedLinks);
+  }
+
+  addJobListPageChangedObserver(observer: () => void) {
+    this.jobListPageChangedObservers.push(observer);
+  }
+
+  setupJobListPageChangedObserver() {
+    (new MutationObserver(() => this.triggerJobListPageChangedEvent()))
+      .observe(document.querySelector("ul.lt")!, {
+        childList: true
+      });
+  }
+
+  private triggerJobListPageChangedEvent() {
+    this.jobListPageChangedObservers.forEach(observer => observer());
   }
 
   private getPrimaryKeywordFromHref(href: string): string {

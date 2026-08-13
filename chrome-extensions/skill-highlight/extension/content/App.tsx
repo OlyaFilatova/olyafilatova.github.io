@@ -235,12 +235,19 @@ export default function App() {
         bindSelectionSave(pageContext.descriptionEl);
         bindHighlightClicks(document);
       } else if (pageType == 'jobs-list') {
-        const links = adapter.getLinks();
+        const stylizeVisitedLinks = function stylizeVisitedLinks() {
+          const links = adapter.getLinks();
 
-        notifyJobListPageOpened({
-          links,
-          url: pageContext.url
-        });
+          notifyJobListPageOpened({
+            links,
+            url: pageContext.url
+          });
+        }
+
+        adapter.setupJobListPageChangedObserver();
+        adapter.addJobListPageChangedObserver(stylizeVisitedLinks);
+
+        stylizeVisitedLinks();
       }
     }
   }, []);

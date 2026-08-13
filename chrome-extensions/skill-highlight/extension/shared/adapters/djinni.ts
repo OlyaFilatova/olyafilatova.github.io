@@ -49,6 +49,11 @@ export class DjinniAdapter implements WebsiteAdapter {
     stylizeVisitedLinks('.job_item__header-link', visitedLinks);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  addJobListPageChangedObserver(_observer: () => void) {}
+
+  setupJobListPageChangedObserver() {}
+
   private getPrimaryKeywordFromHref(href: string): string {
     try {
       const url = new URL(href, window.location.origin);
