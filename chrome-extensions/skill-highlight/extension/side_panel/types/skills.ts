@@ -1,5 +1,3 @@
-import { Familiarity, SkillType, Temperature } from "../../shared/types";
-
 export interface FiltersContext {
   categories: string[];
   setCategories: React.Dispatch<React.SetStateAction<string[]>>;
@@ -31,4 +29,3 @@ export interface PaginationContext {
 }
 
 export interface SkillsContext extends PaginationContext, FiltersContext {}
-

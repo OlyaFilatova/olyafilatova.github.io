@@ -7,7 +7,13 @@ interface SkillRepository {
   getSkills(skillFilters: SkillFilters): Promise<SkillAggregate[]>;
   getCategories(): Promise<string[]>;
   getVisitedLinks(links: string[]): Promise<string[]>;
-  createSkill(skillData: Omit<SkillSaveTriggeredMessage, 'type'>): Promise<void>;
+  createSkill(skillData: Omit<SkillSaveTriggeredMessage, 'type'>): Promise<{
+    normalizedText: any;
+    displayText: any;
+    familiarity: any;
+    temperature: any;
+    type: any;
+  }>;
   editSkill(skillData: Omit<SkillEditTriggeredMessage, 'type'>): Promise<void>;
   ignoreSkill(skillData: Omit<SkillIgnoreTriggeredMessage, 'type'>): Promise<void>;
 }
@@ -97,7 +103,13 @@ class ChromeSkillRepository implements SkillRepository {
     }))];
   }
 
-  async createSkill(skillData: Omit<SkillSaveTriggeredMessage, 'type'>): Promise<void> {
+  async createSkill(skillData: Omit<SkillSaveTriggeredMessage, 'type'>): Promise<{
+    normalizedText: any;
+    displayText: any;
+    familiarity: any;
+    temperature: any;
+    type: any;
+  }> {
     const skillsResponse = await fetch(`${API_URL}/api/skills/create`, {
       method: "POST",
       headers: {
@@ -126,7 +138,13 @@ class ChromeSkillRepository implements SkillRepository {
 
     await jobSkillsResponse.json();
 
-    return normalizedText;
+    return {
+      normalizedText: skillSaveResult["normalized_text"],
+      displayText: skillSaveResult["display_text"],
+      familiarity: skillSaveResult["familiarity"],
+      temperature: skillSaveResult["temperature"],
+      type: skillSaveResult["type"],
+    };
   }
 
   async editSkill({ url, ...skillData }: Omit<SkillEditTriggeredMessage, 'type'>): Promise<void> {

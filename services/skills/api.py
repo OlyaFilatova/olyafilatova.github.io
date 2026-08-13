@@ -105,6 +105,10 @@ class CreateRequest(BaseModel):
 
 class CreateResponse(BaseModel):
   normalized_text: str
+  display_text: str
+  type: SkillType
+  familiarity: Familiarity
+  temperature: Temperature
 
 
 class EditRequest(BaseModel):
@@ -136,7 +140,13 @@ async def create(req: CreateRequest) -> CreateResponse:
       "normalized_text": req.normalizedText,
     }
   )
-  return CreateResponse(normalized_text=str(skill.normalized_text))
+  return CreateResponse(
+    normalized_text=str(skill.normalized_text),
+    display_text=str(skill.text),
+    type=SkillType.APPROACH,
+    familiarity=Familiarity.UNKNOWN,
+    temperature=Temperature.MEH,
+  )
 
 
 @app.post("/edit")

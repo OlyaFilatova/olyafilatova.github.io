@@ -46,9 +46,12 @@ class SkillSynonym(TypedDict):
   updated_at: datetime.datetime
 
 
-@app.get("/health")
-def health() -> HealthResponse:
-  return HealthResponse(status="ok")
+class VisitedLinksRequest(BaseModel):
+  links: list[str]
+
+
+class VisitedLinksResponse(BaseModel):
+  links: list[str]
 
 
 async def get_skill_synonyms() -> list[SkillSynonym]:
@@ -79,6 +82,11 @@ async def parse_skills(body: str, skill_synonyms: list[str]) -> list[str]:
 
   matches = cast(list[str], response.json()["matches"])
   return matches
+
+
+@app.get("/health")
+def health() -> HealthResponse:
+  return HealthResponse(status="ok")
 
 
 @app.post("/process-job-posting", response_model=JobPostingResponse)
@@ -131,14 +139,6 @@ async def process(request: JobPostingRequest) -> JobPostingResponse:
   skills_mapping = [(skill_dict[mapping[0]], mapping[1]) for mapping in main_skill_mapping]
 
   return JobPostingResponse(skills=skills_mapping)
-
-
-class VisitedLinksRequest(BaseModel):
-  links: list[str]
-
-
-class VisitedLinksResponse(BaseModel):
-  links: list[str]
 
 
 @app.post("/get-visited", response_model=VisitedLinksResponse)

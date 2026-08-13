@@ -238,3 +238,17 @@ export function highlightSkillInElementAndCount(root: HTMLElement, skill: Unique
   }
   return highlightCount;
 }
+
+export function highlightSkillInElement(root: HTMLElement, skill: UniqueSkillForMatching): void {
+  highlightSkillInElementAndCount(root, skill);
+}
+
+export async function highlightSavedSkill(descriptionEl: HTMLElement, savedSkill: any): Promise<void> {
+  highlightSkillInElement(descriptionEl, {
+    text: savedSkill.text,
+    normalizedText: savedSkill.normalizedText,
+    familiarity: savedSkill.familiarity,
+    temperature: savedSkill.temperature,
+    type: savedSkill.type,
+  });
+}
