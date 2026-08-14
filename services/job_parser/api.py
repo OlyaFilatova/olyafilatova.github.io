@@ -1,9 +1,5 @@
 from fastapi import FastAPI
 
-from .repositories.job import JobPostingRepository
-from .repositories.job_history import JobPostingHistoryRepository
-from .repositories.job_skill import JobPostingSkillRepository
-
 from .api_models import (
   HealthResponse,
   JobPostingRequest,
@@ -11,7 +7,10 @@ from .api_models import (
   VisitedLinksRequest,
   VisitedLinksResponse,
 )
-from .api_requests import get_skills, get_skill_synonyms, parse_skills
+from .api_requests import get_skill_synonyms, get_skills, parse_skills
+from .repositories.job import JobPostingRepository
+from .repositories.job_history import JobPostingHistoryRepository
+from .repositories.job_skill import JobPostingSkillRepository
 
 app = FastAPI()
 
@@ -53,7 +52,7 @@ async def process(request: JobPostingRequest) -> JobPostingResponse:
   skill_synonyms = await get_skill_synonyms()
   if not len(job_skills):
     matched_skills = await parse_skills(
-      request.body, [skill["normalizedText"] for skill in skill_synonyms]
+      request.body, [skill.normalizedText for skill in skill_synonyms]
     )
 
     await JobPostingSkillRepository().create_many(request.url, matched_skills)
@@ -61,12 +60,12 @@ async def process(request: JobPostingRequest) -> JobPostingResponse:
 
   skill_keys = [str(skill.skill_normalized_text) for skill in job_skills]
   main_skill_mapping = [
-    (synonym["originNormalizedText"], synonym["normalizedText"])
+    (synonym.originNormalizedText, synonym.normalizedText)
     for synonym in skill_synonyms
-    if synonym["normalizedText"] in skill_keys
+    if synonym.normalizedText in skill_keys
   ]
   skills = await get_skills(list(set([mapping[0] for mapping in main_skill_mapping])))
-  skill_dict = {skill["normalizedText"]: skill for skill in skills}
+  skill_dict = {skill.normalizedText: skill for skill in skills}
 
   skills_mapping = [(skill_dict[mapping[0]], mapping[1]) for mapping in main_skill_mapping]
 

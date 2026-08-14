@@ -5,9 +5,6 @@ from fastapi import FastAPI
 
 from services.skills.models.skill import Familiarity, SkillType, Temperature
 
-from .repositories.skill import SkillRepository
-from .repositories.skill_synonym import SkillSynonymRepository
-
 from .api_models import (
   CreateRequest,
   CreateResponse,
@@ -19,13 +16,15 @@ from .api_models import (
   RemoveSynonymRequest,
   RemoveSynonymResponse,
   Skill,
+  SkillsRequest,
+  SkillsResponse,
   SkillSynonym,
   SkillSynonymsResponse,
   SkillText,
   SkillTextsResponse,
-  SkillsRequest,
-  SkillsResponse,
 )
+from .repositories.skill import SkillRepository
+from .repositories.skill_synonym import SkillSynonymRepository
 
 app = FastAPI()
 

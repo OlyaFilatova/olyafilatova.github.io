@@ -1,25 +1,6 @@
-import datetime
-from typing import Any, TypedDict
-
 from pydantic import BaseModel
 
-
-class Skill(TypedDict):
-  normalizedText: str
-  text: str
-  type: Any  # TODO move types to the shared package
-  familiarity: Any
-  temperature: Any
-  createdAt: datetime.datetime
-  updatedAt: datetime.datetime
-
-
-class SkillSynonym(TypedDict):
-  text: str
-  originNormalizedText: str
-  normalizedText: str
-  createdAt: datetime.datetime
-  updatedAt: datetime.datetime
+from .generated.skills_models import Skill
 
 
 class JobPostingRequest(BaseModel):

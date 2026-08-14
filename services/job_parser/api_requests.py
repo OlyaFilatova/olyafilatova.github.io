@@ -2,8 +2,9 @@ import os
 from typing import cast
 
 import requests
+from pydantic import TypeAdapter
 
-from .api_models import Skill, SkillSynonym
+from .generated.skills_models import Skill, SkillSynonym
 
 
 async def get_skill_synonyms() -> list[SkillSynonym]:
@@ -11,8 +12,12 @@ async def get_skill_synonyms() -> list[SkillSynonym]:
   url = f"{url}synonyms"
 
   response = requests.get(url)
+  response.raise_for_status()
 
-  return cast(list[SkillSynonym], response.json()["skills"])
+  adapter = TypeAdapter(list[SkillSynonym])
+  synonyms = adapter.validate_python(response.json()["skills"])
+
+  return synonyms
 
 
 async def get_skills(skill_ids: list[str]) -> list[Skill]:
@@ -20,8 +25,12 @@ async def get_skills(skill_ids: list[str]) -> list[Skill]:
   url = f"{url}skills"
 
   response = requests.get(url, json={"skillIds": skill_ids})
+  response.raise_for_status()
 
-  return cast(list[Skill], response.json()["skills"])
+  adapter = TypeAdapter(list[Skill])
+  skills = adapter.validate_python(response.json()["skills"])
+
+  return skills
 
 
 async def parse_skills(body: str, skill_synonyms: list[str]) -> list[str]:
@@ -31,6 +40,7 @@ async def parse_skills(body: str, skill_synonyms: list[str]) -> list[str]:
   payload = {"body": body, "skillSynonyms": skill_synonyms}
 
   response = requests.post(url, json=payload)
+  response.raise_for_status()
 
   matches = cast(list[str], response.json()["matches"])
   return matches

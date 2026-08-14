@@ -26,3 +26,15 @@ curl -X POST http://localhost:9001/parse-job \
   -H "Content-Type: application/json" \
   -d {"body": "<Job Posting text>", "category": "<Job Posting category>", "company": "<Posting company name>", "url": "<url of the source page>"}
 ```
+
+## maintenance
+
+### regenerate types
+
+```ssh
+datamodel-codegen \
+  --url http://localhost:9002/openapi.json \
+  --input-file-type openapi \
+  --allow-private-network \
+  --output services/job_parser/generated/skills_models.py
+```

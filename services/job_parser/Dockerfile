@@ -21,6 +21,7 @@ COPY services/job_parser/*.py services/job_parser/
 COPY services/job_parser/database/*.py services/job_parser/database/
 COPY services/job_parser/models/*.py services/job_parser/models/
 COPY services/job_parser/repositories/*.py services/job_parser/repositories/
+COPY services/job_parser/generated/*.py services/job_parser/generated/
 
 ENV PATH="/app/.venv/bin:$PATH"
 

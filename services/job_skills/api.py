@@ -2,7 +2,6 @@ from typing import Annotated
 
 from fastapi import FastAPI, Query
 
-from .repositories.job_skill import JobSkillRepository
 from .api_models import (
   CreateRequest,
   CreateResponse,
@@ -10,6 +9,7 @@ from .api_models import (
   FilterSkillsResponse,
   Skill,
 )
+from .repositories.job_skill import JobSkillRepository
 
 app = FastAPI()
 
