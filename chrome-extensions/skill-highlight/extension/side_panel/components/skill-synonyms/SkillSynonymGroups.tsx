@@ -20,7 +20,11 @@ export default function SkillSynonymGroups({
               <button
                 type="button"
                 className="synonym-group__ignore"
-                onClick={() => ignoreSuggestedSynonymGroup(group.id)}>Ignore group</button>
+                onClick={
+                  () => {
+                    // ignoreSuggestedSynonymGroup(group.id);
+                  }
+                }>Ignore group</button>
             </div>
             <div className="synonym-group__skills">{
               group.skills.map((skill) => <SuggestedSynonymSkill skill={skill} groupSkills={group.skills} />)
@@ -32,6 +36,3 @@ export default function SkillSynonymGroups({
   )
 }
 
-function ignoreSuggestedSynonymGroup(groupId: string): void {
-  // saveIgnoredSuggestedGroup(groupId);
-}

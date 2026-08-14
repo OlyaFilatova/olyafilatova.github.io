@@ -14,7 +14,7 @@ export default function SuggestedSynonymSkill({ skill, groupSkills }: {
           aria-label={`Set ${skill.displayText} as synonym of`}
           onChange={event => {
             if (event.target.value) {
-              void updateSuggestedSynonym(skill.normalizedText, event.target.value);
+              // void updateSuggestedSynonym(skill.normalizedText, event.target.value);
             }
           }}>
           <option value="">Choose skill</option>
@@ -25,10 +25,4 @@ export default function SuggestedSynonymSkill({ skill, groupSkills }: {
       </label>
     </div>
   )
-}
-
-
-async function updateSuggestedSynonym(normalizedText: string, synonymSkillId: string): Promise<void> {
-  // await skillRepository.updateSynonymForText(normalizedText, synonymSkillId);
-  // await notifyJobTabs({ type: "RELOAD_HIGHLIGHTS" });
 }

@@ -123,7 +123,7 @@ export type SkillEditedMessage = {
   type: "SKILL_EDITED";
   message: {
     normalizedText: string;
-    url: string;
+    url?: string;
     skillType?: SkillType;
     familiarity?: Familiarity;
     temperature?: Temperature;

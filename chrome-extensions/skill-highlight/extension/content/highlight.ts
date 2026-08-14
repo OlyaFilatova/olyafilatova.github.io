@@ -243,6 +243,7 @@ export function highlightSkillInElement(root: HTMLElement, skill: UniqueSkillFor
   highlightSkillInElementAndCount(root, skill);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function highlightSavedSkill(descriptionEl: HTMLElement, savedSkill: any): Promise<void> {
   highlightSkillInElement(descriptionEl, {
     text: savedSkill.text,
