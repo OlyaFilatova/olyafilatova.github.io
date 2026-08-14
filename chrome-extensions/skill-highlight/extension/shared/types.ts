@@ -1,6 +1,6 @@
-export type Familiarity = "know-in-depth" | "study" | "actively-using" | "know-a-bit" | "unknown";
-export type Temperature = "interested" | "meh" | "avoid!";
-export type SkillType = "Application" | "Approach" | "Non-skill";
+import { paths as jobSkillsPaths, components as jobSkillsComponents } from "./api/job-skills";
+import { paths as skillsPaths } from "./api/skills";
+import { paths as jobPostingsPaths } from "./api/job-postings";
 
 export interface PageContext {
   category: string;
@@ -11,65 +11,42 @@ export interface PageContext {
   extractedSkillEls: HTMLElement[];
 }
 
-export interface JobPostingData {
-  url: string;
-  body: string;
-  category: string;
-  company: string;
-}
+export type Familiarity = jobSkillsComponents["schemas"]["Familiarity"];
+export type Temperature = jobSkillsComponents["schemas"]["Temperature"];
+export type SkillType = jobSkillsComponents["schemas"]["SkillType"];
 
-export interface SkillFilters {
-  currentPage: number;
-  pageSize: number;
-  search: string;
-  category: string;
-  type: SkillType;
-  familiarity: Familiarity; 
-  temperature: Temperature;
-  sort: string;
-  jobUrl?: string;
-}
+export type JobPostingData = jobPostingsPaths["/process-job-posting"]["post"]["requestBody"]["content"]["application/json"];
+export type JobPostingResponse = jobPostingsPaths["/process-job-posting"]["post"]["responses"][200]["content"]["application/json"];
+export type VisitedLinksRequest = jobPostingsPaths["/get-visited"]["post"]["requestBody"]["content"]["application/json"];
+export type VisitedLinksResponse = jobPostingsPaths["/get-visited"]["post"]["responses"][200]["content"]["application/json"];
 
-export interface SkillAggregate {
-  normalizedText: string;
-  displayText: string;
-  familiarity: Familiarity;
-  temperature: Temperature;
-  type: SkillType;
-  normalizedSynonyms: string[];
-  synonymTexts: string[];
-  categories: string[];
-  mentions: string[];
-  companyCount: number;
-  companies: string[];
-}
+export type SkillFilters = jobSkillsPaths['/filter']['get']['parameters']['query'];
+export type SkillsResponse = jobSkillsPaths['/filter']['get']['responses'][200]["content"]["application/json"];
+export type SkillAggregate = SkillsResponse["skills"][number];
+export type CategoriesResponse = jobSkillsPaths['/categories']['get']['responses'][200]["content"]["application/json"];
+export type CreateJobSkillRequest = jobSkillsPaths['/create']['post']['requestBody']['content']['application/json'];
+export type CreateJobSkillResponse = jobSkillsPaths['/create']['post']['responses'][200]["content"]["application/json"];
+
+
+export type SkillTextsResponse = skillsPaths["/skill-texts"]["get"]["responses"][200]["content"]["application/json"];
+export type SkillSaveRequest = skillsPaths["/create"]["post"]["requestBody"]["content"]["application/json"];
+export type SkillSaveResponse = skillsPaths["/create"]["post"]["responses"][200]["content"]["application/json"];
+export type SkillEditRequest = skillsPaths["/edit"]["post"]["requestBody"]["content"]["application/json"];
+export type SkillEditResponse = skillsPaths["/edit"]["post"]["responses"][200]["content"]["application/json"];
+export type SynonymCreateRequest = skillsPaths["/synonym/create"]["post"]["requestBody"]["content"]["application/json"];
+export type SynonymCreateResponse = skillsPaths["/synonym/create"]["post"]["responses"][200]["content"]["application/json"];
+export type SynonymRemoveRequest = skillsPaths["/synonym/remove"]["post"]["requestBody"]["content"]["application/json"];
+export type SynonymRemoveResponse = skillsPaths["/synonym/remove"]["post"]["responses"][200]["content"]["application/json"];
+
 
 export type JobPageOpenedMessage = {
   type: "JOB_PAGE_OPENED";
-  message: {
-    body: string;
-    category: string;
-    company: string;
-    url: string;
-  }
+  message: JobPostingData
 };
 
 export type SkillsParsedMessage = {
   type: "SKILLS_PARSED";
-  message: {
-    skills: Array<[
-      {
-        normalizedText: string;
-        text: string;
-        type: string;
-        familiarity: string;
-        temperature: string;
-        createdAt: string;
-        updatedAt: string;
-      },
-      string
-    ]>;
-  }
+  message: JobPostingResponse;
 };
 
 export type ReloadHighlightsMessage = {
@@ -79,17 +56,14 @@ export type ReloadHighlightsMessage = {
 
 export type JobListPageOpenedMessage = {
   type: "JOB_LIST_PAGE_OPENED";
-  message: {
-    links: string[];
+  message: VisitedLinksRequest & {
     url: string;
   }
 };
 
 export type VisitedLinksParsedMessage = {
   type: "VISITED_LINKS_PARSED";
-  message: {
-    links: string[];
-  }
+  message: VisitedLinksResponse;
 };
 
 export type SkillSaveTriggeredMessage = {
@@ -110,42 +84,27 @@ export type SkillSavedMessage = {
 
 export type SkillEditTriggeredMessage = {
   type: "SKILL_EDIT_TRIGGERED";
-  message: {
-    normalizedText: string;
+  message: SkillEditRequest & {
     url?: string;
-    skillType?: SkillType;
-    familiarity?: Familiarity;
-    temperature?: Temperature;
   }
 }
 
 export type SkillEditedMessage = {
   type: "SKILL_EDITED";
-  message: {
-    normalizedText: string;
+  message: SkillEditRequest & {
     url?: string;
-    skillType?: SkillType;
-    familiarity?: Familiarity;
-    temperature?: Temperature;
   }
 }
 
 
 export type SynonymAddTriggeredMessage = {
   type: "SYNONYM_ADD_TRIGGERED";
-  message: {
-    synonymNormalizedText: string;
-    normalizedText: string;
-  }
+  message: SynonymCreateRequest;
 }
 
 export type SynonymRemoveTriggeredMessage = {
   type: "SYNONYM_REMOVE_TRIGGERED";
-  message: {
-    synonymText: string;
-    synonymNormalizedText: string;
-    normalizedText: string;
-  }
+  message: SynonymRemoveRequest;
 }
 
 export type SynonymUpdatedMessage = {

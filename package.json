@@ -11,7 +11,11 @@
     "projects-assemble": "npx tsx scripts/projects-assemble.ts",
     "data-assemble": "pnpm run experience-assemble && pnpm run thoughts-assemble && pnpm run projects-assemble",
     "lint": "pnpm --filter \"./chrome-extensions/**\" run lint .",
-    "lint:fix": "pnpm --filter \"./chrome-extensions/**\" run lint . --fix"
+    "lint:fix": "pnpm --filter \"./chrome-extensions/**\" run lint . --fix",
+    "generate-api-types": "run-s generate-api-types:*",
+    "generate-api-types:job-postings": "npx openapi-typescript http://localhost:9001/openapi.json -o chrome-extensions/skill-highlight/extension/shared/api/job-postings.d.ts",
+    "generate-api-types:skills": "npx openapi-typescript http://localhost:9002/openapi.json -o chrome-extensions/skill-highlight/extension/shared/api/skills.d.ts",
+    "generate-api-types:job-skills": "npx openapi-typescript http://localhost:9004/openapi.json -o chrome-extensions/skill-highlight/extension/shared/api/job-skills.d.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -20,6 +24,8 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.3",
     "globals": "^17.9.0",
+    "npm-run-all": "^4.1.5",
+    "openapi-typescript": "^7.13.0",
     "tsx": "4.23.5",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.65.0"

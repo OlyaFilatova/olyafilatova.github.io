@@ -32,7 +32,7 @@ export default function Skill({ skill, skillTexts }: {
           <details className="links-accordion">
             <summary>Links to pages</summary>
             <div className="links">
-              {skill.mentions.map(url =>
+              {skill.urls.map(url =>
               <div className="link-row">
                 <a
                   href={url}
@@ -90,7 +90,7 @@ export default function Skill({ skill, skillTexts }: {
                 {value: "", text: "Select skill"},
                 ...skillTexts
                   .filter(skillText => 
-                    !skill.normalizedSynonyms.includes(skillText.normalizedText) &&
+                    !skill.synonyms.includes(skillText.normalizedText) &&
                     skill.normalizedText !== skillText.normalizedText
                   )
                   .map(skillText => ({
@@ -108,7 +108,7 @@ export default function Skill({ skill, skillTexts }: {
               label="Remove synonym"
               options={[
                 {value: "", text: "Select skill"},
-                ...skill.normalizedSynonyms
+                ...skill.synonyms
                   .map(skillText => ({
                     value: skillText,
                     text: skillText
@@ -171,16 +171,16 @@ async function updateType(normalizedText: string, type: SkillType): Promise<void
 
 async function addSynonym(normalizedText: string, synonymNormalizedText: string): Promise<void> {
   notifyAddSynonymTriggered({
-    normalizedText,
-    synonymNormalizedText
+    normalizedText: synonymNormalizedText,
+    originNormalizedText: normalizedText,
   });
 }
 
 
 async function removeSynonym(normalizedText: string, synonymText: string, synonymNormalizedText: string): Promise<void> {
   notifyRemoveSynonymTriggered({
-    normalizedText,
-    synonymText,
-    synonymNormalizedText
+    displayText: synonymText,
+    normalizedText: synonymNormalizedText,
+    originNormalizedText: normalizedText,
   });
 }

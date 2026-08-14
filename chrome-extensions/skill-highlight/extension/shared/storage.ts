@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { normalizeSkillText } from "./skill";
-import { Familiarity, JobPostingData, SkillAggregate, SkillEditTriggeredMessage, SkillFilters, SkillSaveTriggeredMessage, SkillType, SynonymAddTriggeredMessage, SynonymRemoveTriggeredMessage, Temperature } from "./types";
+import { CategoriesResponse, CreateJobSkillRequest, Familiarity, JobPostingData, JobPostingResponse, SkillAggregate, SkillEditTriggeredMessage, SkillFilters, SkillSaveResponse, SkillSaveTriggeredMessage, SkillsResponse, SkillTextsResponse, SkillType, SynonymAddTriggeredMessage, SynonymRemoveTriggeredMessage, Temperature, VisitedLinksRequest, VisitedLinksResponse } from "./types";
 
 
 interface SkillRepository {
-  getJobPostingSkills(jobPostingData: JobPostingData): Promise<any>;
+  getJobPostingSkills(jobPostingData: JobPostingData): Promise<JobPostingResponse["skills"]>;
   getSkills(skillFilters: SkillFilters): Promise<SkillAggregate[]>;
   getCategories(): Promise<string[]>;
   getVisitedLinks(links: string[]): Promise<string[]>;
@@ -36,13 +36,7 @@ type StorageRequest = {
 };
 
 class ChromeSkillRepository implements SkillRepository {
-  async getJobPostingSkills(
-    jobPostingData: {
-      url: string;
-      body: string;
-      category: string;
-      company: string;
-    }): Promise<any> {
+  async getJobPostingSkills(jobPostingData: JobPostingData): Promise<JobPostingResponse["skills"]> {
     const response = await fetch(`${API_URL}/api/job-postings/process-job-posting`, {
       method: "POST",
       headers: {
@@ -55,7 +49,7 @@ class ChromeSkillRepository implements SkillRepository {
     return (await response.json())["skills"];
   }
 
-  async getCategories(): Promise<string[]> {
+  async getCategories(): Promise<CategoriesResponse> {
     const response = await fetch(`${API_URL}/api/job-skills/categories`, {
       method: "GET",
       headers: {
@@ -67,7 +61,7 @@ class ChromeSkillRepository implements SkillRepository {
     return (await response.json());
   }
 
-  async getVisitedLinks(links: string[]): Promise<string[]> {
+  async getVisitedLinks(links: VisitedLinksRequest["links"]): Promise<VisitedLinksResponse["links"]> {
     console.log(links)
     const response = await fetch(`${API_URL}/api/job-postings/get-visited`, {
       method: "POST",
@@ -81,9 +75,13 @@ class ChromeSkillRepository implements SkillRepository {
     return (await response.json())["links"];
   }
 
-  async getSkills(skillFilters: SkillFilters): Promise<SkillAggregate[]> {
+  async getSkills(skillFilters: SkillFilters): Promise<SkillsResponse["skills"]> {
     const params = new URLSearchParams();
-    Object.entries(skillFilters).filter(entry => !!entry[1]).forEach(([key, value]) => params.append(key, value.toString()));
+    if (skillFilters) {
+      Object.entries(skillFilters)
+        .filter((entry): entry is [string, string | number] => !!entry[1])
+        .forEach(([key, value]) => params.append(key, value.toString()));
+    }
 
     const response = await fetch(`${API_URL}/api/job-skills/filter?${params.toString()}`, {
       method: "GET",
@@ -110,10 +108,7 @@ class ChromeSkillRepository implements SkillRepository {
     }))];
   }
 
-  async getSkillTexts(): Promise<Array<{
-    displayText: string;
-    normalizedText: string;
-  }>> {
+  async getSkillTexts(): Promise<SkillTextsResponse["texts"]> {
     const response = await fetch(`${API_URL}/api/skills/skill-texts`, {
       method: "GET",
       headers: {
@@ -127,13 +122,7 @@ class ChromeSkillRepository implements SkillRepository {
     return result["texts"];
   }
 
-  async createSkill(skillData: SkillSaveTriggeredMessage["message"]): Promise<{
-    normalizedText: any;
-    displayText: any;
-    familiarity: any;
-    temperature: any;
-    type: any;
-  }> {
+  async createSkill(skillData: SkillSaveTriggeredMessage["message"]): Promise<SkillSaveResponse> {
     const skillsResponse = await fetch(`${API_URL}/api/skills/create`, {
       method: "POST",
       headers: {
@@ -145,7 +134,7 @@ class ChromeSkillRepository implements SkillRepository {
         normalizedText: normalizeSkillText(skillData.displayText)
       })
     });
-    const skillSaveResult = await skillsResponse.json();
+    const skillSaveResult: SkillSaveResponse = await skillsResponse.json();
     const normalizedText = skillSaveResult["normalizedText"];
 
     const jobSkillsResponse = await fetch(`${API_URL}/api/job-skills/create`, {
@@ -157,18 +146,12 @@ class ChromeSkillRepository implements SkillRepository {
       body: JSON.stringify({
         normalizedText: normalizedText,
         url: skillData.url
-      })
+      } satisfies CreateJobSkillRequest)
     });
 
     await jobSkillsResponse.json();
 
-    return {
-      normalizedText: skillSaveResult["normalizedText"],
-      displayText: skillSaveResult["displayText"],
-      familiarity: skillSaveResult["familiarity"],
-      temperature: skillSaveResult["temperature"],
-      type: skillSaveResult["type"],
-    };
+    return skillSaveResult;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -183,39 +166,25 @@ class ChromeSkillRepository implements SkillRepository {
     });
   }
 
-  async addSynonym({
-    synonymNormalizedText,
-    normalizedText,
-  }: SynonymAddTriggeredMessage["message"]): Promise<void> {
+  async addSynonym(message: SynonymAddTriggeredMessage["message"]): Promise<void> {
     await fetch(`${API_URL}/api/skills/synonym/create`, {
       method: "POST",
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        normalizedText: synonymNormalizedText,
-        originNormalizedText: normalizedText,
-      })
+      body: JSON.stringify(message)
     });
   }
 
-  async removeSynonym({
-    synonymText,
-    synonymNormalizedText,
-    normalizedText,
-  }: SynonymRemoveTriggeredMessage["message"]): Promise<void> {
+  async removeSynonym(message: SynonymRemoveTriggeredMessage["message"]): Promise<void> {
     await fetch(`${API_URL}/api/skills/synonym/remove`, {
       method: "POST",
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        displayText: synonymText,
-        normalizedText: synonymNormalizedText,
-        originNormalizedText: normalizedText,
-      })
+      body: JSON.stringify(message)
     });
   }
 }
@@ -230,7 +199,7 @@ async function invokeStorageMethod(message: StorageRequest): Promise<unknown> {
   extensionSkillRepository = new ChromeSkillRepository();
   switch (message.method) {
     case "getJobPostingSkills":
-      return extensionSkillRepository.getJobPostingSkills(message.args[0] as any);
+      return extensionSkillRepository.getJobPostingSkills(message.args[0] as JobPostingData);
     case "getSkills":
       return extensionSkillRepository.getSkills(message.args[0] as any);
     case "getSkillTexts":

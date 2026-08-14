@@ -106,10 +106,3 @@ async def categories() -> list[str]:
 async def create(req: CreateRequest) -> CreateResponse:
   await SkillRepository().create(req.normalizedText, req.url)
   return CreateResponse()
-
-
-@app.post("/ignore")
-async def ignore(req: IgnoreRequest) -> IgnoreResponse:
-  await SkillRepository().ignore(req.normalizedText, req.url)
-
-  return IgnoreResponse()

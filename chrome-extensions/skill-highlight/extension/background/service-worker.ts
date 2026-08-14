@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { URLS } from "../shared/config";
 import { handleSkillStorageMessage } from "../shared/storage";
-import { ContentMessage, JobListPageOpenedMessage, JobPageOpenedMessage, ServiceWorkerMessage, ServiceWorkerMessageType, SkillEditTriggeredMessage, SkillSavedMessage, SkillSaveTriggeredMessage, SynonymAddTriggeredMessage, SynonymRemoveTriggeredMessage } from "../shared/types";
+import { ContentMessage, JobListPageOpenedMessage, JobPageOpenedMessage, JobPostingResponse, ServiceWorkerMessage, ServiceWorkerMessageType, SkillEditTriggeredMessage, SkillSavedMessage, SkillSaveTriggeredMessage, SynonymAddTriggeredMessage, SynonymRemoveTriggeredMessage } from "../shared/types";
 
 chrome.runtime.onInstalled.addListener(() => {
   if (chrome.sidePanel?.setPanelBehavior) {
@@ -59,7 +59,7 @@ chrome.runtime.onMessage.addListener((
           void broadcastMessage([], [message.url], {
             "type": "SKILLS_PARSED",
             message: {
-              "skills": response.result as any
+              "skills": response.result as JobPostingResponse["skills"]
             }
           });
           sendResponse(response);
