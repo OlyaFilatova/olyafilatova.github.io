@@ -1,9 +1,8 @@
 import os
-from typing import Any
 
 import httpx
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, Response
 
 load_dotenv()
 
@@ -20,13 +19,13 @@ SERVICES = {
   "/api/{service}/{path:path}",
   methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
 )
-async def gateway(service: str, path: str, request: Request) -> Any:
+async def gateway(service: str, path: str, request: Request):
   base_url = SERVICES.get(service)
 
   if not base_url:
     raise HTTPException(status_code=404, detail="Unknown service")
 
-  url = f"{base_url}/{path}"
+  url = f"{base_url.rstrip('/')}/{path}"
 
   body = await request.body()
 
@@ -39,4 +38,13 @@ async def gateway(service: str, path: str, request: Request) -> Any:
       headers={k: v for k, v in request.headers.items() if k.lower() != "host"},
     )
 
-  return response.json()
+  return Response(
+    content=response.content,
+    status_code=response.status_code,
+    headers={
+      k: v
+      for k, v in response.headers.items()
+      if k.lower() not in {"content-length", "transfer-encoding", "connection"}
+    },
+    media_type=response.headers.get("content-type"),
+  )

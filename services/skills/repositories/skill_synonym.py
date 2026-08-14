@@ -47,10 +47,16 @@ class SkillSynonymRepository(BaseRepository):
   async def update(self, normalized_text: str, origin_normalized_text: str) -> None:
     async with postgresql_manager.get_async_session() as session:
       try:
-        stmt = update(SkillSynonym).where(and_(
-          SkillSynonym.normalized_text == normalized_text,
-          SkillSynonym.origin_normalized_text == normalized_text
-        )).values(origin_normalized_text=origin_normalized_text)
+        stmt = (
+          update(SkillSynonym)
+          .where(
+            and_(
+              SkillSynonym.normalized_text == normalized_text,
+              SkillSynonym.origin_normalized_text == normalized_text,
+            )
+          )
+          .values(origin_normalized_text=origin_normalized_text)
+        )
         await session.execute(stmt)
         delete_stmt = delete(Skill).where(Skill.normalized_text == normalized_text)
         await session.execute(delete_stmt)
@@ -61,10 +67,16 @@ class SkillSynonymRepository(BaseRepository):
   async def delete(self, normalized_text: str, text: str, origin_normalized_text: str) -> None:
     async with postgresql_manager.get_async_session() as session:
       try:
-        stmt = update(SkillSynonym).where(and_(
-          SkillSynonym.normalized_text == normalized_text,
-          SkillSynonym.origin_normalized_text == origin_normalized_text
-        )).values(origin_normalized_text=normalized_text)
+        stmt = (
+          update(SkillSynonym)
+          .where(
+            and_(
+              SkillSynonym.normalized_text == normalized_text,
+              SkillSynonym.origin_normalized_text == origin_normalized_text,
+            )
+          )
+          .values(origin_normalized_text=normalized_text)
+        )
         await session.execute(stmt)
 
         origin_skill_stmt = select(Skill).where(Skill.normalized_text == origin_normalized_text)
@@ -72,7 +84,7 @@ class SkillSynonymRepository(BaseRepository):
         origin_skill = result.scalars().first()
 
         if not origin_skill:
-          raise Exception('Failed to find origin skill.')
+          raise Exception("Failed to find origin skill.")
 
         skill = Skill(
           normalized_text=normalized_text,
