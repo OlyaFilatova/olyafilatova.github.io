@@ -54,7 +54,7 @@ export default function Skill({ skill, skillTexts }: {
               currentValue={familiarity}
               onChange={event => {
                 setFamiliarity(event.target.value as Familiarity);
-                void updateFamiliarity(skill.normalizedText, familiarity);
+                void updateFamiliarity(skill.normalizedText, event.target.value as Familiarity);
               }}
              />
 
@@ -67,7 +67,7 @@ export default function Skill({ skill, skillTexts }: {
               currentValue={temperature}
               onChange={event => {
                 setTemperature(event.target.value as Temperature);
-                void updateTemperature(skill.normalizedText, temperature)
+                void updateTemperature(skill.normalizedText, event.target.value as Temperature)
               }}
              />
 
@@ -80,7 +80,7 @@ export default function Skill({ skill, skillTexts }: {
               currentValue={type}
               onChange={event => {
                 setType(event.target.value as SkillType);
-                void updateType(skill.normalizedText, type)
+                void updateType(skill.normalizedText, event.target.value as SkillType)
               }}
              />
 
