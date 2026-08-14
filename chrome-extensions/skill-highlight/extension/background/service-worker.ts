@@ -139,6 +139,9 @@ chrome.runtime.onMessage.addListener((
           void broadcastMessage([], URLS, {
             "type": "SYNONYM_UPDATED"
           });
+          void broadcastToSidePanel({
+            "type": "SYNONYM_UPDATED"
+          });
           sendResponse(response);
         } else {
           sendResponse(response);
@@ -155,6 +158,9 @@ chrome.runtime.onMessage.addListener((
       }, response => {
         if (response.ok) {
           void broadcastMessage([], URLS, {
+            "type": "SYNONYM_UPDATED"
+          });
+          void broadcastToSidePanel({
             "type": "SYNONYM_UPDATED"
           });
           sendResponse(response);
@@ -193,3 +199,6 @@ export async function broadcastMessage(
   );
 }
 
+export async function broadcastToSidePanel(message: ContentMessage) {
+  chrome.runtime.sendMessage(message);
+}

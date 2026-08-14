@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Filters from "./skills/Filters";
 import Header from "./skills/Header";
 import Pagination from "./skills/Pagination";
 import SkillList from "./skills/SkillList";
 import { handleSkillStorageMessage } from "../../shared/storage";
-import { SkillAggregate } from "../../shared/types";
+import { SkillAggregate, SynonymUpdatedMessage } from "../../shared/types";
 
 async function getCurrentTabUrl() {
   // Query the active tab in the current window
@@ -33,9 +33,41 @@ export default function SkillsPanel() {
   const [pagesCount, setPagesCount] = useState(1);
   const [pageSize, setPageSize] = useState(PAGE_SIZES[0]);
 
+  const [skillTexts, setSkillTexts] = useState<Array<{
+    normalizedText: string;
+    displayText: string;
+  }>>([]);
+
+  const skillsLoadingRef = useRef({
+    currentPage,
+    pageSize,
+    search,
+    category,
+    type,
+    familiarity,
+    temperature,
+    sort,
+    currentPageOnly
+  })
+
+  function getSkillTexts() {
+    handleSkillStorageMessage({
+      type: 'SKILL_STORAGE_REQUEST',
+      method: 'getSkillTexts',
+      args: []
+    }, response => {
+      if (response.ok) {
+        setSkillTexts(response.result as any);
+      } else {
+        console.log('error', response);
+      }
+    })
+  }
+
   const paginationContext = {
     currentPage, setCurrentPage, pagesCount, setPagesCount, pageSize, setPageSize, totalItems, setTotalItems
   };
+
   const filtersContext = {
     categories, setCategories, search, setSearch, category, setCategory, type, setType, familiarity, setFamiliarity,
     temperature, setTemperature, sort, setSort, currentPageOnly, setCurrentPageOnly
@@ -61,6 +93,18 @@ export default function SkillsPanel() {
   }
 
   async function reloadSkills() {
+    const {
+      currentPage,
+      pageSize,
+      search,
+      category,
+      type,
+      familiarity,
+      temperature,
+      sort,
+      currentPageOnly,
+    } = skillsLoadingRef.current;
+
     handleSkillStorageMessage({
       type: 'SKILL_STORAGE_REQUEST',
       method: 'getSkills',
@@ -90,19 +134,52 @@ export default function SkillsPanel() {
   useEffect(() => {
     void loadCategories();
     void reloadSkills();
+    getSkillTexts();
+
+    chrome.runtime.onMessage.addListener((
+      message: SynonymUpdatedMessage
+    ) => {
+      console.log(message.type)
+      if (message.type == 'SYNONYM_UPDATED') {
+        getSkillTexts();
+        void reloadSkills();
+      }
+    });
   }, []);
 
   useEffect(() => {
+
+    skillsLoadingRef.current = {
+      currentPage,
+      pageSize,
+      search,
+      category,
+      type,
+      familiarity,
+      temperature,
+      sort,
+      currentPageOnly,
+    };
+
     void reloadSkills();
-  }, [currentPage, pageSize, search, category, type,
-    familiarity, temperature, sort, currentPageOnly]);
+  }, [
+      currentPage,
+      pageSize,
+      search,
+      category,
+      type,
+      familiarity,
+      temperature,
+      sort,
+      currentPageOnly,
+    ]);
 
   return (<>
       <Header skillsContext={skillsContext} />
 
       <Filters filtersContext={skillsContext} />
 
-      <SkillList skills={skills} />
+      <SkillList skills={skills} skillTexts={skillTexts} />
 
       <Pagination pageSizes={PAGE_SIZES} skillsContext={skillsContext} />
     </>
