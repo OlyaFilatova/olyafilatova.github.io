@@ -32,7 +32,19 @@ class SkillSynonymRepository(BaseRepository):
       result = await session.execute(stmt)
       return [*result.scalars().all()]
 
-  async def create(self, normalized_text: str, origin_normalized_text: str) -> None:
+  async def create(self, data: dict[str, Any]) -> SkillSynonym:
+    async with postgresql_manager.get_async_session() as session:
+      try:
+        item = SkillSynonym(**data)
+        session.add(item)
+        await session.commit()
+        await session.refresh(item)
+        return item
+      except IntegrityError as e:
+        await session.rollback()
+        raise ValueError(f"SkillSynonym creation failed: {e}") from e
+
+  async def update(self, normalized_text: str, origin_normalized_text: str) -> None:
     async with postgresql_manager.get_async_session() as session:
       try:
         stmt = update(SkillSynonym).where(and_(
@@ -44,7 +56,7 @@ class SkillSynonymRepository(BaseRepository):
         await session.execute(delete_stmt)
       except IntegrityError as e:
         await session.rollback()
-        raise ValueError(f"SkillSynonym creation failed: {e}") from e
+        raise ValueError(f"SkillSynonym update failed: {e}") from e
 
   async def delete(self, normalized_text: str, text: str, origin_normalized_text: str) -> None:
     async with postgresql_manager.get_async_session() as session:

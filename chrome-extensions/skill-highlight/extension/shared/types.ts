@@ -46,89 +46,111 @@ export interface SkillAggregate {
 
 export type JobPageOpenedMessage = {
   type: "JOB_PAGE_OPENED";
-  body: string;
-  category: string;
-  company: string;
-  url: string;
+  message: {
+    body: string;
+    category: string;
+    company: string;
+    url: string;
+  }
 };
 
 export type SkillsParsedMessage = {
   type: "SKILLS_PARSED";
-  skills: Array<[
-    {
-      normalizedText: string;
-      text: string;
-      type: string;
-      familiarity: string;
-      temperature: string;
-      createdAt: string;
-      updatedAt: string;
-    },
-    string
-  ]>;
+  message: {
+    skills: Array<[
+      {
+        normalizedText: string;
+        text: string;
+        type: string;
+        familiarity: string;
+        temperature: string;
+        createdAt: string;
+        updatedAt: string;
+      },
+      string
+    ]>;
+  }
 };
 
 export type ReloadHighlightsMessage = {
   type: "RELOAD_HIGHLIGHTS";
+  message: undefined;
 };
 
 export type JobListPageOpenedMessage = {
   type: "JOB_LIST_PAGE_OPENED";
-  links: string[];
-  url: string;
+  message: {
+    links: string[];
+    url: string;
+  }
 };
 
 export type VisitedLinksParsedMessage = {
   type: "VISITED_LINKS_PARSED";
-  links: string[];
+  message: {
+    links: string[];
+  }
 };
 
 export type SkillSaveTriggeredMessage = {
   type: "SKILL_SAVE_TRIGGERED"
-  displayText: string;
-  url: string;
+  message: {
+    displayText: string;
+    url: string;
+  }
 }
 
 export type SkillSavedMessage = {
   type: "SKILL_SAVED"
-  displayText: string;
-  url: string;
+  message: {
+    displayText: string;
+    url: string;
+  }
 }
 
 export type SkillEditTriggeredMessage = {
   type: "SKILL_EDIT_TRIGGERED";
-  normalizedText: string;
-  url?: string;
-  skillType?: SkillType;
-  familiarity?: Familiarity;
-  temperature?: Temperature;
+  message: {
+    normalizedText: string;
+    url?: string;
+    skillType?: SkillType;
+    familiarity?: Familiarity;
+    temperature?: Temperature;
+  }
 }
 
 export type SkillEditedMessage = {
   type: "SKILL_EDITED";
-  normalizedText: string;
-  url: string;
-  skillType?: SkillType;
-  familiarity?: Familiarity;
-  temperature?: Temperature;
+  message: {
+    normalizedText: string;
+    url: string;
+    skillType?: SkillType;
+    familiarity?: Familiarity;
+    temperature?: Temperature;
+  }
 }
 
 
 export type SynonymAddTriggeredMessage = {
   type: "SYNONYM_ADD_TRIGGERED";
-  synonymNormalizedText: string;
-  normalizedText: string;
+  message: {
+    synonymNormalizedText: string;
+    normalizedText: string;
+  }
 }
 
 export type SynonymRemoveTriggeredMessage = {
   type: "SYNONYM_REMOVE_TRIGGERED";
-  synonymText: string;
-  synonymNormalizedText: string;
-  normalizedText: string;
+  message: {
+    synonymText: string;
+    synonymNormalizedText: string;
+    normalizedText: string;
+  }
 }
 
 export type SynonymUpdatedMessage = {
   type: "SYNONYM_UPDATED";
+  message: undefined;
 }
 
 export type ContentMessage = SkillsParsedMessage | ReloadHighlightsMessage | VisitedLinksParsedMessage |

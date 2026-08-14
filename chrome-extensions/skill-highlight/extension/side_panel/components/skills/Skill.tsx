@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { notifyAddSynonymTriggered, notifyRemoveSynonymTriggered, notifySkillEditTriggered } from "../../../shared/notifications";
 import { Familiarity, SkillAggregate, SkillType, Temperature } from "../../../shared/types";
 import { FAMILIARITIES, SKILL_TYPES, TEMPERATURES } from "../../config";

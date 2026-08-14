@@ -136,7 +136,7 @@ async def get_all_skill_synonyms() -> SkillSynonymsResponse:
 
 @app.post("/synonym/create")
 async def create_synonym(req: CreateSynonymRequest) -> CreateSynonymResponse:
-  await SkillSynonymRepository().create(
+  await SkillSynonymRepository().update(
     origin_normalized_text=req.originNormalizedText,
     normalized_text=req.normalizedText,
   )

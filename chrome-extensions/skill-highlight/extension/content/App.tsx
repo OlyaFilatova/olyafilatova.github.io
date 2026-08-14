@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getCurrentAdapter } from '../shared/adapters/current';
 import { notifyJobListPageOpened, notifyJobPageOpened, notifySkillEditTriggered, notifySkillSaveTriggered } from '../shared/notifications';
-import { ContentMessage, ContentMessageType, Familiarity, ReloadHighlightsMessage, SkillEditedMessage, SkillSavedMessage, SkillsParsedMessage, SkillType, Temperature, VisitedLinksParsedMessage } from '../shared/types';
+import { ContentMessage, ContentMessageType, Familiarity, SkillEditedMessage, SkillSavedMessage, SkillsParsedMessage, SkillType, Temperature, VisitedLinksParsedMessage } from '../shared/types';
 import { highlightSavedSkill, highlightSkillsInElement, updateSkillHighlightFamiliarity, updateSkillHighlightSkillType, updateSkillHighlightTemperature } from './highlight';
 import { selectionIsInside } from './dom-utils';
 import { FAMILIARITIES, SKILL_TYPES, TEMPERATURES } from '../side_panel/config';
@@ -11,6 +11,7 @@ export default function App() {
   const [highlightPopupOpened, setHighlightPopupOpened] = useState(false);
   const [selectionText, setSelectionText] = useState("");
   const [normalizedText, setNormalizedText] = useState("");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectionRect, setSelectionRect] = useState<DOMRect | undefined>();
   const [savePopupLocation, setSavePopupLocation] = useState<{
     left: string;
@@ -37,8 +38,9 @@ export default function App() {
     };
   }
 
-  const eventListeners: Record<ContentMessageType, (message: any) => void> = {
-    SKILLS_PARSED: (message: SkillsParsedMessage) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const eventListeners: Record<ContentMessageType, (data: any) => void> = {
+    SKILLS_PARSED: (message: SkillsParsedMessage["message"]) => {
       const pageContext = getPageContext();
 
       highlightSkillsInElement(pageContext.descriptionEl!, message.skills.map(skill => ({
@@ -49,12 +51,12 @@ export default function App() {
         type: skill[0].type as SkillType,
       })))
     },
-    VISITED_LINKS_PARSED: (message: VisitedLinksParsedMessage) => {
+    VISITED_LINKS_PARSED: (message: VisitedLinksParsedMessage["message"]) => {
       const pageContext = getPageContext();
 
       pageContext.adapter.stylizeVisitedLinks(message.links)
     },
-    RELOAD_HIGHLIGHTS: (message: ReloadHighlightsMessage) => {
+    RELOAD_HIGHLIGHTS: () => {
       const pageContext = getPageContext();
       notifyJobPageOpened({
         body: pageContext.descriptionEl.innerText,
@@ -63,13 +65,13 @@ export default function App() {
         url: pageContext.url
       });
     },
-    SKILL_SAVED: (message: SkillSavedMessage) => {
+    SKILL_SAVED: (message: SkillSavedMessage["message"]) => {
       const pageContext = getPageContext();
       setSelectionPopupOpened(false);
       window.getSelection()?.removeAllRanges();
       highlightSavedSkill(pageContext.descriptionEl!, message)
     },
-    SKILL_EDITED: (message: SkillEditedMessage) => {
+    SKILL_EDITED: (message: SkillEditedMessage["message"]) => {
       const context = getPageContext();
       setHighlightPopupOpened(false);
       if (context.descriptionEl) {
@@ -83,7 +85,8 @@ export default function App() {
           updateSkillHighlightTemperature(context.descriptionEl, message.normalizedText, message.temperature);
         }
       }
-    }
+    },
+    SYNONYM_UPDATED: () => {}
   };
 
   async function saveSelectedSkill(): Promise<void> {
@@ -141,9 +144,7 @@ export default function App() {
       setSelectionPopupOpened(true);
     });
 
-    document.addEventListener("mousedown", (event) => {
-      const target = event.target as Node | null;
-
+    document.addEventListener("mousedown", () => {
       setSelectionPopupOpened(false);
       setHighlightPopupOpened(false);
     });
@@ -198,7 +199,7 @@ export default function App() {
       chrome.runtime.onMessage.addListener((message: ContentMessage, sender, sendResponse) => {
         const type = message.type;
         if (type in eventListeners) {
-          eventListeners[type](message);
+          eventListeners[type](message.message);
           sendResponse({ ok: true});
         }
       });

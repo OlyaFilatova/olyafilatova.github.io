@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { URLS } from "../shared/config";
 import { handleSkillStorageMessage } from "../shared/storage";
-import { ContentMessage, JobListPageOpenedMessage, JobPageOpenedMessage, ServiceWorkerMessage, ServiceWorkerMessageType, SkillEditTriggeredMessage, SkillSaveTriggeredMessage, SynonymAddTriggeredMessage, SynonymRemoveTriggeredMessage } from "../shared/types";
+import { ContentMessage, JobListPageOpenedMessage, JobPageOpenedMessage, ServiceWorkerMessage, ServiceWorkerMessageType, SkillEditTriggeredMessage, SkillSavedMessage, SkillSaveTriggeredMessage, SynonymAddTriggeredMessage, SynonymRemoveTriggeredMessage } from "../shared/types";
 
 chrome.runtime.onInstalled.addListener(() => {
   if (chrome.sidePanel?.setPanelBehavior) {
@@ -36,8 +37,8 @@ chrome.runtime.onMessage.addListener((
     return undefined;
   }
 
-  const eventListeners: Record<ServiceWorkerMessageType, (sender: any, message: any) => void> = {
-    JOB_PAGE_OPENED: (sender, { type, ...message }: JobPageOpenedMessage) => {
+  const eventListeners: Record<ServiceWorkerMessageType, (sender: any, data: any) => void> = {
+    JOB_PAGE_OPENED: (sender, message: JobPageOpenedMessage["message"]) => {
       const url = (() => {
         const url = new URL(message.url);
         url.search = '';
@@ -57,7 +58,9 @@ chrome.runtime.onMessage.addListener((
         if (response.ok) {
           void broadcastMessage([], [message.url], {
             "type": "SKILLS_PARSED",
-            "skills": response.result as any
+            message: {
+              "skills": response.result as any
+            }
           });
           sendResponse(response);
         } else {
@@ -65,7 +68,8 @@ chrome.runtime.onMessage.addListener((
         }
       })
     },
-    JOB_LIST_PAGE_OPENED: (sender, message: JobListPageOpenedMessage) => {
+    JOB_LIST_PAGE_OPENED: (sender, message: JobListPageOpenedMessage["message"]) => {
+      console.log(message)
       handleSkillStorageMessage({
         type: 'SKILL_STORAGE_REQUEST',
         method: 'getVisitedLinks',
@@ -74,14 +78,16 @@ chrome.runtime.onMessage.addListener((
         if (response.ok) {
           void broadcastMessage([], [message.url], {
             "type": "VISITED_LINKS_PARSED",
-            "links": response.result as string[]
+            message: {
+              "links": response.result as string[]
+            }
           });
         } else {
           console.log('error', response)
         }
       })
     },
-    SKILL_SAVE_TRIGGERED: (sender, { type, ...message }: SkillSaveTriggeredMessage) => {
+    SKILL_SAVE_TRIGGERED: (sender, message: SkillSaveTriggeredMessage["message"]) => {
       handleSkillStorageMessage({
         type: 'SKILL_STORAGE_REQUEST',
         method: 'createSkill',
@@ -91,12 +97,13 @@ chrome.runtime.onMessage.addListener((
       }, response => {
         if (response.ok) {
           void broadcastMessage([], [message.url], {
-            ...(response.result as any),
-            "type": "SKILL_SAVED",
+            message: response.result as SkillSavedMessage["message"],
+            type: "SKILL_SAVED",
           });
           const filteroutTabs = sender.tab?.id ? [sender.tab?.id] : [];
           void broadcastMessage(filteroutTabs, URLS, {
-            "type": "RELOAD_HIGHLIGHTS"
+            type: "RELOAD_HIGHLIGHTS",
+            message: undefined
           });
           sendResponse(response);
         } else {
@@ -104,7 +111,7 @@ chrome.runtime.onMessage.addListener((
         }
       });
     },
-    SKILL_EDIT_TRIGGERED: (sender, { type, ...message }: SkillEditTriggeredMessage) => {
+    SKILL_EDIT_TRIGGERED: (sender, message: SkillEditTriggeredMessage["message"]) => {
       handleSkillStorageMessage({
         type: 'SKILL_STORAGE_REQUEST',
         method: 'editSkill',
@@ -113,13 +120,14 @@ chrome.runtime.onMessage.addListener((
         ]
       }, response => {
         if (response.ok) {
-          void broadcastMessage([], [message.url], {
-            "type": "SKILL_EDITED",
-            ...message
+          void broadcastMessage([], message.url ? [message.url] : [], {
+            type: "SKILL_EDITED",
+            message
           });
           const filteroutTabs = sender.tab?.id ? [sender.tab?.id] : [];
           void broadcastMessage(filteroutTabs, URLS, {
-            "type": "RELOAD_HIGHLIGHTS"
+            type: "RELOAD_HIGHLIGHTS",
+            message: undefined
           });
           sendResponse(response);
         } else {
@@ -127,7 +135,7 @@ chrome.runtime.onMessage.addListener((
         }
       });
     },
-    SYNONYM_ADD_TRIGGERED: (sender, { type, ...message }: SynonymAddTriggeredMessage) => {
+    SYNONYM_ADD_TRIGGERED: (sender, message: SynonymAddTriggeredMessage["message"]) => {
       handleSkillStorageMessage({
         type: 'SKILL_STORAGE_REQUEST',
         method: 'addSynonym',
@@ -137,10 +145,12 @@ chrome.runtime.onMessage.addListener((
       }, response => {
         if (response.ok) {
           void broadcastMessage([], URLS, {
-            "type": "SYNONYM_UPDATED"
+            type: "SYNONYM_UPDATED",
+            message: undefined
           });
           void broadcastToSidePanel({
-            "type": "SYNONYM_UPDATED"
+            type: "SYNONYM_UPDATED",
+            message: undefined
           });
           sendResponse(response);
         } else {
@@ -148,7 +158,7 @@ chrome.runtime.onMessage.addListener((
         }
       });
     },
-    SYNONYM_REMOVE_TRIGGERED: (sender, { type, ...message }: SynonymRemoveTriggeredMessage) => {
+    SYNONYM_REMOVE_TRIGGERED: (sender, message: SynonymRemoveTriggeredMessage["message"]) => {
       handleSkillStorageMessage({
         type: 'SKILL_STORAGE_REQUEST',
         method: 'removeSynonym',
@@ -158,10 +168,12 @@ chrome.runtime.onMessage.addListener((
       }, response => {
         if (response.ok) {
           void broadcastMessage([], URLS, {
-            "type": "SYNONYM_UPDATED"
+            type: "SYNONYM_UPDATED",
+            message: undefined
           });
           void broadcastToSidePanel({
-            "type": "SYNONYM_UPDATED"
+            type: "SYNONYM_UPDATED",
+            message: undefined
           });
           sendResponse(response);
         } else {
@@ -172,7 +184,7 @@ chrome.runtime.onMessage.addListener((
   };
 
   if (message.type in eventListeners) {
-    eventListeners[message.type](sender, message);
+    eventListeners[message.type](sender, message.message);
   }
 });
 

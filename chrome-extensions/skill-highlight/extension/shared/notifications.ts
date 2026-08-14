@@ -1,10 +1,10 @@
 import { JobListPageOpenedMessage, JobPageOpenedMessage, SkillEditTriggeredMessage, SkillSaveTriggeredMessage, SynonymAddTriggeredMessage, SynonymRemoveTriggeredMessage } from "./types";
 
-export function notifyJobPageOpened(message: Omit<JobPageOpenedMessage, "type">): void {
+export function notifyJobPageOpened(message: JobPageOpenedMessage["message"]): void {
   const type = "JOB_PAGE_OPENED";
   const result = chrome.runtime?.sendMessage?.({
     type,
-    ...message
+    message
   } satisfies JobPageOpenedMessage);
   if (result && "catch" in result) {
     result.catch(reason => console.log(
@@ -13,11 +13,11 @@ export function notifyJobPageOpened(message: Omit<JobPageOpenedMessage, "type">)
   }
 }
 
-export function notifyJobListPageOpened(message: Omit<JobListPageOpenedMessage, "type">): void {
+export function notifyJobListPageOpened(message: JobListPageOpenedMessage["message"]): void {
   const type = "JOB_LIST_PAGE_OPENED";
   const result = chrome.runtime?.sendMessage?.({
     type,
-    ...message
+    message
   } satisfies JobListPageOpenedMessage);
   if (result && "catch" in result) {
     result.catch(reason => console.log(
@@ -26,11 +26,11 @@ export function notifyJobListPageOpened(message: Omit<JobListPageOpenedMessage, 
   }
 }
 
-export function notifySkillSaveTriggered(message: Omit<SkillSaveTriggeredMessage, "type">): void {
+export function notifySkillSaveTriggered(message: SkillSaveTriggeredMessage["message"]): void {
   const type = "SKILL_SAVE_TRIGGERED";
   const result = chrome.runtime?.sendMessage?.({
     type,
-    ...message
+    message
   } satisfies SkillSaveTriggeredMessage);
   if (result && "catch" in result) {
     result.catch(reason => console.log(
@@ -39,11 +39,11 @@ export function notifySkillSaveTriggered(message: Omit<SkillSaveTriggeredMessage
   }
 }
 
-export function notifySkillEditTriggered(message: Omit<SkillEditTriggeredMessage, "type">): void {
+export function notifySkillEditTriggered(message: SkillEditTriggeredMessage["message"]): void {
   const type = "SKILL_EDIT_TRIGGERED";
   const result = chrome.runtime?.sendMessage?.({
     type,
-    ...message
+    message
   } satisfies SkillEditTriggeredMessage);
   if (result && "catch" in result) {
     result.catch(reason => console.log(
@@ -52,11 +52,11 @@ export function notifySkillEditTriggered(message: Omit<SkillEditTriggeredMessage
   }
 }
 
-export function notifyAddSynonymTriggered(message: Omit<SynonymAddTriggeredMessage, "type">): void {
+export function notifyAddSynonymTriggered(message: SynonymAddTriggeredMessage["message"]): void {
   const type = "SYNONYM_ADD_TRIGGERED";
   const result = chrome.runtime?.sendMessage?.({
     type,
-    ...message
+    message
   } satisfies SynonymAddTriggeredMessage);
   if (result && "catch" in result) {
     result.catch(reason => console.log(
@@ -65,11 +65,11 @@ export function notifyAddSynonymTriggered(message: Omit<SynonymAddTriggeredMessa
   }
 }
 
-export function notifyRemoveSynonymTriggered(message: Omit<SynonymRemoveTriggeredMessage, "type">): void {
+export function notifyRemoveSynonymTriggered(message: SynonymRemoveTriggeredMessage["message"]): void {
   const type = "SYNONYM_REMOVE_TRIGGERED";
   const result = chrome.runtime?.sendMessage?.({
     type,
-    ...message
+    message
   } satisfies SynonymRemoveTriggeredMessage);
   if (result && "catch" in result) {
     result.catch(reason => console.log(
