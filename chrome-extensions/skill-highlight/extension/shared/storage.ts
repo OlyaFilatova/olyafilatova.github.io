@@ -95,7 +95,7 @@ class ChromeSkillRepository implements SkillRepository {
 
     const result = await response.json();
 
-    return [result["total_rows"], result["skills"].map((skill: any) => ({
+    return [result["totalRows"], result["skills"].map((skill: any) => ({
       normalizedText: skill.normalizedText,
       displayText: skill.displayText,
       familiarity: skill.familiarity,
