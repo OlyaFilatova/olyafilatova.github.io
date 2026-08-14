@@ -10,7 +10,10 @@ export default function SkillList({ skills, skillTexts }: {
 
   return (
     <section id="skillList" className="skill-list" aria-live="polite">
-      {skills.map((skill) => <Skill key={skill.normalizedText} skill={skill} skillTexts={skillTexts} />)}
+      {skills.map((skill) => {
+        console.log(skill)
+        return <Skill key={skill.normalizedText} skill={skill} skillTexts={skillTexts} />
+      })}
     </section>
   )
 }

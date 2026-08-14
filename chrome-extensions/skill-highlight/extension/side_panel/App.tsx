@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import './App.css';
 import SkillsPanel from './components/SkillsPanel';
 import SkillSynonymsPanel from './components/SkillSynonymsPanel';
 import Tabs from './components/Tabs';
+import { Tab, TabId } from './types/skill-synonyms';
+
 export default function App() {
-  const tabs = [
+  const [chosenTab, setChosenTab] = useState<TabId>("skillsTab");
+  const tabs: Tab[] = [
     {
       id: "skillsTab",
       text: "Skills",
@@ -15,18 +19,20 @@ export default function App() {
       panel: "synonymGroupsPanel"
     }
   ];
+
   return (
     <main className="app">
       <Tabs
-        activeTab='skillsTab'
         tabs={tabs}
+        setChosenTab={setChosenTab}
+        chosenTab={chosenTab}
        />
 
-      <div id={tabs[0].panel} role="tabpanel" aria-labelledby={tabs[0].id}>
+      <div id={tabs[0].panel} role="tabpanel" aria-labelledby={tabs[0].id} hidden={tabs[0].id !== chosenTab}>
         <SkillsPanel />
       </div>
 
-      <div id={tabs[1].panel} role="tabpanel" aria-labelledby={tabs[1].id} hidden>
+      <div id={tabs[1].panel} role="tabpanel" aria-labelledby={tabs[1].id} hidden={tabs[1].id !== chosenTab}>
         <SkillSynonymsPanel />
       </div>
     </main>
