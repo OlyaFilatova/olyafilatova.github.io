@@ -1,62 +1,17 @@
-from typing import Annotated, Literal, TypedDict
+from typing import Annotated
 
 from fastapi import FastAPI, Query
-from pydantic import BaseModel, Field
 
-from services.skills.models.skill import Familiarity, SkillType, Temperature
-
-from .repositories.job_skill import SkillRepository
+from .repositories.job_skill import JobSkillRepository
+from .api_models import (
+  CreateRequest,
+  CreateResponse,
+  FilterSkillsRequest,
+  FilterSkillsResponse,
+  Skill,
+)
 
 app = FastAPI()
-
-
-class Skill(TypedDict):
-  normalizedText: str
-  companyCount: int
-  companies: list[str]
-  categories: list[str]
-  synonyms: list[str]
-  synonymTexts: list[str]
-  urls: list[str]
-  familiarity: Familiarity
-  temperature: Temperature
-  type: SkillType
-  displayText: str
-
-
-class FilterSkillsRequest(BaseModel):
-  currentPage: int = Field(1)
-  pageSize: int = Field(10)
-  search: str = Field("")
-  category: str = Field("")
-  sort: Literal["name", "companyCount"] = Field("name")
-  type: SkillType | None = Field(None)
-  familiarity: Familiarity | None = Field(None)
-  temperature: Temperature | None = Field(None)
-  jobUrl: str | None = Field(None)
-
-
-class FilterSkillsResponse(BaseModel):
-  skills: list[Skill]
-  totalRows: int
-
-
-class CreateRequest(BaseModel):
-  normalizedText: str
-  url: str
-
-
-class CreateResponse(BaseModel):
-  pass
-
-
-class IgnoreRequest(BaseModel):
-  normalizedText: str
-  url: str
-
-
-class IgnoreResponse(BaseModel):
-  pass
 
 
 # req: FilterSkillsRequest
@@ -64,7 +19,7 @@ class IgnoreResponse(BaseModel):
 async def filter_skills(
   filter_query: Annotated[FilterSkillsRequest, Query()],
 ) -> FilterSkillsResponse:
-  total_rows, skills = await SkillRepository().filter(
+  total_rows, skills = await JobSkillRepository().filter(
     main_only=True,
     current_page=filter_query.currentPage,
     page_size=filter_query.pageSize,
@@ -99,10 +54,10 @@ async def filter_skills(
 
 @app.get("/categories")
 async def categories() -> list[str]:
-  return await SkillRepository().categories()
+  return await JobSkillRepository().categories()
 
 
 @app.post("/create")
 async def create(req: CreateRequest) -> CreateResponse:
-  await SkillRepository().create(req.normalizedText, req.url)
+  await JobSkillRepository().create(req.normalizedText, req.url)
   return CreateResponse()

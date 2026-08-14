@@ -1,87 +1,19 @@
-import datetime
-import os
-from typing import Any, TypedDict, cast
-
-import requests
 from fastapi import FastAPI
-from pydantic import BaseModel
 
 from .repositories.job import JobPostingRepository
 from .repositories.job_history import JobPostingHistoryRepository
 from .repositories.job_skill import JobPostingSkillRepository
 
+from .api_models import (
+  HealthResponse,
+  JobPostingRequest,
+  JobPostingResponse,
+  VisitedLinksRequest,
+  VisitedLinksResponse,
+)
+from .api_requests import get_skills, get_skill_synonyms, parse_skills
+
 app = FastAPI()
-
-
-class JobPostingRequest(BaseModel):
-  body: str
-  category: str
-  company: str
-  url: str
-
-
-class HealthResponse(BaseModel):
-  status: str
-
-
-class Skill(TypedDict):
-  normalizedText: str
-  text: str
-  type: Any  # TODO move types to the shared package
-  familiarity: Any
-  temperature: Any
-  createdAt: datetime.datetime
-  updatedAt: datetime.datetime
-
-
-class JobPostingResponse(BaseModel):
-  skills: list[tuple[Skill, str]]
-
-
-class SkillSynonym(TypedDict):
-  text: str
-  originNormalizedText: str
-  normalizedText: str
-  createdAt: datetime.datetime
-  updatedAt: datetime.datetime
-
-
-class VisitedLinksRequest(BaseModel):
-  links: list[str]
-
-
-class VisitedLinksResponse(BaseModel):
-  links: list[str]
-
-
-async def get_skill_synonyms() -> list[SkillSynonym]:
-  url = os.getenv("SKILLS_MANAGER_SERVICE")
-  url = f"{url}synonyms"
-
-  response = requests.get(url)
-
-  return cast(list[SkillSynonym], response.json()["skills"])
-
-
-async def get_skills(skill_ids: list[str]) -> list[Skill]:
-  url = os.getenv("SKILLS_MANAGER_SERVICE")
-  url = f"{url}skills"
-
-  response = requests.get(url, json={"skillIds": skill_ids})
-
-  return cast(list[Skill], response.json()["skills"])
-
-
-async def parse_skills(body: str, skill_synonyms: list[str]) -> list[str]:
-  url = os.getenv("PARSE_SKILLS_SERVICE")
-  url = f"{url}parse"
-
-  payload = {"body": body, "skillSynonyms": skill_synonyms}
-
-  response = requests.post(url, json=payload)
-
-  matches = cast(list[str], response.json()["matches"])
-  return matches
 
 
 @app.get("/health")

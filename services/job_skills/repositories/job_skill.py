@@ -25,7 +25,7 @@ class SkillAggregate(TypedDict):
   display_text: str
 
 
-class SkillRepository:
+class JobSkillRepository:
   async def categories(self) -> list[str]:
     async with postgresql_manager.get_async_session() as session:
       stmt = select(JobPosting.category).select_from(JobPosting)

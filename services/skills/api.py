@@ -2,114 +2,32 @@ import datetime
 from typing import Any, cast
 
 from fastapi import FastAPI
-from pydantic import BaseModel, Field
 
-from .models.skill import Familiarity, SkillType, Temperature
+from services.skills.models.skill import Familiarity, SkillType, Temperature
+
 from .repositories.skill import SkillRepository
 from .repositories.skill_synonym import SkillSynonymRepository
 
+from .api_models import (
+  CreateRequest,
+  CreateResponse,
+  CreateSynonymRequest,
+  CreateSynonymResponse,
+  EditRequest,
+  EditResponse,
+  HealthResponse,
+  RemoveSynonymRequest,
+  RemoveSynonymResponse,
+  Skill,
+  SkillSynonym,
+  SkillSynonymsResponse,
+  SkillText,
+  SkillTextsResponse,
+  SkillsRequest,
+  SkillsResponse,
+)
+
 app = FastAPI()
-
-
-class SkillSynonym(BaseModel):
-  text: str
-  originNormalizedText: str
-  normalizedText: str
-  createdAt: datetime.datetime
-  updatedAt: datetime.datetime
-
-
-class Skill(BaseModel):
-  normalizedText: str
-  text: str
-  type: SkillType
-  familiarity: Familiarity
-  temperature: Temperature
-  createdAt: datetime.datetime
-  updatedAt: datetime.datetime
-
-
-class SkillSynonymsResponse(BaseModel):
-  skills: list[SkillSynonym]
-
-
-class CreateSkillResponse(BaseModel):
-  skill: Skill
-
-
-class CreateSkillRequest(BaseModel):
-  normalizedText: str
-  text: str
-  type: SkillType
-  familiarity: Familiarity
-  temperature: Temperature
-
-
-class HealthResponse(BaseModel):
-  status: str
-
-
-class SkillsRequest(BaseModel):
-  skillIds: list[str]
-
-
-class SkillsResponse(BaseModel):
-  skills: list[Skill]
-
-
-class CreateRequest(BaseModel):
-  displayText: str
-  normalizedText: str
-
-
-class CreateResponse(BaseModel):
-  normalizedText: str
-  displayText: str
-  type: SkillType
-  familiarity: Familiarity
-  temperature: Temperature
-
-
-class EditRequest(BaseModel):
-  normalizedText: str
-  skillType: SkillType | None = Field(None)
-  familiarity: Familiarity | None = Field(None)
-  temperature: Temperature | None = Field(None)
-
-
-class EditResponse(BaseModel):
-  pass
-
-
-class SkillText(BaseModel):
-  normalizedText: str
-  displayText: str
-
-
-class SkillTextsResponse(BaseModel):
-  texts: list[SkillText]
-
-
-class CreateSynonymRequest(BaseModel):
-  originNormalizedText: str
-  normalizedText: str
-
-
-class CreateSynonymResponse(BaseModel):
-  originNormalizedText: str
-  normalizedText: str
-
-
-class RemoveSynonymRequest(BaseModel):
-  originNormalizedText: str
-  normalizedText: str
-  displayText: str
-
-
-class RemoveSynonymResponse(BaseModel):
-  originNormalizedText: str
-  normalizedText: str
-  displayText: str
 
 
 @app.get("/health")
