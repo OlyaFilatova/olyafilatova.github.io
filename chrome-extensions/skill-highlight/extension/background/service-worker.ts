@@ -69,7 +69,6 @@ chrome.runtime.onMessage.addListener((
       })
     },
     JOB_LIST_PAGE_OPENED: (sender, message: JobListPageOpenedMessage["message"]) => {
-      console.log(message)
       handleSkillStorageMessage({
         type: 'SKILL_STORAGE_REQUEST',
         method: 'getVisitedLinks',

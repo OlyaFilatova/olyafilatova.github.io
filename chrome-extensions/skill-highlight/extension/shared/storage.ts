@@ -64,7 +64,6 @@ class ChromeSkillRepository implements SkillRepository {
   }
 
   async getVisitedLinks(links: VisitedLinksRequest["links"]): Promise<VisitedLinksResponse["links"]> {
-    console.log(links)
     const response = await fetch(`${API_URL}/api/job-postings/get-visited`, {
       method: "POST",
       headers: {

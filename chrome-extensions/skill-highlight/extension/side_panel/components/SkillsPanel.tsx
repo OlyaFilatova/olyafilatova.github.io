@@ -140,7 +140,6 @@ export default function SkillsPanel() {
     chrome.runtime.onMessage.addListener((
       message: SynonymUpdatedMessage
     ) => {
-      console.log(message.type)
       if (message.type == 'SYNONYM_UPDATED') {
         getSkillTexts();
         void reloadSkills();
