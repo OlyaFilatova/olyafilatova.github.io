@@ -1,12 +1,7 @@
-export interface SuggestedSynonymGroupSkill {
-  displayText: string;
-  normalizedText: string;
-}
+import { SuggestSkillSynonymsResponse } from "../../shared/types";
 
-export interface SuggestedSynonymGroup {
-  id: string;
-  skills: SuggestedSynonymGroupSkill[];
-}
+
+export type SuggestedSynonymGroup = SuggestSkillSynonymsResponse[number];
 
 export type TabId = "skillsTab" | "synonymGroupsTab";
 

@@ -128,6 +128,20 @@ services:
       - "9004:9004"
     restart: unless-stopped
 
+  skill_synonyms:
+    build: 
+      context: .
+      dockerfile: services/skill_synonyms/Dockerfile
+    container_name: skill-synonyms
+    env_file:
+      - .env
+      - services/skill_synonyms/.env
+    networks:
+      - default
+    ports:
+      - "9005:9005"
+    restart: unless-stopped
+
   job_skills_gateway:
     build: 
       context: .
@@ -140,6 +154,7 @@ services:
       - parse_job_posting
       - skills
       - job_skills
+      - skill_synonyms
     networks:
       - default
     ports:

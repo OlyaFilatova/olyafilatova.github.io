@@ -12,8 +12,10 @@ SERVICES = {
   "job-postings": os.getenv("JOB_PARSER_SERVICE"),
   "skills": os.getenv("SKILLS_SERVICE"),
   "job-skills": os.getenv("JOB_SKILLS_SERVICE"),
+  "skill-synonyms": os.getenv("SKILL_SYNONYMS_SERVICE"),
 }
 
+long_requests = ['skill-synonyms/']
 
 @app.api_route(
   "/api/{service}/{path:path}",
@@ -36,6 +38,7 @@ async def gateway(service: str, path: str, request: Request):
       params=request.query_params,
       content=body,
       headers={k: v for k, v in request.headers.items() if k.lower() != "host"},
+      timeout=100.0 if f"{service}/{path}" in long_requests else 5.0
     )
 
   return Response(

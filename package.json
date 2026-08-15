@@ -15,7 +15,10 @@
     "generate-api-types": "run-s generate-api-types:*",
     "generate-api-types:job-postings": "npx openapi-typescript http://localhost:9001/openapi.json -o chrome-extensions/skill-highlight/extension/shared/api/job-postings.d.ts",
     "generate-api-types:skills": "npx openapi-typescript http://localhost:9002/openapi.json -o chrome-extensions/skill-highlight/extension/shared/api/skills.d.ts",
-    "generate-api-types:job-skills": "npx openapi-typescript http://localhost:9004/openapi.json -o chrome-extensions/skill-highlight/extension/shared/api/job-skills.d.ts"
+    "generate-api-types:job-skills": "npx openapi-typescript http://localhost:9004/openapi.json -o chrome-extensions/skill-highlight/extension/shared/api/job-skills.d.ts",
+    "generate-api-types:skill-synonyms": "npx openapi-typescript http://localhost:9005/openapi.json -o chrome-extensions/skill-highlight/extension/shared/api/skill-synonyms.d.ts",
+    "generate-api-types:service-job_parser-skills": "datamodel-codegen --url http://localhost:9002/openapi.json --input-file-type openapi --allow-private-network --output services/job_parser/generated/skills_models.py",
+    "generate-api-types:service-skill_synonyms-skills": "datamodel-codegen --url http://localhost:9002/openapi.json --input-file-type openapi --allow-private-network --output services/skill_synonyms/generated/skills_models.py"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

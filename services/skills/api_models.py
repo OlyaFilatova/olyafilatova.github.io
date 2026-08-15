@@ -65,7 +65,6 @@ class CreateResponse(BaseModel):
 
 
 class EditRequest(BaseModel):
-  normalizedText: str
   skillType: SkillType | None = Field(None)
   familiarity: Familiarity | None = Field(None)
   temperature: Temperature | None = Field(None)
@@ -104,3 +103,14 @@ class RemoveSynonymResponse(BaseModel):
   originNormalizedText: str
   normalizedText: str
   displayText: str
+
+
+class SkillWithSynonyms(BaseModel):
+  originNormalizedText: str
+  displayText: str
+  synonyms: list[str]
+  synonymTexts: list[str]
+
+
+class SkillsWithSynonymsResponse(BaseModel):
+  skills: list[SkillWithSynonyms]

@@ -1,16 +1,24 @@
 from typing import Any, TypedDict
 
-from sqlalchemy import select, update
+from sqlalchemy import func, select, update
 from sqlalchemy.exc import IntegrityError
 
 from ..database.postgres_manager import postgresql_manager
 from ..models.skill import Skill
+from ..models.skill_synonym import SkillSynonym
 from .base import BaseRepository
 
 
 class SkillTexts(TypedDict):
   normalized_text: str
   display_text: str
+
+
+class SkillWithSynonyms(TypedDict):
+  origin_normalized_text: str
+  display_text: str
+  synonyms: list[str]
+  synonym_texts: list[str]
 
 
 class SkillRepository(BaseRepository):
@@ -77,3 +85,39 @@ class SkillRepository(BaseRepository):
       except IntegrityError as e:
         await session.rollback()
         raise ValueError(f"Skill batch creation failed: {e}") from e
+
+  async def skills_with_synonyms(self) -> list[SkillWithSynonyms]:
+    async with postgresql_manager.get_async_session() as session:
+      stmt = (
+        select(
+          SkillSynonym.origin_normalized_text.label("origin_normalized_text"),
+          func.array_agg(func.distinct(SkillSynonym.normalized_text))
+          .filter(Skill.normalized_text != SkillSynonym.origin_normalized_text)
+          .label("synonyms"),
+          func.array_agg(func.distinct(SkillSynonym.text))
+          .filter(Skill.normalized_text != SkillSynonym.origin_normalized_text)
+          .label("synonyms_texts"),
+        )
+        .select_from(Skill)
+        .join(
+          SkillSynonym,
+          Skill.normalized_text == SkillSynonym.origin_normalized_text,
+        )
+        .group_by(SkillSynonym.origin_normalized_text)
+      )
+
+      result = await session.execute(stmt)
+
+      skills = [*result.mappings().all()]
+      skill_dicts = [dict(row) for row in skills]
+      skill_aggregates: list[SkillWithSynonyms] = [
+        SkillWithSynonyms(
+          origin_normalized_text=row["origin_normalized_text"],
+          display_text=row["origin_normalized_text"],
+          synonyms=row["synonyms"] or [],
+          synonym_texts=row["synonyms_texts"] or [],
+        )
+        for row in skill_dicts
+      ]
+
+      return skill_aggregates

@@ -1,6 +1,7 @@
 import { paths as jobSkillsPaths, components as jobSkillsComponents } from "./api/job-skills";
 import { paths as skillsPaths } from "./api/skills";
 import { paths as jobPostingsPaths } from "./api/job-postings";
+import { paths as skillSynonymsPaths } from "./api/skill-synonyms";
 
 export interface PageContext {
   category: string;
@@ -31,13 +32,14 @@ export type CreateJobSkillResponse = jobSkillsPaths['/job-skill']['post']['respo
 export type SkillTextsResponse = skillsPaths["/skill-texts"]["get"]["responses"][200]["content"]["application/json"];
 export type SkillSaveRequest = skillsPaths["/skill"]["post"]["requestBody"]["content"]["application/json"];
 export type SkillSaveResponse = skillsPaths["/skill"]["post"]["responses"][200]["content"]["application/json"];
-export type SkillEditRequest = skillsPaths["/skill"]["put"]["requestBody"]["content"]["application/json"];
-export type SkillEditResponse = skillsPaths["/skill"]["put"]["responses"][200]["content"]["application/json"];
+export type SkillEditRequest = skillsPaths["/skill/{normalized_text}"]["put"]["requestBody"]["content"]["application/json"];
+export type SkillEditResponse = skillsPaths["/skill/{normalized_text}"]["put"]["responses"][200]["content"]["application/json"];
 export type SynonymCreateRequest = skillsPaths["/synonym"]["post"]["requestBody"]["content"]["application/json"];
 export type SynonymCreateResponse = skillsPaths["/synonym"]["post"]["responses"][200]["content"]["application/json"];
 export type SynonymRemoveRequest = skillsPaths["/synonym"]["delete"]["requestBody"]["content"]["application/json"];
 export type SynonymRemoveResponse = skillsPaths["/synonym"]["delete"]["responses"][200]["content"]["application/json"];
-
+export type SuggestSkillSynonymsResponse = skillSynonymsPaths["/"]["get"]["responses"][200]["content"]["application/json"];
+export type IgnoreSuggestedSkillSynonymsRequest = skillSynonymsPaths["/ignore/{id}"]["post"]["parameters"]["path"];
 
 export type JobPageOpenedMessage = {
   type: "JOB_PAGE_OPENED";
@@ -85,6 +87,7 @@ export type SkillSavedMessage = {
 export type SkillEditTriggeredMessage = {
   type: "SKILL_EDIT_TRIGGERED";
   message: SkillEditRequest & {
+    normalizedText: string;
     url?: string;
   }
 }

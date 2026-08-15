@@ -22,6 +22,8 @@ from .api_models import (
   SkillSynonymsResponse,
   SkillText,
   SkillTextsResponse,
+  SkillsWithSynonymsResponse,
+  SkillWithSynonyms,
 )
 from .repositories.skill import SkillRepository
 from .repositories.skill_synonym import SkillSynonymRepository
@@ -136,8 +138,8 @@ async def create(req: CreateRequest) -> CreateResponse:
   )
 
 
-@app.put("/skill")
-async def edit(req: EditRequest) -> EditResponse:
+@app.put("/skill/{normalized_text}")
+async def edit(normalized_text: str, req: EditRequest) -> EditResponse:
   new_data: dict[str, Any] = {}
 
   if req.skillType:
@@ -152,5 +154,21 @@ async def edit(req: EditRequest) -> EditResponse:
   if len(new_data) == 0:
     raise Exception("No edited values found.")
 
-  await SkillRepository().edit(req.normalizedText, new_data)
+  await SkillRepository().edit(normalized_text, new_data)
   return EditResponse()
+
+
+@app.get("/skills-with-synonyms")
+async def get_skills_with_synonyms() -> SkillsWithSynonymsResponse:
+  skills = await SkillRepository().skills_with_synonyms()
+  return SkillsWithSynonymsResponse(
+    skills=[
+      SkillWithSynonyms(
+        originNormalizedText=skill["origin_normalized_text"],
+        displayText=skill["display_text"],
+        synonyms=skill["synonyms"],
+        synonymTexts=skill["synonym_texts"],
+      )
+      for skill in skills
+    ]
+  )

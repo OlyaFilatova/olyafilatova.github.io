@@ -49,8 +49,7 @@ export interface paths {
         };
         /** Get Skills */
         get: operations["get_skills_skill_get"];
-        /** Edit */
-        put: operations["edit_skill_put"];
+        put?: never;
         /** Create */
         post: operations["create_skill_post"];
         delete?: never;
@@ -68,6 +67,40 @@ export interface paths {
         };
         /** Get Skill Texts */
         get: operations["get_skill_texts_skill_texts_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/skill/{normalized_text}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Edit */
+        put: operations["edit_skill__normalized_text__put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/skills-with-synonyms": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Skills With Synonyms */
+        get: operations["get_skills_with_synonyms_skills_with_synonyms_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -113,8 +146,6 @@ export interface components {
         };
         /** EditRequest */
         EditRequest: {
-            /** Normalizedtext */
-            normalizedText: string;
             skillType?: components["schemas"]["SkillType"] | null;
             familiarity?: components["schemas"]["Familiarity"] | null;
             temperature?: components["schemas"]["Temperature"] | null;
@@ -215,6 +246,17 @@ export interface components {
          * @enum {string}
          */
         SkillType: "Approach" | "Application" | "Non-skill";
+        /** SkillWithSynonyms */
+        SkillWithSynonyms: {
+            /** Originnormalizedtext */
+            originNormalizedText: string;
+            /** Displaytext */
+            displayText: string;
+            /** Synonyms */
+            synonyms: string[];
+            /** Synonymtexts */
+            synonymTexts: string[];
+        };
         /** SkillsRequest */
         SkillsRequest: {
             /** Skillids */
@@ -224,6 +266,11 @@ export interface components {
         SkillsResponse: {
             /** Skills */
             skills: components["schemas"]["Skill"][];
+        };
+        /** SkillsWithSynonymsResponse */
+        SkillsWithSynonymsResponse: {
+            /** Skills */
+            skills: components["schemas"]["SkillWithSynonyms"][];
         };
         /**
          * Temperature
@@ -391,39 +438,6 @@ export interface operations {
             };
         };
     };
-    edit_skill_put: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["EditRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["EditResponse"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
     create_skill_post: {
         parameters: {
             query?: never;
@@ -473,6 +487,61 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SkillTextsResponse"];
+                };
+            };
+        };
+    };
+    edit_skill__normalized_text__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                normalized_text: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EditRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EditResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_skills_with_synonyms_skills_with_synonyms_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SkillsWithSynonymsResponse"];
                 };
             };
         };

@@ -12,7 +12,7 @@ members = [
   "shared",
   "scripts/pytools"
 ]
-exclude = ["services/md_to_html", "services/job_matcher", "services/skill_synonyms"]
+exclude = ["services/md_to_html", "services/job_matcher"]
 
 [dependency-groups]
 dev = [

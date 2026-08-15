@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { normalizeSkillText } from "./skill";
-import { CategoriesResponse, CreateJobSkillRequest, Familiarity, JobPostingData, JobPostingResponse, SkillAggregate, SkillEditTriggeredMessage, SkillFilters, SkillSaveResponse, SkillSaveTriggeredMessage, SkillsResponse, SkillTextsResponse, SkillType, SynonymAddTriggeredMessage, SynonymRemoveTriggeredMessage, Temperature, VisitedLinksRequest, VisitedLinksResponse } from "./types";
+import { CategoriesResponse, CreateJobSkillRequest, Familiarity, IgnoreSuggestedSkillSynonymsRequest, JobPostingData, JobPostingResponse, SkillAggregate, SkillEditTriggeredMessage, SkillFilters, SkillSaveResponse, SkillSaveTriggeredMessage, SkillsResponse, SkillTextsResponse, SkillType, SuggestSkillSynonymsResponse, SynonymAddTriggeredMessage, SynonymRemoveTriggeredMessage, Temperature, VisitedLinksRequest, VisitedLinksResponse } from "./types";
 
 
 interface SkillRepository {
@@ -8,7 +8,7 @@ interface SkillRepository {
   getSkills(skillFilters: SkillFilters): Promise<SkillAggregate[]>;
   getCategories(): Promise<string[]>;
   getVisitedLinks(links: string[]): Promise<string[]>;
-  createSkill(skillData: SkillSaveTriggeredMessage["message"]): Promise<{
+  createSkill(message: SkillSaveTriggeredMessage["message"]): Promise<{
     normalizedText: string;
     displayText: string;
     familiarity: Familiarity;
@@ -19,9 +19,11 @@ interface SkillRepository {
     displayText: string;
     normalizedText: string;
   }>>;
-  editSkill(skillData: SkillEditTriggeredMessage["message"]): Promise<void>;
-  addSynonym(skillData: SynonymAddTriggeredMessage["message"]): Promise<void>;
-  removeSynonym(skillData: SynonymRemoveTriggeredMessage["message"]): Promise<void>;
+  editSkill(message: SkillEditTriggeredMessage["message"]): Promise<void>;
+  addSynonym(message: SynonymAddTriggeredMessage["message"]): Promise<void>;
+  removeSynonym(message: SynonymRemoveTriggeredMessage["message"]): Promise<void>;
+  suggestSkillSynonyms(): Promise<SuggestSkillSynonymsResponse>;
+  ignoreSuggestedGroup({ id }: IgnoreSuggestedSkillSynonymsRequest): Promise<void>;
 }
 
 type StorageResponse<T = unknown> = { ok: true; result: T } | { ok: false; error: string };
@@ -110,6 +112,28 @@ class ChromeSkillRepository implements SkillRepository {
     return result["texts"];
   }
 
+  async suggestSkillSynonyms(): Promise<SuggestSkillSynonymsResponse> {
+    const response = await fetch(`${API_URL}/api/skill-synonyms`, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      }
+    });
+
+    return await response.json();
+  }
+
+  async ignoreSuggestedGroup({ id }: IgnoreSuggestedSkillSynonymsRequest): Promise<void> {
+    await fetch(`${API_URL}/api/skill-synonyms/ignore/${id}`, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      }
+    });
+  }
+
   async createSkill(skillData: SkillSaveTriggeredMessage["message"]): Promise<SkillSaveResponse> {
     const skillsResponse = await fetch(`${API_URL}/api/skills/skill`, {
       method: "POST",
@@ -143,8 +167,8 @@ class ChromeSkillRepository implements SkillRepository {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async editSkill({ url, ...skillData }: SkillEditTriggeredMessage["message"]): Promise<void> {
-    await fetch(`${API_URL}/api/skills/skill`, {
+  async editSkill({ url, normalizedText, ...skillData }: SkillEditTriggeredMessage["message"]): Promise<void> {
+    await fetch(`${API_URL}/api/skills/skill/${normalizedText}`, {
       method: "PUT",
       headers: {
         "Accept": "application/json",
@@ -204,6 +228,10 @@ async function invokeStorageMethod(message: StorageRequest): Promise<unknown> {
       return extensionSkillRepository.addSynonym(message.args[0] as SynonymAddTriggeredMessage["message"]);
     case "removeSynonym":
       return extensionSkillRepository.removeSynonym(message.args[0] as SynonymRemoveTriggeredMessage["message"]);
+    case "suggestSkillSynonyms":
+      return extensionSkillRepository.suggestSkillSynonyms();
+    case "ignoreSuggestedGroup":
+      return extensionSkillRepository.ignoreSuggestedGroup(message.args[0] as IgnoreSuggestedSkillSynonymsRequest);
   }
 }
 
