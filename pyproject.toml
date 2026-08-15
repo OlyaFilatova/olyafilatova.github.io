@@ -41,7 +41,7 @@ strict = true
 explicit_package_bases = true
 
 [tool.poe.tasks]
-install_all = "uv sync --package common --package parse-github-issue --package my-platform --package tools --package translate --package parse-job-postin --package job-skills --package skill-synonymsg --package skills"
+install_all = "uv sync --package common --package parse-github-issue --package my-platform --package tools --package translate --package parse-job-posting --package job-skills --package skill-synonyms --package skills"
 lint = "ruff check ."
 format = "ruff format ."
 mypy = "mypy ."

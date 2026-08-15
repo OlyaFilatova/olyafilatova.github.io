@@ -1,6 +1,9 @@
 from dataclasses import dataclass
+from functools import cache
 import re
 import unicodedata
+
+from rapidfuzz.distance import Levenshtein
 
 from .generated.skills_models import SkillWithSynonyms
 from .tracing import profile
@@ -36,16 +39,22 @@ def calculate_suggested_synonym_groups(
       for aggregate in aggregates
     ]
 
-  with profile("get_skill_similarity_score"):
+  with profile(f"get_skill_similarity_score on list {len(skills)}"):
     pair_scores: dict[str, float] = {}
 
-    for outer_index in range(len(skills)):
-      for inner_index in range(outer_index + 1, len(skills)):
-        first = skills[outer_index]
-        second = skills[inner_index]
+    pairs = (
+      (outer_index, inner_index)
+      for outer_index in range(len(skills))
+      for inner_index in range(outer_index + 1, len(skills))
+    )
+    for outer_index, inner_index in pairs:
+      first = skills[outer_index]
+      second = skills[inner_index]
+      with profile("get_skill_similarity_score"):
         score = get_skill_similarity_score(first, second)
 
-        if score > 0:
+      if score > 0:
+        with profile("pair_key"):
           pair_scores[pair_key(first.normalized_text, second.normalized_text)] = score
 
   with profile("gather-candidate_groups"):
@@ -184,6 +193,12 @@ def get_skill_name_similarity_score(first: str, second: str) -> float:
   if not comparable_first["compact"] or not comparable_second["compact"]:
     return 0
 
+  if text_includes_text(comparable_first, comparable_second):
+    return 2
+
+  if is_abbreviation_of(comparable_first, comparable_second):
+    return 1
+
   if (
     text_similarity(
       comparable_first["compact"],
@@ -193,17 +208,10 @@ def get_skill_name_similarity_score(first: str, second: str) -> float:
   ):
     return 3
 
-  if text_includes_text(comparable_first, comparable_second):
-    return 2
-
-  return (
-    1
-    if is_abbreviation_of(comparable_first, comparable_second)
-    or is_abbreviation_of(comparable_second, comparable_first)
-    else 0
-  )
+  return 0
 
 
+@cache
 def normalize_comparable_skill_name(text: str) -> dict:
   transliterated = transliterate_cyrillic(text)
   transliterated = unicodedata.normalize("NFD", transliterated)
@@ -273,31 +281,16 @@ def text_similarity(first: str, second: str) -> float:
   max_length = max(len(first), len(second))
 
   if max_length == 0:
-    return 1.0
+    return 0.0
 
-  return (max_length - levenshtein_distance(first, second)) / max_length
+  max_distance = int(max_length * 0.2)
 
+  if abs(len(first) - len(second)) > max_distance:
+    return 0.0
 
-def levenshtein_distance(first: str, second: str) -> int:
-  previous = list(range(len(second) + 1))
+  distance = Levenshtein.distance(first, second)
 
-  for first_index, first_char in enumerate(first, start=1):
-    current = [first_index]
-
-    for second_index, second_char in enumerate(second, start=1):
-      substitution_cost = 0 if first_char == second_char else 1
-
-      current.append(
-        min(
-          current[second_index - 1] + 1,
-          previous[second_index] + 1,
-          previous[second_index - 1] + substitution_cost,
-        )
-      )
-
-    previous = current
-
-  return previous[-1]
+  return (max_length - distance) / max_length
 
 
 def is_abbreviation_of(
