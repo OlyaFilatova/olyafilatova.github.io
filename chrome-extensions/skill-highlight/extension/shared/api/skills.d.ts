@@ -21,7 +21,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/synonyms": {
+    "/synonym": {
         parameters: {
             query?: never;
             header?: never;
@@ -29,50 +29,18 @@ export interface paths {
             cookie?: never;
         };
         /** Get All Skill Synonyms */
-        get: operations["get_all_skill_synonyms_synonyms_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/synonym/create": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
+        get: operations["get_all_skill_synonyms_synonym_get"];
         put?: never;
         /** Create Synonym */
-        post: operations["create_synonym_synonym_create_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/synonym/remove": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
+        post: operations["create_synonym_synonym_post"];
         /** Remove Synonym */
-        post: operations["remove_synonym_synonym_remove_post"];
-        delete?: never;
+        delete: operations["remove_synonym_synonym_delete"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/skills": {
+    "/skill": {
         parameters: {
             query?: never;
             header?: never;
@@ -80,9 +48,11 @@ export interface paths {
             cookie?: never;
         };
         /** Get Skills */
-        get: operations["get_skills_skills_get"];
-        put?: never;
-        post?: never;
+        get: operations["get_skills_skill_get"];
+        /** Edit */
+        put: operations["edit_skill_put"];
+        /** Create */
+        post: operations["create_skill_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -100,40 +70,6 @@ export interface paths {
         get: operations["get_skill_texts_skill_texts_get"];
         put?: never;
         post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/create": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Create */
-        post: operations["create_create_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/edit": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Edit */
-        post: operations["edit_edit_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -336,7 +272,7 @@ export interface operations {
             };
         };
     };
-    get_all_skill_synonyms_synonyms_get: {
+    get_all_skill_synonyms_synonym_get: {
         parameters: {
             query?: never;
             header?: never;
@@ -356,7 +292,7 @@ export interface operations {
             };
         };
     };
-    create_synonym_synonym_create_post: {
+    create_synonym_synonym_post: {
         parameters: {
             query?: never;
             header?: never;
@@ -389,7 +325,7 @@ export interface operations {
             };
         };
     };
-    remove_synonym_synonym_remove_post: {
+    remove_synonym_synonym_delete: {
         parameters: {
             query?: never;
             header?: never;
@@ -422,7 +358,7 @@ export interface operations {
             };
         };
     };
-    get_skills_skills_get: {
+    get_skills_skill_get: {
         parameters: {
             query?: never;
             header?: never;
@@ -455,14 +391,18 @@ export interface operations {
             };
         };
     };
-    get_skill_texts_skill_texts_get: {
+    edit_skill_put: {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        requestBody?: never;
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EditRequest"];
+            };
+        };
         responses: {
             /** @description Successful Response */
             200: {
@@ -470,12 +410,21 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["SkillTextsResponse"];
+                    "application/json": components["schemas"]["EditResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };
     };
-    create_create_post: {
+    create_skill_post: {
         parameters: {
             query?: never;
             header?: never;
@@ -508,18 +457,14 @@ export interface operations {
             };
         };
     };
-    edit_edit_post: {
+    get_skill_texts_skill_texts_get: {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["EditRequest"];
-            };
-        };
+        requestBody?: never;
         responses: {
             /** @description Successful Response */
             200: {
@@ -527,16 +472,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["EditResponse"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
+                    "application/json": components["schemas"]["SkillTextsResponse"];
                 };
             };
         };

@@ -57,7 +57,7 @@ async def categories() -> list[str]:
   return await JobSkillRepository().categories()
 
 
-@app.post("/create")
+@app.post("/job-skill")
 async def create(req: CreateRequest) -> CreateResponse:
   await JobSkillRepository().create(req.normalizedText, req.url)
   return CreateResponse()

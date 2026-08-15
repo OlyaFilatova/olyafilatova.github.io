@@ -21,7 +21,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/process-job-posting": {
+    "/job-posting": {
         parameters: {
             query?: never;
             header?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Process */
-        post: operations["process_process_job_posting_post"];
+        post: operations["process_job_posting_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -59,6 +59,11 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /**
+         * Familiarity
+         * @enum {string}
+         */
+        Familiarity: "know-in-depth" | "study" | "actively-using" | "know-a-bit" | "unknown";
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
@@ -94,12 +99,9 @@ export interface components {
             normalizedText: string;
             /** Text */
             text: string;
-            /** Type */
-            type: unknown;
-            /** Familiarity */
-            familiarity: unknown;
-            /** Temperature */
-            temperature: unknown;
+            type: components["schemas"]["SkillType"];
+            familiarity: components["schemas"]["Familiarity"];
+            temperature: components["schemas"]["Temperature"];
             /**
              * Createdat
              * Format: date-time
@@ -111,6 +113,16 @@ export interface components {
              */
             updatedAt: string;
         };
+        /**
+         * SkillType
+         * @enum {string}
+         */
+        SkillType: "Approach" | "Application" | "Non-skill";
+        /**
+         * Temperature
+         * @enum {string}
+         */
+        Temperature: "interested" | "meh" | "avoid!";
         /** ValidationError */
         ValidationError: {
             /** Location */
@@ -163,7 +175,7 @@ export interface operations {
             };
         };
     };
-    process_process_job_posting_post: {
+    process_job_posting_post: {
         parameters: {
             query?: never;
             header?: never;

@@ -20,7 +20,7 @@ def health() -> HealthResponse:
   return HealthResponse(status="ok")
 
 
-@app.post("/process-job-posting", response_model=JobPostingResponse)
+@app.post("/job-posting", response_model=JobPostingResponse)
 async def process(request: JobPostingRequest) -> JobPostingResponse:
   repo = JobPostingRepository()
   existing_job = await repo.get_by_url(request.url)

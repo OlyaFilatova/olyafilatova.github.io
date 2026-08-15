@@ -38,7 +38,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/create": {
+    "/job-skill": {
         parameters: {
             query?: never;
             header?: never;
@@ -48,24 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Create */
-        post: operations["create_create_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/ignore": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Ignore */
-        post: operations["ignore_ignore_post"];
+        post: operations["create_job_skill_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -102,15 +85,6 @@ export interface components {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
         };
-        /** IgnoreRequest */
-        IgnoreRequest: {
-            /** Normalizedtext */
-            normalizedText: string;
-            /** Url */
-            url: string;
-        };
-        /** IgnoreResponse */
-        IgnoreResponse: Record<string, never>;
         /** Skill */
         Skill: {
             /** Normalizedtext */
@@ -224,7 +198,7 @@ export interface operations {
             };
         };
     };
-    create_create_post: {
+    create_job_skill_post: {
         parameters: {
             query?: never;
             header?: never;
@@ -244,39 +218,6 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["CreateResponse"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    ignore_ignore_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["IgnoreRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["IgnoreResponse"];
                 };
             };
             /** @description Validation Error */

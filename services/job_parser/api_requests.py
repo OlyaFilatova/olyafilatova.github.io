@@ -9,7 +9,7 @@ from .generated.skills_models import Skill, SkillSynonym
 
 async def get_skill_synonyms() -> list[SkillSynonym]:
   url = os.getenv("SKILLS_MANAGER_SERVICE")
-  url = f"{url}synonyms"
+  url = f"{url}synonym"
 
   response = requests.get(url)
   response.raise_for_status()
@@ -22,7 +22,7 @@ async def get_skill_synonyms() -> list[SkillSynonym]:
 
 async def get_skills(skill_ids: list[str]) -> list[Skill]:
   url = os.getenv("SKILLS_MANAGER_SERVICE")
-  url = f"{url}skills"
+  url = f"{url}skill"
 
   response = requests.get(url, json={"skillIds": skill_ids})
   response.raise_for_status()

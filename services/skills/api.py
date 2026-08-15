@@ -34,7 +34,7 @@ def health() -> HealthResponse:
   return HealthResponse(status="ok")
 
 
-@app.get("/synonyms")
+@app.get("/synonym")
 async def get_all_skill_synonyms() -> SkillSynonymsResponse:
   synonyms = await SkillSynonymRepository().get_all()
   return SkillSynonymsResponse(
@@ -51,7 +51,7 @@ async def get_all_skill_synonyms() -> SkillSynonymsResponse:
   )
 
 
-@app.post("/synonym/create")
+@app.post("/synonym")
 async def create_synonym(req: CreateSynonymRequest) -> CreateSynonymResponse:
   await SkillSynonymRepository().update(
     origin_normalized_text=req.originNormalizedText,
@@ -64,7 +64,7 @@ async def create_synonym(req: CreateSynonymRequest) -> CreateSynonymResponse:
   )
 
 
-@app.post("/synonym/remove")
+@app.delete("/synonym")
 async def remove_synonym(req: RemoveSynonymRequest) -> RemoveSynonymResponse:
   await SkillSynonymRepository().delete(
     origin_normalized_text=req.originNormalizedText,
@@ -79,7 +79,7 @@ async def remove_synonym(req: RemoveSynonymRequest) -> RemoveSynonymResponse:
   )
 
 
-@app.get("/skills")
+@app.get("/skill")
 async def get_skills(req: SkillsRequest) -> SkillsResponse:
   skills = await SkillRepository().get_by_keys(req.skillIds)
   return SkillsResponse(
@@ -109,7 +109,7 @@ async def get_skill_texts() -> SkillTextsResponse:
   )
 
 
-@app.post("/create")
+@app.post("/skill")
 async def create(req: CreateRequest) -> CreateResponse:
   skill = await SkillRepository().create(
     {
@@ -136,7 +136,7 @@ async def create(req: CreateRequest) -> CreateResponse:
   )
 
 
-@app.post("/edit")
+@app.put("/skill")
 async def edit(req: EditRequest) -> EditResponse:
   new_data: dict[str, Any] = {}
 

@@ -15,8 +15,8 @@ export type Familiarity = jobSkillsComponents["schemas"]["Familiarity"];
 export type Temperature = jobSkillsComponents["schemas"]["Temperature"];
 export type SkillType = jobSkillsComponents["schemas"]["SkillType"];
 
-export type JobPostingData = jobPostingsPaths["/process-job-posting"]["post"]["requestBody"]["content"]["application/json"];
-export type JobPostingResponse = jobPostingsPaths["/process-job-posting"]["post"]["responses"][200]["content"]["application/json"];
+export type JobPostingData = jobPostingsPaths["/job-posting"]["post"]["requestBody"]["content"]["application/json"];
+export type JobPostingResponse = jobPostingsPaths["/job-posting"]["post"]["responses"][200]["content"]["application/json"];
 export type VisitedLinksRequest = jobPostingsPaths["/get-visited"]["post"]["requestBody"]["content"]["application/json"];
 export type VisitedLinksResponse = jobPostingsPaths["/get-visited"]["post"]["responses"][200]["content"]["application/json"];
 
@@ -24,19 +24,19 @@ export type SkillFilters = jobSkillsPaths['/filter']['get']['parameters']['query
 export type SkillsResponse = jobSkillsPaths['/filter']['get']['responses'][200]["content"]["application/json"];
 export type SkillAggregate = SkillsResponse["skills"][number];
 export type CategoriesResponse = jobSkillsPaths['/categories']['get']['responses'][200]["content"]["application/json"];
-export type CreateJobSkillRequest = jobSkillsPaths['/create']['post']['requestBody']['content']['application/json'];
-export type CreateJobSkillResponse = jobSkillsPaths['/create']['post']['responses'][200]["content"]["application/json"];
+export type CreateJobSkillRequest = jobSkillsPaths['/job-skill']['post']['requestBody']['content']['application/json'];
+export type CreateJobSkillResponse = jobSkillsPaths['/job-skill']['post']['responses'][200]["content"]["application/json"];
 
 
 export type SkillTextsResponse = skillsPaths["/skill-texts"]["get"]["responses"][200]["content"]["application/json"];
-export type SkillSaveRequest = skillsPaths["/create"]["post"]["requestBody"]["content"]["application/json"];
-export type SkillSaveResponse = skillsPaths["/create"]["post"]["responses"][200]["content"]["application/json"];
-export type SkillEditRequest = skillsPaths["/edit"]["post"]["requestBody"]["content"]["application/json"];
-export type SkillEditResponse = skillsPaths["/edit"]["post"]["responses"][200]["content"]["application/json"];
-export type SynonymCreateRequest = skillsPaths["/synonym/create"]["post"]["requestBody"]["content"]["application/json"];
-export type SynonymCreateResponse = skillsPaths["/synonym/create"]["post"]["responses"][200]["content"]["application/json"];
-export type SynonymRemoveRequest = skillsPaths["/synonym/remove"]["post"]["requestBody"]["content"]["application/json"];
-export type SynonymRemoveResponse = skillsPaths["/synonym/remove"]["post"]["responses"][200]["content"]["application/json"];
+export type SkillSaveRequest = skillsPaths["/skill"]["post"]["requestBody"]["content"]["application/json"];
+export type SkillSaveResponse = skillsPaths["/skill"]["post"]["responses"][200]["content"]["application/json"];
+export type SkillEditRequest = skillsPaths["/skill"]["put"]["requestBody"]["content"]["application/json"];
+export type SkillEditResponse = skillsPaths["/skill"]["put"]["responses"][200]["content"]["application/json"];
+export type SynonymCreateRequest = skillsPaths["/synonym"]["post"]["requestBody"]["content"]["application/json"];
+export type SynonymCreateResponse = skillsPaths["/synonym"]["post"]["responses"][200]["content"]["application/json"];
+export type SynonymRemoveRequest = skillsPaths["/synonym"]["delete"]["requestBody"]["content"]["application/json"];
+export type SynonymRemoveResponse = skillsPaths["/synonym"]["delete"]["responses"][200]["content"]["application/json"];
 
 
 export type JobPageOpenedMessage = {

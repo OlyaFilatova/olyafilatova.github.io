@@ -37,7 +37,7 @@ type StorageRequest = {
 
 class ChromeSkillRepository implements SkillRepository {
   async getJobPostingSkills(jobPostingData: JobPostingData): Promise<JobPostingResponse["skills"]> {
-    const response = await fetch(`${API_URL}/api/job-postings/process-job-posting`, {
+    const response = await fetch(`${API_URL}/api/job-postings/job-posting`, {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -111,7 +111,7 @@ class ChromeSkillRepository implements SkillRepository {
   }
 
   async createSkill(skillData: SkillSaveTriggeredMessage["message"]): Promise<SkillSaveResponse> {
-    const skillsResponse = await fetch(`${API_URL}/api/skills/create`, {
+    const skillsResponse = await fetch(`${API_URL}/api/skills/skill`, {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -125,7 +125,7 @@ class ChromeSkillRepository implements SkillRepository {
     const skillSaveResult: SkillSaveResponse = await skillsResponse.json();
     const normalizedText = skillSaveResult["normalizedText"];
 
-    const jobSkillsResponse = await fetch(`${API_URL}/api/job-skills/create`, {
+    const jobSkillsResponse = await fetch(`${API_URL}/api/job-skills/job-skill`, {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -144,8 +144,8 @@ class ChromeSkillRepository implements SkillRepository {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async editSkill({ url, ...skillData }: SkillEditTriggeredMessage["message"]): Promise<void> {
-    await fetch(`${API_URL}/api/skills/edit`, {
-      method: "POST",
+    await fetch(`${API_URL}/api/skills/skill`, {
+      method: "PUT",
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
@@ -155,7 +155,7 @@ class ChromeSkillRepository implements SkillRepository {
   }
 
   async addSynonym(message: SynonymAddTriggeredMessage["message"]): Promise<void> {
-    await fetch(`${API_URL}/api/skills/synonym/create`, {
+    await fetch(`${API_URL}/api/skills/synonym`, {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -166,8 +166,8 @@ class ChromeSkillRepository implements SkillRepository {
   }
 
   async removeSynonym(message: SynonymRemoveTriggeredMessage["message"]): Promise<void> {
-    await fetch(`${API_URL}/api/skills/synonym/remove`, {
-      method: "POST",
+    await fetch(`${API_URL}/api/skills/synonym`, {
+      method: "DELETE",
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
