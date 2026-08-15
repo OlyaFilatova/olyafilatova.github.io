@@ -6,7 +6,6 @@ import unicodedata
 from rapidfuzz.distance import Levenshtein
 
 from .generated.skills_models import SkillWithSynonyms
-from .tracing import profile
 
 
 @dataclass
@@ -29,58 +28,53 @@ SIMILARITY_THRESHOLD = 0.95
 def calculate_suggested_synonym_groups(
   aggregates: list[SkillWithSynonyms], ignored_suggested_group_ids: list[str]
 ) -> list[SynonymGroup]:
-  with profile("get_suggested_synonym_match_texts"):
-    skills = [
-      SynonymSkill(
-        normalized_text=aggregate.originNormalizedText,
-        display_text=aggregate.displayText,
-        match_texts=get_suggested_synonym_match_texts(aggregate.displayText, aggregate.synonymTexts),
-      )
-      for aggregate in aggregates
-    ]
-
-  with profile(f"get_skill_similarity_score on list {len(skills)}"):
-    pair_scores: dict[str, float] = {}
-
-    pairs = (
-      (outer_index, inner_index)
-      for outer_index in range(len(skills))
-      for inner_index in range(outer_index + 1, len(skills))
+  skills = [
+    SynonymSkill(
+      normalized_text=aggregate.originNormalizedText,
+      display_text=aggregate.displayText,
+      match_texts=get_suggested_synonym_match_texts(aggregate.displayText, aggregate.synonymTexts),
     )
-    for outer_index, inner_index in pairs:
+    for aggregate in aggregates
+  ]
+
+  pair_scores: dict[str, float] = {}
+
+  pairs = (
+    (outer_index, inner_index)
+    for outer_index in range(len(skills))
+    for inner_index in range(outer_index + 1, len(skills))
+  )
+  for outer_index, inner_index in pairs:
+    first = skills[outer_index]
+    second = skills[inner_index]
+    score = get_skill_similarity_score(first, second)
+
+    if score > 0:
+      pair_scores[pair_key(first.normalized_text, second.normalized_text)] = score
+
+  candidate_groups: list[list[SynonymSkill]] = []
+
+  for outer_index in range(len(skills)):
+    for inner_index in range(outer_index + 1, len(skills)):
       first = skills[outer_index]
       second = skills[inner_index]
-      with profile("get_skill_similarity_score"):
-        score = get_skill_similarity_score(first, second)
 
-      if score > 0:
-        with profile("pair_key"):
-          pair_scores[pair_key(first.normalized_text, second.normalized_text)] = score
+      if pair_key(first.normalized_text, second.normalized_text) not in pair_scores:
+        continue
 
-  with profile("gather-candidate_groups"):
-    candidate_groups: list[list[SynonymSkill]] = []
+      group = [first, second]
 
-    for outer_index in range(len(skills)):
-      for inner_index in range(outer_index + 1, len(skills)):
-        first = skills[outer_index]
-        second = skills[inner_index]
-
-        if pair_key(first.normalized_text, second.normalized_text) not in pair_scores:
+      for candidate in skills:
+        if any(skill.normalized_text == candidate.normalized_text for skill in group):
           continue
 
-        group = [first, second]
+        if all(
+          pair_key(skill.normalized_text, candidate.normalized_text) in pair_scores
+          for skill in group
+        ):
+          group.append(candidate)
 
-        for candidate in skills:
-          if any(skill.normalized_text == candidate.normalized_text for skill in group):
-            continue
-
-          if all(
-            pair_key(skill.normalized_text, candidate.normalized_text) in pair_scores
-            for skill in group
-          ):
-            group.append(candidate)
-
-        candidate_groups.append(sorted(group, key=lambda skill: skill.display_text))
+      candidate_groups.append(sorted(group, key=lambda skill: skill.display_text))
 
   groups = [
     SynonymGroup(
@@ -283,7 +277,7 @@ def text_similarity(first: str, second: str) -> float:
   if max_length == 0:
     return 0.0
 
-  max_distance = int(max_length * 0.2)
+  max_distance = int(max_length * 0.03)
 
   if abs(len(first) - len(second)) > max_distance:
     return 0.0

@@ -1,6 +1,6 @@
-from fastapi import FastAPI
+import asyncio
 
-from .tracing import profile
+from fastapi import FastAPI
 
 from .logic import calculate_suggested_synonym_groups
 from .repositories.synonym_groups import IgnoredSynonymGroupRepository
@@ -23,17 +23,15 @@ async def ignore(id: str) -> None:
 
 @app.get("/")
 async def get_suggested_synonym_groups() -> list[SuggestedSynonymGroup]:
-  with profile("load-ignored_suggested_groups"):
-    ignored_suggested_groups = [*await IgnoredSynonymGroupRepository().get_all()]
-    ignored_suggested_group_ids = [
-      str(ignored_group.id) for ignored_group in ignored_suggested_groups
-    ]
+  ignored_suggested_groups, aggregates = await asyncio.gather(
+    IgnoredSynonymGroupRepository().get_all(),
+    get_skill_with_synonyms()
+  )
+  ignored_suggested_group_ids = [
+    str(ignored_group.id) for ignored_group in ignored_suggested_groups
+  ]
 
-  with profile("get_skill_with_synonyms"):
-    aggregates = await get_skill_with_synonyms()
-
-  with profile("calculate_suggested_synonym_groups"):
-    suggested_synonym_groups = calculate_suggested_synonym_groups(aggregates, ignored_suggested_group_ids)
+  suggested_synonym_groups = calculate_suggested_synonym_groups(aggregates, ignored_suggested_group_ids)
 
   return [
     SuggestedSynonymGroup(
