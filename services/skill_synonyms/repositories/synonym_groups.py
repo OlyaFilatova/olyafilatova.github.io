@@ -27,12 +27,3 @@ class IgnoredSynonymGroupRepository(BaseRepository):
       except IntegrityError as e:
         await session.rollback()
         raise ValueError(f"IgnoredSynonymGroup creation failed: {e}") from e
-
-  async def delete(self, id: str) -> None:
-    async with postgresql_manager.get_async_session() as session:
-      try:
-        stmt = delete(IgnoredSynonymGroup).where(IgnoredSynonymGroup.id == id)
-        await session.execute(stmt)
-      except IntegrityError as e:
-        await session.rollback()
-        raise ValueError(f"IgnoredSynonymGroup deletion failed: {e}") from e

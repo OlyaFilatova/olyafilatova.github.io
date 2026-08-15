@@ -3,6 +3,7 @@ import re
 import unicodedata
 
 from .generated.skills_models import SkillWithSynonyms
+from .tracing import profile
 
 
 @dataclass
@@ -25,49 +26,52 @@ SIMILARITY_THRESHOLD = 0.95
 def calculate_suggested_synonym_groups(
   aggregates: list[SkillWithSynonyms], ignored_suggested_group_ids: list[str]
 ) -> list[SynonymGroup]:
-  skills = [
-    SynonymSkill(
-      normalized_text=aggregate.originNormalizedText,
-      display_text=aggregate.displayText,
-      match_texts=get_suggested_synonym_match_texts(aggregate.displayText, aggregate.synonymTexts),
-    )
-    for aggregate in aggregates
-  ]
+  with profile("get_suggested_synonym_match_texts"):
+    skills = [
+      SynonymSkill(
+        normalized_text=aggregate.originNormalizedText,
+        display_text=aggregate.displayText,
+        match_texts=get_suggested_synonym_match_texts(aggregate.displayText, aggregate.synonymTexts),
+      )
+      for aggregate in aggregates
+    ]
 
-  pair_scores: dict[str, float] = {}
+  with profile("get_skill_similarity_score"):
+    pair_scores: dict[str, float] = {}
 
-  for outer_index in range(len(skills)):
-    for inner_index in range(outer_index + 1, len(skills)):
-      first = skills[outer_index]
-      second = skills[inner_index]
-      score = get_skill_similarity_score(first, second)
+    for outer_index in range(len(skills)):
+      for inner_index in range(outer_index + 1, len(skills)):
+        first = skills[outer_index]
+        second = skills[inner_index]
+        score = get_skill_similarity_score(first, second)
 
-      if score > 0:
-        pair_scores[pair_key(first.normalized_text, second.normalized_text)] = score
+        if score > 0:
+          pair_scores[pair_key(first.normalized_text, second.normalized_text)] = score
 
-  candidate_groups: list[list[SynonymSkill]] = []
+  with profile("gather-candidate_groups"):
+    candidate_groups: list[list[SynonymSkill]] = []
 
-  for outer_index in range(len(skills)):
-    for inner_index in range(outer_index + 1, len(skills)):
-      first = skills[outer_index]
-      second = skills[inner_index]
+    for outer_index in range(len(skills)):
+      for inner_index in range(outer_index + 1, len(skills)):
+        first = skills[outer_index]
+        second = skills[inner_index]
 
-      if pair_key(first.normalized_text, second.normalized_text) not in pair_scores:
-        continue
-
-      group = [first, second]
-
-      for candidate in skills:
-        if any(skill.normalized_text == candidate.normalized_text for skill in group):
+        if pair_key(first.normalized_text, second.normalized_text) not in pair_scores:
           continue
 
-        if all(
-          pair_key(skill.normalized_text, candidate.normalized_text) in pair_scores
-          for skill in group
-        ):
-          group.append(candidate)
+        group = [first, second]
 
-      candidate_groups.append(sorted(group, key=lambda skill: skill.display_text))
+        for candidate in skills:
+          if any(skill.normalized_text == candidate.normalized_text for skill in group):
+            continue
+
+          if all(
+            pair_key(skill.normalized_text, candidate.normalized_text) in pair_scores
+            for skill in group
+          ):
+            group.append(candidate)
+
+        candidate_groups.append(sorted(group, key=lambda skill: skill.display_text))
 
   groups = [
     SynonymGroup(
