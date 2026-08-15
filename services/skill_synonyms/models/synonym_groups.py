@@ -1,7 +1,5 @@
-from enum import Enum as PyEnum
 
-from sqlalchemy import Column, DateTime, Enum, String
-from sqlalchemy.orm import mapped_column
+from sqlalchemy import Column, DateTime, String
 from sqlalchemy.sql import func
 
 from shared.models.base import Base

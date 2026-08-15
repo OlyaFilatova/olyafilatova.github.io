@@ -15,13 +15,14 @@ SERVICES = {
   "skill-synonyms": os.getenv("SKILL_SYNONYMS_SERVICE"),
 }
 
-long_requests = ['skill-synonyms/']
+long_requests = ["skill-synonyms/"]
+
 
 @app.api_route(
   "/api/{service}/{path:path}",
   methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
 )
-async def gateway(service: str, path: str, request: Request):
+async def gateway(service: str, path: str, request: Request) -> Response:
   base_url = SERVICES.get(service)
 
   if not base_url:
@@ -38,7 +39,7 @@ async def gateway(service: str, path: str, request: Request):
       params=request.query_params,
       content=body,
       headers={k: v for k, v in request.headers.items() if k.lower() != "host"},
-      timeout=100.0 if f"{service}/{path}" in long_requests else 5.0
+      timeout=100.0 if f"{service}/{path}" in long_requests else 5.0,
     )
 
   return Response(

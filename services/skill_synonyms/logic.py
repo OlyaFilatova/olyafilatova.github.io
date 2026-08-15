@@ -1,7 +1,8 @@
+import re
+from typing import Any
+import unicodedata
 from dataclasses import dataclass
 from functools import cache
-import re
-import unicodedata
 
 from rapidfuzz.distance import Levenshtein
 
@@ -206,7 +207,7 @@ def get_skill_name_similarity_score(first: str, second: str) -> float:
 
 
 @cache
-def normalize_comparable_skill_name(text: str) -> dict:
+def normalize_comparable_skill_name(text: str) -> dict[str, Any]:
   transliterated = transliterate_cyrillic(text)
   transliterated = unicodedata.normalize("NFD", transliterated)
   transliterated = re.sub(r"[\u0300-\u036f]", "", transliterated)
@@ -240,11 +241,11 @@ def pair_key(first: str, second: str) -> str:
   return "|".join(sorted((first, second)))
 
 
-def text_includes_text(first: dict, second: dict) -> bool:
+def text_includes_text(first: dict[str, Any], second: dict[str, Any]) -> bool:
   return word_sequence_includes(first, second) or word_sequence_includes(second, first)
 
 
-def word_sequence_includes(maybe_longer: dict, maybe_shorter: dict) -> bool:
+def word_sequence_includes(maybe_longer: dict[str, Any], maybe_shorter: dict[str, Any]) -> bool:
   longer_words = maybe_longer["words"]
   shorter_words = maybe_shorter["words"]
 
@@ -288,8 +289,8 @@ def text_similarity(first: str, second: str) -> float:
 
 
 def is_abbreviation_of(
-  possible_abbreviation: dict,
-  possible_full_name: dict,
+  possible_abbreviation: dict[str, Any],
+  possible_full_name: dict[str, Any],
 ) -> bool:
   compact = possible_abbreviation["compact"]
   return len(compact) > 1 and compact in possible_full_name["abbreviations"]

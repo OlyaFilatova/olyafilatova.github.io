@@ -18,11 +18,11 @@ from .api_models import (
   Skill,
   SkillsRequest,
   SkillsResponse,
+  SkillsWithSynonymsResponse,
   SkillSynonym,
   SkillSynonymsResponse,
   SkillText,
   SkillTextsResponse,
-  SkillsWithSynonymsResponse,
   SkillWithSynonyms,
 )
 from .repositories.skill import SkillRepository
