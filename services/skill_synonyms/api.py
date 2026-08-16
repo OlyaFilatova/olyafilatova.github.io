@@ -1,4 +1,5 @@
 import asyncio
+from urllib.parse import unquote
 
 from fastapi import FastAPI
 
@@ -15,8 +16,10 @@ def health() -> HealthResponse:
   return HealthResponse(status="ok")
 
 
-@app.post("/ignore/{id}")
+@app.post("/ignore/{id:path}")
 async def ignore(id: str) -> None:
+  id = unquote(id)
+  print(id)
   await IgnoredSynonymGroupRepository().create(id)
 
 

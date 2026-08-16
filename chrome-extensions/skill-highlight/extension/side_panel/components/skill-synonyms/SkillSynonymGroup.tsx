@@ -17,7 +17,7 @@ export default function SkillSynonymGroup({
     handleSkillStorageMessage({
       type: 'SKILL_STORAGE_REQUEST',
       method: 'ignoreSuggestedGroup',
-      args: [{ id: group.id } satisfies IgnoreSuggestedSkillSynonymsRequest]
+      args: [{ id: encodeURIComponent(encodeURIComponent(group.id)) } satisfies IgnoreSuggestedSkillSynonymsRequest]
     }, response => {
       if (response.ok) {
         setIgnored(true);
@@ -28,7 +28,6 @@ export default function SkillSynonymGroup({
   }
 
   function saveSkillSynonymPair(originSkill: string, synonymSkill: string) {
-
     handleSkillStorageMessage({
       type: 'SKILL_STORAGE_REQUEST',
       method: 'addSynonym',
@@ -38,7 +37,7 @@ export default function SkillSynonymGroup({
        } satisfies SynonymAddTriggeredMessage["message"]]
     }, response => {
       if (response.ok) {
-        setSkillNames(skillNames.filter(skillName => skillName !== synonymSkill));
+        setSkillNames([...skillNames.filter(skillName => skillName !== synonymSkill)]);
       } else {
         console.log('error', response)
       }
