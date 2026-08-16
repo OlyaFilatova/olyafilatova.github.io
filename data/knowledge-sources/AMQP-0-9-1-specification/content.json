@@ -72,7 +72,7 @@
     "en": "Durable exchanges last until they are deleted."
   },
   {
-    "uk": "Temporary exchanges повідомленнями існують, доки сервер не завершить роботу.",
+    "uk": "Temporary exchanges існують, доки сервер не завершить роботу.",
     "en": "Temporary exchanges last until the server shuts-down."
   },
   {

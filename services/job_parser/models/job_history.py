@@ -1,4 +1,6 @@
-from sqlalchemy import Column, DateTime, String
+import uuid
+
+from sqlalchemy import UUID, Column, DateTime, String
 from sqlalchemy.sql import func
 
 from shared.models.base import Base
@@ -9,7 +11,8 @@ class JobPostingHistory(Base):
 
   __tablename__ = "job_posting_histories"
 
-  url = Column(String(1024), primary_key=True)
+  id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+  url = Column(String(1024), unique=False, nullable=False, index=True)
   body = Column(String(51200), unique=False, nullable=False, index=False)
   category = Column(String(100), unique=False, nullable=False, index=True)
   company = Column(String(100), unique=False, nullable=False, index=True)

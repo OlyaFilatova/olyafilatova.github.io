@@ -40,7 +40,7 @@
     "en": "CONNECT or STOMP headers. REQUIRED: accept-version, host. OPTIONAL: login, passcode, heart-beat."
   },
   {
-    "uk": "CONNECATE заголовки. REQURED: version. OPTIONAL: session, server, heart-beat.",
+    "uk": "CONNECTED заголовки. REQURED: version. OPTIONAL: session, server, heart-beat.",
     "en": "CONNECTED headers. REQUIRED: version. OPTIONAL: session, server, heart-beat."
   },
   {
