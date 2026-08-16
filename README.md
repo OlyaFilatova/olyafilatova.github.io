@@ -26,6 +26,42 @@
 #### For Highlight skills extension
 - Gateway
 - Job Posting parser (depends on Parse skills service that is not present in the repo)
+  - Expected Parse skills service behaviour:
+
+    available under shared-network
+
+    has endpoint POST /parse
+    
+    that accepts body containing following JSON string:
+    ```json
+    {
+      "type": "object",
+      "properties": {
+        "body":             { "type": "string" },
+        "skillSynonyms":    {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+    ```
+    and returns following JSON string:
+    ```
+    {
+      "type": "object",
+      "properties": {
+        "matches":    {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+    ```
+
 - Skills service
 - Skill synonyms service
 - Job skills service
