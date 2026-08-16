@@ -8,13 +8,15 @@
 <p><strong>Back-end:</strong> Nest.js, FastAPI.</p>
 <p><strong>Infrastructure:</strong> Docker, docker-compose, GitHub Pages, GitHub Actions, monorepo (pnpm, uv).</p>
 <p><strong>Models:</strong> Helsinki-NLP/opus-mt-en-uk, Helsinki-NLP/opus-mt-uk-en.</p>
+<details>
+  <summary>Subprojects...</summary>
 <h2>Subprojects</h2>
 <h3>Website</h3>
 <p>Personal website.</p>
 <p><strong>Deployed:</strong> on GitHub Pages.</p>
 <p><strong>Language:</strong> TypeScript.</p>
 <p><strong>Frameworks and libraries:</strong> React.js with Functional Components, html-react-parser, zod.</p>
-<p><strong>Storage:</strong> IndexedDB, localStorage.</p>
+<p><strong>Storage:</strong> localStorage, static assets.</p>
 <p><strong>Supported languages:</strong> ukrainian and english. After using the language switch, the chosen language is stored in the browser cache.</p>
 <p><strong>Pages:</strong> main page, notes on knowledge sources, projects, experience history.</p>
 <p>Content for pages is stored in the assets folders either as <code>.json</code> or <code>.html</code> files and loaded on-demand. Pages “projects” and “notes” use generated index objects to request content. Content of JSON files is verified using zod library.</p>
@@ -92,3 +94,4 @@
 <h3>GitHub Actions</h3>
 <h4>Deploy GitHub Pages</h4>
 <p>Builds and deploys /website on GitHub Pages.</p>
+</details>

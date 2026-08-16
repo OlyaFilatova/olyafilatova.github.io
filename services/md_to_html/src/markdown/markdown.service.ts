@@ -4,7 +4,7 @@ import MarkdownIt from 'markdown-it';
 @Injectable()
 export class MarkdownService {
   private readonly md = new MarkdownIt({
-    html: false,
+    html: true,
     linkify: true,
     breaks: true,
     typographer: true,
