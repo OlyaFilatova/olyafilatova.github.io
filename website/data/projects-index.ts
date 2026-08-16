@@ -1,5 +1,5 @@
 
-export const bustCache = 8;
+export const bustCache = 11;
 
 export const index: {
   directory: string;

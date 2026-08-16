@@ -15,7 +15,7 @@ SERVICES = {
   "skill-synonyms": os.getenv("SKILL_SYNONYMS_SERVICE"),
 }
 
-long_requests = ["skill-synonyms/"]
+long_requests = []
 
 
 @app.api_route(

@@ -4,10 +4,11 @@
 <p>Основна мета цього проєкту - зберігати мої нотатки та думки без додаткових витрат на хостинг. Тому я вирішила використовувати GitHub Pages на основі публічного репозиторію. Інструменти, які потребують додаткових обчислювальних ресурсів (наприклад, переклад), використовуються лише локально, а рішення для зберігання даних базуються або на сховищі браузера, або на статичному вмісті вебсайту.</p>
 <h2>Основний стек технологій</h2>
 <p><strong>Мови програмування:</strong> TypeScript, Python.</p>
-<p><strong>Front-end:</strong> React.js, Manifest V3.</p>
-<p><strong>Back-end:</strong> Nest.js, FastAPI.</p>
-<p><strong>Інфраструктура:</strong> Docker, docker-compose, GitHub Pages, GitHub Actions, монорепозиторій (pnpm, uv).</p>
+<p><strong>Front-end:</strong> React.js, Manifest V3, zod.</p>
+<p><strong>Back-end:</strong> Nest.js, FastAPI, Pydantic, requests, SQLAlchemy, python-dotenv, httpx.</p>
+<p><strong>Інфраструктура:</strong> Docker, docker-compose, alembic, GitHub Pages, GitHub Actions, монорепозиторій (pnpm, uv).</p>
 <p><strong>Моделі:</strong> Helsinki-NLP/opus-mt-en-uk, Helsinki-NLP/opus-mt-uk-en.</p>
+<p><strong>Зберігання даних</strong>: localStorage, IndexedDB, PostgreSQL.</p>
 <details>
   <summary>Підпроєкти...</summary>
 <h2>Підпроєкти</h2>
@@ -53,10 +54,75 @@
 <li>Приймає напрямок перекладу та список рядків.</li>
 <li>Повертає список перекладених рядків у тому самому порядку, що й у вхідному списку.</li>
 </ul>
+<h4>Job Parser</h4>
+<p><strong>Розгорнуто:</strong> локально за допомогою Docker.</p>
+<p><strong>Мова:</strong> Python</p>
+<p><strong>Фреймворки та бібліотеки:</strong> FastAPI, pydantic, requests, asyncpg, SQLAlchemy, python-dotenv</p>
+<p><strong>Storage:</strong> PostgreSQL</p>
+<p><strong>Вимоги:</strong></p>
+<ul>
+<li>skills сервіс запущений на docker</li>
+<li>parse skills сервіс запущений на docker (Відсутній в репозиторії)</li>
+</ul>
+<p><strong>Функціональність:</strong></p>
+<ul>
+<li>зберегти текст оголошення про вакансію, якщо його ще немає, та використати сервіс parse skills, щоб отримати список знайдених навичок.</li>
+<li>знайти, які посилання у списку вже були проаналізовані.</li>
+</ul>
+<h4>Job Skills</h4>
+<p><strong>Розгорнуто:</strong> локально за допомогою Docker.</p>
+<p><strong>Мова:</strong> Python</p>
+<p><strong>Фреймворки та бібліотеки:</strong> FastAPI, Pydantic, requests, asyncpg, SQLAlchemy, python-dotenv</p>
+<p><strong>Storage:</strong> PostgreSQL</p>
+<p><strong>Вимоги:</strong> postgres сервіс запущений на docker</p>
+<p><strong>Функціональність:</strong></p>
+<ul>
+<li>Фільтрувати навички, агрегувати інформацію про кожну навичку.</li>
+<li>Отримати список категорій навичок.</li>
+<li>Зберегти зв’язок між роботою та навичкою.</li>
+</ul>
+<h4>Skill Synonyms</h4>
+<p><strong>Розгорнуто:</strong> локально за допомогою Docker.</p>
+<p><strong>Мова:</strong> Python</p>
+<p><strong>Фреймворки та бібліотеки:</strong> FastAPI, Pydantic, requests, asyncpg, SQLAlchemy, python-dotenv, rapidfuzz</p>
+<p><strong>Storage:</strong> PostgreSQL</p>
+<p><strong>Вимоги:</strong></p>
+<ul>
+<li>postgres сервіс запущений на docker</li>
+<li>skills сервіс запущений на docker</li>
+</ul>
+<p><strong>Функціональність:</strong></p>
+<ul>
+<li>Знайти групи подібних навичок.</li>
+<li>Ігнорувати запропоновану групу подібних навичок.</li>
+</ul>
+<h4>Skills</h4>
+<p><strong>Розгорнуто:</strong> локально за допомогою Docker.</p>
+<p><strong>Мова:</strong> Python</p>
+<p><strong>Фреймворки та бібліотеки:</strong> FastAPI, pydantic, requests, asyncpg, SQLAlchemy, python-dotenv</p>
+<p><strong>Storage:</strong> PostgreSQL</p>
+<p><strong>Вимоги:</strong> postgres сервіс запущений на docker</p>
+<p><strong>Функціональність:</strong></p>
+<ul>
+<li>створити навичку</li>
+<li>редагувати навичку (type, familiarity, temperature)</li>
+<li>отримати список навичок</li>
+<li>зробити навичку синонімом</li>
+<li>видалити синонім</li>
+<li>отримати список синонімів</li>
+<li>отримати список навичок з їхніми синонімами</li>
+<li>отримати тексти навичок (нормалізований тест, оригінальний текст)</li>
+</ul>
+<h4>Skills Gateway</h4>
+<p>Перенаправляє запити до 4 сервісів (Job parser, Job skills, Skill synonyms, Skills), щоб об’єднати API для клієнта під одним authority.</p>
+<p><strong>Розгорнуто:</strong> локально за допомогою Docker.</p>
+<p><strong>Мова:</strong> Python</p>
+<p><strong>Фреймворки та бібліотеки:</strong> FastAPI, httpx</p>
+<p><strong>Вимоги:</strong> Job parser, Job skills, Skill synonyms, Skills сервіси запущені на Docker.</p>
 <h3>Chrome-розширення</h3>
 <h4>Page Notes</h4>
 <p>Локальне зберігання нотаток, згруповано за сторінками.</p>
-<p>Chrome-розширення побудоване на основі репозиторію <a href="https://github.com/OlyaFilatova/page-notes">https://github.com/OlyaFilatova/page-notes</a>.</p>
+<p>Попередню версію chrome-розширення можна знайти у репозиторії <a href="https://github.com/OlyaFilatova/page-notes">https://github.com/OlyaFilatova/page-notes</a>.</p>
 <p>Версію розширення в цьому репозиторії розширено підтримкою сервісів, зокрема сервісу Parse GitHub Issue.</p>
 <p><strong>Розгорнуто:</strong> локально як unpacked extension.</p>
 <p><strong>Мова:</strong> TypeScript.</p>
@@ -73,6 +139,25 @@
 </ul>
 <p>Кнопка <strong>Export JSON</strong> експортує сторінки та їхні нотатки у форматі JSON. Зазвичай сторінки експортуються під власними URL. Якщо налаштовано поточний GitHub Issue, усі сторінки, перелічені в ньому, групуються та експортуються під URL цього Issue.</p>
 <p>Кнопка <strong>Clear all</strong> після підтвердження очищає всі збережені нотатки з бази даних браузера.</p>
+<h4>Highlight skills</h4>
+<p>Показує навички в оголошеннях про вакансії, стилізуючи їх на основі їхніх властивостей.</p>
+<p>Використовує skills gateway для парсингу та зберігання.</p>
+<p><strong>Розгорнуто:</strong> локально як unpacked extension.</p>
+<p><strong>Мова:</strong> TypeScript</p>
+<p><strong>Фреймворки та бібліотеки:</strong> React.js</p>
+<p><strong>Сховище:</strong> Надсилає дані до API.</p>
+<p><strong>Вимоги:</strong> Gateway, сервіси (Job parser, Job skills, Skill synonyms, Skills) та сервіс postgres, запущений на docker.</p>
+<p><strong>Функціональність:</strong><br />
+Підтримує платформи Djinni.co та Dou.ua.</p>
+<p>Під час завантаження сторінки визначає тип сторінки.</p>
+<p>Якщо на сторінці перелічені вакансії, збирає посилання на вакансії, визначає, які з них були відвідані, та стилізує відповідно.</p>
+<p>Якщо на сторінці відображається оголошення про вакансію:</p>
+<ul>
+<li>аналізує навички з опису оголошення про вакансію та стилізує навички відповідно до їхнього type (Application, Approach, Non-skill), familiarity(know, study, unknown, etc.), та temperature(interesting, meh, avoid).</li>
+<li>при виділенні тексту пропонує зберегти навичку.</li>
+<li>при натисканні на стилізовану навичку відображає спливаюче вікно редагування навички.</li>
+</ul>
+<p>На бічній панелі є дві вкладки. Під вкладкою “навички” навички можна фільтрувати та редагувати. Також навички можна групувати як синоніми відповідно до їхньої оригінальної навички. Список підтримує пошук і пагінацію по 10/25/50 навичок на сторінку. Під вкладкою “запропоновані групи синонімів” можна активувати функцію пошуку груп синонімів на основі схожості тексту. Пізніше запропоновані групи можна схвалити або відхилити.</p>
 <h3>Скрипти</h3>
 <h4>experience assemble</h4>
 <p><strong>Мова:</strong> TypeScript.</p>

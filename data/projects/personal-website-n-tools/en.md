@@ -10,13 +10,15 @@ The main goal of this project is to store my notes and thoughts without addition
 
 **Languages:** TypeScript, Python.
 
-**Front-end:** React.js, Manifest V3.
+**Front-end:** React.js, Manifest V3, zod.
 
-**Back-end:** Nest.js, FastAPI.
+**Back-end:** Nest.js, FastAPI, Pydantic, requests, SQLAlchemy, python-dotenv, httpx.
 
-**Infrastructure:** Docker, docker-compose, GitHub Pages, GitHub Actions, monorepo (pnpm, uv).
+**Infrastructure:** Docker, docker-compose, alembic, GitHub Pages, GitHub Actions, monorepo (pnpm, uv).
 
 **Models:** Helsinki-NLP/opus-mt-en-uk, Helsinki-NLP/opus-mt-uk-en.
+
+**Data storage**: localStorage, IndexedDB, PostgreSQL.
 
 <details>
   <summary>Subprojects...</summary>
@@ -93,13 +95,100 @@ Translate list of texts either from ukrainian to english or from english to ukra
 - Accepts direction of translation and list of strings
 - Returns list of translated strings in the same order as the input list.
 
+#### Job Parser
+
+**Deployed:** locally using Docker.
+
+**Language:** Python
+
+**Frameworks and libraries:** FastAPI, pydantic, requests, asyncpg, SQLAlchemy, python-dotenv
+
+**Storage:** PostgreSQL
+
+**Requirements:**
+- skills service running on docker
+- parse skills service running on docker (Not provided in the repo)
+
+**Functionality:**
+- store job posting text if not present yet and call parse skills service to get list of skills found.
+- find what links in a list where already parsed.
+
+#### Job Skills
+
+**Deployed:** locally using Docker.
+
+**Language:** Python
+
+**Frameworks and libraries:** FastAPI, Pydantic, requests, asyncpg, SQLAlchemy, python-dotenv
+
+**Storage:** PostgreSQL
+
+**Requirements:** postgres service running on docker
+
+**Functionality:**
+- Filter skills, aggregate information for each skill.
+- List skill categories.
+- store job skill connection.
+
+#### Skill Synonyms
+
+**Deployed:** locally using Docker.
+
+**Language:** Python
+
+**Frameworks and libraries:** FastAPI, Pydantic, requests, asyncpg, SQLAlchemy, python-dotenv, rapidfuzz
+
+**Storage:** PostgreSQL
+
+**Requirements:**
+- postgres service running on docker
+- skills service running on docker
+
+**Functionality:**
+- Find groups of similar skills.
+- Ignore suggested group of similar skills.
+
+#### Skills
+
+**Deployed:** locally using Docker.
+
+**Language:** Python
+
+**Frameworks and libraries:** FastAPI, pydantic, requests, asyncpg, SQLAlchemy, python-dotenv
+
+**Storage:** PostgreSQL
+
+**Requirements:** postgres service running on docker
+
+**Functionality:**
+- create skill
+- edit skill (type, familiarity, temperature)
+- get skills
+- make skill a synonym
+- delete synonym
+- get all synonyms
+- list skills with their synonyms
+- get texts of skills (normalized, initial)
+
+#### Skills Gateway
+
+Redirects requests to 4 services (Job parser, Job skills, Skill synonyms, Skills) to unify API for the client under one authority.
+
+**Deployed:** locally using Docker.
+
+**Language:** Python
+
+**Frameworks and libraries:** FastAPI, httpx
+
+**Requirements:** Services Job parser, Job skills, Skill synonyms, Skills running on Docker.
+
 ### Chrome extensions
 
 #### Page notes
 
 Locally store notes grouped by pages.
 
-Chrome extension build on base of the https://github.com/OlyaFilatova/page-notes extension.
+Previous version of the chrome extension can be found in the repo https://github.com/OlyaFilatova/page-notes.
 
 Extension in this repo is extended to use services, namely Parse GitHub Issue service.
 
@@ -126,6 +215,36 @@ Button **Set current GitHub issue** opens a form using which it is possible to p
 Button export JSON exports pages and their notes in JSON format. Pages are exported under their link, but if a current GitHub issue is configured all pages that are listed in the issue will be grouped and exported under the issue link instead.
 
 Clear all button after confirmation clears all stored notes from the browser DB.
+
+#### Highlight skills
+
+Show skills on Job postings, stylize them based on their features.
+
+Uses skills gateway for parsing and storage.
+
+**Deployed:** locally as unpacked extension.
+
+**Language:** TypeScript
+
+**Frameworks and libraries:** React.js
+
+**Storage:** Sends data to API.
+
+**Requirements:** Gateway, services (Job parser, Job skills, Skill synonyms, Skills) and postgres service running on docker.
+
+**Functionality:** 
+Supports Djinni.co and Dou.ua platforms.
+
+On page load identify type of the page.
+
+If the page lists job postings, gathers links to job postings, identifies which where visited and stylizes them accordingly.
+
+If the page displays a job posting:
+- parses skills from job posting description and stylizes skills according to their type (Application, Approach, Non-skill), familiarity(know, study, unknown, etc.), and temperature(interesting, meh, avoid).
+- on text selection suggests saving the skill.
+- on click on the stylzed skill shows a skill edit popup.
+
+In the side panel there are two tabs. Under the "skills" tab skills can be filtered and edited. Skills can be grouped as synonyms under their original skill. The list has pagination by 10/25/50 skills per page. Under the "suggested synonym groups" tab functionality to search for synonym groups based on text similarity can be triggered. Later suggested groups can be approved or disregarded.
 
 ### scripts
 
