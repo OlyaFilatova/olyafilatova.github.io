@@ -39,36 +39,11 @@ class JobPostingSkillRepository(BaseRepository):
         await session.rollback()
         raise ValueError(f"Job Posting Skill list creation failed: {e}") from e
 
-  async def delete_one(self, url: str, normalized_text: str) -> None:
-    async with postgresql_manager.get_async_session() as session:
-      try:
-        item = await session.get(JobPostingSkill, url)
-        if item:
-          stmt = delete(JobPostingSkill).where(
-            JobPostingSkill.job_url == url,
-            JobPostingSkill.skill_normalized_text == normalized_text,
-          )
-          await session.execute(stmt)
-      except IntegrityError as e:
-        await session.rollback()
-        raise ValueError(f"Job Posting Skill delete one failed: {e}") from e
-
   async def delete_by_url(self, url: str) -> None:
     async with postgresql_manager.get_async_session() as session:
       try:
-        item = await session.get(JobPostingSkill, url)
-        if item:
-          stmt = delete(JobPostingSkill).where(JobPostingSkill.job_url == url)
-          await session.execute(stmt)
-      except IntegrityError as e:
-        await session.rollback()
-        raise ValueError(f"Job Posting Skill delete by URL failed: {e}") from e
-
-  async def delete_all(self) -> None:
-    async with postgresql_manager.get_async_session() as session:
-      try:
-        stmt = delete(JobPostingSkill)
+        stmt = delete(JobPostingSkill).where(JobPostingSkill.job_url == url)
         await session.execute(stmt)
       except IntegrityError as e:
         await session.rollback()
-        raise ValueError(f"Job Posting Skill delete all failed: {e}") from e
+        raise ValueError(f"Job Posting Skill delete by URL failed: {e}") from e
