@@ -10,7 +10,7 @@ function Navigation({ onLinkClicked } : { onLinkClicked: () => void}) {
   return (
     <nav className='navigation'>
       <Link onClick={onLinkClicked} to="/">{texts_navigation.main[currentLanguage]}</Link>
-      <Link onClick={onLinkClicked} to="/knowledge-sources">{texts_navigation.books[currentLanguage]}</Link>
+      {/* <Link onClick={onLinkClicked} to="/knowledge-sources">{texts_navigation.books[currentLanguage]}</Link> */}
       <Link onClick={onLinkClicked} to="/projects">{texts_navigation.projects[currentLanguage]}</Link>
       <Link onClick={onLinkClicked} to="/history">{texts_navigation.history[currentLanguage]}</Link>
     </nav>
