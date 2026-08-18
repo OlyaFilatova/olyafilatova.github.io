@@ -494,5 +494,93 @@
   {
     "uk": "Черги із встановленим параметром max-length, завжди відкидають повідомлення з початку черги, щоб забезпечити дотримання обмеження. Це означає, що повідомлення з вищим пріоритетом можуть бути відкинуті, замість повідомлень з нижчим пріоритетом.",
     "en": "Queues which have a max-length set drop messages as usual from the head of the queue to enforce the limit. This means that higher priority messages might be dropped to make way for lower priority ones"
+  },
+  {
+    "uk": "RabbitMQ потоки є збережуваною реплікованою структурою даних. Потоки створюють журнал із дописом повідомлень у кінець, які можна повторно зчитати допоки їх термін зберігання не сплине. Споживачі підписуються на потік і зчитують ті самі повідомлення, стільки разів, скільки потрібно та з будь-якої точки журналу.",
+    "en": "RabbitMQ Streams is a persistent replicated data structure. Streams model an append-only log of messages that can be repeatedly read until they expire. Consumers subscribe to a stream and read the same messages as many times as they want and from any point in the log."
+  },
+  {
+    "uk": "Потоки було розроблено для покриття 4 випадків використання обміну повідомленнями: Large fan-outs, Replay (Time-travelling), Throughput Performance, Large backlogs.",
+    "en": "Streams were developed to initially cover 4 messaging use-cases: Large fan-outs, Replay (Time-travelling), Throughput Performance, Large backlogs."
+  },
+  {
+    "uk": "Потоки - це кворумні системи, тому рекомендуються непарні розміри кластерів.",
+    "en": "Streams are quorum systems so uneven cluster sizes is strongly recommended."
+  },
+  {
+    "uk": "Single active consumer надає 2 переваги: повідомлення оброблятимуться за порядком, а також інший споживач зможе підхопити роботу, якщо активний зупиниться чи впаде.",
+    "en": "The single active consumer feature provides 2 benefits: Messages are processed in order, a consumer from the group will take over if the active one stops or crashes."
+  },
+  {
+    "uk": "Super streams - це спосіб масштабування, діленням великого потоку на менші потоки. Програми бачать super stream як один великий потік.",
+    "en": "Super streams are a way to scale out by partitioning a large stream into smaller streams. Applications see super stream as one “large” stream."
+  },
+  {
+    "uk": "Потік можна налаштувати так, щоб відкидати найстаріші дані у журналі на основі загального розміру даних і/або часу існування.",
+    "en": "Stream can be configured to discard the oldest data in the log based on total log data size and/or age."
+  },
+  {
+    "uk": "Publisher confirms відправляються лише після того, як дані було відтворено на копіях потоку.",
+    "en": "Publisher confirms are only issued once the data has been replicated to a quorum of stream replicas."
+  },
+  {
+    "uk": "Пропускна здатність потоку залежить від розміру повідомлень і розміру кластера. Потоки зазвичай мають нижчий рівень використання CPU та пам'яті, ніж quorum черги. Але потоки мають високе навантаження на дискову підсистему.",
+    "en": "Stream throughput is affected by message size and cluster size.Streams usually will have lower CPU and memory footprint than quorum queues. But streams are disk I/O heavy."
+  },
+  {
+    "uk": "Потік RabbitMQ може визначати і фільтрувати дублікати опублікованих повідомлень, використовуючи 2 клієнтські елементи: назві продюсера і ідентифікаторі оприлюднення повідомлення. Програма-клієнт вказує чи активувати дедуплікацію для окремого продюсера. Важливо: якщо клієнт надсилає повідомлення 5 і потім повідомлення 4 він отримає підтвердження для обох, але повідомлення 4 буде відфільтровано через механізм дедуплікації.",
+    "en": "RabbitMQ Stream can detect and filter out duplicated published messages, based on 2 client-side elements: the producer name and the message publishing ID. A client application chooses to activate deduplication for a given producer. Important: if client sends message 5 and then message 4 it will receive confirmation for both but message 4 will be filtered out due to the deduplication mechangism."
+  },
+  {
+    "uk": "Потіки зберігають свої повідомлення у форматі AMQP 1.0.",
+    "en": "Streams internally store their messages as AMQP 1.0 encoded data."
+  },
+  {
+    "uk": "Management UI може показувати кількість повідомлень, яка трохи перевищує кількість повідомлень у потоці.",
+    "en": "Management UI can show a message count that slightly exceeds the actual count in the stream."
+  },
+  {
+    "uk": "Швидкі видавці можуть перевантажити брокера, якщо той не зможе продовжувати записувати та реплікувати вхідні повідомлення. Тому кожне з’єднання має максимальну кількість непідтверджених повідомлень, які залишаються необробленими, перш ніж його буде заблоковано. Механізм потоку кредитів протоколу потоку дозволяє споживачам контролювати, як брокер розсилає повідомлення. Коли для підписки не залишається кредиту, брокер припиняє надсилання повідомлень.",
+    "en": "Fast publishers can overwhelm the broker if it cannot keep up writing and replicating inbound messages. So each connection has a maximum number of outstanding unconfirmed messages allowed before being blocked. The stream protocol credit flow mechanism allows consumers to control how the broker dispatches messages. When there is no credit left for a subscription, the broker stops sending messages."
+  },
+  {
+    "uk": "Клієнт може обрати з'єднання з відповідним вузлом для взаємодії з потоками: вузлом лідера для відправки, його копії для споживання.",
+    "en": "The client can choose to connect to the appropriate node to interact with the streams: the leader node to publish, a replica to consume."
+  },
+  {
+    "uk": "Тільки лідер обробляє операції запису, такі як додавання вхідних повідомлень до потоку. Будь-який учасник потоку – як лідер, так і будь-який послідовник – може бути використаний для операцій читання. Якщо програма публікує дані на вузлі без лідера, повідомлення автоматично будуть перенаправлені на вузол, на якому розміщено процес лідера. Однак це зробить маршрутизацію трафіку неоптимальною.",
+    "en": "Only the leader handles write operations, such as adding inbound messages to the stream. Any member of the stream – both the leader and any follower — can be used for read operations. If application publishes to a node without the leader, messages will automatically be routed to the node that hosts the leader process. However this will make traffic routing not optimal."
+  },
+  {
+    "uk": "RabbitMQ Stream підтримує наступну частину формату повідомлень AMQP 1.0: properties, application properties, application data, message annotations",
+    "en": "RabbitMQ Stream supports the following section of the AMQP 1.0 message format: properties, application properties, application data, message annotations."
+  },
+  {
+    "uk": "rstream (Python) підтримує такі реалізації стискання: без стискання, Gzip, Snappy, LZ4, Zstd.",
+    "en": "rstream (Python) supports following compression implementations: No compression, Gzip, Snappy, LZ4, Zstd."
+  },
+  {
+    "uk": "rabbitmq-stream-js-client (JS) підтримує такі реалізації стискання: Без стискання, Gzip.",
+    "en": "rabbitmq-stream-js-client (JS) supports following compression implementations: No compression, Gzip."
+  },
+  {
+    "uk": "RabbitMQ надає можливість фільтрації, що дозволяє споживачам отримувати лише ті повідомлення, які їх цікавлять. Повідомлення потоку можна фільтрувати на трьох різних етапах:  chunk matching (bloom filter), AMQP filter expressions, client-side filtering.",
+    "en": "RabbitMQ provides filtering features that allow consumers to receive only the messages they're interested in. Stream messages can be filtered at three distinct stages: chunk matching (bloom filter), AMQP filter expressions, client-side filtering."
+  },
+  {
+    "uk": "Фільтрація Блума працює наступним чином: видавці можуть за бажанням призначити значення фільтра (рядок) кожному повідомленню. Перед записом фрагмента повідомлень на диск RabbitMQ збирає всі ці значення фільтрів у структуру даних фільтра Блума та зберігає її в заголовку фрагмента. Під час зчитування заголовка фрагмента, що містить фільтр Блума, з диска RabbitMQ ефективно оцінює, чи відповідає якесь зі значень фільтра, наданих споживачем, будь-якому повідомленню в фрагменті. За замовчуванням, коли споживач встановлює фільтр Блума, RabbitMQ не доставляє повідомлення, у яких немає значення фільтра.",
+    "en": "Bloom filtering works as follows: Publishers can optionally assign a filter value (string) to each message. Before writing a chunk of messages to disk, RabbitMQ collects all these filter values into a Bloom filter data structure and stores it in the chunk's header. When reading a chunk header including the Bloom filter from disk, RabbitMQ evaluates efficiently whether any of the filter values provided by the consumer matches any message in the chunk. By default, when a consumer sets a Bloom filter, RabbitMQ does not deliver messages that lack a filter value."
+  },
+  {
+    "uk": "Збільшення розміру фільтра Блум може мати сенс, якщо ваше робоче навантаження потребує великої кількості унікальних значень фільтра (висока кардинальність), наприклад, значення фільтра відповідає ідентифікатору клієнта, а кожне повідомлення має власний ідентифікатор клієнта.",
+    "en": "Increasing the Bloom filter size can make sense if your workload requires a high number of unique filter values (high cardinality), for example the filter value represents a customer ID and each message has a different customer ID."
+  },
+  {
+    "uk": "Фільтри Bloom можна використовувати із AMQP 1.0, AMQP 0.9.1, потоками і STOMP.",
+    "en": "Bloom filters can be used with AMQP 1.0, AMQP 0.9.1, the RabbitMQ Stream protocol, and STOMP."
+  },
+  {
+    "uk": "Фільтр AMQP підтримує лише протокол AMQP 1.0. Фільтрування AMQP - це логічні вирази, які споживачі надають під час приєднання до потоку. Вузли RabbitMQ обчислюють ці вирази за допомогою метаданих повідомлення. Споживач може визначити або фільтр властивостей, або фільтр SQL, але не обидва.",
+    "en": "AMQP filter expressions support only AMQP 1.0 protocol. AMQP filter expressions are logical statements that consumers provide when attaching to a stream. RabbitMQ nodes evaluate these expressions against message metadata. A consumer can define either a Property Filter or SQL Filter, but not both."
   }
 ]
