@@ -124,3 +124,4 @@
 - `alembic upgrade head`
 - `docker exec -t parse_job_posting_db pg_dump -Fp -U postgres -d parse_job_posting > backup.sql`
 - `pnpm lint --fix`
+- `pnpm run assemble:thoughts`
