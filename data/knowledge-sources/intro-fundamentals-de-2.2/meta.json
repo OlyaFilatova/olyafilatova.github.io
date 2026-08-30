@@ -1,11 +1,11 @@
 {
-  "kind": "unknown",
+  "kind": "course",
   "status": "first-read",
   "title": {
     "uk": "Introduction to the Fundamentals of Data Engineering, Урок 2.2: Stages of the data engineering lifecycle",
     "en": "Introduction to the Fundamentals of Data Engineering, Lesson 2.2: Stages of the data engineering lifecycle"
   },
-  "access": "free",
+  "access": "paid",
   "categories": [],
   "link": "https://learning.oreilly.com/videos/introduction-to-the/0636920921646/0636920921646-video353811/"
 }

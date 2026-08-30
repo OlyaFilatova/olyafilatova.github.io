@@ -1,18 +1,18 @@
 [
   {
-    "uk": "",
+    "uk": "Управління даними – це розробка, виконання та контроль планів, політик, програм і практик, які забезпечують, контролюють, захищають та підвищують цінність даних та інформаційних активів протягом усього їхнього життєвого циклу.",
     "en": "Data management is the development, execution and supervision of plans, policies, programs, and practices that deliver, control, protect, and enhance the value of data and information assets throughout their lifecycle."
   },
   {
-    "uk": "",
+    "uk": "Важливі сфери управління даними: управління даними, моделювання та проектування даних, походження даних, зберігання та оптимізація, інтеграція даних та сумісність, управління життєвим циклом даних, етика та конфіденційність.",
     "en": "Important areas of data management: data governance, data modeling and design, data lineage, storage and optimization, data integration and interoperability, data lifecycle management, ethics and privacy."
   },
   {
-    "uk": "",
+    "uk": "Ключовими компонентами DataOps є автоматизація, спостережуваність та моніторинг, а також реагування на інциденти.",
     "en": "The key components of DataOps are automation, observability and monitoring, and incident response."
   },
   {
-    "uk": "",
+    "uk": "Ключові компоненти оркестрації: керування завданнями на основі часу або подій, ефективне керування завданнями, автоматизована обробка помилок, масштабованість, моніторинг та оповіщення, спрямований ациклічний граф, також відомий як DAG.",
     "en": "Key components of orchestration: time or event-based, efficient task management, automated error handling, scalability, monitoring and alerting, Directed Acyclic Graph, aka DAG."
   }
 ]

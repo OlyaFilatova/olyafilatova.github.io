@@ -1,46 +1,22 @@
 [
   {
-    "uk": "",
-    "en": "Storage abstractions: Datalake, Data lakehouse, Data platform, Cloud data warehouse."
-  },
-  {
-    "uk": "",
-    "en": "Storage systems: HDFS, RDBMS, Object storage, Cache/memory-based storage, Streaming storage."
-  },
-  {
-    "uk": "",
+    "uk": "Зберігання \"сирі інгредієнти\": HSS, SSD, оперативна пам'ять, мережа, серіалізація, стиснення, процесор.",
     "en": "Storage \"raw ingredients\": HSS, SSD, RAM, Networking, Serialization, Compression, CPU."
   },
   {
-    "uk": "",
-    "en": "Serialization is about converting data from one form to another."
+    "uk": "Системи зберігання даних: HDFS, RDBMS, об'єктне сховище, кеш-сховище/сховище на основі пам'яті, потокове сховище.",
+    "en": "Storage systems: HDFS, RDBMS, Object storage, Cache/memory-based storage, Streaming storage."
   },
   {
-    "uk": "",
+    "uk": "Абстракції сховища: Datalake, Data Lakehouse, Платформа даних, Хмарне сховище даних.",
+    "en": "Storage abstractions: Datalake, Data lakehouse, Data platform, Cloud data warehouse."
+  },
+  {
+    "uk": "Сховище об'єктів керує своїми даними як об'єктами. Об'єкт – це окрема одиниця даних, яка зберігається з власним унікальним ідентифікатором. Об'єкти можуть мати компонент даних, який містить фактичний вміст об'єкта. Це може бути будь-який тип даних. Об'єкти мають свої власні унікальні ідентифікатори. Метадані надають додаткову інформацію про об'єкт.",
     "en": "Object storage manages its data as objects. An object is a discrete unit of data that is stored with its own unique identifier. Objects may have a data component that holds the actual content of the object. This can be any type of data. Objects have thier own unique identifiers. Metadata provides additional information about the object."
   },
   {
-    "uk": "",
-    "en": "Separation of storage and compute."
-  },
-  {
-    "uk": "",
-    "en": "Hot, warm, cold data."
-  },
-  {
-    "uk": "",
-    "en": "non-volatile = read-only"
-  },
-  {
-    "uk": "",
-    "en": "In data lake you're just storing a bunch of different data types together."
-  },
-  {
-    "uk": "",
+    "uk": "Поєднання понять data warehouse та data lake утворює data lake house.",
     "en": "Combining the notion of a data warehouse and data lake is a data lake house."
-  },
-  {
-    "uk": "",
-    "en": "data management: use data catalogues, data versioning."
   }
 ]

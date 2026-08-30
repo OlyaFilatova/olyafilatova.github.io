@@ -1,22 +1,14 @@
 [
   {
-    "uk": "",
-    "en": "Data ingestion this stage involves capturing an importing data from various sources."
+    "uk": "Отримання даних передбачає захоплення та імпортування даних з різних джерел.",
+    "en": "Data ingestion involves capturing an importing data from various sources."
   },
   {
-    "uk": "",
-    "en": "Data engineers are responsible for Designing building and maintaining data infrastructure. This includes creating and maintaining data pipelines databases and processing systems that enable data to be collected stored transformed and served."
+    "uk": "Інженери обробки даних відповідають за проектування, створення та підтримку інфраструктури даних. Це включає створення та підтримку пайплайнів даних, баз даних та систем обробки, які дозволяють збирати, зберігати, перетворювати та надавати дані. Інженери даних забезпечують надійність даних та їх готовність до використання для бізнес-аналізу або машинного навчання.",
+    "en": "Data engineers are responsible for designing, building and maintaining data infrastructure. This includes creating and maintaining data pipelines, databases and processing systems that enable data to be collected, stored, transformed and served. Data engineers ensure that data is availableб reliable and ready to use for business analysis or machine learningю"
   },
   {
-    "uk": "",
-    "en": "Data engineers ensure that data is available reliable and ready to use for business analysis or machine learning."
-  },
-  {
-    "uk": "",
-    "en": "Tasks might include: designing and constructing data pipelines to gather information from various sources; creating and overseeing data warehouses and data Lakes; cleaning modeling and transforming data to ensure consistency and usability; producing data sets for data analysis and data science and writing and managing data orchestration workflows."
-  },
-  {
-    "uk": "",
-    "en": "Data engineering lifecycle management: data creation in source systems, ingestion, storage, transformation, serving."
+    "uk": "Завдання можуть включати: проектування та побудову пайплайнів даних для збору інформації з різних джерел; створення та контроль сховищ даних і озер даних; очищення, моделювання та перетворення даних для забезпечення узгодженості та зручності використання; створення наборів даних для аналізу даних та науки про дані, а також написання та управління процесами оркестрації даних.",
+    "en": "Tasks might include: designing and constructing data pipelines to gather information from various sources; creating and overseeing data warehouses and data Lakes; cleaning, modeling and transforming data to ensure consistency and usability; producing data sets for data analysis and data science and writing and managing data orchestration workflows."
   }
 ]

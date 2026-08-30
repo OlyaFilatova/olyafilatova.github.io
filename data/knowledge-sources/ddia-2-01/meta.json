@@ -1,11 +1,11 @@
 {
-  "kind": "unknown",
+  "kind": "book",
   "status": "first-read",
   "title": {
     "uk": "DDIA 2, chapter 1",
     "en": "DDIA 2, chapter 1"
   },
-  "access": "free",
+  "access": "paid",
   "categories": [],
-  "link": "https://learning.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/ch01.html#id17"
+  "link": "https://learning.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/ch01.html"
 }

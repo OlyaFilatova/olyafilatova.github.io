@@ -1,38 +1,22 @@
 [
   {
-    "uk": "",
-    "en": "data architecture is identifying the data needs of the enterprise (regardless of structure) and designing and maintaining the master blueprints to meet those needs. Using master blueprints to guide data integration, control data assets, and align data investments with business strategy."
+    "uk": "Архітектура даних – це визначення потреб підприємства в даних (незалежно від структури) та проектування й підтримка генеральних креслень для задоволення цих потреб. Використання генеральних креслень для керівництва інтеграцією даних, контролю активів даних та узгодження інвестицій у дані з бізнес-стратегією.",
+    "en": "Data architecture is identifying the data needs of the enterprise (regardless of structure) and designing and maintaining the master blueprints to meet those needs. Using master blueprints to guide data integration, control data assets, and align data investments with business strategy."
   },
   {
-    "uk": "",
+    "uk": "Архітектура даних — це опис структури та взаємодії основних типів і джерел даних підприємства, логічних активів даних, фізичних активів даних та ресурсів управління даними.",
     "en": "Data architecture is a description of the structure and interaction of the enterprise's major types and sources of data, logical data assets, physical data assets, and data management resources."
   },
   {
-    "uk": "",
+    "uk": "Архітектура даних — це проектування систем для підтримки потреб підприємства в даних, що постійно змінюються, що досягається за допомогою гнучких та зворотних рішень, прийнятих шляхом ретельної оцінки компромісів.",
     "en": "Data architecture is the design of systems to support the evolving data needs of an enterprise, achieved by flexible and reversible decisions reach through a careful evaluation of trade-offs."
   },
   {
-    "uk": "",
-    "en": "Good architecture is a living breathing thing. It's never finished."
+    "uk": "Основні концепції архітектури: домени та сервіси, розподілені системи, масштабованість, проектування з урахуванням відмов, тісний та вільний зв'язок, архітектура «зеленого» та «коричневого» середовища.",
+    "en": "Major architecture concepts: domains and service, distributed systems, scalability, designing for failure, tight vs loose coupling, greenfield vs brownfield architecture."
   },
   {
-    "uk": "",
-    "en": "Major architecture concepts: domains and service, distributed systems, scalability, designing for failure, tight vs loos coupling, greenfield vs brownfield architecture."
-  },
-  {
-    "uk": "",
+    "uk": "Домен: сфера знань, впливу або діяльності. Предметна галузь, до якої користувач застосовує програму, є доменом програмного забезпечення.",
     "en": "Domain: a sphere of knowledge, influence, or activity. The subject area to which the user applies a program is the domain of the software."
-  },
-  {
-    "uk": "",
-    "en": "A service is a set of functionality whose goal is to accomplish a task."
-  },
-  {
-    "uk": "",
-    "en": "A green field architecture is a system that is being built from scratch."
-  },
-  {
-    "uk": "",
-    "en": "A brownfield architecture is an existing system that is being updated or modified."
   }
 ]
