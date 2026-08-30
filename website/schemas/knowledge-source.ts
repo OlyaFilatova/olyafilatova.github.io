@@ -9,7 +9,7 @@ const Status = zod.enum(['planned', 'in-progress-first-read', 'first-read', 'in-
 const Access = zod.enum(['free', 'paid']);
 
 export const KnowledgeSourceMeta = zod.object({
-  "kind": zod.enum(["book", "documentation", "paper", "web-page", "specification"]),
+  "kind": zod.enum(["book", "documentation", "paper", "web-page", "specification", "course"]),
   "status": Status,
   "title": localizedString,
   "access": Access,
