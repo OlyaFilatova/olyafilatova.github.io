@@ -1,0 +1,26 @@
+[
+  {
+    "uk": "",
+    "en": "nonfunctional requirements: for example, the app should be fast, reliable, secure, legally compliant, and easy to maintain"
+  },
+  {
+    "uk": "",
+    "en": "a system is said to be scalable if its maximum throughput can be significantly increased by adding computing resources."
+  },
+  {
+    "uk": "",
+    "en": "The response time is what the client sees; it includes all delays incurred anywhere in the system."
+  },
+  {
+    "uk": "",
+    "en": "Latency is a catchall term for time during which a request is not being actively processed—that is, during which it is latent."
+  },
+  {
+    "uk": "",
+    "en": "We call a system fault-tolerant if it continues providing the required service to users in spite of certain faults occurring."
+  },
+  {
+    "uk": "",
+    "en": "Chaos engineering is a discipline that aims to improve confidence in fault-tolerance mechanisms through experiments such as deliberately injecting faults"
+  }
+]

@@ -1,0 +1,106 @@
+[
+  {
+    "uk": "",
+    "en": "Query allows you to retrieve an act on data."
+  },
+  {
+    "uk": "",
+    "en": "Query is parsed and converted to bytecode and then it's sent to the query planner where it's optimized query is now executed and results are returned."
+  },
+  {
+    "uk": "",
+    "en": "The explain plan can be used to understand how the database will execute a statement and to identify potential performance."
+  },
+  {
+    "uk": "",
+    "en": "a good data model captures how communication and work can actually flow is within your organization in contrast a poor data model or non-existent one results in haphazard confusing and incoherent data."
+  },
+  {
+    "uk": "",
+    "en": "Data modeling stages: conceptual, logical, physical."
+  },
+  {
+    "uk": "",
+    "en": "conceptual data modeling: the high level understanding of how data and Concepts relate to each other at this stage."
+  },
+  {
+    "uk": "",
+    "en": "The Logical data model defines the structure of the data including tables columns keys and relationships between the tables. However, The Logical data model is still independent of any specific database or technology."
+  },
+  {
+    "uk": "",
+    "en": "physical data modeling: logical model is refined to fit the particular database or storage technology that you'll be storing and retrieving the data from."
+  },
+  {
+    "uk": "",
+    "en": "The grain is a level of detail that is captured in each row of the table. It is a combination of columns that uniquely identify each row. In other words, the grain of a table defines what a single row of data represents."
+  },
+  {
+    "uk": "",
+    "en": "1NF the requires that each column in a table contains only one value for each row."
+  },
+  {
+    "uk": "",
+    "en": "2NF all non-key columns in a table be dependent on the primary key."
+  },
+  {
+    "uk": "",
+    "en": "3NF requires that all non-key columns in a table are dependent on the primary key and not any other key."
+  },
+  {
+    "uk": "",
+    "en": "Boyce-Codd NF requires all non-key columns in the table be fully dependent on the primary key."
+  },
+  {
+    "uk": "",
+    "en": "Analytical data modeling approaches: dimensional, data vault, OBT(One Big Table), JBOT (Just a Bunch Of Tables), \"Query-driven modeling\"."
+  },
+  {
+    "uk": "",
+    "en": "Dimensional data modeling organizes data into two types of tables: facts and dimensions. Fact tables store quantitative information for analysis, like sales figures. Dimension tables store descriptive data such as product details or store locations."
+  },
+  {
+    "uk": "",
+    "en": "Data Vault is a detail-oriented historical tracking and auditable approach to data modeling. It separates out business keys, descriptive attributes, relationships and it makes the data model resilient to changes."
+  },
+  {
+    "uk": "",
+    "en": "One big table as the name implies sores all data in a single monolithic table."
+  },
+  {
+    "uk": "",
+    "en": "JBOT: storing data in a bunch of unrelated tables."
+  },
+  {
+    "uk": "",
+    "en": "Query driven data modeling: designs a data model based upon the queries that will be performed."
+  },
+  {
+    "uk": "",
+    "en": "The dimensional model is also sometimes called a star schema."
+  },
+  {
+    "uk": "",
+    "en": "a view and this is a virtual table that's created from query"
+  },
+  {
+    "uk": "",
+    "en": "A materialized view is actually a physical table that's created from a query."
+  },
+  {
+    "uk": "",
+    "en": "ETL stands for extract, transform and load and ELT stands for extract, load and transform."
+  },
+  {
+    "uk": "",
+    "en": "Security: exercise the principle of least privilege."
+  },
+  {
+    "uk": "",
+    "en": "data management: focus on data privacy masking data obfuscation."
+  },
+  {
+    "uk": "",
+    "en": "data lineage is the practice of tracing back the elements used in a data."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "uk": "",
+    "en": "Data management is the development, execution and supervision of plans, policies, programs, and practices that deliver, control, protect, and enhance the value of data and information assets throughout their lifecycle."
+  },
+  {
+    "uk": "",
+    "en": "Important areas of data management: data governance, data modeling and design, data lineage, storage and optimization, data integration and interoperability, data lifecycle management, ethics and privacy."
+  },
+  {
+    "uk": "",
+    "en": "The key components of DataOps are automation, observability and monitoring, and incident response."
+  },
+  {
+    "uk": "",
+    "en": "Key components of orchestration: time or event-based, efficient task management, automated error handling, scalability, monitoring and alerting, Directed Acyclic Graph, aka DAG."
+  }
+]

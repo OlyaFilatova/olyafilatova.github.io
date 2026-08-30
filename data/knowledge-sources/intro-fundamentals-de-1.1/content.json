@@ -1,0 +1,18 @@
+[
+  {
+    "uk": "",
+    "en": "data engineering is a development implementation and maintenance of systems and processes that take in raw data and produce high quality, consistent information that supports Downstream use cases such as analysis and machine learning data engineering is the intersection of security, data management, DataOps, data architecture, orchestration and software engineering."
+  },
+  {
+    "uk": "",
+    "en": "At its core data engineers get data from source systems, they do something useful to it and serve it for downstream uses such as analytics and machine learning."
+  },
+  {
+    "uk": "",
+    "en": "You'll adjust data, you'll transform it. You'll serve it and all along the way you're going to store it in various different ways."
+  },
+  {
+    "uk": "",
+    "en": "There are undercurrents across this life cycle: security, data management, DataOps, data architecture, orchestration, software engineering."
+  }
+]

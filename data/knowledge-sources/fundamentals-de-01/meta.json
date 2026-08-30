@@ -1,0 +1,11 @@
+{
+  "kind": "book",
+  "status": "first-read",
+  "title": {
+    "uk": "Fundamentals of Data Engineering, Розділ 1",
+    "en": "Fundamentals of Data Engineering, Chapter 1"
+  },
+  "access": "paid",
+  "categories": [],
+  "link": "https://learning.oreilly.com/library/view/fundamentals-of-data/9781098108298/ch01.html#internal_facing_versus_external_facing"
+}

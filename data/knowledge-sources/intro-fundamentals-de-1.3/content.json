@@ -1,0 +1,22 @@
+[
+  {
+    "uk": "",
+    "en": "Data ingestion this stage involves capturing an importing data from various sources."
+  },
+  {
+    "uk": "",
+    "en": "Data engineers are responsible for Designing building and maintaining data infrastructure. This includes creating and maintaining data pipelines databases and processing systems that enable data to be collected stored transformed and served."
+  },
+  {
+    "uk": "",
+    "en": "Data engineers ensure that data is available reliable and ready to use for business analysis or machine learning."
+  },
+  {
+    "uk": "",
+    "en": "Tasks might include: designing and constructing data pipelines to gather information from various sources; creating and overseeing data warehouses and data Lakes; cleaning modeling and transforming data to ensure consistency and usability; producing data sets for data analysis and data science and writing and managing data orchestration workflows."
+  },
+  {
+    "uk": "",
+    "en": "Data engineering lifecycle management: data creation in source systems, ingestion, storage, transformation, serving."
+  }
+]

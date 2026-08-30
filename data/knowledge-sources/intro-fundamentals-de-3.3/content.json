@@ -1,0 +1,42 @@
+[
+  {
+    "uk": "",
+    "en": "Data ingestion is simply the process of moving data from one place to another."
+  },
+  {
+    "uk": "",
+    "en": "bounded vs unbounded; batch vs streaming; sync vs async; push vs pull vs poll; schema changes."
+  },
+  {
+    "uk": "",
+    "en": "bounded data - divide data into chunks (segmenting it)."
+  },
+  {
+    "uk": "",
+    "en": "batch - fixed intervals (data size or time based)"
+  },
+  {
+    "uk": "",
+    "en": "streaming - continiously flowing data."
+  },
+  {
+    "uk": "",
+    "en": "Data management: make sure you're paying attention to Upstream schema changes and have a plan to handle those accordingly."
+  },
+  {
+    "uk": "",
+    "en": "obfuscate and mask PII."
+  },
+  {
+    "uk": "",
+    "en": "setup observability and monitoring for data pipelines."
+  },
+  {
+    "uk": "",
+    "en": "setup data quality checks."
+  },
+  {
+    "uk": "",
+    "en": "Data architecture - build for resiliency and failure."
+  }
+]

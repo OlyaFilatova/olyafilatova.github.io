@@ -1,0 +1,22 @@
+[
+  {
+    "uk": "",
+    "en": "The data lifecycle components: creation, capture, preparation, usage, archival, deletion."
+  },
+  {
+    "uk": "",
+    "en": "The data engineering lifecycle. The first area is where data is generated. These can be various source system such as databases files and so forth. Next data is ingested, transformed and served for analytics, ML, reverse ETL, etc.(along the way it's stored)"
+  },
+  {
+    "uk": "",
+    "en": "Data ingestion is a process of extracting data from various sources systems moving it and preparing it for further use or storage. This extraction can take several forms depending on the nature of the source and the intended destination."
+  },
+  {
+    "uk": "",
+    "en": "Data storage involves saving data in an organized and easy to understand manner that allows for easy retrieval, but not just any storage will do you might be storing small amounts or large amounts of data, the type of storage can vary based on the needs of the data and the organization. It could be a traditional relational database file system blob storage nosql database data warehouse data lake or data lake house, maybe a vector database or a countless other ways of storing data. The goal of data storage is to ensure that data is accessible secure and ready for the next stages"
+  },
+  {
+    "uk": "",
+    "en": "Data transformation is about shaping and refining data during the data transformation process; data mutates and evolves into something different."
+  }
+]

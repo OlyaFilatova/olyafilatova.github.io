@@ -1,0 +1,102 @@
+[
+  {
+    "uk": "",
+    "en": "data engineering lifecycle: data generation, storage, ingestion, transformation, and serving."
+  },
+  {
+    "uk": "",
+    "en": "Data engineering is the development, implementation, and maintenance of systems and processes that take in raw data and produce high-quality, consistent information that supports downstream use cases, such as analysis and machine learning. Data engineering is the intersection of security, data management, DataOps, data architecture, orchestration, and software engineering. A data engineer manages the data engineering lifecycle, beginning with getting data from source systems and ending with serving data for use cases, such as analysis or machine learning."
+  },
+  {
+    "uk": "",
+    "en": "The stages of the data engineering lifecycle are as follows: Generation, Storage, Ingestion, Transformation, Serving."
+  },
+  {
+    "uk": "",
+    "en": "undercurrents—critical ideas across the entire lifecycle. These include security, data management, DataOps, data architecture, orchestration, and software engineering."
+  },
+  {
+    "uk": "",
+    "en": "big data as “extremely large data sets that may be analyzed computationally to reveal patterns, trends, and associations, especially relating to human behavior and interactions.”"
+  },
+  {
+    "uk": "",
+    "en": "data engineer juggles a lot of complex moving parts and must constantly optimize along the axes of cost, agility, scalability, simplicity, reuse, and interoperability"
+  },
+  {
+    "uk": "",
+    "en": "Data maturity is the progression toward higher data utilization, capabilities, and integration across the organization, but data maturity does not simply depend on the age or revenue of a company."
+  },
+  {
+    "uk": "",
+    "en": "Stage 1. Starting with data: Get buy-in from key stakeholders, Define the right data architecture(This means determining business goals and the competitive advantage you’re aiming to achieve with your data initiative.), Identify and audit data that will support key initiatives and operate within the data architecture you designed, Build a solid data foundation for future data analysts and data scientists to generate reports and models that provide competitive value."
+  },
+  {
+    "uk": "",
+    "en": "Getting quick wins will establish the importance of data within the organization."
+  },
+  {
+    "uk": "",
+    "en": "Get out and talk to people, and avoid working in silos."
+  },
+  {
+    "uk": "",
+    "en": "Use off-the-shelf, turnkey solutions wherever possible."
+  },
+  {
+    "uk": "",
+    "en": "Stage 2. Scaling with data: Establish formal data practices, Create scalable and robust data architectures, Adopt DevOps and DataOps practices, Build systems that support ML, Continue to avoid undifferentiated heavy lifting and customize only when a competitive advantage results"
+  },
+  {
+    "uk": "",
+    "en": "Teach the organization how to consume and leverage data."
+  },
+  {
+    "uk": "",
+    "en": "Focus on solutions that are simple to deploy and manage to expand your team’s throughput."
+  },
+  {
+    "uk": "",
+    "en": "Any technology decisions should be driven by the value they’ll deliver to your customers."
+  },
+  {
+    "uk": "",
+    "en": "Stage 3. Leading with data: Create automation for the seamless introduction and usage of new data, Focus on building custom tools and systems that leverage data as a competitive advantage, Focus on the “enterprisey” aspects of data, such as data management (including data governance and quality) and DataOps, Deploy tools that expose and disseminate data throughout the organization, including data catalogs, data lineage tools, and metadata management systems, Collaborate efficiently with software engineers, ML engineers, analysts, and others, Create a community and environment where people can collaborate and speak openly, no matter their role or position"
+  },
+  {
+    "uk": "",
+    "en": "constantly focus on maintenance and improvement"
+  },
+  {
+    "uk": "",
+    "en": "Utilize custom-built technology only where it provides a competitive advantage."
+  },
+  {
+    "uk": "",
+    "en": "dbt (Data Build Tool)."
+  },
+  {
+    "uk": "",
+    "en": "Type A data scientists—where A stands for analysis—focus on understanding and deriving insight from data."
+  },
+  {
+    "uk": "",
+    "en": "The type B data scientist builds systems that make data science work in production."
+  },
+  {
+    "uk": "",
+    "en": "Type A data engineers. A stands for abstraction. In this case, the data engineer avoids undifferentiated heavy lifting, keeping data architecture as abstract and straightforward as possible and not reinventing the wheel."
+  },
+  {
+    "uk": "",
+    "en": "Type B data engineers build data tools and systems that scale and leverage a company’s core competency and competitive advantage."
+  },
+  {
+    "uk": "",
+    "en": "An external-facing data engineer typically aligns with the users of external-facing applications, such as social media apps, Internet of Things (IoT) devices, and ecommerce platforms."
+  },
+  {
+    "uk": "",
+    "en": "An internal-facing data engineer typically focuses on activities crucial to the needs of the business and internal stakeholders"
+  }
+]

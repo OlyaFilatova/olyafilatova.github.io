@@ -1,0 +1,46 @@
+[
+  {
+    "uk": "",
+    "en": "Storage abstractions: Datalake, Data lakehouse, Data platform, Cloud data warehouse."
+  },
+  {
+    "uk": "",
+    "en": "Storage systems: HDFS, RDBMS, Object storage, Cache/memory-based storage, Streaming storage."
+  },
+  {
+    "uk": "",
+    "en": "Storage \"raw ingredients\": HSS, SSD, RAM, Networking, Serialization, Compression, CPU."
+  },
+  {
+    "uk": "",
+    "en": "Serialization is about converting data from one form to another."
+  },
+  {
+    "uk": "",
+    "en": "Object storage manages its data as objects. An object is a discrete unit of data that is stored with its own unique identifier. Objects may have a data component that holds the actual content of the object. This can be any type of data. Objects have thier own unique identifiers. Metadata provides additional information about the object."
+  },
+  {
+    "uk": "",
+    "en": "Separation of storage and compute."
+  },
+  {
+    "uk": "",
+    "en": "Hot, warm, cold data."
+  },
+  {
+    "uk": "",
+    "en": "non-volatile = read-only"
+  },
+  {
+    "uk": "",
+    "en": "In data lake you're just storing a bunch of different data types together."
+  },
+  {
+    "uk": "",
+    "en": "Combining the notion of a data warehouse and data lake is a data lake house."
+  },
+  {
+    "uk": "",
+    "en": "data management: use data catalogues, data versioning."
+  }
+]
