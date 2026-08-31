@@ -4,7 +4,7 @@ import { GlobalState } from "../types";
 
 import './AppHeader.css';
 
-export default function AppHeader({ state: { setCurrentPage, totalItems, reload } }: {
+export default function AppHeader({ state: { reloadNotes } }: {
   state: GlobalState
 }) {
   const [clearAllConfirmationActive, setClearAllConfirmationActive] = useState(false);
@@ -30,39 +30,7 @@ export default function AppHeader({ state: { setCurrentPage, totalItems, reload 
 
     setClearAllConfirmation(false);
     await noteRepository.clearNotes();
-    setCurrentPage(1);
-    reload();
-  }
-
-  async function exportJson(): Promise<void> {
-    const { currentIssue, mappingsByUrl } = await noteRepository.getStorage();
-    if (!currentIssue || !currentIssue.links.length) {
-      downloadJson({
-        mappingsByUrl
-      }, 'notes.json');
-    } else {
-      const currentIssueLinks = currentIssue.links.map(link => link.url);
-
-      const storedUrls = Object.keys(mappingsByUrl);
-
-      const currentIssueUrls = currentIssueLinks.filter(link => storedUrls.includes(link));
-
-      const otherUrls = storedUrls.filter(link => !currentIssueLinks.includes(link));
-
-      const mapping = {
-        ...((currentIssueUrls.length) ? {
-          [currentIssue.url]: {
-            url: currentIssue.url,
-            notes: currentIssueUrls.toReversed().map(url => mappingsByUrl[url].notes).flat()
-          }
-        } : {}),
-        ...(otherUrls.length ? Object.fromEntries(Object.entries(mappingsByUrl).filter(entry => otherUrls.includes(entry[0]))) : {})
-      }
-
-      downloadJson({
-        mappingsByUrl: mapping
-      }, 'notes.json')
-    }
+    reloadNotes();
   }
 
   function downloadJson(value: unknown, filename: string): void {
@@ -75,15 +43,17 @@ export default function AppHeader({ state: { setCurrentPage, totalItems, reload 
     URL.revokeObjectURL(url);
   }
 
+  async function exportJson(): Promise<void> {
+    const pages = await noteRepository.export();
+    downloadJson({
+      mappingsByUrl: pages
+    }, 'notes.json')
+  }
+
   return (
     <header className="app__header">
       <div>
         <h1>Notes</h1>
-        <p id="summary">{
-          totalItems ?
-          `${totalItems} other pages` :
-          "No other pages saved yet"
-        }</p>
       </div>
       <div className="header-actions">
         <button

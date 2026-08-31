@@ -12,13 +12,13 @@ The main goal of this project is to store my notes and thoughts without addition
 
 **Front-end:** React.js, Manifest V3, zod.
 
-**Back-end:** Nest.js, FastAPI, Pydantic, requests, SQLAlchemy, python-dotenv, httpx.
+**Back-end:** Nest.js, TypeORM, FastAPI, Pydantic, requests, SQLAlchemy, python-dotenv, httpx.
 
 **Infrastructure:** Docker, docker-compose, alembic, GitHub Pages, GitHub Actions, monorepo (pnpm, uv).
 
 **Models:** Helsinki-NLP/opus-mt-en-uk, Helsinki-NLP/opus-mt-uk-en.
 
-**Data storage**: localStorage, IndexedDB, PostgreSQL.
+**Data storage**: localStorage, PostgreSQL.
 
 <details>
   <summary>Subprojects...</summary>
@@ -65,6 +65,58 @@ Expected format of the issue body:
 - Checklist of links.
 - Only one link per text line.
 - Link must be at the end of the text line.
+
+#### Note Issues
+
+CRUD service for issues
+
+**Deployed:** locally using Docker.
+
+**Language:** TypeScript.
+
+**Frameworks and libraries:** Nest.js.
+
+**Requirements:**
+- Parse Github Issue service running on Docker
+- postgres service running on Docker
+
+**Functionality:**
+- add issue
+- list issues
+- reload issue
+- delete issue
+
+#### Notes
+
+CRUD service for notes.
+
+**Deployed:** locally using Docker.
+
+**Language:** TypeScript.
+
+**Frameworks and libraries:** Nest.js.
+
+**Requirements:**
+- postgres service running on Docker
+
+**Functionality:**
+- add note
+- edit note
+- edit note translation
+- list notes aggregated by urls
+- delete note
+
+#### Notes Gateway
+
+Redirects requests to 2 services (Notes, Note Issues) to unify API for the client under one authority.
+
+**Deployed:** locally using Docker.
+
+**Language:** TypeScript
+
+**Frameworks and libraries:** Nest.js
+
+**Requirements:** Services Notes, Note Issues running on Docker.
 
 #### Markdown to HTML
 
@@ -198,13 +250,13 @@ Extension in this repo is extended to use services, namely Parse GitHub Issue se
 
 **Frameworks and libraries:** React.js
 
-**Storage:** IndexedDB, localStorage.
+**Storage:** Sends data to API, localStorage.
 
-**Requirements:** Parse Github Issue service up and running locally on port 8000.
+**Requirements:** Locally running services: postgres, Parse GitHub Issue, Notes, Note Issues, Notes Gateway.
 
 **Functionality:** When extension Side Panel is opened the form of the current page is shown. Notes can be saved using the form or directly from the page: 1. select text, 2. click **Save Note** that appears near the selection. When textarea value is changed its value is stored in browser cache mapped to the current page URL.
 
-Notes from other pages saved previously are listed below the block of the current page. Notes can be deleted. The list can be searched through. The list has pagination by 10/25/50 pages per page. Notes are stored using IndexedDB.
+Notes from other pages saved previously are listed below the block of the current page. Notes can be deleted.
 
 Button **Set current GitHub issue** opens a form using which it is possible to parse list of links from GitHub issue. These links will be listed under the form split by status: 
 
@@ -214,7 +266,7 @@ Button **Set current GitHub issue** opens a form using which it is possible to p
 
 Button export JSON exports pages and their notes in JSON format. Pages are exported under their link, but if a current GitHub issue is configured all pages that are listed in the issue will be grouped and exported under the issue link instead.
 
-Clear all button after confirmation clears all stored notes from the browser DB.
+Clear all button after confirmation clears all stored notes.
 
 #### Highlight skills
 

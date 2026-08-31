@@ -15,8 +15,8 @@ export function Meta({ aggregate }: {
 
   return (<div className="meta">
     <MetaLine label="Notes" value={aggregate.notes.length.toString()} />
-    {aggregate.notes.length ?
+    {/* {aggregate.notes.length ?
       <MetaLine label="Last updated at" value={aggregate.lastUpdatedAt.toLocaleString()} /> :
-      undefined}
+      undefined} */}
   </div>)
 }

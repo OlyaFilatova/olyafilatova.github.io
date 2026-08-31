@@ -10,13 +10,13 @@ export default function Note({ state, note }: {
 }) {
 
   async function deleteNote() {
-    await noteRepository.deleteNote(note);
-    state.reload();
+    await noteRepository.deleteNote(note.id);
+    state.reloadNotes();
   }
 
   return (
     <li>
-      <div>{note.text}</div>
+      <div>{note.note_en}</div>
       <div className="controls">
         <button
           className="delete-button"

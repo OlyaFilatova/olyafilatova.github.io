@@ -1,11 +1,48 @@
 version: "3.9"
 
 services:
+  page_notes_postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: ${DB_NOTES_NAME}
+      POSTGRES_USER: ${DB_NOTES_USER}
+      POSTGRES_PASSWORD: ${DB_NOTES_PASSWORD}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --lc-collate=C --lc-ctype=C"
+    ports:
+      - "5434:5432"
+    volumes:
+      - page_notes_postgres_data:/var/lib/postgresql
+      - ./data:/docker-entrypoint-initdb.d
+      - ./sql:/sql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - default
+
+  page_notes_pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "8081:80"
+    volumes:
+      - page_notes_pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - page_notes_postgres
+    restart: unless-stopped
+    networks:
+      - default
+
   parse_github_issue:
     build: 
       context: .
       dockerfile: services/github_issue/Dockerfile
-    container_name: parse-github-issue
     env_file:
       - services/github_issue/.env
     ports:
@@ -34,10 +71,66 @@ services:
     build: 
       context: .
       dockerfile: services/md_to_html/Dockerfile
-    container_name: markdown-to-html
     ports:
       - "3000:3000"
     restart: unless-stopped
 
+  note_issues:
+    build: 
+      context: .
+      dockerfile: services/note_issues/Dockerfile
+    ports:
+      - "4001:4001"
+    restart: unless-stopped
+    networks:
+      - default
+    depends_on:
+      - page_notes_postgres
+    environment:
+      DB_HOST: page_notes_postgres
+      DB_PORT: 5432
+      DB_NAME: ${DB_NOTES_NAME}
+      DB_USER: ${DB_NOTES_USER}
+      DB_PASS: ${DB_NOTES_PASSWORD}
+      SERVICE_ISSUE_LINKS: 'http://parse_github_issue:8000'
+
+  notes:
+    build: 
+      context: .
+      dockerfile: services/notes/Dockerfile
+    ports:
+      - "4002:4002"
+    restart: unless-stopped
+    networks:
+      - default
+    depends_on:
+      - page_notes_postgres
+    environment:
+      DB_HOST: page_notes_postgres
+      DB_PORT: 5432
+      DB_NAME: ${DB_NOTES_NAME}
+      DB_USER: ${DB_NOTES_USER}
+      DB_PASS: ${DB_NOTES_PASSWORD}
+
+  notes_gateway:
+    build: 
+      context: .
+      dockerfile: services/_notes_gateway/Dockerfile
+    ports:
+      - "4000:4000"
+    restart: unless-stopped
+    depends_on:
+      - notes
+      - note_issues
+    environment:
+      ISSUES_SERVICE_URL: ${ISSUES_SERVICE_URL}
+      NOTES_SERVICE_URL: ${NOTES_SERVICE_URL}
+
 volumes:
   huggingface_cache:
+  page_notes_postgres_data:
+  page_notes_pgadmin_data:
+
+networks:
+  default:
+    name: page_notes

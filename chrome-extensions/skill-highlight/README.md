@@ -64,4 +64,3 @@ npm run test:all
 
 - Source files live in `extension/`.
 - Build output lives in `dist/` and is ignored by git.
-- Storage is backed by IndexedDB and accessed through a repository abstraction in `extension/shared/storage.ts`.

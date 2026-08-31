@@ -1,0 +1,11 @@
+{
+  "monorepo": true,
+  "projects": {
+    "notes-gateway": {
+      "type": "application",
+      "root": "services/_notes_gateway",
+      "entryFile": "main",
+      "sourceRoot": "services/_notes_gateway/src"
+    }
+  }
+}

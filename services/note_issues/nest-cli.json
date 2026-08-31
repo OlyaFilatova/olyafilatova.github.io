@@ -1,0 +1,11 @@
+{
+  "monorepo": true,
+  "projects": {
+    "note-issues": {
+      "type": "application",
+      "root": "services/note_issues",
+      "entryFile": "main",
+      "sourceRoot": "services/note_issues/src"
+    }
+  }
+}

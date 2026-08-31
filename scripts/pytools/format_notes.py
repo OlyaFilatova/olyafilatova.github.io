@@ -7,7 +7,7 @@ import requests
 
 
 class Note(TypedDict):
-  text: str
+  note_en: str
 
 
 class Mapping(TypedDict):
@@ -54,7 +54,7 @@ def read_file(file: Path) -> dict[str, Mapping]:
 
 def format_file(mappingsByUrl: dict[str, Mapping]) -> list[Page]:
   return [
-    {"url": value["url"], "notes": [note["text"] for note in value["notes"]]}
+    {"url": value["url"], "notes": [note["note_en"] for note in value["notes"]]}
     for value in mappingsByUrl.values()
   ]
 

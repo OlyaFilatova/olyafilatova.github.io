@@ -1,6 +1,7 @@
 packages:
   - "chrome-extensions/*"
   - "services/*"
+  - "packages/*"
   - "website"
   - "scripts"
 allowBuilds:

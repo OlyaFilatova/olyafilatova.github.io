@@ -16,15 +16,12 @@ export default function CurrentPage({ state: { currentPageUrl, newNote, setNewNo
       return;
     }
 
-    await noteRepository.createNote({
-      text,
-      url: currentPageUrl
-    });
+    await noteRepository.createNote(currentPageUrl, text);
 
     setNewNote('');
     localStorage.removeItem(currentPageUrl);
 
-    state.reload();
+    state.reloadNotes();
   }
 
   return (

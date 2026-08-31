@@ -12,13 +12,13 @@
 
 **Front-end:** React.js, Manifest V3, zod.
 
-**Back-end:** Nest.js, FastAPI, Pydantic, requests, SQLAlchemy, python-dotenv, httpx.
+**Back-end:** Nest.js, TypeORM, FastAPI, Pydantic, requests, SQLAlchemy, python-dotenv, httpx.
 
 **Інфраструктура:** Docker, docker-compose, alembic, GitHub Pages, GitHub Actions, монорепозиторій (pnpm, uv).
 
 **Моделі:** Helsinki-NLP/opus-mt-en-uk, Helsinki-NLP/opus-mt-uk-en.
 
-**Зберігання даних**: localStorage, IndexedDB, PostgreSQL.
+**Зберігання даних**: localStorage, PostgreSQL.
 
 <details>
   <summary>Підпроєкти...</summary>
@@ -66,6 +66,58 @@
 - список посилань у вигляді чекліста;
 - лише одне посилання в одному рядку;
 - посилання має бути наприкінці текстового рядка.
+
+#### Note Issues
+
+CRUD сервіс для issues
+
+**Розгорнуто:** локально за допомогою Docker.
+
+**Мова:** TypeScript.
+
+**Фреймворки та бібліотеки:** Nest.js.
+
+**Вимоги:**
+- Parse Github Issue сервіс запущений на docker
+- postgres сервіс запущений на docker
+
+**Функціональність:**
+- add issue
+- list issues
+- reload issue
+- delete issue
+
+#### Notes
+
+CRUD сервіс для notes.
+
+**Розгорнуто:** локально за допомогою Docker.
+
+**Мова:** TypeScript.
+
+**Фреймворки та бібліотеки:** Nest.js.
+
+**Вимоги:**
+- postgres сервіс запущений на docker
+
+**Функціональність:**
+- add note
+- edit note
+- edit note translation
+- list notes aggregated by urls
+- delete note
+
+#### Notes Gateway
+
+Перенаправляє запити до 2 сервісів (Notes, Note Issues), щоб об'єднати API для клієнта під одним authority.
+
+**Розгорнуто:** локально за допомогою Docker.
+
+**Мова:** TypeScript
+
+**Фреймворки та бібліотеки:** Nest.js
+
+**Вимоги:** Services Notes, Note Issues запущені на docker.
 
 #### Markdown to HTML
 

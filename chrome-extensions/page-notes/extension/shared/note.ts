@@ -1,9 +1,12 @@
 export interface Note {
   id: string;
-  text: string;
+  note_en: string;
+  note_uk?: string | null;
   url: string;
-  createdAt: Date;
-  updatedAt: Date;
+  uk_approved: boolean;
+  visible: boolean;
+  // createdAt: Date;
+  // updatedAt: Date;
 }
 
 export type ExtensionMessage =
@@ -24,18 +27,11 @@ export interface PageAggregate {
   lastUpdatedAt: Date;
 }
 
-interface Link {
-  status: 'DONE' | 'PLANNED';
-  url: string;
-}
+type LinksStatus = 'DONE' | 'PLANNED' | 'CANCELLED'
 
-export interface CurrentIssue {
-  url: string;
-  links: Link[];
-}
+export type Link = [LinksStatus, string]
 
-export interface NoteStorage {
-  notes: Note[];
-  mappingsByUrl: Record<string, PageAggregate>;
-  currentIssue: undefined | CurrentIssue;
+export interface Issue {
+  url: string;
+  links: Array<Link>;
 }

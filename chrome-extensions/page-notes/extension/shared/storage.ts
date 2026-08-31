@@ -1,33 +1,27 @@
 import type {
-  Note,
   PageAggregate,
-  NoteStorage,
-  CurrentIssue
+  Issue
 } from "./note";
 
-const DB_NAME = "page-notes";
-const DB_VERSION = 3;
-const NOTE_STORE = "pages";
-const ISSUE_STORE = "issue";
 const STORAGE_REQUEST_TYPE = "NOTE_STORAGE_REQUEST";
 const STORAGE_REQUEST_RETRY_COUNT = 2;
 const STORAGE_REQUEST_RETRY_DELAY_MS = 100;
 
-export interface CreateNoteInput {
-  text: string;
-  url: string;
-}
+const ISSUE_BASE = 'issue';
+const NOTE_BASE = 'note';
 
 export interface NoteRepository {
-  getAllNotes(): Promise<Note[]>;
+  export(): Promise<Record<string, PageAggregate>>;
   getAggregates(): Promise<Record<string, PageAggregate>>;
-  getStorage(): Promise<NoteStorage>;
-  createNote(input: CreateNoteInput): Promise<{ note: Note; created: boolean; reason?: string }>;
-  deleteNote(note: Note): Promise<void>;
+  createNote(url: string, note: string): Promise<string>;
+  editNote(id: string, note: string): Promise<void>;
+  deleteNote(id: string): Promise<void>;
   clearNotes(): Promise<void>;
-  storeCurrentIssue(issue: CurrentIssue): Promise<void>;
-  clearCurrentIssue(): Promise<void>;
-  getCurrentIssue(): Promise<undefined | CurrentIssue>
+
+  addIssue(url: string): Promise<void>;
+  refreshIssue(url: string): Promise<void>;
+  deleteIssue(url: string): Promise<void>;
+  getIssues(): Promise<Array<Issue>>
 }
 
 type StorageMethod = keyof NoteRepository;
@@ -38,161 +32,151 @@ type StorageRequest = {
 };
 type StorageResponse<T = unknown> = { ok: true; result: T } | { ok: false; error: string };
 
-export class ChromeNoteRepository implements NoteRepository {
-  private databasePromise: Promise<IDBDatabase> | null = null;
+export class APINoteRepository implements NoteRepository {
+  async export(): Promise<Record<string, PageAggregate>> {
+    const response = await fetch(`${API_URL}/api/${NOTE_BASE}/note`, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      }
+    });
 
-  async getAllNotes(): Promise<Note[]> {
-    const storage = await this.getStorage();
-    return [...storage.notes];
-  }
-
-  async getCurrentIssue(): Promise<CurrentIssue | undefined> {
-    const storage = await this.getStorage();
-    return storage.currentIssue;
+    return (await response.json())["pages"];
   }
 
   async getAggregates(): Promise<Record<string, PageAggregate>> {
-    const storage = await this.getStorage();
-    return {...storage.mappingsByUrl};
+    const response = await fetch(`${API_URL}/api/${NOTE_BASE}/note`, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      }
+    });
+
+    return (await response.json())["pages"];
   }
 
-  async getStorage(): Promise<NoteStorage> {
-    return this.readIndexedDbStorage();
+  async createNote(url: string, note: string): Promise<string> {
+    const result = await fetch(`${API_URL}/api/${NOTE_BASE}/note`, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        url,
+        note_en: note
+      })
+    });
+    const id = (await result.json()).id;
+    return id;
   }
 
-  async createNote(input: CreateNoteInput): Promise<{ note: Note; created: boolean; reason?: string }> {
-    const storage = await this.getStorage();
-    const note = normalizeMainNote(input);
-
-    storage.notes.unshift(note);
-    if (!(note.url in storage.mappingsByUrl)) {
-      storage.mappingsByUrl[note.url] = {
-        url: note.url,
-        notes: [],
-        lastUpdatedAt: note.updatedAt
-      };
-    }
-    storage.mappingsByUrl[note.url].notes.unshift(note);
-    await this.saveStorage(storage);
-    return { note, created: true }
+  async editNote(id: string, note: string): Promise<void> {
+    await fetch(`${API_URL}/api/${NOTE_BASE}/note`, {
+      method: "PUT",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        note_en: note
+      })
+    });
   }
 
-  async deleteNote(note: Note): Promise<void> {
-    const storage = await this.getStorage();
+  async translateNote(id: string, note: string): Promise<void> {
+    await fetch(`${API_URL}/api/${NOTE_BASE}/note/uk`, {
+      method: "PUT",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        note_uk: note
+      })
+    });
+  }
 
-    const noteIdx = storage.notes.findIndex(n => n.id == note.id);
-    const page = storage.mappingsByUrl[note.url];
-    const pageNoteIdx = page?.notes.findIndex(n => n.id == note.id);
-    if (noteIdx === -1 && (!page || pageNoteIdx === -1)) {
-      return;
-    }
-
-    if (noteIdx !== -1) {
-      delete storage.notes[noteIdx];
-    }
-
-    if (pageNoteIdx !== -1) {
-      delete page.notes[pageNoteIdx];
-    }
-
-    await this.saveStorage(storage);
+  async deleteNote(id: string): Promise<void> {
+    await fetch(`${API_URL}/api/${NOTE_BASE}/note`, {
+      method: "DELETE",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id
+      })
+    });
   }
 
   async clearNotes(): Promise<void> {
-    const storage = await this.getStorage();
-    await this.saveStorage({
-      notes: [],
-      mappingsByUrl: {},
-      currentIssue: storage.currentIssue
-    });
-  }
-
-  async clearCurrentIssue(): Promise<void> {
-    const storage = await this.getStorage();
-    await this.saveStorage({
-      notes: storage.notes,
-      mappingsByUrl: storage.mappingsByUrl,
-      currentIssue: undefined
-    });
-  }
-
-  async storeCurrentIssue(currentIssue: CurrentIssue): Promise<void> {
-    const storage = await this.getStorage();
-    await this.saveStorage({
-      notes: storage.notes,
-      mappingsByUrl: storage.mappingsByUrl,
-      currentIssue
-    });
-  }
-
-  private async saveStorage(storage: NoteStorage): Promise<void> {
-    await this.writeIndexedDbStorage(storage);
-  }
-
-  private async readIndexedDbStorage(): Promise<NoteStorage> {
-    const database = await this.getDatabase();
-    const transaction = database.transaction([NOTE_STORE, ISSUE_STORE], "readonly");
-    const noteStore = transaction.objectStore(NOTE_STORE);
-    const issueStore = transaction.objectStore(ISSUE_STORE);
-    const done = transactionToPromise(transaction);
-    const [notes, currentIssue] = await Promise.all([
-      requestToPromise<Note[]>(noteStore.getAll()),
-      requestToPromise<CurrentIssue | undefined>(issueStore.get("currentIssue"))
-    ]);
-    await done;
-
-    const sortedNotes = notes.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
-
-
-    return {
-      notes: sortedNotes,
-      mappingsByUrl: sortedNotes.reduce((aggregates: Record<string, PageAggregate>, note) => {
-        if (!(note.url in aggregates)) {
-          aggregates[note.url] = {
-            url: note.url,
-            notes: [],
-            lastUpdatedAt: note.updatedAt
-          }
-        }
-
-        aggregates[note.url].notes.push(note);
-
-        return aggregates
-      }, {}),
-      currentIssue
-    };
-  }
-
-  private async writeIndexedDbStorage(storage: NoteStorage): Promise<void> {
-    const database = await this.getDatabase();
-    const transaction = database.transaction([NOTE_STORE, ISSUE_STORE], "readwrite");
-    const noteStore = transaction.objectStore(NOTE_STORE);
-    const issueStore = transaction.objectStore(ISSUE_STORE);
-    const done = transactionToPromise(transaction);
-    const requests: Array<Promise<unknown>> = [
-      requestToPromise(noteStore.clear()),
-      requestToPromise(issueStore.clear())
-    ];
-
-    for (const note of storage.notes) {
-      if (note) {
-        requests.push(requestToPromise(noteStore.put(recordForNoteStore(noteStore, note))));
+    await fetch(`${API_URL}/api/${NOTE_BASE}/note/all`, {
+      method: "DELETE",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
       }
-    }
-
-    requests.push(requestToPromise(issueStore.put(storage.currentIssue, 'currentIssue')))
-
-    await Promise.all(requests);
-    await done;
+    });
   }
 
-  private async getDatabase(): Promise<IDBDatabase> {
-    this.databasePromise ??= openDatabase();
-    return this.databasePromise;
+  async addIssue(url: string): Promise<void> {
+    await fetch(`${API_URL}/api/${ISSUE_BASE}/issue`, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        url
+      })
+    });
+  }
+
+  async refreshIssue(url: string): Promise<void> {
+    await fetch(`${API_URL}/api/${ISSUE_BASE}/issue`, {
+      method: "PUT",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        url
+      })
+    });
+  }
+
+  async deleteIssue(url: string): Promise<void> {
+    await fetch(`${API_URL}/api/${ISSUE_BASE}/issue`, {
+      method: "DELETE",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        url
+      })
+    });
+  }
+
+  async getIssues(): Promise<Array<Issue>> {
+    const response = await fetch(`${API_URL}/api/${ISSUE_BASE}/issue`, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      }
+    });
+
+    return (await response.json())["issues"];
   }
 }
 
-export const extensionNoteRepository = new ChromeNoteRepository();
+export const extensionNoteRepository = new APINoteRepository();
 
 export async function handleNoteStorageMessage(
   message: unknown,
@@ -210,40 +194,44 @@ export async function handleNoteStorageMessage(
 }
 
 class RuntimeNoteRepository implements NoteRepository {
-  getAllNotes(): Promise<Note[]> {
-    return sendStorageRequest("getAllNotes");
+  createNote(url: string, note: string): Promise<string> {
+    return sendStorageRequest("createNote", url, note);
   }
 
-  getStorage(): Promise<NoteStorage> {
-    return sendStorageRequest("getStorage");
+  editNote(id: string, note: string): Promise<void> {
+    return sendStorageRequest("editNote", id, note);
   }
 
-  createNote(input: CreateNoteInput): Promise<{ note: Note; created: boolean; reason?: string }> {
-    return sendStorageRequest("createNote", input);
-  }
-
-  deleteNote(note: Note): Promise<void> {
-    return sendStorageRequest("deleteNote", note);
+  deleteNote(id: string): Promise<void> {
+    return sendStorageRequest("deleteNote", id);
   }
 
   clearNotes(): Promise<void> {
     return sendStorageRequest("clearNotes");
   }
 
+  export(): Promise<Record<string, PageAggregate>> {
+    return sendStorageRequest("export");
+  }
+
   getAggregates(): Promise<Record<string, PageAggregate>> {
     return sendStorageRequest("getAggregates");
   }
 
-  clearCurrentIssue(): Promise<void> {
-    return sendStorageRequest("clearCurrentIssue");
+  addIssue(url: string): Promise<void> {
+    return sendStorageRequest("addIssue", url);
   }
 
-  storeCurrentIssue(issue: CurrentIssue): Promise<void> {
-    return sendStorageRequest("storeCurrentIssue");
+  refreshIssue(id: string): Promise<void> {
+    return sendStorageRequest("refreshIssue", id);
   }
 
-  getCurrentIssue(): Promise<CurrentIssue | undefined> {
-    return sendStorageRequest("getCurrentIssue");
+  deleteIssue(id: string): Promise<void> {
+    return sendStorageRequest("deleteIssue", id);
+  }
+
+  getIssues(): Promise<Array<Issue>> {
+    return sendStorageRequest("getIssues");
   }
 }
 
@@ -284,42 +272,9 @@ async function sendRawStorageRequest<T>(method: StorageMethod, ...args: unknown[
   throw lastError instanceof Error ? lastError : new Error(String(lastError));
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function invokeStorageMethod(message: StorageRequest): Promise<unknown> {
-  switch (message.method) {
-    case "getAllNotes":
-      return extensionNoteRepository.getAllNotes();
-    case "getStorage":
-      return extensionNoteRepository.getStorage();
-    case "createNote":
-      return extensionNoteRepository.createNote(message.args[0] as CreateNoteInput);
-    case "deleteNote":
-      return extensionNoteRepository.deleteNote(message.args[0] as Note);
-    case "clearNotes":
-      return extensionNoteRepository.clearNotes();
-    case "getAggregates":
-      return extensionNoteRepository.getAggregates();
-  }
-}
-
-function normalizeMainNote(note: Partial<Note>): Note {
-  return {
-    id: note.id || crypto.randomUUID(),
-    text: note.text?.trim() || '',
-    url: note.url!,
-    createdAt: toDate(note.createdAt) ?? new Date(),
-    updatedAt: toDate(note.updatedAt) ?? new Date()
-  };
-}
-
-function toDate(value: unknown): Date | undefined {
-  if (value instanceof Date) {
-    return value;
-  }
-  if (typeof value === "string" || typeof value === "number") {
-    const date = new Date(value);
-    return Number.isNaN(date.getTime()) ? undefined : date;
-  }
-  return undefined;
+  throw new Error('invokeStorageMethod has been removed.')
 }
 
 function shouldUseRuntimeRepository(): boolean {
@@ -355,42 +310,3 @@ function shouldRetryStorageRequest(error: unknown): boolean {
 function delay(ms: number): Promise<void> {
   return new Promise((resolve) => globalThis.setTimeout(resolve, ms));
 }
-
-function recordForNoteStore(noteStore: IDBObjectStore, note: Note): Note {
-  return noteStore.keyPath === "id" ? { ...note, id: note.id || crypto.randomUUID() } : note;
-}
-
-function openDatabase(): Promise<IDBDatabase> {
-  return new Promise((resolve, reject) => {
-    const request = indexedDB.open(DB_NAME, DB_VERSION);
-
-    request.onupgradeneeded = () => {
-      const database = request.result;
-      if (!database.objectStoreNames.contains(NOTE_STORE)) {
-        const store = database.createObjectStore(NOTE_STORE, { keyPath: "id" });
-        store.createIndex?.("id", "id", { unique: true });
-      }
-      if (!database.objectStoreNames.contains(ISSUE_STORE)) {
-        database.createObjectStore(ISSUE_STORE);
-      }
-    };
-    request.onsuccess = () => resolve(request.result);
-    request.onerror = () => reject(request.error ?? new Error("Failed to open notes database."));
-  });
-}
-
-function requestToPromise<T>(request: IDBRequest<T>): Promise<T> {
-  return new Promise((resolve, reject) => {
-    request.onsuccess = () => resolve(request.result);
-    request.onerror = () => reject(request.error ?? new Error("IndexedDB request failed."));
-  });
-}
-
-function transactionToPromise(transaction: IDBTransaction): Promise<void> {
-  return new Promise((resolve, reject) => {
-    transaction.oncomplete = () => resolve();
-    transaction.onerror = () => reject(transaction.error ?? new Error("IndexedDB transaction failed."));
-    transaction.onabort = () => reject(transaction.error ?? new Error("IndexedDB transaction aborted."));
-  });
-}
-
