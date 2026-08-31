@@ -274,7 +274,10 @@ async function sendRawStorageRequest<T>(method: StorageMethod, ...args: unknown[
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function invokeStorageMethod(message: StorageRequest): Promise<unknown> {
-  throw new Error('invokeStorageMethod has been removed.')
+  switch (message.method) {
+    case "createNote":
+      return extensionNoteRepository.createNote(message.args[0] as string, message.args[1] as string);
+  }
 }
 
 function shouldUseRuntimeRepository(): boolean {

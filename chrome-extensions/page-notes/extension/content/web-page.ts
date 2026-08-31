@@ -66,10 +66,10 @@ async function saveSelectedNote(): Promise<void> {
   }
 
   try {
-    await noteRepository.createNote({
-      text: pendingSelectionText,
-      url: context.url
-    });
+    await noteRepository.createNote(
+      context.url,
+      pendingSelectionText
+    );
 
     hideSaveButton();
     window.getSelection()?.removeAllRanges();
