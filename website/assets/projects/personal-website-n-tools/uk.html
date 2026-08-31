@@ -5,10 +5,10 @@
 <h2>Основний стек технологій</h2>
 <p><strong>Мови програмування:</strong> TypeScript, Python.</p>
 <p><strong>Front-end:</strong> React.js, Manifest V3, zod.</p>
-<p><strong>Back-end:</strong> Nest.js, FastAPI, Pydantic, requests, SQLAlchemy, python-dotenv, httpx.</p>
+<p><strong>Back-end:</strong> Nest.js, TypeORM, FastAPI, Pydantic, requests, SQLAlchemy, python-dotenv, httpx.</p>
 <p><strong>Інфраструктура:</strong> Docker, docker-compose, alembic, GitHub Pages, GitHub Actions, монорепозиторій (pnpm, uv).</p>
 <p><strong>Моделі:</strong> Helsinki-NLP/opus-mt-en-uk, Helsinki-NLP/opus-mt-uk-en.</p>
-<p><strong>Зберігання даних</strong>: localStorage, IndexedDB, PostgreSQL.</p>
+<p><strong>Зберігання даних</strong>: localStorage, PostgreSQL.</p>
 <details>
   <summary>Підпроєкти...</summary>
 <h2>Підпроєкти</h2>
@@ -36,6 +36,46 @@
 <li>лише одне посилання в одному рядку;</li>
 <li>посилання має бути наприкінці текстового рядка.</li>
 </ul>
+<h4>Note Issues</h4>
+<p>CRUD сервіс для issues</p>
+<p><strong>Розгорнуто:</strong> локально за допомогою Docker.</p>
+<p><strong>Мова:</strong> TypeScript.</p>
+<p><strong>Фреймворки та бібліотеки:</strong> Nest.js.</p>
+<p><strong>Вимоги:</strong></p>
+<ul>
+<li>Parse Github Issue сервіс запущений на docker</li>
+<li>postgres сервіс запущений на docker</li>
+</ul>
+<p><strong>Функціональність:</strong></p>
+<ul>
+<li>add issue</li>
+<li>list issues</li>
+<li>reload issue</li>
+<li>delete issue</li>
+</ul>
+<h4>Notes</h4>
+<p>CRUD сервіс для notes.</p>
+<p><strong>Розгорнуто:</strong> локально за допомогою Docker.</p>
+<p><strong>Мова:</strong> TypeScript.</p>
+<p><strong>Фреймворки та бібліотеки:</strong> Nest.js.</p>
+<p><strong>Вимоги:</strong></p>
+<ul>
+<li>postgres сервіс запущений на docker</li>
+</ul>
+<p><strong>Функціональність:</strong></p>
+<ul>
+<li>add note</li>
+<li>edit note</li>
+<li>edit note translation</li>
+<li>list notes aggregated by urls</li>
+<li>delete note</li>
+</ul>
+<h4>Notes Gateway</h4>
+<p>Перенаправляє запити до 2 сервісів (Notes, Note Issues), щоб об’єднати API для клієнта під одним authority.</p>
+<p><strong>Розгорнуто:</strong> локально за допомогою Docker.</p>
+<p><strong>Мова:</strong> TypeScript</p>
+<p><strong>Фреймворки та бібліотеки:</strong> Nest.js</p>
+<p><strong>Вимоги:</strong> Services Notes, Note Issues запущені на docker.</p>
 <h4>Markdown to HTML</h4>
 <p>Перетворює Markdown-текст на HTML.</p>
 <p><strong>Розгорнуто:</strong> локально за допомогою Docker.</p>

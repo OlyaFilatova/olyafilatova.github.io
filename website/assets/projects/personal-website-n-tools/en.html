@@ -5,10 +5,10 @@
 <h2>Main tech stack</h2>
 <p><strong>Languages:</strong> TypeScript, Python.</p>
 <p><strong>Front-end:</strong> React.js, Manifest V3, zod.</p>
-<p><strong>Back-end:</strong> Nest.js, FastAPI, Pydantic, requests, SQLAlchemy, python-dotenv, httpx.</p>
+<p><strong>Back-end:</strong> Nest.js, TypeORM, FastAPI, Pydantic, requests, SQLAlchemy, python-dotenv, httpx.</p>
 <p><strong>Infrastructure:</strong> Docker, docker-compose, alembic, GitHub Pages, GitHub Actions, monorepo (pnpm, uv).</p>
 <p><strong>Models:</strong> Helsinki-NLP/opus-mt-en-uk, Helsinki-NLP/opus-mt-uk-en.</p>
-<p><strong>Data storage</strong>: localStorage, IndexedDB, PostgreSQL.</p>
+<p><strong>Data storage</strong>: localStorage, PostgreSQL.</p>
 <details>
   <summary>Subprojects...</summary>
 <h2>Subprojects</h2>
@@ -36,6 +36,46 @@
 <li>Only one link per text line.</li>
 <li>Link must be at the end of the text line.</li>
 </ul>
+<h4>Note Issues</h4>
+<p>CRUD service for issues</p>
+<p><strong>Deployed:</strong> locally using Docker.</p>
+<p><strong>Language:</strong> TypeScript.</p>
+<p><strong>Frameworks and libraries:</strong> Nest.js.</p>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>Parse Github Issue service running on Docker</li>
+<li>postgres service running on Docker</li>
+</ul>
+<p><strong>Functionality:</strong></p>
+<ul>
+<li>add issue</li>
+<li>list issues</li>
+<li>reload issue</li>
+<li>delete issue</li>
+</ul>
+<h4>Notes</h4>
+<p>CRUD service for notes.</p>
+<p><strong>Deployed:</strong> locally using Docker.</p>
+<p><strong>Language:</strong> TypeScript.</p>
+<p><strong>Frameworks and libraries:</strong> Nest.js.</p>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>postgres service running on Docker</li>
+</ul>
+<p><strong>Functionality:</strong></p>
+<ul>
+<li>add note</li>
+<li>edit note</li>
+<li>edit note translation</li>
+<li>list notes aggregated by urls</li>
+<li>delete note</li>
+</ul>
+<h4>Notes Gateway</h4>
+<p>Redirects requests to 2 services (Notes, Note Issues) to unify API for the client under one authority.</p>
+<p><strong>Deployed:</strong> locally using Docker.</p>
+<p><strong>Language:</strong> TypeScript</p>
+<p><strong>Frameworks and libraries:</strong> Nest.js</p>
+<p><strong>Requirements:</strong> Services Notes, Note Issues running on Docker.</p>
 <h4>Markdown to HTML</h4>
 <p>Convert markdown text to HTML text.</p>
 <p><strong>Deployed:</strong> locally using Docker.</p>
@@ -127,10 +167,10 @@
 <p><strong>Deployed:</strong> locally as unpacked extension.</p>
 <p><strong>Language:</strong> TypeScript</p>
 <p><strong>Frameworks and libraries:</strong> React.js</p>
-<p><strong>Storage:</strong> IndexedDB, localStorage.</p>
-<p><strong>Requirements:</strong> Parse Github Issue service up and running locally on port 8000.</p>
+<p><strong>Storage:</strong> Sends data to API, localStorage.</p>
+<p><strong>Requirements:</strong> Locally running services: postgres, Parse GitHub Issue, Notes, Note Issues, Notes Gateway.</p>
 <p><strong>Functionality:</strong> When extension Side Panel is opened the form of the current page is shown. Notes can be saved using the form or directly from the page: 1. select text, 2. click <strong>Save Note</strong> that appears near the selection. When textarea value is changed its value is stored in browser cache mapped to the current page URL.</p>
-<p>Notes from other pages saved previously are listed below the block of the current page. Notes can be deleted. The list can be searched through. The list has pagination by 10/25/50 pages per page. Notes are stored using IndexedDB.</p>
+<p>Notes from other pages saved previously are listed below the block of the current page. Notes can be deleted.</p>
 <p>Button <strong>Set current GitHub issue</strong> opens a form using which it is possible to parse list of links from GitHub issue. These links will be listed under the form split by status:</p>
 <ul>
 <li><strong>planned</strong> - checkbox unchecked in the list in the issue</li>
@@ -138,7 +178,7 @@
 <li><strong>done</strong> - checkbox checked in the list in the issue.</li>
 </ul>
 <p>Button export JSON exports pages and their notes in JSON format. Pages are exported under their link, but if a current GitHub issue is configured all pages that are listed in the issue will be grouped and exported under the issue link instead.</p>
-<p>Clear all button after confirmation clears all stored notes from the browser DB.</p>
+<p>Clear all button after confirmation clears all stored notes.</p>
 <h4>Highlight skills</h4>
 <p>Show skills on Job postings, stylize them based on their features.</p>
 <p>Uses skills gateway for parsing and storage.</p>
