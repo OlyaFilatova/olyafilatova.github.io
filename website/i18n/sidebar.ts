@@ -1,6 +1,6 @@
 import type { Localization } from "./config";
 import cv_en from '../assets/CV - Software Engineer - Olha Filatova.pdf';
-import cv_ua from '../assets/CV - Software Engineer - Ольга Філатова.pdf';
+import cv_ua from '../assets/CV - Software Engineer - Olha Filatova.pdf';
 
 export const texts = {
   "download_cv": {

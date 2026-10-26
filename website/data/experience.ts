@@ -265,10 +265,6 @@ export const experience: Experience[] = [
         "uk": "Auth0"
       },
       {
-        "en": "vllm",
-        "uk": "vllm"
-      },
-      {
         "en": "Kafka",
         "uk": "Kafka"
       },
@@ -322,12 +318,16 @@ export const experience: Experience[] = [
     },
     "projects": [
       {
-        "en": "Chrome extension for highlighting terms and subsequent analysis of the pages.",
-        "uk": "Chrome розширення для виділення виразів на сторінках та  аналізу сторінок."
+        "en": "Chrome extension and server for parsing page content and subsequent analysis of the gathered information.",
+        "uk": "Розширення для Chrome і сервер для парсингу вмісту сторінок та подальшого аналізу зібраної інформації."
       },
       {
         "en": "Mobile app with real time collaboration for a small user group",
         "uk": "Мобільний застосунок із real time співпрацею для малої групи користувачів"
+      },
+      {
+        "en": "Plugin for an open source C# application.",
+        "uk": "Плагін для open source C#-застосунку."
       }
     ],
     "skills": [
@@ -346,6 +346,10 @@ export const experience: Experience[] = [
       {
         "en": "Python",
         "uk": "Python"
+      },
+      {
+        "en": "C#",
+        "uk": "C#"
       },
       {
         "en": "Node.js",
@@ -390,14 +394,6 @@ export const experience: Experience[] = [
       {
         "en": "Manifest V3",
         "uk": "Manifest V3"
-      },
-      {
-        "en": "Vite",
-        "uk": "Vite"
-      },
-      {
-        "en": "Playwright",
-        "uk": "Playwright"
       },
       {
         "en": "VPS (Linux)",
